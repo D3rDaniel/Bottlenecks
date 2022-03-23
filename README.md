@@ -1,2 +1,2 @@
 # Splittergruppe
-Gruppe von Joe, Eugen, Daniel für Software-Praktikum
+Gruppe von Johannes Matus, Eugen Kudrashow, Daniel Vogel für Software-Praktikum
