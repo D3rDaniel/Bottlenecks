@@ -12,14 +12,16 @@ class Task extends Model
     protected $fillable=[
         'title',
         'description',
-        'priority_id',
-        'project_id',
-        'status_id',
         'creator_user_id',
         'assignee_user_id',
-        'due_time',
         'due_date',
-        'completed_at',
+        'completed_date',
+        'due_time',
+        'completed_time',
+        'project_id',
+        'status_id',
+        'priority_id',
+        'tag_id'
     ];
 
     public function priority()

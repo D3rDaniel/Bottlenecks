@@ -20,11 +20,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'username',	
         'email',
         'password',
-        'username'
+        'first_name',
+        'last_name'
     ];
 
     public function projects(){

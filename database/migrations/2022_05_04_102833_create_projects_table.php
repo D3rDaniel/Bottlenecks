@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('creator_user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->date('due_date');
+            $table->date('completed_date')->nullable();
 
             $table->timestamps();
         });
