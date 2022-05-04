@@ -14,12 +14,14 @@ copy .env.example to .env and change values
 php artisan key:generate
 php artisan migrate 
 (php artisan db:seed)
-php artisan serve -->serves on port 8000 by default
 
 npm install
 npm run dev --> Laravel Mix compiles resources/js/app.js
+
+Während der Entwicklung:
 npm run watch (damit man nach jeder Änderung nicht npm run dev ausführen muss)
 
+php artisan serve --> (default port: 8000)
 
 
 Vendor Extraction:
