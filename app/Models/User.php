@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Project;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -18,10 +20,24 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'username'
     ];
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
+
+    public function createdTasks(){
+        return $this->hasMany(Task::class,'creator_user_id');
+    }
+
+    public function assignedTasks(){
+        return $this->hasMany(Task::class,'assignee_user_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
