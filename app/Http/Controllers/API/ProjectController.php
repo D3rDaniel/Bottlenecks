@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Priority;
+use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
-class PriorityController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,16 +14,6 @@ class PriorityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -41,21 +32,10 @@ class PriorityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Priority  $priority
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Priority $priority)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Priority  $priority
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Priority $priority)
+    public function show(Project $project)
     {
         //
     }
@@ -64,10 +44,10 @@ class PriorityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Priority  $priority
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Priority $priority)
+    public function update(Request $request, Project $project)
     {
         //
     }
@@ -75,10 +55,10 @@ class PriorityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Priority  $priority
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Priority $priority)
+    public function destroy(Project $project)
     {
         //
     }
