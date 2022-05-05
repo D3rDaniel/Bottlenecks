@@ -7,6 +7,10 @@ Password ==> Siehe e-mail an Herrn Daniel Eric Vogel
 
 Installierte Software :
 
-Auf dem Server befindet sich php version 7.3.4. php Extensions, Webserver Apache2, mysql-datenbank, Laravel.
+Betriebssystem: Ubuntu 22.04 LTS
+
+Auf dem Server befindet sich php version 8.1.5 php Extensions,
+Webserver Apache2/2.4.53 (Ubuntu),
+mysql 8.0.29, Laravel.
 
 Have Fun!
