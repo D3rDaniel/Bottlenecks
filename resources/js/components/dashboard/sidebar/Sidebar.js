@@ -1,5 +1,4 @@
 import React from 'react'
-import Admin from './AdminButton'
 import SidebarButtonList from './SidebarButtonList'
 import SidebarButtonElement from './SidebarButtonElement'
 import SignOut from './SignOutButton'
@@ -8,7 +7,7 @@ import InfoIcon from '../../../../images/icons/info.jpg'
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col w-72 justify-between mt-2">
+    <div className="flex flex-col min-w-max w-80 justify-between mt-2">
       
       {/* Header */}
       <div className="rounded-xl bg-white">
@@ -18,13 +17,12 @@ const Sidebar = () => {
       </div>
 
       {/* Body */}
-      <div className="-mt-12">
-        <Admin></Admin>     
+      <div className="mt-16">
         <SidebarButtonList></SidebarButtonList> 
       </div>
       
       {/* Footer */}
-      <div>
+      <div className="">
         <SidebarButtonElement
           img={InfoIcon}
           desc="Info" 
