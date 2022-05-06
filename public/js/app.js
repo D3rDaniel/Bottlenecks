@@ -2327,18 +2327,21 @@ var ProjectMaximumView = function ProjectMaximumView() {
       className: "ml-8 w-1/2 py-5",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
         className: "font-bold",
-        children: "Titel-Task"
+        children: "Projekt-Titel"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         children: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "ml-auto mt-5 w-1/3",
+      className: "ml-auto mt-5 w-1/4",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
         className: "font-bold",
         children: "Personen:"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         children: "Person 1, Person 2, Person 3"
       })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      className: "bg-red w-28 h-6 rounded-xl mr-12  mb-4 mt-auto text-white hover:font-bold drop-shadow-lg",
+      children: "Verlassen"
     })]
   });
 };
@@ -2423,10 +2426,10 @@ var ProjectMinimumView = function ProjectMinimumView(_ref) {
     className: "my-5 ml-8",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "ml-12 w-1/5",
         children: title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "w-1/5",
         children: creator
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -2438,18 +2441,23 @@ var ProjectMinimumView = function ProjectMinimumView(_ref) {
             children: [progress, "%"]
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "w-1/5",
         children: startDate
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "w-1/5",
-        onClick: test,
         children: date
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-        src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
-        alt: "maxView",
-        className: "h-5 w-5 mr-3 ml-auto hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
-        onClick: rotateArrow
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex ml-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+          children: "\xD6ffnen"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+          alt: "maxView",
+          className: "h-5 w-5 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+          onClick: rotateArrow
+        }), "            "]
       })]
     }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {}) : null]
   });
@@ -2694,7 +2702,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var elements = [{
-  label: "Titel",
+  label: "Projetname",
   selected: false
 }, {
   label: "Ersteller",
@@ -2712,7 +2720,7 @@ var elements = [{
 
 var SortList = function SortList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "flex w-full ml-20 mr-8",
+    className: "flex w-full ml-20 mr-36",
     children: elements.map(function (element, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
         label: element.label,
@@ -2949,19 +2957,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var tasks = [{
-  title: "Frontend",
-  progress: 70,
+  title: "Task1",
+  status: "abgeschlossen",
   prio: "Hoch",
+  completedDate: "06.05.2022",
   date: "09.05.2022"
 }, {
-  title: "Backend",
-  progress: 50,
+  title: "Task2",
+  status: "in Bearbeitung",
   prio: "Mittel",
+  completedDate: "-",
   date: "09.05.2022"
 }, {
-  title: "API",
-  progress: 30,
+  title: "Task3",
+  status: "pausiert",
   prio: "Gering",
+  completedDate: "-",
   date: "09.05.2022"
 }];
 
@@ -2973,8 +2984,9 @@ var DashboardTasks = function DashboardTasks() {
       children: tasks.map(function (task, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
           title: task.title,
-          progress: task.progress,
+          status: task.status,
           prio: task.prio,
+          completedDate: task.completedDate,
           date: task.date
         }, index);
       })
@@ -3004,30 +3016,57 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var TaskMaximumView = function TaskMaximumView() {
+var TaskMaximumView = function TaskMaximumView(_ref) {
+  var title = _ref.title;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "bg-white rounded-xl -mt-5 shadow-bottom",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "flex",
+      className: "ml-8 pt-5",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        className: "font-bold",
+        children: title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "flex ml-8 mr-8 pt-5",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "ml-8 pt-5",
+        className: "w-1/3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
           className: "font-bold",
-          children: "Titel-Task"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          children: "test.sdf..sdf.sfd.fsd.sfd"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "ml-auto mr-72 pt-5",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-          className: "font-bold",
-          children: "Personen:"
+          children: "bearbeitet von:"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           children: "Person 1, Person 2, Person 3"
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "w-1/3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+          className: "font-bold",
+          children: "erstellt von: "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: "Person 1"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "w-1/3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+          className: "font-bold",
+          children: "zuletzt aktualisiert:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "flex",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "font-bold",
+              children: "06.05.2022"
+            }), " von ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "font-bold",
+              children: "Person2"
+            })]
+          })
+        })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "flex justify-between",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "ml-8 pt-5 pb-2",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
           className: "font-bold",
@@ -3035,7 +3074,10 @@ var TaskMaximumView = function TaskMaximumView() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           children: "#Tag1, #Tag2"
         })]
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        className: "bg-red w-36 h-6 rounded-xl mr-12  mb-4 mt-auto text-white hover:font-bold drop-shadow-lg",
+        children: "Task abbrechen"
+      })]
     })]
   });
 };
@@ -3080,8 +3122,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var TaskMinimumView = function TaskMinimumView(_ref) {
   var title = _ref.title,
-      progress = _ref.progress,
+      status = _ref.status,
       prio = _ref.prio,
+      completedDate = _ref.completedDate,
       date = _ref.date;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("text-black"),
@@ -3089,15 +3132,10 @@ var TaskMinimumView = function TaskMinimumView(_ref) {
       prioColor = _useState2[0],
       setPrioColor = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("w-0%"),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      progressCompleted = _useState4[0],
-      setProgressCompleted = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState6 = _slicedToArray(_useState5, 2),
-      rotate = _useState6[0],
-      setRotate = _useState6[1];
+      rotate = _useState4[0],
+      setRotate = _useState4[1];
 
   var changePrioColor = function changePrioColor() {
     switch (prio) {
@@ -3118,12 +3156,6 @@ var TaskMinimumView = function TaskMinimumView(_ref) {
     }
   };
 
-  var fillProgressBar = function fillProgressBar() {
-    var progressString = Math.round(progress).toString();
-    console.log(progressString);
-    setProgressCompleted("w-" + progressString + "%");
-  };
-
   var rotateArrow = function rotateArrow() {
     if (rotate) {
       setRotate(false);
@@ -3139,38 +3171,41 @@ var TaskMinimumView = function TaskMinimumView(_ref) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     changePrioColor();
-    fillProgressBar();
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "my-5 ml-8 mr-8",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "ml-12 w-1/4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "ml-12 w-1/5",
         children: title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "w-1/4",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "".concat(progressCompleted, " bg-green-400 rounded-full"),
-            children: [progress, "%"]
-          })
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "w-1/4 ".concat(prioColor),
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "w-1/5",
+        children: status
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "w-1/5 ".concat(prioColor),
         children: prio
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "w-1/4",
-        onClick: test,
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "w-1/5",
+        children: completedDate
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "w-1/5",
         children: date
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-        src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
-        alt: "maxView",
-        className: "h-5 w-5 mr-3 ml-auto hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
-        onClick: rotateArrow
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex ml-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
+          children: "Abschlie\xDFen"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+          alt: "maxView",
+          className: "h-5 w-5 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+          onClick: rotateArrow
+        }), "            "]
       })]
-    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TaskMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {}) : null]
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TaskMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      title: title
+    }) : null]
   });
 };
 
@@ -3377,7 +3412,7 @@ var SortElement = function SortElement(_ref) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "flex mt-1 w-1/4",
+    className: "flex mt-1 w-1/5",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
       className: "text-white",
       children: label
@@ -3416,19 +3451,22 @@ var elements = [{
   label: "Titel",
   selected: false
 }, {
-  label: "Fortschritt",
+  label: "Status",
   selected: false
 }, {
   label: "Priorität",
   selected: false
 }, {
-  label: "Endet am",
+  label: "Abgeschlossen",
+  selected: false
+}, {
+  label: "Endet",
   selected: false
 }];
 
 var SortList = function SortList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "flex w-full ml-20 mr-16",
+    className: "flex w-full ml-20 mr-52",
     children: elements.map(function (element, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
         label: element.label,
@@ -3509,7 +3547,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Sidebar = function Sidebar() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-    className: "flex flex-col w-72 justify-between mt-2",
+    className: "flex flex-col min-w-max w-80 justify-between mt-2",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "rounded-xl bg-white",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {

@@ -32,13 +32,9 @@ const ProjectMinimumView = ({title, creator, progress, startDate, date}) => {
   return (
     <div className="my-5 ml-8">
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
-            <div className="ml-12 w-1/5">
-                {title}
-            </div>
+            <label className="ml-12 w-1/5">{title}</label>
 
-            <div className="w-1/5">
-                {creator}
-            </div>
+            <label className="w-1/5">{creator}</label>
 
             <div className="w-1/5">
                 <div className="bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center">
@@ -48,16 +44,14 @@ const ProjectMinimumView = ({title, creator, progress, startDate, date}) => {
                 </div>
             </div>
             
-            <div className={`w-1/5`}>
-                {startDate}
-            </div>
+            <label className={`w-1/5`}>{startDate}</label>
 
-            <div className="w-1/5" onClick={test}>
-                {date}
-            </div>
+            <label className="w-1/5">{date}</label>
 
-            <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 ml-auto hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
-        </div>
+            <div  className="flex ml-auto">
+                <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg">Öffnen</button>
+                <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
+            </div>
         {rotate ? <TaskMaximumView /> : null}
     </div>
     
