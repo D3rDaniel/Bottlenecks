@@ -4,6 +4,7 @@ import SidebarButtonElement from './SidebarButtonElement'
 import SignOut from './SignOutButton'
 import Logo from '../../../../images/logo.jpg'
 import InfoIcon from '../../../../images/icons/info.jpg'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   return (
@@ -11,7 +12,7 @@ const Sidebar = () => {
       
       {/* Header */}
       <div className="rounded-xl bg-white">
-        <img src= {Logo} alt="logo" className="h-16 w-16 mr-2 pl-2 float-left hover:cursor-pointer"></img>
+        <Link to='/'><img src= {Logo} alt="logo" className="h-16 w-16 mr-2 pl-2 float-left hover:cursor-pointer"></img></Link>
         <h1 className="font-bold text-xl mt-1">Dashboard</h1>
         <h2>von <span className="text-darkorange">xxx</span></h2>
       </div>

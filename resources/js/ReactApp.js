@@ -1,21 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Sidebar from './components/dashboard/sidebar/Sidebar'
-import DashboardProjects from './components/dashboard/dashboardProjects/DashboardProjects'
-import SidebarProject from './components/projectDashboard/sidebar/Sidebar'
-import DashboardTasks from './components/projectDashboard/dashboardTasks/DashboardTasks'
+import DashboardPage from './pages/DashboardPage'
+import ProjectPage from './pages/ProjectPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function ReactApp() {
     return (
         <div className="bg-customgray flex h-screen w-screen font-body">
-            <Sidebar />
-            <DashboardProjects />
-            {/* <SidebarProject />
-            <DashboardTasks /> */}
+            <Routes>
+                <Route exact path='/' element={<DashboardPage/>}/>
+                <Route path='/project' element={<ProjectPage/>}/>
+            </Routes>
         </div>
     );
 }
 
 if (document.getElementById('root')) {
-    ReactDOM.render(<ReactApp />, document.getElementById('root'));
+    ReactDOM.render(
+        <BrowserRouter>
+            <ReactApp />
+        </BrowserRouter>
+        , document.getElementById('root')
+        );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Arrow from '../../../../images/icons/arrow-black.jpg'
 import TaskMaximumView from './ProjectMaximumView'
+import { Link } from 'react-router-dom'
 
 const ProjectMinimumView = ({title, creator, progress, startDate, date}) => {
 
@@ -49,7 +50,7 @@ const ProjectMinimumView = ({title, creator, progress, startDate, date}) => {
             <label className="w-1/5">{date}</label>
 
             <div  className="flex ml-auto">
-                <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg">Öffnen</button>
+                <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" ><Link to='/project'>Öffnen</Link></button>
                 <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
             </div>
         {rotate ? <TaskMaximumView /> : null}
