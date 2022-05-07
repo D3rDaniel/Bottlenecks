@@ -21,10 +21,14 @@ class Project extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'creator_user_id');
     }
 
     public function tags(){
         return $this->hasMany(Tag::class);
+    }
+
+    public function tasks(){
+        return $this->hasMany(Task::class);
     }
 }

@@ -20,15 +20,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',	
+        'username',
         'email',
         'password',
         'first_name',
-        'last_name'
+        'last_name',
+        'email_verified_at',
     ];
 
     public function projects(){
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class,'creator_user_id');
     }
 
     public function createdTasks(){
