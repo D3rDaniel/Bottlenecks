@@ -32,10 +32,10 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show($id)
     {
         //
     }
@@ -44,10 +44,10 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -55,11 +55,22 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        try {
+            $task = Task::findOrFail($id);
+        }
+        catch (\Exception $e) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
+        if($task->delete()) {
+            return response()->json(['success' => 'Task deleted successfully'], 200);
+        }
+        else {
+            return response()->json(['error' => 'Task could not be deleted'], 500);
+        }
     }
 }
