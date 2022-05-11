@@ -4,26 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Project;
 
-class Tag extends Model
+class ProjectMember extends Model
 {
     use HasFactory;
 
-
-    protected $fillable = [
-        'title',
-        'description',
-        'project_id'
-    ];
-
-    protected $hidden = [
+    protected $guarded = [
+        'id',
         'created_at',
         'updated_at'
     ];
 
     public function project()
     {
-        return $this->belongsToOne(Project::class, 'project_id');
+        return $this->belongsTo(Project::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -28,7 +28,7 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
-    public function projects(){
+    public function projectOwner(){
         return $this->hasMany(Project::class,'creator_user_id');
     }
 
@@ -40,6 +40,26 @@ class User extends Authenticatable
         return $this->hasMany(Task::class,'assignee_user_id');
     }
 
+    public function projectMember(){
+        return $this->hasMany(ProjectMember::class);
+    }
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
+
+    public function announcements(){
+        return $this->hasMany(Announcement::class);
+    }
+
+    public function projectInvitationsIssued(){
+        return $this->hasMany(ProjectInvite::class,'inviter_user_id');
+    }
+
+    public function projectInvitationsReceived(){
+        return $this->hasMany(ProjectInvite::class,'invited_user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,6 +68,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'first_name',
+        'last_name'
     ];
 
     /**

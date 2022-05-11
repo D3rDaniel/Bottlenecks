@@ -26,7 +26,7 @@ class Task extends Model
 
     public function priority()
     {
-        return $this->hasOne(Priority::class);
+        return $this->belongsTo(Priority::class);
     }
 
     public function project()
@@ -47,5 +47,10 @@ class Task extends Model
     public function assignee()
     {
         return $this->belongsTo(User::class,'assignee_user_id');
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
     }
 }

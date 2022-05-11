@@ -25,11 +25,11 @@ return new class extends Migration
             $table->foreign('creator_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('assignee_user_id')->nullable();
             $table->foreign('assignee_user_id')->references('id')->on('users')->onDelete('set null');
-            
+
             $table->date('due_date');
             $table->date('completed_date')->nullable();
 
-            $table->time('due_time');
+            $table->time('due_time')->default('23:59:59');
             $table->time('completed_time')->nullable();
 
             $table->unsignedBigInteger('project_id');
