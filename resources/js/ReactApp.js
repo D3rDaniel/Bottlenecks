@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import DashboardPage from './pages/DashboardPage'
 import ProjectPage from './pages/ProjectPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -15,11 +15,9 @@ export default function ReactApp() {
     );
 }
 
-if (document.getElementById('root')) {
-    ReactDOM.render(
-        <BrowserRouter>
-            <ReactApp />
-        </BrowserRouter>
-        , document.getElementById('root')
-        );
-}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <BrowserRouter>
+        <ReactApp />
+    </BrowserRouter>
+);
