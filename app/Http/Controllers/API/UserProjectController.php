@@ -28,7 +28,7 @@ class UserProjectController extends Controller
         }
 
         foreach ($projects as $project) {
-
+        //TODO eager loading umgehen -> user wieder entfernen wenn er creator ist
             if ($project->creator->id == $id) {
                 $project->is_creator = true;
             } else {
@@ -44,11 +44,11 @@ class UserProjectController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
