@@ -14,8 +14,29 @@ class UserProjectController extends Controller
      */
     public function index($id)
     {
-        $user = User::find($id);
-        $projects = $user->projects;
+        //get all projects where a user is either the owner or a member
+        $projects = User::find($id)->projects()->with('creator')->get();
+
+        //add the created Projects of the user to the projects
+        $createdProjects = User::find($id)->createdProjects()->get();
+
+        $projects = $projects->merge($createdProjects);
+
+        //check if projects are empty
+        if($projects->isEmpty()){
+            return response()->json(['message'=>'no projects found'], 404);
+        }
+
+        foreach ($projects as $project) {
+
+            if ($project->creator->id == $id) {
+                $project->is_creator = true;
+            } else {
+                $project->is_creator = false;
+            }
+            $project->progress_percentage = $project->calculateProgress();
+        }
+
         return response()->json($projects);
     }
 

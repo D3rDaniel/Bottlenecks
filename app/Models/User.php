@@ -40,8 +40,9 @@ class User extends Authenticatable
         return $this->hasMany(Task::class,'assignee_user_id');
     }
 
-    public function projectsWhereMember(){
-        return $this->hasMany(ProjectUser::class);
+    public function projects(){
+        return $this->belongsToMany(Project::class,'project_users')
+            ->withPivot(['can_edit_tasks','can_create_tasks','can_assign_tasks','can_create_tags'])->as('user_project_rights');
     }
 
     public function bookings(){
@@ -61,7 +62,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'email_verified_at',
-        'updated_at'
+        'updated_at',
+        'created_at',
     ];
 
     /**

@@ -20,6 +20,7 @@ class Project extends Model
         'completed_date'
     ];
 
+
     public function creator(){
         return $this->belongsTo(User::class,'creator_user_id');
     }
@@ -30,5 +31,17 @@ class Project extends Model
 
     public function tasks(){
         return $this->hasMany(Task::class);
+    }
+
+    public function members(){
+        return $this->belongsToMany(User::class,'project_users','project_id','user_id')
+            ->withPivot('user_id','project_id');
+    }
+
+    public function calculateProgress(){
+        $totalTasks = $this->tasks()->count();
+        $completedTasks = $this->tasks()->where('status_id',1)->count();
+        $progress = ($totalTasks > 0) ? round(($completedTasks / $totalTasks) * 100) : 0;
+        return $progress;
     }
 }
