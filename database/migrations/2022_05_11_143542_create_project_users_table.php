@@ -13,13 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('resources', function (Blueprint $table) {
+        Schema::create('project_members', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->string('name');
-            $table->string('description');
+            // Foreign keys
+            $table->foreignIdFor(\App\Models\User::class)->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignIdFor(\App\Models\Project::class)->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
+
+            // Columns
+            $table->boolean('can_create_tasks')->default(false);
+            $table->boolean('can_edit_tasks')->default(false);
+            $table->boolean('can_assign_tasks')->default(false);
+            $table->boolean('can_create_tags')->default(false);
         });
     }
 
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resources');
+        Schema::dropIfExists('project_members');
     }
 };

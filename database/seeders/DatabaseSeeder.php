@@ -23,14 +23,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-         $high =Priority::factory()->create(['title' => 'Hoch']);
-         $middle =Priority::factory()->create(['title' => 'Mittel']);
-         $low =Priority::factory()->create(['title' => 'Gering']);
+         $high =Priority::factory()->create(['title' => 'Hoch','slug' => 'high']);
+         $middle =Priority::factory()->create(['title' => 'Mittel','slug' => 'medium']);
+         $low =Priority::factory()->create(['title' => 'Gering','slug' => 'low']);
 
-         $done =Status::factory()->create(['title' => 'Erledigt']);
-         $in_progress =Status::factory()->create(['title' => 'In Arbeit']);
-         $on_hold =Status::factory()->create(['title' => 'Pausiert']);
-         $failed =Status::factory()->create(['title' => 'Fehlgeschlagen']);
+         $done =Status::factory()->create(['title' => 'Erledigt','slug' => 'completed']);
+         $in_progress =Status::factory()->create(['title' => 'In Arbeit','slug' => 'in-progress']);
+         $on_hold =Status::factory()->create(['title' => 'Pausiert','slug' => 'paused']);
+         $failed =Status::factory()->create(['title' => 'Fehlgeschlagen','slug' => 'failed']);
 
          User::factory(5)->create();
 

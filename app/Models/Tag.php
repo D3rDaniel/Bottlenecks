@@ -18,12 +18,11 @@ class Tag extends Model
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at'
     ];
 
     public function project()
     {
-        return $this->belongsToOne(Project::class, 'project_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

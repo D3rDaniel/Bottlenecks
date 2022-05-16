@@ -28,7 +28,7 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
-    public function projectOwner(){
+    public function createdProjects(){
         return $this->hasMany(Project::class,'creator_user_id');
     }
 
@@ -36,12 +36,12 @@ class User extends Authenticatable
         return $this->hasMany(Task::class,'creator_user_id');
     }
 
-    public function assignedTasks(){
+    public function tasksAssigned(){
         return $this->hasMany(Task::class,'assignee_user_id');
     }
 
-    public function projectMember(){
-        return $this->hasMany(ProjectMember::class);
+    public function projectsWhereMember(){
+        return $this->hasMany(ProjectUser::class);
     }
 
     public function bookings(){
@@ -50,14 +50,6 @@ class User extends Authenticatable
 
     public function announcements(){
         return $this->hasMany(Announcement::class);
-    }
-
-    public function projectInvitationsIssued(){
-        return $this->hasMany(ProjectInvite::class,'inviter_user_id');
-    }
-
-    public function projectInvitationsReceived(){
-        return $this->hasMany(ProjectInvite::class,'invited_user_id');
     }
 
     /**
@@ -69,10 +61,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'email_verified_at',
-        'created_at',
-        'updated_at',
-        'first_name',
-        'last_name'
+        'updated_at'
     ];
 
     /**

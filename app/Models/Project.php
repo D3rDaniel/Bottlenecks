@@ -20,7 +20,7 @@ class Project extends Model
         'completed_date'
     ];
 
-    public function user(){
+    public function creator(){
         return $this->belongsTo(User::class,'creator_user_id');
     }
 

@@ -18,20 +18,15 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('title');
-            $table->string('description')->nullable();
-            $table->string('room_number')->nullable();
+            $table->string('description', 1000)->nullable();
+            $table->string('room_number', 12)->nullable();
             $table->integer('capacity')->nullable();
+            $table->string('equipment_info',800)->nullable();
+            $table->string('address_info',500)->nullable();
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
             $table->boolean('opened_on_weekends')->default(false);
         });
-
-        Schema::create('resources_rooms', function(Blueprint $table){
-            $table->id();
-            $table->timestamps();
-            $table->foreignIdFor(\App\Models\Room::class)->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignIdFor(\App\Models\Resource::class)->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
-});
     }
 
     /**
@@ -42,6 +37,5 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('rooms');
-        Schema::dropIfExists('resources_rooms');
     }
 };

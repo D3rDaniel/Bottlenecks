@@ -23,8 +23,6 @@ return new class extends Migration
             $table->date('reservation_date');
             $table->time('start_time')->default(now())->nullable();
             $table->time('end_time')->default(now())->nullable();
-            $table->boolean('is_confirmed')->default(false);
-            $table->boolean('is_cancelled')->default(false);
 
         });
     }

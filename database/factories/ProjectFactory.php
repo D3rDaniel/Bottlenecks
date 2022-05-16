@@ -21,8 +21,8 @@ class ProjectFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->sentence,
             'creator_user_id' => User::factory(), //create a new user
-            'due_date' => $this->faker->dateTimeBetween('-1 years', '+1 years'),
-            'completed_date' => null,
+            'due_date' => $this->faker->dateTimeBetween(now(), '+1 years'),
+            'completion_date' => null,
         ];
     }
 }

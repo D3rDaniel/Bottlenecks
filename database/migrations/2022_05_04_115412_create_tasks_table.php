@@ -32,6 +32,8 @@ return new class extends Migration
             $table->time('due_time')->default('23:59:59');
             $table->time('completed_time')->nullable();
 
+            $table->string('completion_comment')->nullable();
+
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 
