@@ -23,7 +23,7 @@ class ProjectController extends Controller
 
         if($project){
             $res = ['success'=>true, 'project'=>$project];
-            $status = 200;
+            $status = 201;
         }else{
             $res = ['success'=>false,'message'=>'Project could not be created'];
             $status = 500;
@@ -40,10 +40,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::find($id);
+        $project = Project::with('creator')->find($id);
 
         if($project){
-            $res = ['project'=>$project];
+            $res = ['success'=>true,'project'=>$project];
             $status = 200;
         }
         else{
@@ -87,12 +87,12 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if(!$project){
-            return response()->json(['success'=>true,'message' => 'Project not found'],404);
+            return response()->json(['success'=>false,'message' => 'Project not found'],404);
         }
         if($project->delete()){
             return response()->json(['success'=>true],200);
         }
-        return response()->json(['success'=>false],404);
+        return response()->json(['success'=>false],500);
     }
 
     /**
@@ -113,7 +113,7 @@ class ProjectController extends Controller
         $project->completion_date = $date;
         $project->save();
 
-        return response()->json($project, 200);
+        return response()->json(['success'=>true,'project'=>$project], 200);
     }
     }
 

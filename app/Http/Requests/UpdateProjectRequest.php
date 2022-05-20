@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use HttpResponseException;
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateProjectRequest extends FormRequest
 {
