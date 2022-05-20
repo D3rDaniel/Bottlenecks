@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->string('description',1000)->nullable();
 
             $table->unsignedBigInteger('creator_user_id');
             $table->foreign('creator_user_id')->references('id')->on('users')->onDelete('cascade');

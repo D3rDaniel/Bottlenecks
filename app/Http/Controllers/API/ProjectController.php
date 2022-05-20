@@ -109,7 +109,7 @@ class ProjectController extends Controller
         if (!$project) {
             return response()->json(['success' => false], 404);
         }
-        $date = today('Europe/Berlin')->toDateString();
+        $date = today()->toDateString();
         $project->completion_date = $date;
         $project->save();
 

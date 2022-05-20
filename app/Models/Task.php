@@ -21,7 +21,8 @@ class Task extends Model
         'project_id',
         'status_id',
         'priority_id',
-        'tag_id'
+        'tag_id',
+        'completion_comment'
     ];
 
     public function priority()
