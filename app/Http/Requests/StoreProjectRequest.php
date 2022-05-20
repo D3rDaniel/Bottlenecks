@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectStoreRequest extends FormRequest
+class StoreProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class ProjectStoreRequest extends FormRequest
         return [
                 'creator_user_id' => 'required|exists:users,id',
                 'title' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
+                'description' => 'required|string|max:3000',
                 'due_date' => 'required|date',
         ];
     }

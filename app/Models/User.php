@@ -40,7 +40,7 @@ class User extends Authenticatable
         return $this->hasMany(Task::class,'assignee_user_id');
     }
 
-    public function projects(){
+    public function projectsWhereMember(){
         return $this->belongsToMany(Project::class,'project_users')
             ->withPivot(['can_edit_tasks','can_create_tasks','can_assign_tasks','can_create_tags'])->as('user_project_rights');
     }

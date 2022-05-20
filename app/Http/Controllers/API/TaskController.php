@@ -64,13 +64,13 @@ class TaskController extends Controller
             $task = Task::findOrFail($id);
         }
         catch (\Exception $e) {
-            return response()->json(['error' => 'Task not found'], 404);
+            return response()->json(['success'=>false, 'message' => 'Task not found'], 404);
         }
         if($task->delete()) {
-            return response()->json(['success' => 'Task deleted successfully'], 200);
+            return response()->json(['success' => true, 'message' => 'Deleted task.'], 200);
         }
         else {
-            return response()->json(['error' => 'Task could not be deleted'], 500);
+            return response()->json(['success'=>false,'message' => 'Task could not be deleted. Cause unknown.'], 500);
         }
     }
 }

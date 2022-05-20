@@ -3,81 +3,78 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProjectStoreRequest;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store a newly created project in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(ProjectStoreRequest $request)
+    public function store(StoreProjectRequest $request)
     {
-        $fields=$request->validated();
+        $data = $request->safe()->only(['title','description','due_date','creator_user_id']);
 
-        $project = Project::create(
-            [
-                'title' => $fields['title'],
-                'description' => $fields['description'],
-                'creator_user_id' => $fields['creator_user_id'],
-                'due_date' => $fields['due_date']
-            ]
-        );
+        $project = Project::create($data);
 
         if($project){
-            return response()->json($project,200);
+            $res = ['success'=>true, 'project'=>$project];
+            $status = 200;
         }else{
-            return response()->json(['success'=>false,'message'=>'Project could not be created'],500);
+            $res = ['success'=>false,'message'=>'Project could not be created'];
+            $status = 500;
         }
+
+        return response()->json($res, $status);
     }
 
     /**
-     * Display the specified resource.
+     * Return the project specified by its id.
      *
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
+        $project = Project::find($id);
+
+        if($project){
+            $res = ['project'=>$project];
+            $status = 200;
+        }
+        else{
+            $res = ['success'=>false, 'message'=>'Project not found.'];
+            $status = 404;
+        }
+        return response()->json($res, $status);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update title, description and due_date of resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
-        //TODO: verify request (especially dates)
-
+        $data = $request->safe()->only(['title','description','due_date']);
         $project = Project::find($id);
+
         if($project){
-            $project->update($request->all());
-            //TODO: not manually
-            if($request->has('completion_date')){
-                $project->completion_date = $request->completion_date;
-            }
-            return response()->json($project,200);
+            $project->update($data);
+
+            $res = ['success'=>true,'project'=>$project];
+            $status = 200;
         }else{
-            return response()->json(['success'=>false,'message'=>'Project could not be found'],404);
+            $res = ['success'=>false,'message'=>'Project could not be found'];
+            $status = 404;
         }
+        return response()->json($res,$status);
     }
 
     /**
@@ -90,11 +87,33 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if(!$project){
-            return response()->json(['message' => 'Project not found'],404);
+            return response()->json(['success'=>true,'message' => 'Project not found'],404);
         }
         if($project->delete()){
-            return response()->json(['deleted'=>true],200);
+            return response()->json(['success'=>true],200);
         }
-        return response()->json(['deleted'=>false],404);
+        return response()->json(['success'=>false],404);
     }
-}
+
+    /**
+     * Set the projects completion date
+     * to current date
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function completeProject($id)
+    {
+        $project = Project::find($id);
+
+        if (!$project) {
+            return response()->json(['success' => false], 404);
+        }
+        $date = today('Europe/Berlin')->toDateString();
+        $project->completion_date = $date;
+        $project->save();
+
+        return response()->json($project, 200);
+    }
+    }
+
