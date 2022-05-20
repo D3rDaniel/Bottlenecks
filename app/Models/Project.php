@@ -35,7 +35,7 @@ class Project extends Model
 
     public function members(){
         return $this->belongsToMany(User::class,'project_users','project_id','user_id')
-            ->withPivot('user_id','project_id');
+            ->withPivot('user_id','project_id','can_create_tasks','can_assign_tasks','can_create_tags');
     }
 
     public function calculateProgress(){
