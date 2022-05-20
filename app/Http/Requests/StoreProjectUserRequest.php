@@ -25,7 +25,7 @@ class StoreProjectUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'username' => 'required|exists:users,username',
             'project_id' => 'required|exists:projects,id',
             'can_create_tasks'=>'required|boolean',
             'can_assign_tasks'=>'required|boolean',

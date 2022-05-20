@@ -13,10 +13,12 @@ Route::apiResource('project.tasks', ProjectTaskController::class)->only('index')
 Route::apiResource('user.projects', UserProjectController::class)->only('index');
 
 //ProjectUsers (Members)
-Route::apiResource('project.members', ProjectUserController::class)->only(['index', 'store']);
+Route::apiResource('project.members', ProjectUserController::class)->only(['index']);
 //id = id of ProjectUser NOT the user
 Route::delete('/project-member/{id}', [ProjectUserController::class,'destroy']);
 Route::put('/project-member/{id}', [ProjectUserController::class,'update']);
+//add user by username
+Route::post('/project/{id}/add-new-user', [ProjectUserController::class,'store']);
 
 //Project
 Route::post('/project', [ProjectController::class, 'store']);

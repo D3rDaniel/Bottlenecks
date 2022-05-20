@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectUserRequest;
 use App\Http\Requests\UpdateProjectUserRequest;
 use App\Models\Project;
 use App\Models\ProjectUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 //Controller for operations of project-members
@@ -48,17 +49,23 @@ class ProjectUserController extends Controller
     public function store(StoreProjectUserRequest $request)
     {
         $data = $request->safe()->only(
-            ['user_id',
+            ['username',
             'project_id',
             'can_create_tasks',
             'can_assign_tasks',
             'can_edit_tasks',
             'can_create_tags']);
 
-        $member = ProjectUser::where($data['project_id'],'project_id')
-                            ->where($data['user_id'],'user_id');
+        $user = User::where('username',$data['username'])->first();
+
+
+        $member = ProjectUser::where('project_id', $data['project_id'],)
+                            ->where('user_id',$user->id)->first();
 
         if(!$member){
+
+            $data['user_id']=$user->id;
+
             $new_member = ProjectUser::create($data);
 
             if(!$new_member){
