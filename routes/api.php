@@ -34,3 +34,21 @@ Route::put('task/{id}/complete', [TaskController::class,'completeTask']);
 
 //Tags
 Route::apiResource('/tag',\App\Http\Controllers\API\TagController::class)->only(['store','destroy']);
+
+//User
+Route::apiResource('user', \App\Http\Controllers\API\UserController::class);
+Route::put('/user/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
+
+//Room
+Route::apiResource('room', \App\Http\Controllers\API\RoomController::class);
+Route::put('/room/{id}', [\App\Http\Controllers\API\RoomController::class, 'update']);
+
+//Booking
+Route::apiResource('bookings', \App\Http\Controllers\API\BookingController::class);
+
+//Announcements
+Route::get('/announcements/{project_id}/{user_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'show_project_user']);
+Route::get('/announcements/{project_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'show']);
+Route::post('/announcements', [\App\Http\Controllers\API\AnnouncementController::class, 'store']);
+Route::put('/announcements/{id}', [\App\Http\Controllers\API\AnnouncementController::class, 'update']);
+
