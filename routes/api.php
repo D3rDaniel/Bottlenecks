@@ -26,7 +26,11 @@ Route::get('/project/{id}', [ProjectController::class, 'show']);
 Route::delete('/project/{id}', [ProjectController::class, 'destroy']);
 Route::put('/project/{id}', [ProjectController::class, 'update']);
 Route::put('/project/{id}/complete', [ProjectController::class, 'completeProject']);
+Route::get('/project/{id}/tags',[ProjectController::class,'getTags']);
 
 //Tasks
-Route::apiResource('tasks', TaskController::class);
+Route::apiResource('task', TaskController::class);
 Route::put('task/{id}/complete', [TaskController::class,'completeTask']);
+
+//Tags
+Route::apiResource('/tag',\App\Http\Controllers\API\TagController::class)->only(['store','destroy']);

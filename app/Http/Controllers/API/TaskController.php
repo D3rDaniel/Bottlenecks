@@ -136,7 +136,7 @@ class TaskController extends Controller
             return response()->json(['success'=>false, 'message' => 'Task not found'], 404);
         }
         if($task->delete()) {
-            return response()->json(['success' => true, 'message' => 'Deleted task.'], 200);
+            return response()->json(['success' => true, 'message' => 'Task deleted.'], 200);
         }
         else {
             return response()->json(['success'=>false,'message' => 'Task could not be deleted. Cause unknown.'], 500);
@@ -157,6 +157,7 @@ class TaskController extends Controller
 
         $data['completed_date']=now()->toDateString();
         $data['completed_time']=now()->toTimeString();
+        $data['status_id']=1;
 
         try {
             $task = Task::findOrFail($id);
@@ -166,7 +167,7 @@ class TaskController extends Controller
             $res= [
                 'success'=>true,
                 'data'=>$data,
-                'task'=>$task
+                //'task'=>$task
             ];
             return response()->json($res, 201);
         }

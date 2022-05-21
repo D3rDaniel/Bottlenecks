@@ -115,5 +115,23 @@ class ProjectController extends Controller
 
         return response()->json(['success'=>true,'project'=>$project], 200);
     }
+
+    /**
+     * Get the projects tags
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTags($id)
+    {
+        $project = Project::find($id);
+
+        if (!$project) {
+            return response()->json(['success' => false,'message' => 'Project not found.'], 404);
+        }
+        $tags = $project->tags()->get();
+
+        return response()->json(['success'=>true,'project_id'=>$project->id,'tags'=>$tags], 200);
+    }
     }
 
