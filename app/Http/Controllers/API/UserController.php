@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class UserController extends Controller
 {
@@ -117,5 +119,31 @@ class UserController extends Controller
         }
         return response()->json(['deleted'=>false,'message'=>'User could not be deleted'],404);
 
+    }
+
+    public function getTasks($id,$slug){
+
+        $user = User::find($id);
+        //check if user exists
+        if(empty($user)){
+            return response()->json(['success'=>false,'message'=>'User not found'],404);
+        }
+        $status = Status::where('slug',$slug)->first();
+        //check if status exists
+        if(empty($status)){
+            return response()->json(['success'=>false,'message'=>'Status not found'],404);
+        }
+
+        $tasks = $user->tasksAssigned()
+        ->with(['creator' => function ($query) {
+            $query->select('id', 'username');
+        },'project' => function ($query) {
+            $query->select('id', 'title');
+        },'priority','tag','status'])
+        ->where('status_id',$status->id)
+        ->orderBy('due_date','asc')
+        ->get();
+
+        return response()->json(['success'=>true,'tasks'=>$tasks],200);
     }
 }

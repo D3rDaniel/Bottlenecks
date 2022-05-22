@@ -38,6 +38,7 @@ Route::apiResource('/tag',\App\Http\Controllers\API\TagController::class)->only(
 //User
 Route::apiResource('user', \App\Http\Controllers\API\UserController::class);
 Route::put('/user/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
+Route::get('/user/{id}/tasks/{slug}',[\App\Http\Controllers\API\UserController::class,'getTasks']);
 
 //Room
 Route::apiResource('room', \App\Http\Controllers\API\RoomController::class);
