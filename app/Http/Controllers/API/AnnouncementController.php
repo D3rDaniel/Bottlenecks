@@ -52,8 +52,18 @@ class AnnouncementController extends Controller
 
         return response()->json($announcements);
     }
+    public function showByUserId($user_id)
+    {
+        $announcements = Announcement::where('user_id',$user_id)->get();
 
-    public function show_project_user($project_id,$user_id)
+        if($announcements->isEmpty()){
+            return response()->json(['message' => 'No announcements found'], 404);
+        }
+
+        return response()->json($announcements);
+    }
+
+    public function showProjectUser($project_id,$user_id)
     {
         $announcements = Announcement::where('project_id',$project_id)->where('user_id',$user_id)->get();
 

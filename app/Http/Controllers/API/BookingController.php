@@ -29,6 +29,7 @@ class BookingController extends Controller
         return response()->json($bookings);
     }
 
+
     /**
      * Store a new booking
      *
@@ -95,6 +96,16 @@ class BookingController extends Controller
             ], 404);
         }
         return response()->json($booking, 200);
+    }
+    public function showByUserId($user_id)
+    {
+        $bookings = Booking::where('user_id',$user_id)->get();
+
+        if($bookings ->isEmpty()){
+            return response()->json(['message' => 'No Bookings found'], 404);
+        }
+
+        return response()->json($bookings);
     }
 
     /**
