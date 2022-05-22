@@ -97,16 +97,6 @@ class BookingController extends Controller
         }
         return response()->json($booking, 200);
     }
-    public function showByUserId($user_id)
-    {
-        $bookings = Booking::where('user_id',$user_id)->get();
-
-        if($bookings ->isEmpty()){
-            return response()->json(['message' => 'No Bookings found'], 404);
-        }
-
-        return response()->json($bookings);
-    }
 
     /**
      * Update the specified resource in storage.

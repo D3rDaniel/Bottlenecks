@@ -80,26 +80,6 @@ class TaskController extends Controller
             return response()->json($res,404);
         }
     }
-    public function showOpenByUserId($user_id): JsonResponse
-    {
-        $tasks = Task::where('assignee_user_id',$user_id)->where('completed_date',NULL)->get();
-
-        if($tasks ->isEmpty()){
-            return response()->json(['message' => 'No tasks found'], 404);
-        }
-
-        return response()->json($tasks);
-    }
-    public function showCompletedByUserId($user_id): JsonResponse
-    {
-        $tasks = Task::where('assignee_user_id',$user_id)->where('completed_date','!=',NULL)->get();
-
-        if($tasks ->isEmpty()){
-            return response()->json(['message' => 'No tasks found'], 404);
-        }
-
-        return response()->json($tasks);
-    }
 
     /**
      * Update the specified resource in storage.

@@ -30,8 +30,6 @@ Route::get('/project/{id}/tags',[ProjectController::class,'getTags']);
 
 //Tasks
 Route::apiResource('task', TaskController::class);
-Route::get('task/showOpenByUserId/{user_id}', [TaskController::class,'showOpenByUserId']);
-Route::get('task/showCompletedByUserId/{user_id}', [TaskController::class,'showCompletedByUserId']);
 Route::put('task/{id}/complete', [TaskController::class,'completeTask']);
 
 //Tags
@@ -47,11 +45,11 @@ Route::put('/room/{id}', [\App\Http\Controllers\API\RoomController::class, 'upda
 
 //Booking
 Route::apiResource('bookings', \App\Http\Controllers\API\BookingController::class);
-Route::get('bookings/showByUserId/{user_id}', [\App\Http\Controllers\API\BookingController::class, 'showByUserId']);
+Route::get('/user/{user_id}/bookings', [\App\Http\Controllers\API\UserBookingController::class,'show']);
 
 //Announcements
 Route::get('/announcements/showProjectUser/{project_id}/{user_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'showProjectUser']);
-Route::get('/announcements/showByUserId/{user_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'showByUserId']);
+Route::get('/user/{user_id}/announcements', [\App\Http\Controllers\API\UserAnnouncementController::class,'show']);
 Route::get('/announcements/project/{project_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'show']);
 Route::post('/announcements', [\App\Http\Controllers\API\AnnouncementController::class, 'store']);
 Route::put('/announcements/{id}', [\App\Http\Controllers\API\AnnouncementController::class, 'update']);
