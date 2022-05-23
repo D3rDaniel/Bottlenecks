@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,12 +18,22 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
+        $created_at = $this->faker->dateTimeBetween(now()->modify('-1 year'),now()->modify('+1 year'));
+        $due_date = $this->faker->dateTimeBetween($created_at, '+1 years');
+        if($due_date<now()){
+            $due_date_start = clone $due_date;
+            $completion_date = $this->faker->dateTimeBetween($due_date_start->modify('-1 month'), $due_date->modify('+1 week'));
+        }
+        else{
+            $completion_date=null;
+        }
         return [
+            'created_at' => $created_at,
             'title' => $this->faker->sentence,
             'description' => $this->faker->sentence,
-            'creator_user_id' => User::factory(), //create a new user
-            'due_date' => $this->faker->dateTimeBetween(now(), '+1 years'),
-            'completion_date' => null,
+            'creator_user_id' => User::all()->random()->id, //create a new user
+            'due_date' => $due_date,
+            'completion_date' => $completion_date,
         ];
     }
 }
