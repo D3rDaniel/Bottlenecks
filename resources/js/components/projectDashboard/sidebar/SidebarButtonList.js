@@ -6,6 +6,7 @@ import DeadlineIcon from '../../../../images/icons/list.jpg'
 import TasksIcon from '../../../../images/icons/list.jpg'
 import AnkuendigungIcon from '../../../../images/icons/ankuendigung.jpg'
 import TagsIcon from '../../../../images/icons/uebersicht.jpg'
+import RoomIcon from '../../../../images/icons/raum-weiss.png'
 
 
 
@@ -16,6 +17,7 @@ const elements = [
     {img: TasksIcon, desc: "Tasks", selected: "false", gap:"false"},
     {img: AnkuendigungIcon, desc: "Ankündiungen", selected: "false"},
     {img: TagsIcon, desc: "Tags", selected: "false"},
+    {img: RoomIcon, desc: "Räume", selected: "false"},
 ];
 
 
