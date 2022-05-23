@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import SearchBar from './searchbar/SearchBar'
 import ProjectMinimumView from './ProjectMinimumView'
+import CreateProjectButton from './CreateProjectButton'
+import NewProjectPopup from './popup/NewProjectPopup'
 
 const tasks = [
   {title: "Frontend", creator: "Hans Jürgen" , progress: 70, startDate: "01.05.2022", date: "09.05.2022"},
@@ -9,6 +11,10 @@ const tasks = [
 ]
 
 const DashboardProjects = () => {
+  const [popupTrigger, setPopupTrigger] = useState(false)
+  const changePopupTriggerValue = () => {
+    setPopupTrigger(!popupTrigger);
+  }
   return(
     <div className="flex flex-col w-full m-1 ml-2">
         <SearchBar />
@@ -27,6 +33,11 @@ const DashboardProjects = () => {
             )
           })}
         </div>
+
+        <div class="flex justify-end">
+          <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
+        </div>
+        <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue}/>
     </div>
   )
 }
