@@ -44,10 +44,8 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        //Check email
         $user = User::where('email',$credentials['email'])->first();
 
-        //return 'no user found' if $usr is null
         if(!$user){
             return response(['message' => 'No user found'],404);
         }
@@ -57,7 +55,6 @@ class AuthController extends Controller
             return response(['message' => 'Invalid credentials'],401);
         }
 
-        //Copilot generated
         //if(!auth()->attempt($credentials)){
         //   return response(['message' => 'Invalid credentials'],401);
         //}

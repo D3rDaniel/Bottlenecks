@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 //Public routes
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
-
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout',[AuthController::class,'logout']);
@@ -34,6 +33,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/project/{id}', [ProjectController::class, 'update']);
     Route::put('/project/{id}/complete', [ProjectController::class, 'completeProject']);
     Route::get('/project/{id}/tags',[ProjectController::class,'getTags']);
+    //Project Overview
+    Route::get('project/{id}/overview',[\App\Http\Controllers\API\ProjectOverviewController::class,'show']);
 
 //Tasks
     Route::apiResource('task', TaskController::class);
@@ -62,4 +63,3 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/announcements', [\App\Http\Controllers\API\AnnouncementController::class, 'store']);
     Route::put('/announcements/{id}', [\App\Http\Controllers\API\AnnouncementController::class, 'update']);
 });
-

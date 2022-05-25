@@ -47,6 +47,7 @@ class StoreTaskRequest extends FormRequest
     /**
      * Get the error messages for the defined validation rules.*
      * @return array
+     * @throws HttpResponseException
      */
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator): array
     {
@@ -58,6 +59,7 @@ class StoreTaskRequest extends FormRequest
     /**
      * Get the error messages for the defined authorization rules.*
      * @return array
+     * @throws HttpResponseException
      */
     protected function failedAuthorization(): array
     {
