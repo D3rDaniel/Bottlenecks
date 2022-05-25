@@ -1,6 +1,6 @@
 import React from 'react'
-import SearchBar from '../dashboardProjects/searchbar/SearchBar'
-import ProjectMinimumView from '../dashboardProjects/ProjectMinimumView'
+import ProjectMinimumView from './ProjectMinimumView'
+import SearchBarAnkündigungen from './searchbar/SearchBarAnkündigungen'
 const tasks = [
   {project: "Projekt aB", created_at: "01.01.2022" , title: "Message 1", description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
   {project: "Projekt 420", created_at: "20.04.2022" , title: "Message 2", description: "afasdfafdöafhöosdSMOKEWEEDEVERYDAYjöadfhaöNOTREALLY"},
@@ -9,17 +9,16 @@ const tasks = [
 const DashboardAnkündigungen = () => {
   return(
     <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBar />
+        <SearchBarAnkündigungen />
         
         <div className="h-full w-full">
-          {tasks.map((project, index) => {
+          {tasks.map((task, index) => {
             return (
               <ProjectMinimumView
-                title={project.title}
-                creator={project.creator}
-                progress={project.progress}
-                startDate={project.startDate}
-                date={project.date}
+                project={task.project}
+                created_at={task.created_at}
+                title={task.title}
+                description={task.description}
                 key={index}>
               </ProjectMinimumView>
             )

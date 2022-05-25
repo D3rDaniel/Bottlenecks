@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from '../dashboardProjects/searchbar/SearchBar'
+import SearchBar from './searchbar/SearchBarRaumbuchungens'
 
 function DashboardRaumbuchungen() {
   return (

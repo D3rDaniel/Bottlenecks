@@ -1,12 +1,13 @@
 import React from 'react'
-import Sortelement from './SortElement'
+import SortElement from '../../dashboardProjects/searchbar/SortElement';
 
 const elements = [
-    {label: "Projetname", selected: false},
-    {label: "Ersteller", selected: false},
-    {label: "Fortschritt", selected: false},
+    {label: "Raumname", selected: false},
+    {label: "Raumnummer", selected: false},
     {label: "Erstellt am", selected: false},
-    {label: "Endet am", selected: false}
+    {label: "Raumgröße", selected: false},
+    {label: "Buchungstag", selected: false},
+    {label: "Zeitraum", selected: false},
   ];
 
 const SortList = () => {
@@ -14,11 +15,11 @@ const SortList = () => {
     <div className="flex w-full ml-20 mr-36">
         {elements.map((element, index) => {
             return (
-                <Sortelement
+                <SortElement
                     label={element.label}
                     selected={element.selected}
                     key={index}>
-                </Sortelement>
+                </SortElement>
         )
         })}
     </div>

@@ -2295,23 +2295,347 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardProjects/searchbar/SearchBar */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchBar.js");
+/* harmony import */ var _searchbar_SearchBarAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar/SearchBarAbgeschlosseneTasks */ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/searchbar/SearchBarAbgeschlosseneTasks.js");
+/* harmony import */ var _ProjectMinimumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMinimumViewAbgeschlosseneTasks */ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMinimumViewAbgeschlosseneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var elements = [{
+  project: "Projekt aB",
+  created_at: "01.01.2022",
+  title: "Title2",
+  deadline: "25.05.2022",
+  finished_at: "24.05.2022",
+  priority: "hoch",
+  tag: "back-end",
+  finished_state: "abgeschlossen",
+  description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  room: "A009",
+  finish_comment: "War ganz easy, Abschlusskommentar"
+}, {
+  project: "Projekt 420",
+  created_at: "01.03.2022",
+  title: "Title2",
+  deadline: "25.06.2022",
+  finished_at: "24.05.2022",
+  priority: "niedrig",
+  tag: "front-end",
+  finished_state: "abgebrochen",
+  description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  room: "B015",
+  finish_comment: "Macht garkeinen Bock, Abschlusskommentar"
+}];
+
+function DashboardAbgeschlosseneTasks() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "flex flex-col w-full m-1 ml-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_searchbar_SearchBarAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "h-full w-full",
+      children: elements.map(function (element, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMinimumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          title: element.title,
+          project: element.project,
+          created_at: element.created_at,
+          deadline: element.deadline,
+          finished_at: element.finished_at,
+          priority: element.priority,
+          tag: element.tag,
+          finished_state: element.finished_state,
+          description: element.description,
+          finish_comment: element.finish_comment,
+          room: element.room
+        }, index);
+      })
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardAbgeschlosseneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMaximumViewAbgeschlosseneTasks.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMaximumViewAbgeschlosseneTasks.js ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var ProjectMaximumViewAbgeschlosseneTasks = function ProjectMaximumViewAbgeschlosseneTasks(_ref) {
+  var description = _ref.description,
+      room = _ref.room,
+      finish_comment = _ref.finish_comment;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "ml-8 w-1/2 py-5",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        className: "font-bold",
+        children: "Beschreibung"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: description
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "w-1/2 p-3 ",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "h-1/2 px-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+          className: "font-bold",
+          children: "Raum"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: room
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "h-1/2 px-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+          className: "font-bold",
+          children: "Abschlusskommentar"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: finish_comment
+        })]
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMaximumViewAbgeschlosseneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMinimumViewAbgeschlosseneTasks.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMinimumViewAbgeschlosseneTasks.js ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.jpg */ "./resources/images/icons/arrow-black.jpg");
+/* harmony import */ var _ProjectMaximumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumViewAbgeschlosseneTasks */ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMaximumViewAbgeschlosseneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlosseneTasks(_ref) {
+  var project = _ref.project,
+      created_at = _ref.created_at,
+      title = _ref.title,
+      description = _ref.description,
+      deadline = _ref.deadline,
+      finished_at = _ref.finished_at,
+      finished_state = _ref.finished_state,
+      priority = _ref.priority,
+      tag = _ref.tag,
+      finish_comment = _ref.finish_comment,
+      room = _ref.room;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      rotate = _useState2[0],
+      setRotate = _useState2[1];
+
+  var rotateArrow = function rotateArrow() {
+    if (rotate) {
+      setRotate(false);
+    } else {
+      setRotate(true);
+    }
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "my-5 ml-1",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex justify-evenly h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        "class": "flex justify-around w-11/12",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: title
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: project
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: created_at
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: deadline
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: finished_at
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: priority
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: tag
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: finished_state
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "w-1/12",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+          children: "\xD6ffnen"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex ml-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+          alt: "maxView",
+          className: "h-5 w-5 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+          onClick: rotateArrow
+        }), "            "]
+      })]
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      description: description,
+      room: room,
+      finish_comment: finish_comment
+    }) : null]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMinimumViewAbgeschlosseneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/searchbar/SearchBarAbgeschlosseneTasks.js":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/searchbar/SearchBarAbgeschlosseneTasks.js ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SearchField */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchField.js");
+/* harmony import */ var _SortListAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SortListAbgeschlosseneTasks */ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/searchbar/SortListAbgeschlosseneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function SearchBarAbgeschlosseneTasks() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "bg-blue rounded-xl h-20",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SortListAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBarAbgeschlosseneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/searchbar/SortListAbgeschlosseneTasks.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/searchbar/SortListAbgeschlosseneTasks.js ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SortElement */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SortElement.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
 
-function DashboardAbgeschlosseneTasks() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "flex flex-col w-full m-1 ml-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      children: "AbgeschlosseneTasks"
+var elements = [{
+  label: "Titel",
+  selected: false
+}, {
+  label: "Projekt",
+  selected: false
+}, {
+  label: "Erstellt am",
+  selected: false
+}, {
+  label: "Deadline",
+  selected: false
+}, {
+  label: "Beendet",
+  selected: false
+}, {
+  label: "Priorität",
+  selected: false
+}, {
+  label: "Tag",
+  selected: false
+}, {
+  label: "Abschluss",
+  selected: false
+}];
+
+var SortListAbgeschlosseneTasks = function SortListAbgeschlosseneTasks() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "flex w-11/12 pl-16 justify-around",
+      children: elements.map(function (element, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          label: element.label,
+          selected: element.selected
+        }, index);
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "w-1/12"
     })]
   });
-}
+};
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardAbgeschlosseneTasks);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SortListAbgeschlosseneTasks);
 
 /***/ }),
 
@@ -2359,11 +2683,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardProjects/searchbar/SearchBar */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchBar.js");
-/* harmony import */ var _forms_inputField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../forms/inputField */ "./resources/js/components/forms/inputField.js");
-/* harmony import */ var _ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChangeEmailAndPasswordButton */ "./resources/js/components/dashboard/dashboardAccountVerwalten/ChangeEmailAndPasswordButton.js");
-/* harmony import */ var _popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./popup/ChangePasswordAndEmailPopup */ "./resources/js/components/dashboard/dashboardAccountVerwalten/popup/ChangePasswordAndEmailPopup.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _forms_inputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../forms/inputField */ "./resources/js/components/forms/inputField.js");
+/* harmony import */ var _ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChangeEmailAndPasswordButton */ "./resources/js/components/dashboard/dashboardAccountVerwalten/ChangeEmailAndPasswordButton.js");
+/* harmony import */ var _popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./popup/ChangePasswordAndEmailPopup */ "./resources/js/components/dashboard/dashboardAccountVerwalten/popup/ChangePasswordAndEmailPopup.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2383,7 +2706,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function DashboardAccountVerwalten() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2394,85 +2716,85 @@ function DashboardAccountVerwalten() {
     setPopupTrigger(!popupTrigger);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "flex flex-col w-full m-1 ml-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       "class": "w-full h-full bg-white",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_3__["default"], {
         trigger: popupTrigger,
         onClick: changePopupTriggerValue
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
         "class": "text-5xl pt-5 pl-9",
         children: "Profil"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         "class": "w-full",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
           "class": "bg-white shadow-md rounded-lg w-720 px-10 pt-12 pb-14 mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             "class": "mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               "class": "flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 "class": "pr-4",
                 "for": "username",
                 children: "Nutzername:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 id: "username",
                 value: "person123"
               })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             "class": "mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
               "class": "pr-4",
               children: "Passwort:"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             "class": "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               "class": "flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 "class": "pr-10",
                 "for": "forename",
                 children: "Vorname:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 id: "forename",
                 value: "Max"
               })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             "class": "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               "class": "flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 "class": "pr-7",
                 "for": "lastname",
                 children: "Nachname:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 "class": "w-36",
                 id: "lastname",
                 value: "Mustermann"
               })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             "class": "mb-16",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
               "class": "pr-4",
               children: "Email:"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             "class": "flex items-center justify-between",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
               "class": "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
               type: "button",
               children: "\xC4nderungen speichern"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
               onClick: changePopupTriggerValue
             })]
           })]
         })
       })]
-    })]
+    })
   });
 }
 
@@ -2574,8 +2896,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardProjects/searchbar/SearchBar */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchBar.js");
-/* harmony import */ var _dashboardProjects_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dashboardProjects/ProjectMinimumView */ "./resources/js/components/dashboard/dashboardProjects/ProjectMinimumView.js");
+/* harmony import */ var _ProjectMinimumView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProjectMinimumView */ "./resources/js/components/dashboard/dashboardAnkündigungen/ProjectMinimumView.js");
+/* harmony import */ var _searchbar_SearchBarAnk_ndigungen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./searchbar/SearchBarAnkündigungen */ "./resources/js/components/dashboard/dashboardAnkündigungen/searchbar/SearchBarAnkündigungen.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -2597,15 +2919,14 @@ var tasks = [{
 var DashboardAnkündigungen = function DashboardAnkündigungen() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "flex flex-col w-full m-1 ml-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_searchbar_SearchBarAnk_ndigungen__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "h-full w-full",
-      children: tasks.map(function (project, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dashboardProjects_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          title: project.title,
-          creator: project.creator,
-          progress: project.progress,
-          startDate: project.startDate,
-          date: project.date
+      children: tasks.map(function (task, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          project: task.project,
+          created_at: task.created_at,
+          title: task.title,
+          description: task.description
         }, index);
       })
     })]
@@ -2613,6 +2934,214 @@ var DashboardAnkündigungen = function DashboardAnkündigungen() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardAnkündigungen);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAnkündigungen/ProjectMaximumView.js":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAnkündigungen/ProjectMaximumView.js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var ProjectMaximumView = function ProjectMaximumView(_ref) {
+  var description = _ref.description;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "ml-8 w-1/2 py-5",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        className: "font-bold",
+        children: "Beschreibung"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: description
+      })]
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMaximumView);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAnkündigungen/ProjectMinimumView.js":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAnkündigungen/ProjectMinimumView.js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.jpg */ "./resources/images/icons/arrow-black.jpg");
+/* harmony import */ var _ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumView */ "./resources/js/components/dashboard/dashboardAnkündigungen/ProjectMaximumView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var ProjectMinimumView = function ProjectMinimumView(_ref) {
+  var project = _ref.project,
+      created_at = _ref.created_at,
+      title = _ref.title,
+      description = _ref.description;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      rotate = _useState2[0],
+      setRotate = _useState2[1];
+
+  var rotateArrow = function rotateArrow() {
+    if (rotate) {
+      setRotate(false);
+    } else {
+      setRotate(true);
+    }
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "my-5 ml-1",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "w-1/6 pl-12",
+        children: project
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "w-1/5 pl-14",
+        children: created_at
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "w-1/4 pl-5",
+        children: title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex ml-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+          alt: "maxView",
+          className: "h-5 w-5 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+          onClick: rotateArrow
+        }), "            "]
+      })]
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      description: description
+    }) : null]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMinimumView);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAnkündigungen/searchbar/SearchBarAnkündigungen.js":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAnkündigungen/searchbar/SearchBarAnkündigungen.js ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SearchField */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchField.js");
+/* harmony import */ var _SortListAnk_ndigungen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SortListAnkündigungen */ "./resources/js/components/dashboard/dashboardAnkündigungen/searchbar/SortListAnkündigungen.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function SearchBarAnkündigungen() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "bg-blue rounded-xl h-20",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SortListAnk_ndigungen__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBarAnkündigungen);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardAnkündigungen/searchbar/SortListAnkündigungen.js":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAnkündigungen/searchbar/SortListAnkündigungen.js ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SortElement */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SortElement.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var elements = [{
+  label: "Projekt",
+  selected: false
+}, {
+  label: "Erstellt am",
+  selected: false
+}, {
+  label: "Titel",
+  selected: false
+}];
+
+var SortList = function SortList() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "flex w-full ml-20 mr-36",
+    children: elements.map(function (element, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        label: element.label,
+        selected: element.selected
+      }, index);
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SortList);
 
 /***/ }),
 
@@ -2629,23 +3158,337 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardProjects/searchbar/SearchBar */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchBar.js");
+/* harmony import */ var _searchbar_SearchBarOffeneTasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar/SearchBarOffeneTasks */ "./resources/js/components/dashboard/dashboardOffeneTasks/searchbar/SearchBarOffeneTasks.js");
+/* harmony import */ var _ProjectMinimumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMinimumViewOffeneTasks */ "./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMinimumViewOffeneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var elements = [{
+  project: "Projekt aB",
+  title: "Title2",
+  deadline: "25.05.2022",
+  priority: "hoch",
+  tag: "back-end",
+  description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  room: "A009"
+}, {
+  project: "Projekt WEED",
+  title: "Title420",
+  deadline: "25.06.2022",
+  priority: "mittel",
+  tag: "front-end",
+  description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  room: "AB09"
+}];
+
+function DashboardOffeneTasks() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "flex flex-col w-full m-1 ml-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_searchbar_SearchBarOffeneTasks__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "h-full w-full",
+      children: elements.map(function (element, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMinimumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          title: element.title,
+          project: element.project,
+          deadline: element.deadline,
+          tag: element.tag,
+          room: element.room,
+          priority: element.priority,
+          description: element.description
+        }, index);
+      })
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardOffeneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMaximumViewOffeneTasks.js":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMaximumViewOffeneTasks.js ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var ProjectMaximumViewOffeneTasks = function ProjectMaximumViewOffeneTasks(_ref) {
+  var title = _ref.title,
+      description = _ref.description,
+      deadline = _ref.deadline;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "ml-8 w-1/2 py-5",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        className: "font-bold",
+        children: title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: description
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "flex justify-center w-1/2 p-3 pt-8",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "w-1/2 h-1/2 px-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+          className: "font-bold",
+          children: "Deadline"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: deadline
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "h-1/2 px-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+          className: "font-bold",
+          children: "Abgeschlossen am"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: "offene Abgeschlossen? lol, m\xFCssen wir \xE4ndern"
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "flex w-1/2 p-3 items-end",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "flex justify-between items-end",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          className: "bg-amber-500 w-36 h-6 px-3 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+          children: "Bearbeiten"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          className: "bg-red w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+          children: "L\xF6schen"
+        })]
+      })
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMaximumViewOffeneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMinimumViewOffeneTasks.js":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMinimumViewOffeneTasks.js ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.jpg */ "./resources/images/icons/arrow-black.jpg");
+/* harmony import */ var _ProjectMaximumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumViewOffeneTasks */ "./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMaximumViewOffeneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+var ProjectMinimumViewOffeneTasks = function ProjectMinimumViewOffeneTasks(_ref) {
+  var project = _ref.project,
+      title = _ref.title,
+      description = _ref.description,
+      deadline = _ref.deadline,
+      priority = _ref.priority,
+      tag = _ref.tag,
+      room = _ref.room;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      rotate = _useState2[0],
+      setRotate = _useState2[1];
+
+  var rotateArrow = function rotateArrow() {
+    if (rotate) {
+      setRotate(false);
+    } else {
+      setRotate(true);
+    }
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "my-5 ml-1",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex justify-evenly h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        "class": "flex justify-around w-4/5",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: title
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: project
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: deadline
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: tag
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: room
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "",
+          children: priority
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "w-1/5",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex justify-between",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            className: "bg-amber-300 w-36 h-6 px-3 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+            children: "in Bearbeitung"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+            children: "Abschlie\xDFen"
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex ml-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+          alt: "maxView",
+          className: "h-5 w-5 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+          onClick: rotateArrow
+        }), "            "]
+      })]
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      description: description,
+      title: title,
+      deadline: deadline
+    }) : null]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMinimumViewOffeneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardOffeneTasks/searchbar/SearchBarOffeneTasks.js":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardOffeneTasks/searchbar/SearchBarOffeneTasks.js ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SearchField */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchField.js");
+/* harmony import */ var _SortListOffeneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SortListOffeneTasks */ "./resources/js/components/dashboard/dashboardOffeneTasks/searchbar/SortListOffeneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function SearchBarOffeneTasks() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "bg-blue rounded-xl h-20",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SortListOffeneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBarOffeneTasks);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardOffeneTasks/searchbar/SortListOffeneTasks.js":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardOffeneTasks/searchbar/SortListOffeneTasks.js ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SortElement */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SortElement.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
 
-function DashboardOffeneTasks() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "flex flex-col w-full m-1 ml-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      children: "OffeneTasks"
+var elements = [{
+  label: "Titel",
+  selected: false
+}, {
+  label: "Projekt",
+  selected: false
+}, {
+  label: "Deadline",
+  selected: false
+}, {
+  label: "Tag",
+  selected: false
+}, {
+  label: "Raum",
+  selected: false
+}, {
+  label: "Priorität",
+  selected: false
+}];
+
+var SortListOffeneTasks = function SortListOffeneTasks() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "flex w-4/5 pl-20 justify-around",
+      children: elements.map(function (element, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          label: element.label,
+          selected: element.selected
+        }, index);
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "w-1/5"
     })]
   });
-}
+};
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardOffeneTasks);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SortListOffeneTasks);
 
 /***/ }),
 
@@ -2905,7 +3748,7 @@ var ProjectMinimumView = function ProjectMinimumView(_ref) {
     fillProgressBar();
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "my-5 ml-8",
+    className: "my-5 ml-1",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -3309,7 +4152,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardProjects/searchbar/SearchBar */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchBar.js");
+/* harmony import */ var _searchbar_SearchBarRaumbuchungens__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar/SearchBarRaumbuchungens */ "./resources/js/components/dashboard/dashboardRaumbuchungen/searchbar/SearchBarRaumbuchungens.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -3319,13 +4162,106 @@ __webpack_require__.r(__webpack_exports__);
 function DashboardRaumbuchungen() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex flex-col w-full m-1 ml-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardProjects_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_searchbar_SearchBarRaumbuchungens__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       children: "Raumbuchungen"
     })]
   });
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardRaumbuchungen);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardRaumbuchungen/searchbar/SearchBarRaumbuchungens.js":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardRaumbuchungen/searchbar/SearchBarRaumbuchungens.js ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SearchField */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SearchField.js");
+/* harmony import */ var _SortListRaumbuchungen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SortListRaumbuchungen */ "./resources/js/components/dashboard/dashboardRaumbuchungen/searchbar/SortListRaumbuchungen.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function SearchBarAnkündigungen() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "bg-blue rounded-xl h-20",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dashboardProjects_searchbar_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SortListRaumbuchungen__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBarAnkündigungen);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/dashboardRaumbuchungen/searchbar/SortListRaumbuchungen.js":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardRaumbuchungen/searchbar/SortListRaumbuchungen.js ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dashboardProjects/searchbar/SortElement */ "./resources/js/components/dashboard/dashboardProjects/searchbar/SortElement.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var elements = [{
+  label: "Raumname",
+  selected: false
+}, {
+  label: "Raumnummer",
+  selected: false
+}, {
+  label: "Erstellt am",
+  selected: false
+}, {
+  label: "Raumgröße",
+  selected: false
+}, {
+  label: "Buchungstag",
+  selected: false
+}, {
+  label: "Zeitraum",
+  selected: false
+}];
+
+var SortList = function SortList() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "flex w-full ml-20 mr-36",
+    children: elements.map(function (element, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardProjects_searchbar_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        label: element.label,
+        selected: element.selected
+      }, index);
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SortList);
 
 /***/ }),
 

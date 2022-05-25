@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import SearchBar from '../dashboardProjects/searchbar/SearchBar'
 import InputField from '../../forms/inputField'
 import ChangeEmailAndPasswordButton from './ChangeEmailAndPasswordButton'
 import ChangePasswordAndEmailPopup from './popup/ChangePasswordAndEmailPopup'
@@ -11,7 +10,6 @@ function DashboardAccountVerwalten() {
   }
   return (
     <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBar />
         
         <div class="w-full h-full bg-white">
         <ChangePasswordAndEmailPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />

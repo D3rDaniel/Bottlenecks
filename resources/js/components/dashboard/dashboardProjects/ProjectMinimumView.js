@@ -31,7 +31,7 @@ const ProjectMinimumView = ({title, creator, progress, startDate, date}) => {
     });
 
   return (
-    <div className="my-5 ml-8">
+    <div className="my-5 ml-1">
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
             <label className="ml-12 w-1/5">{title}</label>
 
