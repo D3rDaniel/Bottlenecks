@@ -14,6 +14,11 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize()
     {
+        $user = auth()->user();
+        //TODO
+        //check if user is owner
+        //check if user is project member
+            //check if user is allowed to create tasks
         return true;
     }
 
@@ -27,8 +32,8 @@ class StoreTaskRequest extends FormRequest
         return [
             //TODO:validate combination of user_id and project_id in project_users
             'creator_user_id' => 'required|exists:users,id',
-            'assignee_user_id' => 'required|exists:users,id|exists:project_users,user_id',
-            'project_id' => 'required|exists:projects,id|exists:project_users,project_id',
+            'assignee_user_id' => 'required|exists:users,id',
+            'project_id' => 'required|exists:projects,id',
             'status_id' => 'exists:statuses,id',
             'priority_id' => 'exists:priorities,id',
             'tag_id' => 'exists:tags,id',
@@ -48,5 +53,16 @@ class StoreTaskRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'errors' => $validator->errors()
         ], 422));
+    }
+
+    /**
+     * Get the error messages for the defined authorization rules.*
+     * @return array
+     */
+    protected function failedAuthorization(): array
+    {
+        throw new HttpResponseException(response()->json([
+            'errors' => 'unauthorized.'
+        ], 403));
     }
 }

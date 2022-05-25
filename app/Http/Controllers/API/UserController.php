@@ -122,6 +122,7 @@ class UserController extends Controller
     }
 
     public function getTasks($id,$slug){
+        //check if slug is null
 
         $user = User::find($id);
         //check if user exists
