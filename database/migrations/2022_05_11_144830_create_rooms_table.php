@@ -26,6 +26,8 @@ return new class extends Migration
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
             $table->boolean('opened_on_weekends')->default(false);
+
+            $table->foreignIdFor(\App\Models\Project::class)->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -38,6 +38,10 @@ class Project extends Model
             ->withPivot('user_id','project_id','can_create_tasks','can_assign_tasks','can_create_tags');
     }
 
+    public function rooms(){
+        $this->hasMany(Room::class);
+    }
+
     public function calculateProgress(){
         $totalTasks = $this->tasks()->count();
         $completedTasks = $this->tasks()->where('status_id',1)->count();
