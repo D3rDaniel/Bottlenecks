@@ -43,7 +43,7 @@ class BookingController extends Controller
         $room = Room::find($data['room_id']);
         $date = Carbon::create($data['reservation_date']);
         if($room->opened_on_weekends==0&&$date->isWeekend()){
-            return response()->json(['message' => 'This room is not open at the weekend'], 422);
+            return response()->json(['success'=>false,'message' => 'This room is not open at the weekend'], 422);
         }
 
         //check if the timeslot is available
@@ -53,7 +53,7 @@ class BookingController extends Controller
         $room_opening_hours = CarbonPeriod::create($room->opening_time, $room->closing_time);
         //check if the timeslot of the booking is within the timeslot of the opening_hours
         if (!$timeslot->overlaps($room_opening_hours)) {
-            return response()->json(['error' => 'The timeslot of the booking is not within the time range of the opening hours'], 422);
+            return response()->json(['success'=>false,'message' => 'The timeslot of the booking is not within the time range of the opening hours'], 422);
         }
 
         //Check if the timeslot is available
@@ -62,7 +62,7 @@ class BookingController extends Controller
             foreach($bookings as $booking){
                 $booking_timeslot = CarbonPeriod::create($booking->start_time, $booking->end_time);
                 if($timeslot->overlaps($booking_timeslot)){
-                    return response()->json(['message' => 'This timeslot is not available'], 422);
+                    return response()->json(['success'=>false,'message' => 'This timeslot is not available'], 422);
                 }
             }
         }
@@ -70,14 +70,17 @@ class BookingController extends Controller
 
         $booking = Booking::create($data);
 
-        if (!$booking) {
-            return response()->json([
-                'message' => 'Booking could not be created',
-                'data' => $booking
-            ], 500);
+
+
+        if($booking){
+            $res = ['success'=>true, 'booking'=>$booking];
+            $status = 201;
+        }else{
+            $res = ['success'=>false,'message'=>'Booking could not be created'];
+            $status = 500;
         }
 
-        return response()->json($booking, 201);
+        return response()->json($res, $status);
     }
 
     /**
@@ -107,7 +110,7 @@ class BookingController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
-        //
+        //TODO: Update funktion
     }
 
     /**
@@ -121,14 +124,14 @@ class BookingController extends Controller
         $booking = Booking::find($id);
         if (!$booking) {
             return response()->json([
+                'success' => false,
                 'message' => 'Booking not found',
-                'status' => 'error'
             ], 404);
         }
         $booking->delete();
         return response()->json([
+            'success' => true,
             'message' => 'Booking deleted',
-            'status' => 'success'
         ], 200);
     }
 }

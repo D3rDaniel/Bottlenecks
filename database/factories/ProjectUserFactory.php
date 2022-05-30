@@ -24,7 +24,7 @@ class ProjectUserFactory extends Factory
         if($admin){
             return [
                 'user_id' => $user_id,
-                'project_id ' =>$project_id,
+                'project_id' =>$project_id,
                 'can_create_tasks' => 1,
                 'can_edit_tasks' => 1,
                 'can_assign_tasks' => 1,
@@ -34,7 +34,7 @@ class ProjectUserFactory extends Factory
         else{
             return [
                 'user_id' => $user_id,
-                'project_id ' => $project_id,
+                'project_id' => $project_id,
                 'can_create_tasks' => $this->faker->numberBetween(0,  1),
                 'can_edit_tasks' => $this->faker->numberBetween(0,  1),
                 'can_assign_tasks' => $this->faker->numberBetween(0,  1),

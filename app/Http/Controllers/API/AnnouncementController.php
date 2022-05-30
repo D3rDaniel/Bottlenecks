@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAnnouncementRequest;
+use App\Http\Requests\UpdateAnnouncementRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Announcement;
 use App\Models\Project;
@@ -22,20 +23,23 @@ class AnnouncementController extends Controller
 
         if(!(Project::find($data['project_id'])->members()->find($data['user_id']))){
             return response()->json([
+                'success' => false,
                 'message' => 'User not part of project',
-            ], 404);
+            ], 422);
         }
 
         $announcement= Announcement::create($data);
 
-        if(! $announcement){
-            return response()->json([
-                'message' => 'Room could not be created',
-                'data' =>  $announcement
-            ], 500);
+        if($announcement){
+            $res = ['success'=>true, 'Announcement'=>$announcement];
+            $status = 201;
+        }else{
+            $res = ['success'=>false,'message'=>'Announcement could not be created'];
+            $status = 500;
         }
+
+        return response()->json($res, $status);
         //TODO: Generate EMAIL
-        return response()->json($announcement, 201);
     }
 
     /**
@@ -68,14 +72,9 @@ class AnnouncementController extends Controller
      * Update announcement.
      *
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateAnnouncementRequest $request, $id)
     {
-        $data = $request->safe()->only(
-            [
-                'subject',
-                'message',
-            ]
-        );
+        $data = $request->safe()->only(['subject', 'message']);
 
         try {
             $announcement = Announcement::findOrFail($id);
@@ -102,12 +101,17 @@ class AnnouncementController extends Controller
     public function destroy($id)
     {
         $announcement = Announcement::find($id);
-        if(empty($announcement)){
-            return response()->json(['deleted'=>false,'message'=>'Announcement not found'],404);
+        if (!$announcement) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Announcement not found',
+            ], 404);
         }
-        if($announcement->delete()){
-            return response()->json(['deleted'=>true],200);
-        }
-        return response()->json(['deleted'=>false,'message'=>'Announcement could not be deleted'],404);
+        $announcement->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Announcement deleted',
+        ], 200);
+
     }
 }
