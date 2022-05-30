@@ -12,18 +12,21 @@ import AccountVerwaltenPage from './pages/AccountVerwaltenPage';
 import RaumbuchungenPage from './pages/RaumbuchungenPage';
 
 export default function ReactApp() {
+
+    let userID = 1;
+
     return (
         <div className="bg-customgray relative flex h-screen w-screen font-body">
             <Routes>
-                <Route exact path='/' element={<DashboardPage/>}/>
+                <Route exact path='/' element={<DashboardPage userID={userID}/>}/>
                 <Route path='/project' element={<ProjectPage/>}/>
                 <Route path='/login' element={<LoginPage/>}/>
-                <Route path='/register' element={<RegisterPage/>}/>
-                <Route path='/ankuendigungen' element={<AnkündigungenPage/>}/>
-                <Route path='/abgeschlosseneTasks' element={<AbgeschlosseneTasksPage/>}/>
-                <Route path='/offeneTasks' element={<OffeneTasksPage/>}/>
-                <Route path='/accountVerwalten' element={<AccountVerwaltenPage/>}/>
-                <Route path='/raumbuchungen' element={<RaumbuchungenPage/>}/>
+                <Route path='/register' element={<RegisterPage userID={userID}/>}/>
+                <Route path='/ankuendigungen' element={<AnkündigungenPage userID={userID}/>}/>
+                <Route path='/abgeschlosseneTasks' element={<AbgeschlosseneTasksPage userID={userID}/>}/>
+                <Route path='/offeneTasks' element={<OffeneTasksPage userID={userID}/>}/>
+                <Route path='/accountVerwalten' element={<AccountVerwaltenPage userID={userID}/>}/>
+                <Route path='/raumbuchungen' element={<RaumbuchungenPage userID={userID}/>}/>
             </Routes>
         </div>
     );

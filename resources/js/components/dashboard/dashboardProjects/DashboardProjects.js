@@ -1,33 +1,67 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import SearchBar from './searchbar/SearchBar'
 import ProjectMinimumView from './ProjectMinimumView'
 import CreateProjectButton from './CreateProjectButton'
 import NewProjectPopup from './popup/NewProjectPopup'
 
-const tasks = [
+const projects = [
   {title: "Frontend", creator: "Hans Jürgen" , progress: 70, startDate: "01.05.2022", date: "09.05.2022"},
   {title: "Backend", creator: "Max Muster" ,  progress: 50, startDate: "01.05.2022" , date: "09.05.2022"},
   {title: "API", creator: "Men Rexona" , progress: 30, startDate: "01.05.2022" , date: "09.05.2022"}
 ]
 
-const DashboardProjects = () => {
+function DashboardProjects (props) {
   const [popupTrigger, setPopupTrigger] = useState(false)
   const changePopupTriggerValue = () => {
     setPopupTrigger(!popupTrigger);
   }
+
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedProjects, setProjects] = useState([]);
+
+    useEffect(() => {
+        setIsLoaded(true);
+        const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/projects";
+
+        fetch(url, {
+          headers: {
+            'Accept': 'application/json',
+          }
+        })
+          .then(response => response.json())
+          .then((data) => {
+            setIsLoaded(true);
+            setProjects(data["projects_created"]);  
+            },(error) =>{
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, []);
+      
+      if (error) {
+          return <div>Error: {error.message}</div>
+      }else if(!isLoaded){
+          return <div>Loading..</div>
+      }else {
+
   return(
     <div className="flex flex-col w-full m-1 ml-2">
         <SearchBar />
         
         <div className="h-full w-full">
-          {tasks.map((project, index) => {
+          {loadedProjects.map((project, index) => {
+            let title = project.title
+            if(title.length > 33) title = title.substring(0,30)+'...'
             return (
               <ProjectMinimumView
-                title={project.title}
-                creator={project.creator}
-                progress={project.progress}
-                startDate={project.startDate}
-                date={project.date}
+                title={title}
+                creator={project.creator_user_id}
+                progress={project.progress_percentage}
+                startDate={project.created_at.substring(0,10)}
+                date={project.due_date}
+                description={project.description}
                 key={index}>
               </ProjectMinimumView>
             )
@@ -39,7 +73,7 @@ const DashboardProjects = () => {
         </div>
         <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue}/>
     </div>
-  )
+  )}
 }
 
 export default DashboardProjects

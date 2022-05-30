@@ -2197,13 +2197,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ReactApp() {
+  var userID = 1;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
     className: "bg-customgray relative flex h-screen w-screen font-body",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         exact: true,
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_DashboardPage__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_DashboardPage__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          userID: userID
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/project",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_ProjectPage__WEBPACK_IMPORTED_MODULE_3__["default"], {})
@@ -2212,22 +2215,34 @@ function ReactApp() {
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_LoginPage__WEBPACK_IMPORTED_MODULE_4__["default"], {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/register",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_RegisterPage__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_RegisterPage__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          userID: userID
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/ankuendigungen",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_Ank_ndigungenPage__WEBPACK_IMPORTED_MODULE_6__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_Ank_ndigungenPage__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          userID: userID
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/abgeschlosseneTasks",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_AbgeschlosseneTasksPage__WEBPACK_IMPORTED_MODULE_7__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_AbgeschlosseneTasksPage__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          userID: userID
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/offeneTasks",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_OffeneTasksPage__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_OffeneTasksPage__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          userID: userID
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/accountVerwalten",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_AccountVerwaltenPage__WEBPACK_IMPORTED_MODULE_9__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_AccountVerwaltenPage__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          userID: userID
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/raumbuchungen",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_RaumbuchungenPage__WEBPACK_IMPORTED_MODULE_10__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_pages_RaumbuchungenPage__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          userID: userID
+        })
       })]
     })
   });
@@ -3565,7 +3580,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var tasks = [{
+var projects = [{
   title: "Frontend",
   creator: "Hans Jürgen",
   progress: 70,
@@ -3585,7 +3600,7 @@ var tasks = [{
   date: "09.05.2022"
 }];
 
-var DashboardProjects = function DashboardProjects() {
+function DashboardProjects(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       popupTrigger = _useState2[0],
@@ -3595,31 +3610,77 @@ var DashboardProjects = function DashboardProjects() {
     setPopupTrigger(!popupTrigger);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    className: "flex flex-col w-full m-1 ml-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      className: "h-full w-full",
-      children: tasks.map(function (project, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          title: project.title,
-          creator: project.creator,
-          progress: project.progress,
-          startDate: project.startDate,
-          date: project.date
-        }, index);
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      "class": "flex justify-end",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_CreateProjectButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        popupTrigger: popupTrigger,
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      error = _useState4[0],
+      setError = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isLoaded = _useState6[0],
+      setIsLoaded = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      loadedProjects = _useState8[0],
+      setProjects = _useState8[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsLoaded(true);
+    var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/projects";
+    fetch(url, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      setIsLoaded(true);
+      setProjects(data["projects_created"]);
+    }, function (error) {
+      setIsLoaded(true);
+      setError(error);
+    });
+  }, []);
+
+  if (error) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: ["Error: ", error.message]
+    });
+  } else if (!isLoaded) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      children: "Loading.."
+    });
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "flex flex-col w-full m-1 ml-2",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "h-full w-full",
+        children: loadedProjects.map(function (project, index) {
+          var title = project.title;
+          if (title.length > 33) title = title.substring(0, 30) + '...';
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            title: title,
+            creator: project.creator_user_id,
+            progress: project.progress_percentage,
+            startDate: project.created_at.substring(0, 10),
+            date: project.due_date,
+            description: project.description
+          }, index);
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        "class": "flex justify-end",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_CreateProjectButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          popupTrigger: popupTrigger,
+          onClick: changePopupTriggerValue
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_popup_NewProjectPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        trigger: popupTrigger,
         onClick: changePopupTriggerValue
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_popup_NewProjectPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      trigger: popupTrigger,
-      onClick: changePopupTriggerValue
-    })]
-  });
-};
+      })]
+    });
+  }
+}
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardProjects);
 
@@ -3643,25 +3704,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ProjectMaximumView = function ProjectMaximumView() {
+var ProjectMaximumView = function ProjectMaximumView(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "ml-8 w-1/2 py-5",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
         className: "font-bold",
-        children: "Projekt-Titel"
+        children: props.title
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        children: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        children: props.description
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "ml-auto mt-5 w-1/4",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-        className: "font-bold",
-        children: "Personen:"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        children: "Person 1, Person 2, Person 3"
-      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "ml-auto mt-5 w-1/4"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
       className: "bg-red w-28 h-6 rounded-xl mr-12  mb-4 mt-auto text-white hover:font-bold drop-shadow-lg",
       children: "Verlassen"
@@ -3709,13 +3764,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var ProjectMinimumView = function ProjectMinimumView(_ref) {
-  var title = _ref.title,
-      creator = _ref.creator,
-      progress = _ref.progress,
-      startDate = _ref.startDate,
-      date = _ref.date;
-
+var ProjectMinimumView = function ProjectMinimumView(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("w-0%"),
       _useState2 = _slicedToArray(_useState, 2),
       progressCompleted = _useState2[0],
@@ -3727,7 +3776,7 @@ var ProjectMinimumView = function ProjectMinimumView(_ref) {
       setRotate = _useState4[1];
 
   var fillProgressBar = function fillProgressBar() {
-    var progressString = Math.round(progress).toString();
+    var progressString = Math.round(props.progress).toString();
     setProgressCompleted("w-" + progressString + "%");
   };
 
@@ -3753,25 +3802,25 @@ var ProjectMinimumView = function ProjectMinimumView(_ref) {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "ml-12 w-1/5",
-        children: title
+        children: props.title
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "w-1/5",
-        children: creator
+        children: props.creator
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "w-1/5",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "".concat(progressCompleted, " bg-green-400 rounded-full"),
-            children: [progress, "%"]
+            children: [props.progress, "%"]
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "w-1/5",
-        children: startDate
+        children: props.startDate
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "w-1/5",
-        children: date
+        children: props.date
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "flex ml-auto",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
@@ -3787,7 +3836,10 @@ var ProjectMinimumView = function ProjectMinimumView(_ref) {
           onClick: rotateArrow
         }), "            "]
       })]
-    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {}) : null]
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      title: props.title,
+      description: props.description
+    }) : null]
   });
 };
 
@@ -5507,10 +5559,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var DashboardPage = function DashboardPage() {
+var DashboardPage = function DashboardPage(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "flex w-screen",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_dashboardProjects_DashboardProjects__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_dashboardProjects_DashboardProjects__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      userID: props.userID
+    })]
   });
 };
 

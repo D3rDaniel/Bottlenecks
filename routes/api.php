@@ -15,7 +15,7 @@ Route::get('/statuses/all',[\App\Http\Controllers\API\StatusController::class,'i
 Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::class,'index']);
 
 //Protected routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+/* Route::group(['middleware' => ['auth:sanctum']], function () { */
     Route::post('/logout',[AuthController::class,'logout']);
     //all tasks of a project /api/project/{id}/tasks
     Route::apiResource('project.tasks', ProjectTaskController::class)->only('index');
@@ -66,6 +66,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/announcements/project/{project_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'show']);
     Route::post('/announcements', [\App\Http\Controllers\API\AnnouncementController::class, 'store']);
     Route::put('/announcements/{id}', [\App\Http\Controllers\API\AnnouncementController::class, 'update']);
-});
+/* }) */ ;
 
 
