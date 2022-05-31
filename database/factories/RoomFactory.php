@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -30,6 +31,7 @@ class RoomFactory extends Factory
             'opening_time' =>   $opening_time,
             'closing_time' =>   $closing_time,
             'opened_on_weekends' => $this->faker->numberBetween(0,1),
+            'project_id' => Project::all()->random()->id
         ];
     }
 }

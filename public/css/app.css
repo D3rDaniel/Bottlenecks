@@ -514,8 +514,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-auto{
   margin-top: auto;
 }
-.ml-12{
-  margin-left: 3rem;
+.ml-16{
+  margin-left: 4rem;
+}
+.ml-3{
+  margin-left: 0.75rem;
 }
 .mt-2{
   margin-top: 0.5rem;
@@ -531,6 +534,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mr-8{
   margin-right: 2rem;
+}
+.ml-12{
+  margin-left: 3rem;
 }
 .mb-20{
   margin-bottom: 5rem;
@@ -552,9 +558,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mt-3{
   margin-top: 0.75rem;
-}
-.ml-3{
-  margin-left: 0.75rem;
 }
 .mt-1\.5{
   margin-top: 0.375rem;
@@ -843,14 +846,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pr-7{
   padding-right: 1.75rem;
 }
-.pl-12{
-  padding-left: 3rem;
+.pl-20{
+  padding-left: 5rem;
 }
-.pl-14{
-  padding-left: 3.5rem;
-}
-.pl-5{
-  padding-left: 1.25rem;
+.pl-10{
+  padding-left: 2.5rem;
 }
 .pt-8{
   padding-top: 2rem;
@@ -860,6 +860,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pt-0{
   padding-top: 0px;
+}
+.pl-3{
+  padding-left: 0.75rem;
 }
 .pb-2{
   padding-bottom: 0.5rem;
@@ -872,12 +875,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pl-16{
   padding-left: 4rem;
-}
-.pl-20{
-  padding-left: 5rem;
-}
-.pl-3{
-  padding-left: 0.75rem;
 }
 .text-center{
   text-align: center;

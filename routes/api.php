@@ -19,9 +19,10 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
     Route::post('/logout',[AuthController::class,'logout']);
     //all tasks of a project /api/project/{id}/tasks
     Route::apiResource('project.tasks', ProjectTaskController::class)->only('index');
+    //all rooms of a project /api/project/{id}/rooms
+    Route::apiResource('project.rooms', \App\Http\Controllers\API\ProjectRoomController::class)->only('index');
 //all projects of a user /api/user/{id}/projects
     Route::apiResource('user.projects', UserProjectController::class)->only('index');
-
     //ProjectUsers (Members)
     Route::apiResource('project.members', ProjectUserController::class)->only(['index']);
 //id = id of ProjectUser NOT the user
@@ -54,18 +55,19 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
 
 //Room
     Route::apiResource('room', \App\Http\Controllers\API\RoomController::class);
+    Route::get('/user/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
     Route::put('/room/{id}', [\App\Http\Controllers\API\RoomController::class, 'update']);
 
 //Booking
     Route::apiResource('bookings', \App\Http\Controllers\API\BookingController::class);
     Route::get('/user/{user_id}/bookings', [\App\Http\Controllers\API\UserBookingController::class,'show']);
+    Route::get('/room/{room_id}/bookings', [\App\Http\Controllers\API\RoomBookingController::class,'show']);
 
 //Announcements
-    Route::get('/announcements/showProjectUser/{project_id}/{user_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'showProjectUser']);
+    Route::apiResource('/announcements',\App\Http\Controllers\API\AnnouncementController::class);
+    Route::get('/project/{project_id}/user/{user_id}/announcements', [\App\Http\Controllers\API\ProjectUserAnnouncementController::class, 'show']);
     Route::get('/user/{user_id}/announcements', [\App\Http\Controllers\API\UserAnnouncementController::class,'show']);
-    Route::get('/announcements/project/{project_id}', [\App\Http\Controllers\API\AnnouncementController::class, 'show']);
-    Route::post('/announcements', [\App\Http\Controllers\API\AnnouncementController::class, 'store']);
-    Route::put('/announcements/{id}', [\App\Http\Controllers\API\AnnouncementController::class, 'update']);
+    Route::get('/project/{project_id}/announcements', [\App\Http\Controllers\API\ProjectAnnouncementController::class, 'show']);
 /* }) */ ;
 
 

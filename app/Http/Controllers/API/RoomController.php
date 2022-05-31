@@ -16,13 +16,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::get();
 
-        if($rooms->isEmpty()){
-            return response()->json(['message' => 'No rooms found'], 404);
-        }
-
-        return response()->json($rooms);
     }
 
     /**
@@ -41,7 +35,16 @@ class RoomController extends Controller
             ], 500);
         }
 
-        return response()->json($room, 201);
+        else{
+            $res = [
+                'success' => true,
+                'room'=>$room
+            ];
+            $status = 201;
+        }
+
+        return response()->json($res, $status);
+
     }
 
     /**
@@ -67,8 +70,12 @@ class RoomController extends Controller
     {
         $data = $request->safe()->only(
             [
-                'capacity',
+                'title',
                 'description',
+                'room_number',
+                'capacity',
+                'equipment_info' ,
+                'address_info',
                 'equipment_info',
                 'opening_time',
                 'closing_time',
@@ -84,7 +91,7 @@ class RoomController extends Controller
                 'success' => true,
                 'room' => $room,
             ];
-            return response()->json($res, 200);
+            return response()->json($res, 201);
         } catch (\Exception $e) {
             $res = [
                 'success' => false,
@@ -102,11 +109,11 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
         if(empty($room)){
-            return response()->json(['deleted'=>false,'message'=>'Room not found'],404);
+            return response()->json(['success' => false,'message'=>'Room not found'],404);
         }
         if($room->delete()){
-            return response()->json(['deleted'=>true],200);
+            return response()->json(['success' => true],200);
         }
-        return response()->json(['deleted'=>false,'message'=>'Room could not be deleted'],404);
+        return response()->json(['success' => false,'message'=>'Room could not be deleted'],500);
     }
 }
