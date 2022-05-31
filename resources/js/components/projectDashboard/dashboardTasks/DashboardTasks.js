@@ -40,7 +40,7 @@ function DashboardTasks(props) {
   }else {
 
     return(
-      <div className="flex flex-col w-full m-1 ml-2">
+      <div className="flex flex-col w-full mx-1 my-2">
           <SearchBar />
 
           <div className="h-full w-full">

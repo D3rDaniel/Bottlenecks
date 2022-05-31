@@ -6,7 +6,10 @@ import SortList from './SortList.js'
 const SearchBar = () => {
   return (
     <div className="bg-blue rounded-xl h-20">
-      <SearchField />
+        <div className="flex">
+            <SearchField />
+        </div>
+      
       <div className="flex">
         <SortList />
       </div>

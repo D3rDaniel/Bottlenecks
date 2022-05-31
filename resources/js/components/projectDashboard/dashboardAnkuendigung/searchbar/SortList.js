@@ -8,7 +8,7 @@ const elements = [
 
 const SortList = () => {
   return (
-    <div className="flex">
+    <div className="flex w-full ml-20 mr-28">
         {elements.map((element, index) => {
             return (
                 <Sortelement

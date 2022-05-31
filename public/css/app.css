@@ -475,6 +475,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 2.5rem;
   margin-right: 2.5rem;
 }
+.mx-1{
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+.my-2{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.my-3{
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.mx-8{
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
 .mr-2{
   margin-right: 0.5rem;
 }
@@ -607,6 +623,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-mt-80{
   margin-top: -20rem;
 }
+.mr-24{
+  margin-right: 6rem;
+}
+.mr-28{
+  margin-right: 7rem;
+}
+.mt-8{
+  margin-top: 2rem;
+}
 .inline-block{
   display: inline-block;
 }
@@ -728,6 +753,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+}
+.max-w-min{
+  max-width: -webkit-min-content;
+  max-width: -moz-min-content;
+  max-width: min-content;
 }
 .-translate-x-1\/2{
   --tw-translate-x: -50%;
@@ -1000,6 +1030,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-400{
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+.text-blue{
+  --tw-text-opacity: 1;
+  color: rgb(66 168 253 / var(--tw-text-opacity));
 }
 .shadow-md{
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);

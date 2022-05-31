@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 const Sidebar = (props) => {
   return (
-    <div className="flex flex-col min-w-max w-72 justify-between mt-2">
+    <div className="flex flex-col min-w-max w-72 justify-between mt-1">
       
       {/* Header */}
         <div className="mb-10">
