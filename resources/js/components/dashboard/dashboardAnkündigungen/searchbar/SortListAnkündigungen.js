@@ -4,6 +4,7 @@ import SortElement from '../../dashboardProjects/searchbar/SortElement';
 const elements = [
     {label: "Projekt", selected: false},
     {label: "Erstellt am", selected: false},
+    {label: "Geändert am", selected: false},
     {label: "Titel", selected: false},
   ];
 

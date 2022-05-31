@@ -33,9 +33,9 @@ const ProjectMinimumView = (props) => {
   return (
     <div className="my-5 ml-1">
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
-            <label className="ml-12 w-1/5">{props.title}</label>
+            <label className="ml-16 pl-3 w-1/5">{props.title}</label>
 
-            <label className="w-1/5">{props.creator}</label>
+            <label className="w-1/5 ml-3">{props.creator}</label>
 
             <div className="w-1/5">
                 <div className="bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center">
@@ -53,7 +53,7 @@ const ProjectMinimumView = (props) => {
                 <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" ><Link to='/project'>Öffnen</Link></button>
                 <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
             </div>
-        {rotate ? <TaskMaximumView title={props.title} description={props.description}/> : null}
+        {rotate ? <TaskMaximumView title={props.fullTitle} description={props.description}/> : null}
     </div>
     
   )

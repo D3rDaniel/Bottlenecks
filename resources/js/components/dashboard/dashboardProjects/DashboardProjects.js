@@ -52,11 +52,11 @@ function DashboardProjects (props) {
         
         <div className="h-full w-full">
           {loadedProjects.map((project, index) => {
-            let title = project.title
-            if(title.length > 33) title = title.substring(0,30)+'...'
+            
             return (
               <ProjectMinimumView
-                title={title}
+                title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
+                fullTitle = {project.title}
                 creator={project.creator_user_id}
                 progress={project.progress_percentage}
                 startDate={project.created_at.substring(0,10)}
