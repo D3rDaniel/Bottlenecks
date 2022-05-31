@@ -1,4 +1,5 @@
 import React from 'react'
+
 import InputField from '../../../forms/InputField'
 
 function ChangeAccountPasswortAndEmail({trigger, onClick}) {

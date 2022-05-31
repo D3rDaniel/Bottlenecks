@@ -22,7 +22,7 @@ const elements = [
 
 const SidebarButtonList = () => {
   return (
-    <div className="bg-white ml-2 mb-80 rounded-xl">
+    <div className="bg-white ml-2 rounded-xl">
       {elements.map((element, index) => {
         return (
         <SidebarButtonListElement

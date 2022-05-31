@@ -9,21 +9,20 @@ import { Link } from 'react-router-dom'
 
 const Sidebar = (props) => {
   return (
-    <div className="flex flex-col min-w-max w-80 justify-between mt-2">
+    <div className="flex flex-col min-w-max w-72 justify-between mt-2">
       
       {/* Header */}
-      <div className="rounded-xl bg-white">
-        <Link to='/'><img src= {Logo} alt="logo" className="h-16 w-16 mr-2 pl-2 float-left hover:cursor-pointer"></img></Link>
-        <h1 className="font-bold text-xl mt-1">Projekt</h1>
-        <h2><span className="text-darkorange">xxx</span></h2>
-      </div>
-
-      {/* Body */}
-      <div className="-mt-12">
-        <Admin selected={props.page} ></Admin>     
-        <SidebarButtonList selected={props.page}></SidebarButtonList> 
-      </div>
-      
+        <div className="mb-10">
+            <div className="rounded-xl bg-white h-16 mb-10">
+                <Link to='/'><img src= {Logo} alt="logo" className="h-16 w-16 mr-2 pl-2 float-left hover:cursor-pointer"></img></Link>
+                <h1 className="font-bold text-xl mt-1">Projekt</h1>
+                <h2><span className="text-darkorange">xxx</span></h2>
+            </div>    
+            <Admin selected={props.page} ></Admin>
+        </div>
+        
+        <SidebarButtonList selected={props.page}></SidebarButtonList>          
+    
       {/* Footer */}
       <div>
         <SidebarButtonElement
