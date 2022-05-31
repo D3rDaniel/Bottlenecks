@@ -13,7 +13,7 @@ const DashboardAnkündigungen = (props) => {
   const [loadedAnnouncements, setAnnouncements] = useState([]);
 
     useEffect(() => {
-        setIsLoaded(true);
+        setIsLoaded(false);
         const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/announcements"
 
         fetch(url, {

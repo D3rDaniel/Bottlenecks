@@ -12,10 +12,6 @@ const ProjectMaximumViewOffeneTasks = ({title, description, deadline}) => {
           <h3 className="font-bold">Deadline</h3>
           <label>{deadline}</label>
         </div>
-        <div className="h-1/2 px-3">
-          <h3 className="font-bold">Abgeschlossen am</h3>
-          <label>offene Abgeschlossen? lol, müssen wir ändern</label>
-        </div>
       </div>
       <div className="flex w-1/2 p-3 items-end">
         <div className='flex justify-between items-end'>

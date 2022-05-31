@@ -25,7 +25,7 @@ function TaskMaximumView(props){
             <div className="w-1/3">
                 <h1 className="font-bold">zuletzt aktualisiert:</h1>
                 <div className="flex">
-                    <label> <span className="font-bold">{props.update}</span></label>
+                    <label> <span className="font-bold">{props.updated_at}</span></label>
                 </div>
             </div>
         </div>  

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Arrow from '../../../../images/icons/arrow-black.jpg'
 import TaskMaximumView from './TaskMaximumView'
 
-const TaskMinimumView = (props) => {
+function TaskMinimumView (props) {
 
     const [prioColor, setPrioColor] = useState("text-black");
     const [rotate, setRotate] = useState(0);
@@ -53,7 +53,7 @@ const TaskMinimumView = (props) => {
                 <button className="bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg">Abschließen</button>
                 <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
             </div>
-        {rotate ? <TaskMaximumView title={props.fullTitle} description={props.description} assignee={props.assignee} creator={props.creator} update={props.update} tag={props.tag}></TaskMaximumView> : null}
+        {rotate ? <TaskMaximumView title={props.fullTitle} description={props.description} assignee={props.assignee} creator={props.creator} updated_at={props.updated_at} tag={props.tag}></TaskMaximumView> : null}
     </div>
     
   )

@@ -15,7 +15,7 @@ function DashboardTasks(props) {
   const [loadedTasks, setTasks] = useState([]);
 
   useEffect(() => {
-      setIsLoaded(true);
+      setIsLoaded(false);
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
       fetch(url, {
         headers: {
@@ -55,7 +55,7 @@ function DashboardTasks(props) {
                   prio = {task.priority_id == 3 ? "Gering" : ((task.priority_id == 2) ? "Mittel" : "Hoch")}
                   completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
                   date = {task.due_date}
-                  update = {task.updated_at}
+                  updated_at = {task.updated_at.substring(0,10)}
                   creator = {task.creator_user_id}
                   assignee = {task.assignee}
                   tag = {task.tag_id == null ? "keine Tag" : task.tag_id}
