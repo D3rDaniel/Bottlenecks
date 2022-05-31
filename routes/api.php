@@ -23,6 +23,8 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
     Route::apiResource('project.rooms', \App\Http\Controllers\API\ProjectRoomController::class)->only('index');
 //all projects of a user /api/user/{id}/projects
     Route::apiResource('user.projects', UserProjectController::class)->only('index');
+    //all task if a user /api/user/{id}/tasks
+    Route::apiResource('user.tasks', \App\Http\Controllers\API\UserTaskController::class)->only('index');
 
     //ProjectUsers (Members)
     Route::apiResource('project.members', ProjectUserController::class)->only(['index']);
