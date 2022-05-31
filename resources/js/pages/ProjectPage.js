@@ -8,7 +8,7 @@ const ProjectPage = () => {
 
     return(
         <div className='flex w-screen'>
-            <Sidebar></Sidebar>
+            <Sidebar page=""></Sidebar>
             <DashboardTasks projectID={projectID}></DashboardTasks>
         </div>
     )
