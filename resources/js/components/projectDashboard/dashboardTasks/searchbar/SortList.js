@@ -6,7 +6,7 @@ const elements = [
     {label: "Status", selected: false},
     {label: "Priorität", selected: false},
     {label: "Abgeschlossen", selected: false},
-    {label: "Endet", selected: false}
+    {label: "Deadline", selected: false}
   ];
 
 const SortList = () => {
