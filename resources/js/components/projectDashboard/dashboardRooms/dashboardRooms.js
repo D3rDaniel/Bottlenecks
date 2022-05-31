@@ -3,6 +3,8 @@ import React from 'react'
 import Searchbar from './searchbar/SearchBar'
 import MinView from './RoomsMinView'
 
+import Plus from '../../../../images/icons/plus.png'
+
 const rooms = [
     {title : "Dösraum" , 
     room_number : "100" , 
@@ -47,6 +49,13 @@ const dashboardRooms = () => {
                 )
             })}
         </div>
+        <div className="w-full flex justify-end">
+            <div className="bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold">
+                <img src={Plus} alt="plus" className="h-6 w-6 mx-2"></img>
+                <button className="text-white rounded-xl">Raum erstellen</button>           
+            </div>   
+        </div>
+        
     </div>
   )
 }

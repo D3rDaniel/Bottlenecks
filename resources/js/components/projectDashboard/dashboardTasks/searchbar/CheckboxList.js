@@ -4,7 +4,7 @@ import Checkbox from './Checkbox'
 
 const CheckboxList = () => {
   return (
-      <div className="flex mt-3 h-7">
+      <div className="flex mt-3 h-7 min-w-max">
         <Checkbox 
             title="Meine Tasks anzeigen">
         </Checkbox>

@@ -11,7 +11,7 @@ const elements = [
 
 const SortList = () => {
   return (
-    <div className="flex w-full ml-20 mr-52">
+    <div className="flex w-full ml-20 mr-48">
         {elements.map((element, index) => {
             return (
                 <Sortelement

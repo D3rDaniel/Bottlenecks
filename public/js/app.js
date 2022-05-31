@@ -3660,7 +3660,7 @@ function CreateProjectButton(_ref) {
     className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
-      "class": "mt-1 mr-2"
+      className: "mt-1 mr-2"
     }), "Neues Projekt"]
   });
 }
@@ -5148,6 +5148,168 @@ var SortList = function SortList() {
 
 /***/ }),
 
+/***/ "./resources/js/components/projectDashboard/dashboardDeadline/MonthView.js":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardDeadline/MonthView.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardTasks/TaskMinimumView */ "./resources/js/components/projectDashboard/dashboardTasks/TaskMinimumView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var MonthView = function MonthView(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Date().getMonth() + 1),
+      _useState2 = _slicedToArray(_useState, 1),
+      currentDate = _useState2[0];
+
+  var checkTaskMonth = function checkTaskMonth(date) {
+    var checkMonth;
+    date.charAt(6) <= currentDate ? checkMonth = true : checkMonth = false;
+    return checkMonth;
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mt-2 ml-5 font-bold",
+      children: "Endet diesen Monat:"
+    }), props.tasks.map(function (task, index) {
+      return checkTaskMonth(task.date) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
+        fullTitle: task.title,
+        description: "DummyDesc" //{task.description}
+        ,
+        comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
+        status: task.status //{task.status.title}
+        ,
+        prio: task.prio //{task.priority.title}
+        ,
+        completedDate: task.completed_date === null ? "not completed" : task.completed_date,
+        date: task.date //{task.due_date}
+        ,
+        updated_at: "Dummy Updatet" //{task.updated_at.substring(0,10)}
+        ,
+        creator: "DummyErsteller" //{task.creator.username}
+        ,
+        assignee: "DummyAssign" //{task.assignee}
+        ,
+        tag: "dummyTag" //{task.tag.title == null ? "keine Tag" : task.tag.title}
+
+      }, index) : null;
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MonthView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardDeadline/WeekView.js":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardDeadline/WeekView.js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardTasks/TaskMinimumView */ "./resources/js/components/projectDashboard/dashboardTasks/TaskMinimumView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var WeekView = function WeekView(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Date()),
+      _useState2 = _slicedToArray(_useState, 1),
+      currentDate = _useState2[0];
+
+  var checkTaskWeek = function checkTaskWeek(date) {
+    var checkWeek;
+    var week = new Date(Date.parse(date));
+    week <= currentDate ? checkWeek = true : checkWeek = false;
+    return checkWeek;
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    currentDate.setDate(currentDate.getDate() + 7);
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mt-2 ml-5 font-bold",
+      children: "Endet in einer Woche:"
+    }), props.tasks.map(function (task, index) {
+      return checkTaskWeek(task.date) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
+        fullTitle: task.title,
+        description: "DummyDesc" //{task.description}
+        ,
+        comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
+        status: task.status //{task.status.title}
+        ,
+        prio: task.prio //{task.priority.title}
+        ,
+        completedDate: task.completed_date === null ? "not completed" : task.completed_date,
+        date: task.date //{task.due_date}
+        ,
+        updated_at: "Dummy Updatet" //{task.updated_at.substring(0,10)}
+        ,
+        creator: "DummyErsteller" //{task.creator.username}
+        ,
+        assignee: "DummyAssign" //{task.assignee}
+        ,
+        tag: "dummyTag" //{task.tag.title == null ? "keine Tag" : task.tag.title}
+
+      }, index) : null;
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WeekView);
+
+/***/ }),
+
 /***/ "./resources/js/components/projectDashboard/dashboardDeadline/dashboardDeadline.js":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/projectDashboard/dashboardDeadline/dashboardDeadline.js ***!
@@ -5161,13 +5323,130 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _dashboardTasks_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardTasks/searchbar/SearchBar */ "./resources/js/components/projectDashboard/dashboardTasks/searchbar/SearchBar.js");
+/* harmony import */ var _WeekView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./WeekView */ "./resources/js/components/projectDashboard/dashboardDeadline/WeekView.js");
+/* harmony import */ var _MonthView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MonthView */ "./resources/js/components/projectDashboard/dashboardDeadline/MonthView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
+
+
+
+
+var tasks = [{
+  title: "Task1",
+  status: "abgeschlossen",
+  prio: "Hoch",
+  completedDate: "06.05.2022",
+  date: "2022-05-09"
+}, {
+  title: "Task2",
+  status: "in Bearbeitung",
+  prio: "Mittel",
+  completedDate: "-",
+  date: "2022-05-09"
+}, {
+  title: "Task3",
+  status: "in Bearbeitung",
+  prio: "Mittel",
+  completedDate: "-",
+  date: "2022-05-31"
+}, {
+  title: "Task4",
+  status: "abgeschlossen",
+  prio: "Gering",
+  completedDate: "20.05.2022",
+  date: "2022-05-09"
+}, {
+  title: "Task5",
+  status: "in Bearbeitung",
+  prio: "Gering",
+  completedDate: "-",
+  date: "2022-06-05"
+}, {
+  title: "Task6",
+  status: "in Bearbeitung",
+  prio: "Gering",
+  completedDate: "-",
+  date: "2022-06-06"
+}, {
+  title: "Task7",
+  status: "in Bearbeitung",
+  prio: "Gering",
+  completedDate: "-",
+  date: "2022-06-07"
+}, {
+  title: "Task8",
+  status: "in Bearbeitung",
+  prio: "Gering",
+  completedDate: "-",
+  date: "2022-06-08"
+}, {
+  title: "Task9",
+  status: "in Bearbeitung",
+  prio: "Gering",
+  completedDate: "-",
+  date: "2022-07-07"
+}, {
+  title: "Task10",
+  status: "in Bearbeitung",
+  prio: "Gering",
+  completedDate: "-",
+  date: "2022-07-09"
+}, {
+  title: "Task11",
+  status: "in Bearbeitung",
+  prio: "Gering",
+  completedDate: "-",
+  date: "2022-07-09"
+}];
 
 var dashboardDeadline = function dashboardDeadline() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "dashboardDeadline"
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tasksInWorking = _useState2[0],
+      setTasksInWorking = _useState2[1];
+
+  var checkWorkingTasks = function checkWorkingTasks() {
+    var workingTasks = [];
+
+    for (var i = 0; i < tasks.length; i++) {
+      if (tasks[i].status !== "abgeschlossen") {
+        workingTasks.push(tasks[i]);
+      }
+    }
+
+    ;
+    setTasksInWorking(workingTasks);
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    checkWorkingTasks();
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "flex flex-col w-full mx-1 my-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_dashboardTasks_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "h-full w-full flex flex-col justify-center items-center",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_WeekView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        tasks: tasksInWorking
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "h-10"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MonthView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        tasks: tasksInWorking
+      })]
+    })]
   });
 };
 
@@ -5397,7 +5676,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar/SearchBar */ "./resources/js/components/projectDashboard/dashboardRooms/searchbar/SearchBar.js");
 /* harmony import */ var _RoomsMinView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomsMinView */ "./resources/js/components/projectDashboard/dashboardRooms/RoomsMinView.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../images/icons/plus.png */ "./resources/images/icons/plus.png");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -5460,14 +5741,27 @@ var rooms = [{
 }];
 
 var dashboardRooms = function dashboardRooms() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "flex flex-col w-full mx-1 my-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "h-full w-full",
       children: rooms.map(function (room, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_2__["default"], {
           room: room
         }, index);
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "w-full flex justify-end",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          src: _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__["default"],
+          alt: "plus",
+          className: "h-6 w-6 mx-2"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          className: "text-white rounded-xl",
+          children: "Raum erstellen"
+        })]
       })
     })]
   });
@@ -5730,7 +6024,7 @@ var TagInputField = function TagInputField() {
         alt: "plus",
         className: "h-6 w-6 mx-2"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        className: "text-white",
+        className: "text-white hover:font-bold",
         children: "Neuer Tag"
       })]
     })]
@@ -5811,7 +6105,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar/SearchBar */ "./resources/js/components/projectDashboard/dashboardTasks/searchbar/SearchBar.js");
 /* harmony import */ var _TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TaskMinimumView */ "./resources/js/components/projectDashboard/dashboardTasks/TaskMinimumView.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../images/icons/plus.png */ "./resources/images/icons/plus.png");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5823,6 +6118,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -5884,20 +6180,20 @@ function DashboardTasks(props) {
   }, []);
 
   if (error) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       children: ["Error: ", error.message]
     });
   } else if (!isLoaded) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       children: "Loading.."
     });
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "flex flex-col w-full mx-1 my-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "h-full w-full",
         children: loadedTasks.map(function (task, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
             fullTitle: task.title,
             description: task.description,
@@ -5911,6 +6207,19 @@ function DashboardTasks(props) {
             assignee: task.assignee,
             tag: task.tag.title == null ? "keine Tag" : task.tag.title
           }, index);
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "w-full flex justify-end",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+            src: _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__["default"],
+            alt: "plus",
+            className: "h-6 w-6 mx-2"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            className: "text-white rounded-xl",
+            children: "Task erstellen"
+          })]
         })
       })]
     });
@@ -6101,7 +6410,7 @@ function TaskMinimumView(props) {
         className: "w-1/5",
         children: props.date
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "flex ml-auto",
+        className: "flex",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           className: "bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
           children: "Abschlie\xDFen"
@@ -6151,7 +6460,7 @@ var Checkbox = function Checkbox(_ref) {
     className: "",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
       type: "checkbox",
-      className: "mr-1 ml-6 "
+      className: "mr-1 ml-6"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
       className: "text-white",
       children: title
@@ -6185,7 +6494,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var CheckboxList = function CheckboxList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "flex mt-3 h-7",
+    className: "flex mt-3 h-7 min-w-max",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Checkbox__WEBPACK_IMPORTED_MODULE_1__["default"], {
       title: "Meine Tasks anzeigen"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Checkbox__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -6380,7 +6689,7 @@ var elements = [{
 
 var SortList = function SortList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "flex w-full ml-20 mr-52",
+    className: "flex w-full ml-20 mr-48",
     children: elements.map(function (element, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
         label: element.label,

@@ -43,7 +43,7 @@ function TaskMinimumView (props) {
 
             <label className="w-1/5">{props.date}</label>
 
-            <div  className="flex ml-auto">
+            <div  className="flex">
                 <button className="bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg">Abschließen</button>
                 <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
         </div>
