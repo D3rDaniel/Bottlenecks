@@ -4691,7 +4691,7 @@ __webpack_require__.r(__webpack_exports__);
 function InputField(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-      "class": "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+      className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
       id: props.id,
       type: "text",
       placeholder: props.placeholder
@@ -4901,10 +4901,10 @@ var dashboardRooms = function dashboardRooms() {
 
 /***/ }),
 
-/***/ "./resources/js/components/projectDashboard/dashboardTags/dashboardTags.js":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/projectDashboard/dashboardTags/dashboardTags.js ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/projectDashboard/dashboardTags/TagElement.js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardTags/TagElement.js ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4918,9 +4918,110 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var TagElement = function TagElement(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "font-bold",
+    children: ["#", props.name]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TagElement);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardTags/TagInputField.js":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardTags/TagInputField.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _images_icons_plus_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/plus.jpg */ "./resources/images/icons/plus.jpg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var TagInputField = function TagInputField() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "mx-5 mb-4 flex drop-shadow-md",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      type: "text",
+      placeholder: "Titel...",
+      className: "bg-customgray text-black w-full rounded-l-md pl-3 h-8"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-blue rounded-r-md w-40 flex items-center hover:cursor-pointer",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+        src: _images_icons_plus_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+        alt: "plus",
+        className: "h-6 w-6 mx-2 "
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        className: "text-white",
+        children: "Neuer Tag"
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TagInputField);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardTags/dashboardTags.js":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardTags/dashboardTags.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TagElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TagElement */ "./resources/js/components/projectDashboard/dashboardTags/TagElement.js");
+/* harmony import */ var _TagInputField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TagInputField */ "./resources/js/components/projectDashboard/dashboardTags/TagInputField.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var tags = [{
+  name: "Tag1"
+}, {
+  name: "Tag2"
+}, {
+  name: "Tag3"
+}];
+
 var dashboardTags = function dashboardTags() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "dashboardTags"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    className: "flex w-screen h-screen justify-center items-center",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex flex-col justify-between bg-white h-2/3 w-2/3 rounded-xl",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          className: "font-bold mt-4 ml-5 text-xl",
+          children: "Tags"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: " mt-5 ml-10",
+          children: tags.map(function (tag, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TagElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              name: tag.name
+            });
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TagInputField__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+    })
   });
 };
 
@@ -6074,7 +6175,9 @@ var ProjectPage = function ProjectPage() {
   var projectID = 1;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "flex w-screen",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardTasks_DashboardTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      page: ""
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardTasks_DashboardTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
       projectID: projectID
     })]
   });
@@ -8533,6 +8636,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/nutzer.jpg?18336d73f0ca0773246a7981875b5227");
+
+/***/ }),
+
+/***/ "./resources/images/icons/plus.jpg":
+/*!*****************************************!*\
+  !*** ./resources/images/icons/plus.jpg ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/plus.jpg?048cabb185d4523d71d3ca10239eb61c");
 
 /***/ }),
 
