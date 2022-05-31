@@ -14,6 +14,8 @@ copy .env.example to .env and change values
 php artisan key:generate
 php artisan migrate 
 (php artisan db:seed)
+php artisan migrate:fresh --seed
+
 
 npm install
 npm run dev --> Laravel Mix compiles resources/js/app.js

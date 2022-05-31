@@ -5,7 +5,7 @@ import DashboardTasks from '../components/projectDashboard/dashboardTasks/Dashbo
 const ProjectPage = () => {
     return(
         <div className='flex w-screen'>
-            <Sidebar></Sidebar>
+            <Sidebar page=""></Sidebar>
             <DashboardTasks></DashboardTasks>
         </div>
     )

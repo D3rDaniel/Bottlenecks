@@ -7,7 +7,7 @@ import Logo from '../../../../images/logo.jpg'
 import InfoIcon from '../../../../images/icons/info.jpg'
 import { Link } from 'react-router-dom'
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   return (
     <div className="flex flex-col min-w-max w-80 justify-between mt-2">
       
@@ -20,8 +20,8 @@ const Sidebar = () => {
 
       {/* Body */}
       <div className="-mt-12">
-        <Admin></Admin>     
-        <SidebarButtonList></SidebarButtonList> 
+        <Admin selected={props.page} ></Admin>     
+        <SidebarButtonList selected={props.page}></SidebarButtonList> 
       </div>
       
       {/* Footer */}

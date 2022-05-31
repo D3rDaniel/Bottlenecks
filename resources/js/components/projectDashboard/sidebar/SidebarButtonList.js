@@ -1,7 +1,6 @@
 import React from 'react'
 import SidebarButtonListElement from './SidebarButtonElement'
 import UebersichtIcon from '../../../../images/icons/uebersicht.jpg'
-import KalenderIcon from '../../../../images/icons/kalender.jpg'
 import DeadlineIcon from '../../../../images/icons/list.jpg'
 import TasksIcon from '../../../../images/icons/list.jpg'
 import AnkuendigungIcon from '../../../../images/icons/ankuendigung.jpg'
@@ -11,18 +10,26 @@ import RoomIcon from '../../../../images/icons/raum-weiss.png'
 
 
 const elements = [
-    {img: UebersichtIcon, desc: "Übersicht", selected: "false"},
-    {img: KalenderIcon, desc: "Kalender", selected: "false"},
-    {img: DeadlineIcon, desc: "Bevorstehende Deadline", selected: "false"},
-    {img: TasksIcon, desc: "Tasks", selected: "false", gap:"false"},
-    {img: AnkuendigungIcon, desc: "Ankündiungen", selected: "false"},
-    {img: TagsIcon, desc: "Tags", selected: "false"},
-    {img: RoomIcon, desc: "Räume", selected: "false"},
+    {img: TasksIcon, desc: "Tasks", selected: "false", url: ""},
+    {img: DeadlineIcon, desc: "Bevorstehende Deadline", selected: "false", url: "deadline"},
+    {img: UebersichtIcon, desc: "Übersicht", selected: "false", url: "uebersicht"},
+    {img: AnkuendigungIcon, desc: "Ankündiungen", selected: "false", url: "ankuendigungen"},
+    {img: TagsIcon, desc: "Tags", selected: "false", url: "tags"},
+    {img: RoomIcon, desc: "Räume", selected: "false", url: "rooms"},
 ];
 
 
 
-const SidebarButtonList = () => {
+const SidebarButtonList = (props) => {
+
+  for(let i = 0; i < elements.length; i++){
+    elements[i].selected="false";
+
+    if(elements[i].url === props.selected){
+      elements[i].selected = "true";
+    }
+  }
+
   return (
     <div className="bg-white ml-2 rounded-xl">
       {elements.map((element, index) => {
@@ -31,7 +38,7 @@ const SidebarButtonList = () => {
           img={element.img}
           desc={element.desc} 
           selected={element.selected}
-          gap={element.gap}
+          url={element.url}
           key={index}>
         </SidebarButtonListElement>
         )
