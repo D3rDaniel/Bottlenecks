@@ -5034,14 +5034,14 @@ function DashboardTasks(props) {
             fullTitle: task.title,
             description: task.description,
             comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
-            status: task.status_id == 1 ? "Erledigt" : task.status_id == 2 ? "In Arbeit" : task.status_id == 3 ? "Pausiert" : "Fehlgeschlagen",
-            prio: task.priority_id == 3 ? "Gering" : task.priority_id == 2 ? "Mittel" : "Hoch",
+            status: task.status.title,
+            prio: task.priority.title,
             completedDate: task.completed_date === null ? "not completed" : task.completed_date,
             date: task.due_date,
             updated_at: task.updated_at.substring(0, 10),
-            creator: task.creator_user_id,
+            creator: task.creator.username,
             assignee: task.assignee,
-            tag: task.tag_id == null ? "keine Tag" : task.tag_id
+            tag: task.tag.title == null ? "keine Tag" : task.tag.title
           }, index);
         })
       })]
@@ -6074,7 +6074,9 @@ var ProjectPage = function ProjectPage() {
   var projectID = 1;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "flex w-screen",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardTasks_DashboardTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      page: ""
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardTasks_DashboardTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
       projectID: projectID
     })]
   });
