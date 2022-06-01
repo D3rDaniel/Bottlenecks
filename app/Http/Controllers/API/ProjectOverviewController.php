@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProjectOverviewController extends Controller
 {
     /**
-     * Display the specified resource.
+     * Return an overview of the projects stats.
      *
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
@@ -17,8 +19,10 @@ class ProjectOverviewController extends Controller
     {
 
         try {
-            //get project by id and return an error if it is not found
             $project = Project::findOrFail($id);
+
+            //only creator and members are allowed to get the project overview
+            $this->authorize('view', [$project]);
 
             $tasks = $project->tasks;
 
@@ -47,7 +51,7 @@ class ProjectOverviewController extends Controller
 
             return response()->json($data, 200);
         }
-        catch (\Exception $e){
+        catch (ModelNotFoundException  $e){
             return response()->json(['success'=>false,'message'=>'Project not found'], 404);
         }
     }

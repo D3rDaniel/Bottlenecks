@@ -6,18 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use Illuminate\Auth\Access\AuthorizationException;
+use Mockery\Exception;
 
 class ProjectController extends Controller
 {
     /**
-     * Store a newly created project in storage.
+     * Store a newly created project.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreProjectRequest $request)
     {
+        $user = auth()->user();
+
         $data = $request->safe()->only(['title','description','due_date','creator_user_id']);
+        $data['creator_user_id']=$user->id;
 
         $project = Project::create($data);
 
@@ -30,6 +35,7 @@ class ProjectController extends Controller
         }
 
         return response()->json($res, $status);
+
     }
 
     /**
@@ -42,7 +48,20 @@ class ProjectController extends Controller
     {
         $project = Project::with('creator')->find($id);
 
+        //TODO: Antwort zentral anpassen
         if($project){
+            try {
+                $this->authorize('view', [$project]);
+            }
+            catch(\Exception $exception){
+                if ($exception instanceof AuthorizationException) {
+                    return response()->json([
+                        'message' => 'Not authorized.'
+                    ],403);
+                }
+            }
+
+
             $res = ['success'=>true,'project'=>$project];
             $status = 200;
         }
@@ -54,7 +73,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Update title, description and due_date of resource in storage.
+     * Update title, description and due_date of the project(id) in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -62,10 +81,14 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, $id)
     {
-        $data = $request->safe()->only(['title','description','due_date']);
+
         $project = Project::find($id);
+        $data = $request->safe()->only(['title','description','due_date']);
+
+        $this->authorize('update',[$project]);
 
         if($project){
+
             $project->update($data);
 
             $res = ['success'=>true,'project'=>$project];
@@ -78,21 +101,25 @@ class ProjectController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified project from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
+
         $project = Project::find($id);
         if(!$project){
-            return response()->json(['success'=>false,'message' => 'Project not found'],404);
+            return response()->json(['success'=>false,'message' => 'Project not found.'],404);
         }
+
+        $this->authorize('forceDelete',[$project]);
+
         if($project->delete()){
-            return response()->json(['success'=>true],200);
+            return response()->json(['success'=>true,'message'=>'project deleted.'],200);
         }
-        return response()->json(['success'=>false],500);
+        return response()->json(['success'=>false,'message'=>'Project could not be deleted.'],500);
     }
 
     /**
@@ -109,6 +136,9 @@ class ProjectController extends Controller
         if (!$project) {
             return response()->json(['success' => false], 404);
         }
+
+        $this->authorize('completeProject',[$project]);
+
         $date = today()->toDateString();
         $project->completion_date = $date;
         $project->save();
@@ -117,7 +147,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Get the projects tags
+     * Get all of the the projects tags.
      *
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
@@ -129,6 +159,9 @@ class ProjectController extends Controller
         if (!$project) {
             return response()->json(['success' => false,'message' => 'Project not found.'], 404);
         }
+
+        $this->authorize('getTags',[$project]);
+
         $tags = $project->tags()->get();
 
         return response()->json(['success'=>true,'project_id'=>$project->id,'tags'=>$tags], 200);
