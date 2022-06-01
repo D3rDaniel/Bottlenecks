@@ -4733,10 +4733,10 @@ function TextArea(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/projectDashboard/dashboardAdmin/dashboardAdmin.js":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/projectDashboard/dashboardAdmin/dashboardAdmin.js ***!
-  \***********************************************************************************/
+/***/ "./resources/js/components/projectDashboard/dashboardAdmin/AdminAnkuendigungView.js":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardAdmin/AdminAnkuendigungView.js ***!
+  \******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4750,9 +4750,104 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var dashboardAdmin = function dashboardAdmin() {
+var AdminAnkuendigungView = function AdminAnkuendigungView() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "dashboardAdmin"
+    className: "bg-white rounded-xl w-full h-full",
+    children: "ANkuendigung"
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdminAnkuendigungView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardAdmin/AdminProjectView.js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardAdmin/AdminProjectView.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var AdminProjectView = function AdminProjectView() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "bg-white rounded-xl w-full h-full",
+    children: "AdminProjectView"
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdminProjectView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardAdmin/MemberView.js":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardAdmin/MemberView.js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var MemberView = function MemberView() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "bg-white rounded-xl w-1/4 h-full",
+    children: "kotze"
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MemberView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardAdmin/dashboardAdmin.js":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardAdmin/dashboardAdmin.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _AdminProjectView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminProjectView */ "./resources/js/components/projectDashboard/dashboardAdmin/AdminProjectView.js");
+/* harmony import */ var _AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdminAnkuendigungView */ "./resources/js/components/projectDashboard/dashboardAdmin/AdminAnkuendigungView.js");
+/* harmony import */ var _MemberView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MemberView */ "./resources/js/components/projectDashboard/dashboardAdmin/MemberView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+var dashboardAdmin = function dashboardAdmin() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "h-screen w-screen flex justify-center items-center ml-10 mr-5",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "flex flex-col justify-center h-full w-full mr-5 gap-10",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AdminProjectView__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MemberView__WEBPACK_IMPORTED_MODULE_3__["default"], {})]
   });
 };
 
@@ -5403,13 +5498,11 @@ var dashboardDeadline = function dashboardDeadline() {
     checkWorkingTasks();
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "flex flex-col w-full mx-1 my-2",
+    className: "flex flex-col w-full mx-2 my-2",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_dashboardTasks_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "h-full w-full flex flex-col justify-center items-center",
+      className: "h-full w-full flex flex-col justify-center items-center gap-10",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_WeekView__WEBPACK_IMPORTED_MODULE_2__["default"], {
         tasks: tasksInWorking
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "h-10"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MonthView__WEBPACK_IMPORTED_MODULE_3__["default"], {
         tasks: tasksInWorking
       })]
