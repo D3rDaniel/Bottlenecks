@@ -18,7 +18,7 @@ function DashboardAccountVerwalten() {
             <form className="bg-white shadow-md rounded-lg w-720 px-10 pt-12 pb-14 mb-4">
               <div className="mb-4">
                 <div className="flex">
-                  <label className="pr-4" for="username">Nutzername:</label>
+                  <label className="pr-4" htmlFor="username">Nutzername:</label>
                   <InputField id="username" value="person123"></InputField>
                 </div>
                 
@@ -28,14 +28,14 @@ function DashboardAccountVerwalten() {
               </div>
               <div className="mb-6">
                 <div className="flex">
-                  <label className="pr-10" for="forename">Vorname:</label>
+                  <label className="pr-10" htmlFor="forename">Vorname:</label>
                   <InputField id="forename" value="Max"></InputField>
                 </div>
                   
               </div>
               <div className="mb-6">
                 <div className="flex">
-                  <label className="pr-7" for="lastname">Nachname:</label>
+                  <label className="pr-7" htmlFor="lastname">Nachname:</label>
                   <InputField className="w-36" id="lastname" value="Mustermann"></InputField>
                 </div>
                   
