@@ -1,5 +1,5 @@
 import React from 'react'
-import InputField from '../../../forms/inputField';
+import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
 
 function NewProjectPopup({trigger, onClick}) {
