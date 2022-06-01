@@ -18,7 +18,7 @@ const AnkuendigungMinimumView = (props) => {
                 <label className="mr-24 text-blue font-bold">{props.message.creator}</label>   
             </div>
                 
-            <label className="w-1/2">{props.message.created_at}</label>
+            <label className="w-1/2">{props.message.created_at.substring(0,10)}</label>
 
             <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
         </div>

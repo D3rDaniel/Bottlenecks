@@ -1,15 +1,14 @@
 import React from 'react'
 import Sidebar from '../components/projectDashboard/sidebar/Sidebar'
 import DashboardTasks from '../components/projectDashboard/dashboardTasks/DashboardTasks'
+import Project_TagsPage from './Project_TagsPage';
 
-const ProjectPage = () => {
-
-    const projectID = 1;
+const ProjectPage = (props) => {
 
     return(
         <div className='flex w-screen'>
             <Sidebar page=""></Sidebar>
-            <DashboardTasks projectID={projectID}></DashboardTasks>
+            <DashboardTasks projectID={props.projectID}></DashboardTasks>
         </div>
     )
 }

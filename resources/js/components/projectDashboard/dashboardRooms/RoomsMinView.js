@@ -15,7 +15,7 @@ const RoomsMinView = (props) => {
             
             <label className="ml-12 w-1/4 min-w-max">{props.room.title}</label>
             <label className="w-1/4 min-w-max">{props.room.room_number}</label>
-            <label className="w-1/4 min-w-max">{props.room.created_at}</label>
+            <label className="w-1/4 min-w-max">{props.room.created_at.substring(0,10)}</label>
             <label className="w-1/4 min-w-max">{props.room.capacity}</label>
 
             <div className="flex ml-auto">

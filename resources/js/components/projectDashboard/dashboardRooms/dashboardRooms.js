@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState, useEffect} from 'react'
 
 import Searchbar from './searchbar/SearchBar'
 import MinView from './RoomsMinView'
@@ -34,13 +34,43 @@ const rooms = [
     description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"}
 ]
 
-const dashboardRooms = () => {
+const dashboardRooms = (props) => {
+
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [loadedRooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        setIsLoaded(false);
+        const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
+        fetch(url, {
+          headers: {
+            'Accept': 'application/json',
+          }
+        })
+          .then(response => response.json())
+          .then((data) => {
+            setIsLoaded(true);
+            setRooms(data["rooms"]);
+            },(error) =>{
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, []);
+
+    if (error) {
+        return <div>Error: {error.message}</div>
+    }else if(!isLoaded){
+        return <div>Loading..</div>
+    }else {
+
   return (
     <div className="flex flex-col w-full mx-1 my-2">
         <Searchbar />
 
         <div className="h-full w-full">
-            {rooms.map((room, index) => {
+            {loadedRooms.map((room, index) => {
                 return (
                     <MinView 
                         room = {room}
@@ -57,7 +87,7 @@ const dashboardRooms = () => {
         </div>
         
     </div>
-  )
+  )}
 }
 
 export default dashboardRooms

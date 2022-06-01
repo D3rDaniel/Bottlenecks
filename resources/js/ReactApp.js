@@ -19,7 +19,8 @@ import Project_TagsPage from './pages/Project_TagsPage'
 
 export default function ReactApp() {
 
-    let userID = 2;
+    const userID = 1;
+    const projectID = 1;
 
     return (
         <div className="bg-customgray relative flex h-screen w-screen font-body">
@@ -32,13 +33,13 @@ export default function ReactApp() {
                 <Route path='/offeneTasks' element={<OffeneTasksPage userID={userID}/>}/>
                 <Route path='/accountVerwalten' element={<AccountVerwaltenPage userID={userID}/>}/>
                 <Route path='/raumbuchungen' element={<RaumbuchungenPage userID={userID}/>}/>
-                <Route path='/project' element={<ProjectPage/>}/>
-                <Route path='/project/admin' element={<Project_AdminPage />}/>
-                <Route path='/project/ankuendigungen' element={<Project_AnkuendiungPage />}/>
-                <Route path='/project/deadline' element={<Project_DeadlinePage />}/>
-                <Route path='/project/uebersicht' element={<Project_UebersichtPage/>}/>
-                <Route path='/project/rooms' element={<Project_RoomsPage />}/>
-                <Route path='/project/tags' element={<Project_TagsPage />}/>
+                <Route path='/project' element={<ProjectPage projectID={projectID}/>}/>
+                <Route path='/project/admin' element={<Project_AdminPage projectID={projectID} />}/>
+                <Route path='/project/ankuendigungen' element={<Project_AnkuendiungPage projectID={projectID} />}/>
+                <Route path='/project/deadline' element={<Project_DeadlinePage projectID={projectID} />}/>
+                <Route path='/project/uebersicht' element={<Project_UebersichtPage projectID={projectID}/>}/>
+                <Route path='/project/rooms' element={<Project_RoomsPage projectID={projectID} />}/>
+                <Route path='/project/tags' element={<Project_TagsPage projectID={projectID} />}/>
             </Routes>
         </div>
     );
