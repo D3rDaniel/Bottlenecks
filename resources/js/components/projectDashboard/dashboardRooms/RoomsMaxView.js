@@ -4,9 +4,11 @@ const RoomsMaxView = (props) => {
 
     let city = props.room.address_info;
     let building = city.substring(0,city.indexOf(','));
-    let plz = building.substring(building.length-5)
+    let helper = [...building].reverse().join("");
+    helper = helper.substring(0,helper.indexOf(' '))
+    let plz = [...helper].reverse().join("");
     city = city.replace(building+',', '');
-    building = building.substring(0,building.length-6)
+    building = building.substring(0,building.length-helper.length)
 
   return (
     <div className="flex bg-white rounded-xl -mt-5 shadow-bottom">
