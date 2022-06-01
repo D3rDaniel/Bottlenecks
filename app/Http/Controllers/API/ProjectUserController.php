@@ -8,6 +8,9 @@ use App\Http\Requests\UpdateProjectUserRequest;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 //Controller for operations of project-members
@@ -16,14 +19,18 @@ class ProjectUserController extends Controller
     /**
      * Return a listing of all project members and their rights.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function index($project_id)
     {
         try {
             $project = Project::findOrFail($project_id);
+
+            $this->authorize('viewAny', [ProjectUser::class, $project_id]);
+
         }
-        catch (\Exception $e){
+        catch (ModelNotFoundException $e){
             return response()->json([
                 'success'=>false,
                 'message'=>'Project Not found.'
@@ -43,10 +50,11 @@ class ProjectUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param StoreProjectUserRequest $request
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function store(StoreProjectUserRequest $request)
+    public function store(StoreProjectUserRequest $request): JsonResponse
     {
         $data = $request->safe()->only(
             ['username',
@@ -56,9 +64,12 @@ class ProjectUserController extends Controller
             'can_edit_tasks',
             'can_create_tags']);
 
+        $this->authorize('projectOwnerAction', [ProjectUser::class, $data['project_id']]);
+
+        //get user by username
         $user = User::where('username',$data['username'])->first();
 
-
+        //check if user already exists
         $member = ProjectUser::where('project_id', $data['project_id'],)
                             ->where('user_id',$user->id)->first();
 
@@ -101,11 +112,12 @@ class ProjectUserController extends Controller
     /**
      * Update ProjectUsers (members) rights.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param UpdateProjectUserRequest $request
+     * @param int $id
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function update(UpdateProjectUserRequest $request, $id)
+    public function update(UpdateProjectUserRequest $request, int $id): JsonResponse
     {
         $data = $request->safe()->only(['can_create_tasks',
             'can_assign_tasks',
@@ -114,6 +126,9 @@ class ProjectUserController extends Controller
 
         try {
             $member = ProjectUser::findOrFail($id);
+
+            $this->authorize('projectOwnerAction', [ProjectUser::class, $member->project_id]);
+
             $member->update($data);
 
             $res = [
@@ -123,7 +138,7 @@ class ProjectUserController extends Controller
 
             return response()->json($res, 201);
         }
-        catch(\Exception $e){
+        catch(ModelNotFoundException $e){
             $res = [
                 'success'=>false,
                 'message'=> 'ProjectUser id not found.'
@@ -138,15 +153,19 @@ class ProjectUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param int $id
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $member = ProjectUser::find($id);
         if(!$member){
             return response()->json(['success'=>true,'message' => 'Member does not exist and therefore can not be deleted.'],404);
         }
+
+        $this->authorize('projectOwnerAction', [ProjectUser::class, $member->project_id]);
+
         if($member->delete()){
             return response()->json(['success'=>true,'message'=>'Deleted.'],200);
         }

@@ -29,7 +29,7 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
     Route::delete('/project-member/{id}', [ProjectUserController::class,'destroy']);
     Route::put('/project-member/{id}', [ProjectUserController::class,'update']);
 //add user by username
-    Route::post('/project/{id}/add-new-user', [ProjectUserController::class,'store']);
+    Route::post('/project/add-new-user', [ProjectUserController::class,'store']);
 
 //Project
     Route::post('/project', [ProjectController::class, 'store']);
