@@ -2473,13 +2473,160 @@ function DashboardAbgeschlosseneTasks(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMaximumViewAbgeschlosseneTasks.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMaximumViewAbgeschlosseneTasks.js ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+function ProjectMaximumViewAbgeschlosseneTasks(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "ml-8 w-1/2 py-5",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        className: "font-bold",
+        children: props.title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: props.description
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "w-1/2 p-3 ",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "h-1/2 px-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+          className: "font-bold",
+          children: "Raum"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: props.room
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "h-1/2 px-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+          className: "font-bold",
+          children: "Abschlusskommentar"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: props.finish_comment
+        })]
+      })]
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMaximumViewAbgeschlosseneTasks);
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMinimumViewAbgeschlosseneTasks.js":
 /*!*****************************************************************************************************************!*\
   !*** ./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMinimumViewAbgeschlosseneTasks.js ***!
   \*****************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\germa\\Coding\\Bottlenecks\\resources\\js\\components\\dashboard\\dashboardAbgeschlosseneTasks\\ProjectMinimumViewAbgeschlosseneTasks.js: Unexpected token (21:1)\n\n\u001b[0m \u001b[90m 19 |\u001b[39m         \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m{\u001b[32m`flex h-14 bg-white ${rotate ? null : \"drop-shadow-md\"} rounded-xl items-center`\u001b[39m} \u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 20 |\u001b[39m             \u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 21 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 22 |\u001b[39m             \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m \u001b[36mclass\u001b[39m\u001b[33m=\u001b[39m\u001b[32m\"flex justify-around w-11/12 items-center\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 23 |\u001b[39m                 \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"w-1/6 pl-5\"\u001b[39m\u001b[33m>\u001b[39m{props\u001b[33m.\u001b[39mtitle}\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mdiv\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 24 |\u001b[39m                 \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"w-1/6 pl-5\"\u001b[39m\u001b[33m>\u001b[39m{props\u001b[33m.\u001b[39mproject}\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mdiv\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at instantiate (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:72:32)\n    at constructor (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:358:12)\n    at Object.raise (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:3335:19)\n    at Object.unexpected (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:3373:16)\n    at Object.jsxParseIdentifier (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:7779:12)\n    at Object.jsxParseNamespacedName (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:7789:23)\n    at Object.jsxParseElementName (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:7800:21)\n    at Object.jsxParseOpeningElementAt (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:7897:22)\n    at Object.jsxParseElementAt (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:7930:33)\n    at Object.jsxParseElementAt (C:\\Users\\germa\\Coding\\Bottlenecks\\node_modules\\@babel\\parser\\lib\\index.js:7946:32)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.jpg */ "./resources/images/icons/arrow-black.jpg");
+/* harmony import */ var _ProjectMaximumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumViewAbgeschlosseneTasks */ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMaximumViewAbgeschlosseneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlosseneTasks(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      rotate = _useState2[0],
+      setRotate = _useState2[1];
+
+  var rotateArrow = function rotateArrow() {
+    if (rotate) {
+      setRotate(false);
+    } else {
+      setRotate(true);
+    }
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "my-5 ml-1",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        "class": "flex justify-around w-11/12 items-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "w-1/6 pl-5",
+          children: props.title
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "w-1/6 pl-5",
+          children: props.project
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "w-1/6 pl-12",
+          children: props.finished_at
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "w-1/6 pl-12",
+          children: props.priority
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "w-1/6 pl-12",
+          children: props.tag
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "w-1/6 pl-12",
+          children: props.finished_state
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "w-1/12",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+          children: "\xD6ffnen"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex ml-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: _images_icons_arrow_black_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+          alt: "maxView",
+          className: "h-5 w-5 mx-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+          onClick: rotateArrow
+        }), "            "]
+      })]
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      title: props.fullTitle,
+      description: props.description,
+      room: props.room,
+      finish_comment: props.finish_comment
+    }) : null]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectMinimumViewAbgeschlosseneTasks);
 
 /***/ }),
 
