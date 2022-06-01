@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import Arrow from '../../../../images/icons/arrow-black.jpg'
+import Arrow from '../../../../images/icons/arrow-black.png'
 import MaxView from './AnkuendigungMaximumView'
 
 const AnkuendigungMinimumView = (props) => {
@@ -20,7 +20,7 @@ const AnkuendigungMinimumView = (props) => {
                 
             <label className="w-1/2">{props.message.created_at.substring(0,10)}</label>
 
-            <img src={Arrow} alt="maxView" className={`h-5 w-5 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
+            <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
         </div>
         {rotate ? <MaxView subject={props.message.subject} message={props.message.message}></MaxView> : null}
     </div>

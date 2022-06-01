@@ -38,7 +38,7 @@ const dashboardDeadline = () => {
   return (
     <div className="flex flex-col w-full mx-2 my-2">
         <Searchbar />
-        <div className="h-full w-full flex flex-col justify-center items-center gap-10">
+        <div className="h-full w-full flex flex-col gap-10 mt-10">
             <WeekView tasks={tasksInWorking}/>
             <MonthView tasks={tasksInWorking}/>   
         </div>        
