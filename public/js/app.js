@@ -2526,7 +2526,7 @@ var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlo
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex justify-evenly h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "flex justify-around w-11/12",
+        className: "flex justify-around w-11/12",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "",
           children: title
@@ -2764,23 +2764,23 @@ function DashboardAccountVerwalten() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "flex flex-col w-full m-1 ml-2",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      "class": "w-full h-full bg-white",
+      className: "w-full h-full bg-white",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_3__["default"], {
         trigger: popupTrigger,
         onClick: changePopupTriggerValue
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        "class": "text-5xl pt-5 pl-9",
+        className: "text-5xl pt-5 pl-9",
         children: "Profil"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        "class": "w-full",
+        className: "w-full",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
-          "class": "bg-white shadow-md rounded-lg w-720 px-10 pt-12 pb-14 mb-4",
+          className: "bg-white shadow-md rounded-lg w-720 px-10 pt-12 pb-14 mb-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            "class": "mb-4",
+            className: "mb-4",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              "class": "flex",
+              className: "flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                "class": "pr-4",
+                className: "pr-4",
                 "for": "username",
                 children: "Nutzername:"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -2789,17 +2789,17 @@ function DashboardAccountVerwalten() {
               })]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            "class": "mb-4",
+            className: "mb-4",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-              "class": "pr-4",
+              className: "pr-4",
               children: "Passwort:"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            "class": "mb-6",
+            className: "mb-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              "class": "flex",
+              className: "flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                "class": "pr-10",
+                className: "pr-10",
                 "for": "forename",
                 children: "Vorname:"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -2808,29 +2808,29 @@ function DashboardAccountVerwalten() {
               })]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            "class": "mb-6",
+            className: "mb-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              "class": "flex",
+              className: "flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                "class": "pr-7",
+                className: "pr-7",
                 "for": "lastname",
                 children: "Nachname:"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                "class": "w-36",
+                className: "w-36",
                 id: "lastname",
                 value: "Mustermann"
               })]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            "class": "mb-16",
+            className: "mb-16",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-              "class": "pr-4",
+              className: "pr-4",
               children: "Email:"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            "class": "flex items-center justify-between",
+            className: "flex items-center justify-between",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-              "class": "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+              className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
               type: "button",
               children: "\xC4nderungen speichern"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -3794,7 +3794,7 @@ function DashboardProjects(props) {
           }, index);
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        "class": "flex justify-end",
+        className: "flex justify-end",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_CreateProjectButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
           popupTrigger: popupTrigger,
           onClick: changePopupTriggerValue

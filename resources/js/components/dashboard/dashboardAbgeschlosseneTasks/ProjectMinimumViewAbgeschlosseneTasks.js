@@ -18,7 +18,7 @@ const ProjectMinimumViewAbgeschlosseneTasks = ({project, created_at, title, desc
     <div className="my-5 ml-1">
         <div className={`flex justify-evenly h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
             
-            <div class="flex justify-around w-11/12">
+            <div className="flex justify-around w-11/12">
                 <div className="">{title}</div>
                 <div className="">{project}</div>
                 <div className="">{created_at}</div>
