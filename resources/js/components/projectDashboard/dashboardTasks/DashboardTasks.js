@@ -2,8 +2,8 @@ import {React, useState, useEffect} from 'react'
 
 import SearchBar from './searchbar/SearchBar'
 import TaskMinimumView from './TaskMinimumView'
-
-import Plus from '../../../../images/icons/plus.png'
+import NewTaskPopup from './popup/NewTaskPopup'
+import CreateTaskButton from './CreateTaskButton'
 
 const tasks = [
   {title: "Task1", status: "abgeschlossen", prio: "Hoch", completedDate: "06.05.2022" , date: "09.05.2022"},
@@ -12,6 +12,11 @@ const tasks = [
 ]
 
 function DashboardTasks(props) {
+
+  const [popupTrigger, setPopupTrigger] = useState(false)
+  const changePopupTriggerValue = () => {
+    setPopupTrigger(!popupTrigger);
+  }
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -69,11 +74,13 @@ function DashboardTasks(props) {
           </div>
 
           <div className="w-full flex justify-end">
-            <div className="bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold">
+            {/*<div className="bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold">
                 <img src={Plus} alt="plus" className="h-6 w-6 mx-2"></img>
                 <button className="text-white rounded-xl">Task erstellen</button>           
-            </div>   
+            </div> */}
+            <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
+        <NewTaskPopup trigger={popupTrigger} onClick={changePopupTriggerValue}/>
       </div>
     )}
 }

@@ -2753,7 +2753,7 @@ __webpack_require__.r(__webpack_exports__);
 function ChangeEmailAndPasswordButton(_ref) {
   var onClick = _ref.onClick;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-    "class": "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+    className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
     type: "button",
     onClick: onClick,
     children: "Passwort / Email \xE4ndern"
@@ -2830,7 +2830,7 @@ function DashboardAccountVerwalten() {
               className: "flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 className: "pr-4",
-                "for": "username",
+                htmlFor: "username",
                 children: "Nutzername:"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 id: "username",
@@ -2849,7 +2849,7 @@ function DashboardAccountVerwalten() {
               className: "flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 className: "pr-10",
-                "for": "forename",
+                htmlFor: "forename",
                 children: "Vorname:"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 id: "forename",
@@ -2862,7 +2862,7 @@ function DashboardAccountVerwalten() {
               className: "flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 className: "pr-7",
-                "for": "lastname",
+                htmlFor: "lastname",
                 children: "Nachname:"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 className: "w-36",
@@ -4037,6 +4037,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../forms/InputField */ "./resources/js/components/forms/InputField.js");
 /* harmony import */ var _forms_TextArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../forms/TextArea */ "./resources/js/components/forms/TextArea.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -4046,45 +4058,95 @@ __webpack_require__.r(__webpack_exports__);
 function NewProjectPopup(_ref) {
   var trigger = _ref.trigger,
       onClick = _ref.onClick;
+
+  var _useState = useState(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      description = _useState2[0],
+      setDescription = _useState2[1];
+
+  var _useState3 = useState(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      title = _useState4[0],
+      setTitle = _useState4[1];
+
+  var _useState5 = useState(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      deadline = _useState6[0],
+      setDeadline = _useState6[1];
+
+  var getTitle = function getTitle(data) {
+    setTitle(data);
+  };
+
+  var getDeadline = function getDeadline(data) {
+    setDeadline(data);
+  };
+
+  var getDescription = function getDescription(data) {
+    setDescription(data);
+  };
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    var project = {
+      title: title,
+      deadline: deadline,
+      description: description
+    };
+    console.log(project);
+    /*
+    const url = "http://127.0.0.1:8000/api/project/"
+    axios.post(url, {project})
+     .then(res => {
+         console.log(res);
+         console.log(res.data);
+     })
+     */
+  };
+
   return trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-    "class": "w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ",
+    className: "w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      "class": "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        "class": "w-full",
+        className: "w-full",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
-          "class": "bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20",
+          className: "bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20",
+          onSubmit: handleSubmit,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-            "class": "items-center mb-6 text-5xl font-body",
+            className: "items-center mb-6 text-5xl font-body",
             children: "Projekt erstellen"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            "class": "mb-4",
+            className: "mb-4",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
               id: "projectTitle",
+              onChange: getTitle,
               placeholder: "Titel..."
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            "class": "mb-6",
+            className: "mb-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
               id: "projectDeadline",
+              onChange: getDeadline,
               placeholder: "Deadline..."
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            "class": "mb-6",
+            className: "mb-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_2__["default"], {
               id: "description",
+              onChange: getDescription,
               placeholder: "Beschreibung..."
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            "class": "flex items-center justify-between",
+            className: "flex items-center justify-between",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               onClick: onClick,
-              "class": "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+              className: "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
               type: "button",
               children: "Abbruch"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              "class": "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
-              type: "button",
+              className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+              type: "submit",
               children: "Erstellen"
             })]
           })]
@@ -4719,6 +4781,74 @@ var SignOutButton = function SignOutButton() {
 
 /***/ }),
 
+/***/ "./resources/js/components/forms/DropDownSelect.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/forms/DropDownSelect.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+function DropDownSelect(props) {
+  var data = Array.from(props.options);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      selects = _useState2[0],
+      setSelects = _useState2[1];
+
+  var handleChange = function handleChange(e) {
+    setSelects(e.target.value);
+    props.onChange(e.target.value);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "flex justify-center",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "mb-3 xl:w-96",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
+        className: "form-select\r block\r w-full\r px-3\r py-1.5\r text-base\r font-normal\r text-gray-700\r bg-white bg-clip-padding bg-no-repeat\r border border-solid border-gray-300\r rounded\r transition\r ease-in-out\r m-0\r focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+        value: selects,
+        onChange: handleChange,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+          children: props.title
+        }), data.map(function (option, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+            value: option,
+            children: option
+          }, index);
+        })]
+      })
+    })
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DropDownSelect);
+
+/***/ }),
+
 /***/ "./resources/js/components/forms/InputField.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/forms/InputField.js ***!
@@ -4733,14 +4863,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
 
 function InputField(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
+  var handleChange = function handleChange(e) {
+    setValue(e.target.value);
+    props.onChange(e.target.value);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
       className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+      onChange: handleChange,
       id: props.id,
       type: "text",
       placeholder: props.placeholder
@@ -4766,12 +4919,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
 function TextArea(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
+  var handleChange = function handleChange(e) {
+    setValue(e.target.value);
+    props.onChange(e.target.value);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("textarea", {
-    "class": "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+    className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+    onChange: handleChange,
     id: props.id,
     type: "text",
     placeholder: props.placeholder
@@ -5645,6 +5821,42 @@ var dashboardOverView = function dashboardOverView() {
 
 /***/ }),
 
+/***/ "./resources/js/components/projectDashboard/dashboardRooms/CreateRoomButton.js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardRooms/CreateRoomButton.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/bs */ "./node_modules/react-icons/bs/index.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+function CreateRoomButton(_ref) {
+  var onClick = _ref.onClick,
+      popupTrigger = _ref.popupTrigger;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    onClick: onClick,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
+      className: "mt-1 mr-2"
+    }), "Raum erstellen"]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateRoomButton);
+
+/***/ }),
+
 /***/ "./resources/js/components/projectDashboard/dashboardRooms/RoomsMaxView.js":
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/projectDashboard/dashboardRooms/RoomsMaxView.js ***!
@@ -5858,7 +6070,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar/SearchBar */ "./resources/js/components/projectDashboard/dashboardRooms/searchbar/SearchBar.js");
 /* harmony import */ var _RoomsMinView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomsMinView */ "./resources/js/components/projectDashboard/dashboardRooms/RoomsMinView.js");
 /* harmony import */ var _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../images/icons/plus.png */ "./resources/images/icons/plus.png");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _CreateRoomButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CreateRoomButton */ "./resources/js/components/projectDashboard/dashboardRooms/CreateRoomButton.js");
+/* harmony import */ var _popup_NewRoomPopup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./popup/NewRoomPopup */ "./resources/js/components/projectDashboard/dashboardRooms/popup/NewRoomPopup.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5870,6 +6084,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -5934,20 +6150,29 @@ var rooms = [{
 }];
 
 var dashboardRooms = function dashboardRooms(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      error = _useState2[0],
-      setError = _useState2[1];
+      popupTrigger = _useState2[0],
+      setPopupTrigger = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var changePopupTriggerValue = function changePopupTriggerValue() {
+    setPopupTrigger(!popupTrigger);
+  };
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      isLoaded = _useState4[0],
-      setIsLoaded = _useState4[1];
+      error = _useState4[0],
+      setError = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      loadedRooms = _useState6[0],
-      setRooms = _useState6[1];
+      isLoaded = _useState6[0],
+      setIsLoaded = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      loadedRooms = _useState8[0],
+      setRooms = _useState8[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
@@ -5968,42 +6193,264 @@ var dashboardRooms = function dashboardRooms(props) {
   }, []);
 
   if (error) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       children: ["Error: ", error.message]
     });
   } else if (!isLoaded) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       children: "Loading.."
     });
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "flex flex-col w-full mx-1 my-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "h-full w-full",
         children: loadedRooms.map(function (room, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             room: room
           }, index);
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "w-full flex justify-end",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          className: "bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-            src: _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__["default"],
-            alt: "plus",
-            className: "h-6 w-6 mx-2"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-            className: "text-white rounded-xl",
-            children: "Raum erstellen"
-          })]
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_CreateRoomButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          popupTrigger: popupTrigger,
+          onClick: changePopupTriggerValue
         })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_popup_NewRoomPopup__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        trigger: popupTrigger,
+        onClick: changePopupTriggerValue
       })]
     });
   }
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dashboardRooms);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardRooms/popup/NewRoomPopup.js":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardRooms/popup/NewRoomPopup.js ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../forms/InputField */ "./resources/js/components/forms/InputField.js");
+/* harmony import */ var _forms_TextArea__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../forms/TextArea */ "./resources/js/components/forms/TextArea.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+function NewRoomPopup(_ref) {
+  var trigger = _ref.trigger,
+      onClick = _ref.onClick;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      name = _useState2[0],
+      setName = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      size = _useState4[0],
+      setSize = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      number = _useState6[0],
+      setNumber = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState8 = _slicedToArray(_useState7, 2),
+      open_at = _useState8[0],
+      setOpen_at = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      close_at = _useState10[0],
+      setClose_at = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      open_on_weekend = _useState12[0],
+      setOpen_on_weekend = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState14 = _slicedToArray(_useState13, 2),
+      description = _useState14[0],
+      setDescription = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState16 = _slicedToArray(_useState15, 2),
+      address = _useState16[0],
+      setAddress = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState18 = _slicedToArray(_useState17, 2),
+      equipment = _useState18[0],
+      setEquipment = _useState18[1];
+
+  var getName = function getName(data) {
+    setName(data);
+  };
+
+  var getSize = function getSize(data) {
+    setSize(data);
+  };
+
+  var getNumber = function getNumber(data) {
+    setNumber(data);
+  };
+
+  var getOpen_at = function getOpen_at(data) {
+    setOpen_at(data);
+  };
+
+  var getClose_at = function getClose_at(data) {
+    setClose_at(data);
+  };
+
+  var getOpen_on_weekend = function getOpen_on_weekend(data) {
+    setOpen_on_weekend(data);
+  };
+
+  var getDescription = function getDescription(data) {
+    setDescription(data);
+  };
+
+  var getAddress = function getAddress(data) {
+    setAddress(data);
+  };
+
+  var getEquipment = function getEquipment(data) {
+    setEquipment(data);
+  };
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    var room = {
+      name: name,
+      size: size,
+      number: number,
+      open_at: open_at,
+      close_at: close_at,
+      open_on_weekend: open_on_weekend,
+      address: address,
+      description: description,
+      equipment: equipment
+    };
+    console.log(room);
+    /*
+    const url = "http://127.0.0.1:8000/api/room/"; 
+    axios.post(url, {room})
+     .then(res => {
+         console.log(res);
+         console.log(res.data);
+     })
+     */
+  };
+
+  return trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    className: "w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "w-full",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+          className: "bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20",
+          onSubmit: handleSubmit,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+            className: "items-center mb-6 text-5xl font-body",
+            children: "Raum erstellen"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "w-full h-full p-6",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "flex justify-between p-4 mb-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                onChange: getName,
+                placeholder: "Name..."
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                onChange: getSize,
+                placeholder: "Gr\xF6\xDFe..."
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                onChange: getNumber,
+                placeholder: "Nummer..."
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "flex justify-between p-4 mb-4",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                onChange: getOpen_at,
+                placeholder: "\xD6ffnet um..."
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                onChange: getClose_at,
+                placeholder: "Schlie\xDFt um..."
+              }), "checkbox missing"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "p-4 mb-4",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                onChange: getAddress,
+                placeholder: "Adresse..."
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "flex justify-between p-6",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "w-1/2 h-full p-6",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                onChange: getDescription,
+                placeholder: "Beschreibung..."
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "w-1/2 h-full p-6",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                onChange: getEquipment,
+                placeholder: "Ausstattung..."
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "flex items-center justify-between",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              onClick: onClick,
+              className: "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+              type: "button",
+              children: "Abbruch"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+              type: "submit",
+              children: "Erstellen"
+            })]
+          })]
+        })
+      })
+    })
+  }) : "";
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewRoomPopup);
 
 /***/ }),
 
@@ -6368,7 +6815,7 @@ var dashboardTags = function dashboardTags(props) {
             children: loadedTags.map(function (tag, index) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TagElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 name: tag.title
-              });
+              }, index);
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TagInputField__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
@@ -6378,6 +6825,42 @@ var dashboardTags = function dashboardTags(props) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dashboardTags);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardTasks/CreateTaskButton.js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardTasks/CreateTaskButton.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/bs */ "./node_modules/react-icons/bs/index.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+function CreateTaskButton(_ref) {
+  var onClick = _ref.onClick,
+      popupTrigger = _ref.popupTrigger;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    onClick: onClick,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
+      className: "mt-1 mr-2"
+    }), "Neue Task"]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateTaskButton);
 
 /***/ }),
 
@@ -6396,8 +6879,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar/SearchBar */ "./resources/js/components/projectDashboard/dashboardTasks/searchbar/SearchBar.js");
 /* harmony import */ var _TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TaskMinimumView */ "./resources/js/components/projectDashboard/dashboardTasks/TaskMinimumView.js");
-/* harmony import */ var _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../images/icons/plus.png */ "./resources/images/icons/plus.png");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _popup_NewTaskPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./popup/NewTaskPopup */ "./resources/js/components/projectDashboard/dashboardTasks/popup/NewTaskPopup.js");
+/* harmony import */ var _CreateTaskButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CreateTaskButton */ "./resources/js/components/projectDashboard/dashboardTasks/CreateTaskButton.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6409,6 +6893,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -6437,20 +6922,29 @@ var tasks = [{
 }];
 
 function DashboardTasks(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      error = _useState2[0],
-      setError = _useState2[1];
+      popupTrigger = _useState2[0],
+      setPopupTrigger = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var changePopupTriggerValue = function changePopupTriggerValue() {
+    setPopupTrigger(!popupTrigger);
+  };
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      isLoaded = _useState4[0],
-      setIsLoaded = _useState4[1];
+      error = _useState4[0],
+      setError = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      loadedTasks = _useState6[0],
-      setTasks = _useState6[1];
+      isLoaded = _useState6[0],
+      setIsLoaded = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      loadedTasks = _useState8[0],
+      setTasks = _useState8[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
@@ -6471,20 +6965,20 @@ function DashboardTasks(props) {
   }, []);
 
   if (error) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       children: ["Error: ", error.message]
     });
   } else if (!isLoaded) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       children: "Loading.."
     });
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "flex flex-col w-full mx-1 my-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "h-full w-full",
         children: loadedTasks.map(function (task, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
             fullTitle: task.title,
             description: task.description,
@@ -6499,19 +6993,15 @@ function DashboardTasks(props) {
             tag: task.tag.title == null ? "keine Tag" : task.tag.title
           }, index);
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "w-full flex justify-end",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          className: "bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-            src: _images_icons_plus_png__WEBPACK_IMPORTED_MODULE_3__["default"],
-            alt: "plus",
-            className: "h-6 w-6 mx-2"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-            className: "text-white rounded-xl",
-            children: "Task erstellen"
-          })]
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_CreateTaskButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          popupTrigger: popupTrigger,
+          onClick: changePopupTriggerValue
         })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_popup_NewTaskPopup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        trigger: popupTrigger,
+        onClick: changePopupTriggerValue
       })]
     });
   }
@@ -6724,6 +7214,240 @@ function TaskMinimumView(props) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TaskMinimumView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardTasks/popup/NewTaskPopup.js":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardTasks/popup/NewTaskPopup.js ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _forms_DropDownSelect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../forms/DropDownSelect */ "./resources/js/components/forms/DropDownSelect.js");
+/* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../forms/InputField */ "./resources/js/components/forms/InputField.js");
+/* harmony import */ var _forms_TextArea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../forms/TextArea */ "./resources/js/components/forms/TextArea.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+function NewTaskPopup(_ref) {
+  var trigger = _ref.trigger,
+      onClick = _ref.onClick;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      worker = _useState2[0],
+      setWorker = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      room = _useState4[0],
+      setRoom = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      priority = _useState6[0],
+      setPriority = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState8 = _slicedToArray(_useState7, 2),
+      tag = _useState8[0],
+      setTag = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      title = _useState10[0],
+      setTitle = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      deadline = _useState12[0],
+      setDeadline = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState14 = _slicedToArray(_useState13, 2),
+      description = _useState14[0],
+      setDescription = _useState14[1];
+
+  var getRoom = function getRoom(data) {
+    setRoom(data);
+  };
+
+  var getWorker = function getWorker(data) {
+    setWorker(data);
+  };
+
+  var getPriority = function getPriority(data) {
+    setPriority(data);
+  };
+
+  var getTag = function getTag(data) {
+    setTag(data);
+  };
+
+  var getTitle = function getTitle(data) {
+    setTitle(data);
+  };
+
+  var getDeadline = function getDeadline(data) {
+    setDeadline(data);
+  };
+
+  var getDescription = function getDescription(data) {
+    setDescription(data);
+  };
+
+  {
+    /* test if states are adapted
+      useEffect(() => {   
+      console.log("Worker:", worker)
+      console.log("Room:", room)
+      console.log("Priority:", priority)
+      console.log("Tag:", tag)
+      console.log("Title:", title)
+      console.log("Deadline:", deadline)
+      console.log("Description:", description)
+      },[worker, room, priority, tag, title, deadline, description])
+    */
+  }
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    var task = {
+      title: title,
+      deadline: deadline,
+      worker: worker,
+      room: room,
+      priority: priority,
+      tag: tag
+    };
+    console.log(task);
+    /*
+    const url = "http://127.0.0.1:8000/api/project-member/"+props.ID; 
+    axios.post(url, {task})
+     .then(res => {
+         console.log(res);
+         console.log(res.data);
+     })
+     */
+  };
+
+  return trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    className: "w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "w-full",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
+          className: "bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20",
+          onSubmit: handleSubmit,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+            className: "items-center mb-6 text-5xl font-body",
+            children: "Task erstellen"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "flex justify-between p-6",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "w-1/2 h-full p-6",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "mb-4",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                  id: "projectTitle",
+                  onChange: getTitle,
+                  placeholder: "Titel..."
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "mb-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                  id: "projectDeadline",
+                  onChange: getDeadline,
+                  placeholder: "Deadline..."
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "mb-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_DropDownSelect__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                  title: "Bearbeiter auswählen",
+                  onChange: getWorker,
+                  options: ["muss", "noch", "dynamisch", "geladen", "werden"]
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "w-1/2 h-full p-6",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "mb-4",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_DropDownSelect__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                  title: "Raum auswählen",
+                  onChange: getRoom,
+                  options: ["muss", "noch", "dynamisch", "geladen", "werden"]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "mb-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_DropDownSelect__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                  title: "Tag auswählen",
+                  onChange: getTag,
+                  options: ["muss", "noch", "dynamisch", "geladen", "werden"]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "mb-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_DropDownSelect__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                  title: "Priorität auswählen",
+                  onChange: getPriority,
+                  options: ["Hoch", "Mittel", "Niedrig"]
+                })
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "mb-6",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              id: "description",
+              onChange: getDescription,
+              placeholder: "Beschreibung..."
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "flex items-center justify-between",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              onClick: onClick,
+              className: "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+              type: "button",
+              children: "Abbruch"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+              type: "submit",
+              children: "Erstellen"
+            })]
+          })]
+        })
+      })
+    })
+  }) : "";
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewTaskPopup);
 
 /***/ }),
 

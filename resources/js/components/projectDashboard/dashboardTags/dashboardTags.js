@@ -49,7 +49,8 @@ const dashboardTags = (props) => {
                     {loadedTags.map((tag, index) => {
                         return (
                             <TagElement
-                                name={tag.title}>
+                                name={tag.title}
+                                key={index}>
                             </TagElement>
                         )
                     })}

@@ -21,6 +21,8 @@
         "tailwindcss": "^3.0.24"
     },
     "dependencies": {
+        "@headlessui/react": "^1.6.4",
+        "@heroicons/react": "^1.0.6",
         "react-icons": "^4.3.1",
         "react-router-dom": "^6.3.0",
         "tailwindcss-percentage-width": "^1.0.1"

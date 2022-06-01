@@ -4,6 +4,8 @@ import Searchbar from './searchbar/SearchBar'
 import MinView from './RoomsMinView'
 
 import Plus from '../../../../images/icons/plus.png'
+import CreateRoomButton from './CreateRoomButton'
+import NewRoomPopup from './popup/NewRoomPopup'
 
 const rooms = [
     {title : "Dösraum" , 
@@ -35,6 +37,11 @@ const rooms = [
 ]
 
 const dashboardRooms = (props) => {
+
+  const [popupTrigger, setPopupTrigger] = useState(false)
+  const changePopupTriggerValue = () => {
+    setPopupTrigger(!popupTrigger);
+  }
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -80,12 +87,9 @@ const dashboardRooms = (props) => {
             })}
         </div>
         <div className="w-full flex justify-end">
-            <div className="bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold">
-                <img src={Plus} alt="plus" className="h-6 w-6 mx-2"></img>
-                <button className="text-white rounded-xl">Raum erstellen</button>           
-            </div>   
+            <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        
+        <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
     </div>
   )}
 }
