@@ -68,7 +68,7 @@ function DashboardProjects (props) {
           })}
         </div>
 
-        <div class="flex justify-end">
+        <div className="flex justify-end">
           <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
         </div>
         <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue}/>

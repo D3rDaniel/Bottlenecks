@@ -1,6 +1,13 @@
 import React, {useState} from 'react'
 
 const RoomsMaxView = (props) => {
+
+    let city = props.room.address_info;
+    let building = city.substring(0,city.indexOf(','));
+    let plz = building.substring(building.length-5)
+    city = city.replace(building+',', '');
+    building = building.substring(0,building.length-6)
+
   return (
     <div className="flex bg-white rounded-xl -mt-5 shadow-bottom">
         <div className="w-1/4 ml-5 mt-5 pb-5">
@@ -15,7 +22,7 @@ const RoomsMaxView = (props) => {
             </div>
             <div className="">
                 <div className="font-bold">Öffnungszeiten:</div>
-                <label>{props.room.time.openend_on_weekends === "0" ? "Mo-Fr " : "Mo-So"}: {props.room.time.opening_time} - {props.room.time.closing_time} Uhr</label>
+                <label>{props.room.opened_on_weekends === "0" ? "Mo-Fr " : "Mo-So"}: {props.room.opening_time} - {props.room.closing_time} Uhr</label>
             </div>
         </div>
 
@@ -23,19 +30,17 @@ const RoomsMaxView = (props) => {
             <div className="font-bold">Zu finden:</div>
             <div>
                <label>Stadt: </label>
-                <label>{props.room.address_info.city}</label> 
+                <label>{city}</label> 
             </div>
             <div>
                <label>PLZ: </label>
-                <label>{props.room.address_info.plz}</label> 
+                <label>{plz}</label> 
             </div>
             <div>
                <label>Adresse: </label>
-                <label>{props.room.address_info.address}</label> 
+                <label>{building}</label> 
             </div>
             <div>
-               <label>Gebäude: </label>
-                <label>{props.room.address_info.appartment}</label> 
             </div>
             <div>
                <label>Raum: </label>
