@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Status;
 use App\Models\Task;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,10 +18,13 @@ class ProjectTaskController extends Controller
      *
      * @param $projectId
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function index($projectId): JsonResponse
     {
         $project = Project::find($projectId);
+
+        $this->authorize('viewAny', [Task::class, $project->id]);
 
         if (!$project) {
             return response()->json(['success'=>false,'message' => 'Project not found'], 404);

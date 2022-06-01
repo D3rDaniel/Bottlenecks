@@ -28,29 +28,57 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
-    public function createdProjects(){
+    public function createdProjects(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Project::class,'creator_user_id');
     }
 
-    public function createdTasks(){
+    public function createdTasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Task::class,'creator_user_id');
     }
 
-    public function tasksAssigned(){
+    public function tasksAssigned(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Task::class,'assignee_user_id');
     }
 
-    public function projectsWhereMember(){
+    public function projectsWhereMember(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany(Project::class,'project_users')
             ->withPivot(['can_edit_tasks','can_create_tasks','can_assign_tasks','can_create_tags'])->as('user_project_rights');
     }
 
-    public function bookings(){
+    public function bookings(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Booking::class);
     }
 
-    public function announcements(){
+    public function announcements(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Announcement::class);
+    }
+
+    public function isOwnerOfProject($project_id): bool
+    {
+        return $this->createdProjects()->where('id',$project_id)->exists();
+    }
+
+    public function isMemberOfProject($project_id): bool
+    {
+        return $this->projectsWhereMember()->where('project_id',$project_id)->exists();
+    }
+
+    /**
+     * Get the ProjectUser / Member Information for the project
+     * whith the specified project_id and this user.
+     *
+     * @param int $project_id
+     * @return ProjectUser
+     */
+    public function getUserProjectInformation(int $project_id): ProjectUser
+    {
+        return ProjectUser::where('user_id',$this->id)->where('project_id',$project_id)->first();
     }
 
     /**

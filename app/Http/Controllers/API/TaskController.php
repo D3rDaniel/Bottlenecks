@@ -7,7 +7,11 @@ use App\Http\Requests\CompleteTaskRequest;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -17,11 +21,14 @@ class TaskController extends Controller
      *
      * @param StoreTaskRequest $request
      * @return JsonResponse
+     * @throws AuthorizationException
+     * Exception is automatically handled by Laravel
      */
     public function store(StoreTaskRequest $request): JsonResponse
     {
+
         $data = $request->safe()->only(
-            ['creator_user_id',
+            [
             'assignee_user_id',
             'project_id',
             'status_id',
@@ -32,6 +39,19 @@ class TaskController extends Controller
             'due_date',
             'due_time']
         );
+
+        //get assigned user
+        $assignee = User::find($data['assignee_user_id']);
+
+        //check if assignee is a project-member
+        if (!$assignee->isMemberOfProject($data['project_id'])) {
+            return response()->json(['success'=>false,'message' => 'Assignee is not a member of the project.'], 400);
+        }
+
+        //authorize
+        $this->authorize('create', [Task::class,$data['project_id']]);
+
+        $data['creator_user_id'] = Auth::id();
 
         $new_task = Task::create($data);
 
@@ -55,15 +75,18 @@ class TaskController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Returns the specified task.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function show($id): JsonResponse
     {
         try {
             $task = Task::findOrFail($id);
+
+            $this->authorize('view', $task);
 
             $res = [
                 'success'=>true,
@@ -72,17 +95,17 @@ class TaskController extends Controller
 
             return response()->json($res,200);
         }
-        catch (\Exception $e){
+        catch (ModelNotFoundException $e){
             $res = [
                 'success'=>false,
-                'message'=>'Task was not found'
+                'message'=>'Task was not found.'
             ];
             return response()->json($res,404);
         }
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the task in storage.
      *
      * @param UpdateTaskRequest $request
      * @param int $id
@@ -103,8 +126,22 @@ class TaskController extends Controller
                 'completion_comment'
             ]
         );
+
         try {
             $task = Task::findOrFail($id);
+
+            $this->authorize('update', $task);
+
+            //check if the assignee user_id field in $data exists
+            if(array_key_exists('assignee_user_id', $data)){
+                //get assigned user
+                $assignee = User::find($data['assignee_user_id']);
+
+                //check if new assignee is a project-member
+                if (!$assignee->isMemberOfProject($task->project_id)) {
+                    return response()->json(['success'=>false,'message' => 'Assignee is not a member of the project.'], 400);
+                }
+            }
 
             $task->update($data);
             $res = [
@@ -112,10 +149,10 @@ class TaskController extends Controller
                 'task' => $task,
             ];
             return response()->json($res, 200);
-        } catch (\Exception $e) {
+        } catch (ModelNotFoundException $e) {
             $res = [
                 'success' => false,
-                'message' => 'Task was not found.'
+                'message' => 'Task not found.'
             ];
             return response()->json($res, 404);
         }
@@ -124,15 +161,18 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function destroy($id): JsonResponse
     {
         try {
             $task = Task::findOrFail($id);
+
+            $this->authorize('forceDelete', $task);
         }
-        catch (\Exception $e) {
+        catch (ModelNotFoundException $e) {
             return response()->json(['success'=>false, 'message' => 'Task not found'], 404);
         }
         if($task->delete()) {
@@ -162,6 +202,8 @@ class TaskController extends Controller
         try {
             $task = Task::findOrFail($id);
 
+            $this->authorize('complete', $task);
+
             $task->update($data);
 
             $res= [
@@ -171,7 +213,7 @@ class TaskController extends Controller
             ];
             return response()->json($res, 201);
         }
-        catch (\Exception $e) {
+        catch (ModelNotFoundException $e) {
             return response()->json(['success'=>false, 'message' => 'Task not found.'], 404);
         }
 

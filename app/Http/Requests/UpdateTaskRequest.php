@@ -25,8 +25,7 @@ class UpdateTaskRequest extends FormRequest
     public function rules()
     {
         return [
-            //TODO:validate combination of user_id and project_id in project_users
-            'assignee_user_id' => 'exists:users,id|exists:project_users,user_id',
+            'assignee_user_id' => 'exists:users,id',
             'status_id' => 'exists:statuses,id',
             'priority_id' => 'exists:priorities,id',
             'tag_id' => 'exists:tags,id',
