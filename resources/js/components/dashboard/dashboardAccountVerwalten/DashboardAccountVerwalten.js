@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import InputField from '../../forms/inputField'
+import InputField from '../../forms/InputField'
 import ChangeEmailAndPasswordButton from './ChangeEmailAndPasswordButton'
 import ChangePasswordAndEmailPopup from './popup/ChangePasswordAndEmailPopup'
 

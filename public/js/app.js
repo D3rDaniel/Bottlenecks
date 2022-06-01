@@ -2728,7 +2728,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _forms_inputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../forms/inputField */ "./resources/js/components/forms/inputField.js");
+/* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../forms/InputField */ "./resources/js/components/forms/InputField.js");
 /* harmony import */ var _ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChangeEmailAndPasswordButton */ "./resources/js/components/dashboard/dashboardAccountVerwalten/ChangeEmailAndPasswordButton.js");
 /* harmony import */ var _popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./popup/ChangePasswordAndEmailPopup */ "./resources/js/components/dashboard/dashboardAccountVerwalten/popup/ChangePasswordAndEmailPopup.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -2783,7 +2783,7 @@ function DashboardAccountVerwalten() {
                 "class": "pr-4",
                 "for": "username",
                 children: "Nutzername:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 id: "username",
                 value: "person123"
               })]
@@ -2802,7 +2802,7 @@ function DashboardAccountVerwalten() {
                 "class": "pr-10",
                 "for": "forename",
                 children: "Vorname:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 id: "forename",
                 value: "Max"
               })]
@@ -2815,7 +2815,7 @@ function DashboardAccountVerwalten() {
                 "class": "pr-7",
                 "for": "lastname",
                 children: "Nachname:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
                 "class": "w-36",
                 id: "lastname",
                 value: "Mustermann"
@@ -3985,7 +3985,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _forms_inputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../forms/inputField */ "./resources/js/components/forms/inputField.js");
+/* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../forms/InputField */ "./resources/js/components/forms/InputField.js");
 /* harmony import */ var _forms_TextArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../forms/TextArea */ "./resources/js/components/forms/TextArea.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -4010,13 +4010,13 @@ function NewProjectPopup(_ref) {
             children: "Projekt erstellen"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             "class": "mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
               id: "projectTitle",
               placeholder: "Titel..."
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             "class": "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
               id: "projectDeadline",
               placeholder: "Deadline..."
             })
@@ -4730,39 +4730,6 @@ function TextArea(props) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TextArea);
-
-/***/ }),
-
-/***/ "./resources/js/components/forms/inputField.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/forms/inputField.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-function InputField(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-      className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
-      id: props.id,
-      type: "text",
-      placeholder: props.placeholder
-    })
-  });
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InputField);
 
 /***/ }),
 
@@ -7515,7 +7482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_forms_inputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/forms/inputField */ "./resources/js/components/forms/inputField.js");
+/* harmony import */ var _components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/forms/InputField */ "./resources/js/components/forms/InputField.js");
 /* harmony import */ var _images_logo_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../images/logo.jpg */ "./resources/images/logo.jpg");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -7548,31 +7515,31 @@ function RegisterPage() {
         "class": "bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           "class": "mb-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
             id: "name",
             placeholder: "Name..."
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           "class": "mb-6",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
             id: "email",
             placeholder: "Email..."
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           "class": "mb-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
             id: "username",
             placeholder: "Username..."
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           "class": "mb-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
             id: "password",
             placeholder: "Passwort..."
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           "class": "mb-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_inputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
             id: "password_again",
             placeholder: "Passwort wiederholen..."
           })

@@ -1,5 +1,5 @@
 import React from 'react'
-import InputField from '../components/forms/inputField'
+import InputField from '../components/forms/InputField'
 import Logo from '../../images/logo.jpg'
 import {Link} from 'react-router-dom'
 
