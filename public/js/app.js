@@ -3990,8 +3990,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.png */ "./resources/images/icons/arrow-black.png");
 /* harmony import */ var _ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumView */ "./resources/js/components/dashboard/dashboardProjects/ProjectMaximumView.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var _progressBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../progressBar */ "./resources/js/progressBar.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4003,6 +4004,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -4043,47 +4045,43 @@ var ProjectMinimumView = function ProjectMinimumView(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fillProgressBar();
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "my-5 ml-1",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
         className: "ml-16 pl-3 w-1/5",
         children: props.title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
         className: "w-1/5 ml-3",
         children: props.creator
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "w-1/5",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "".concat(progressCompleted, " bg-green-400 rounded-full"),
-            children: [props.progress, "%"]
-          })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "w-1/5 mr-5",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_progressBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          progressPercentage: props.progress
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
         className: "w-1/5",
         children: props.startDate
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
         className: "w-1/5",
         children: props.date
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "flex ml-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
             to: "/project",
             children: "\xD6ffnen"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
           src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__["default"],
           alt: "maxView",
           className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
           onClick: rotateArrow
         }), "            "]
       })]
-    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ProjectMaximumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
       title: props.fullTitle,
       description: props.description
     }) : null]
@@ -6447,10 +6445,134 @@ var dashboardDeadline = function dashboardDeadline() {
 
 /***/ }),
 
-/***/ "./resources/js/components/projectDashboard/dashboardOverview/dashboardOverView.js":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/projectDashboard/dashboardOverview/dashboardOverView.js ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/components/projectDashboard/dashboardOverview/InfoView.js":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardOverview/InfoView.js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _progressBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../progressBar */ "./resources/js/progressBar.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var InfoView = function InfoView(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "h-full w-1/2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "font-bold",
+      children: "Mitglieder"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mt-1 mb-2",
+      children: props.project.members.map(function (member) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
+          children: [member.username, ", "]
+        }, member.username);
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "font-bold",
+      children: "Beschreibung"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mt-1 mb-2",
+      children: props.project.description
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "font-bold",
+      children: "Enddatum"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "mt-1 mb-2",
+      children: props.project.due_date
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "mr-2",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "font-bold mb-2",
+        children: "Fortschritt"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_progressBar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        progressPercentage: props.project.progress_percentage
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InfoView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardOverview/PieView.js":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardOverview/PieView.js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_minimal_pie_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-minimal-pie-chart */ "./node_modules/react-minimal-pie-chart/dist/index.js");
+/* harmony import */ var react_minimal_pie_chart__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_minimal_pie_chart__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var PieView = function PieView(props) {
+  var completed = props.tasks.completed_tasks;
+  var progress = props.tasks.in_progress_tasks;
+  var failed = props.tasks.failed_tasks;
+  var paused = props.tasks.paused_tasks;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "h-5/6 w-1/2 mt-8",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_minimal_pie_chart__WEBPACK_IMPORTED_MODULE_2__.PieChart, {
+      label: function label(_ref) {
+        var dataEntry = _ref.dataEntry;
+        return dataEntry.value !== 0 ? dataEntry.title : "";
+      },
+      labelStyle: function labelStyle(index) {
+        return {
+          fontSize: '5px',
+          fill: 'white'
+        };
+      },
+      data: [{
+        title: 'Abgeschlossen',
+        value: completed,
+        color: '#42A8FD'
+      }, {
+        title: 'in Bearbeitung',
+        value: progress,
+        color: '#FFBB29'
+      }, {
+        title: 'Abgebrochen',
+        value: failed,
+        color: '#FF3838'
+      }, {
+        title: 'Pausiert',
+        value: paused,
+        color: '#ADADAD'
+      }]
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PieView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardOverview/absoluteView.js":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardOverview/absoluteView.js ***!
+  \************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6464,9 +6586,108 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var absoluteView = function absoluteView(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "w-52 bg-white rounded-xl mt-3 drop-shadow-xl pl-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "font-bold",
+      children: "Aufgaben - absolut:"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: ["Abgeschlossen: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        className: "font-bold",
+        children: props.tasks.completed_tasks
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: ["in Bearbeitung: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        className: "font-bold",
+        children: props.tasks.in_progress_tasks
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: ["Abgebrochen: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        className: "font-bold",
+        children: props.tasks.failed_tasks
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: ["Pausiert: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        className: "font-bold",
+        children: props.tasks.paused_tasks
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (absoluteView);
+
+/***/ }),
+
+/***/ "./resources/js/components/projectDashboard/dashboardOverview/dashboardOverView.js":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/projectDashboard/dashboardOverview/dashboardOverView.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _absoluteView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./absoluteView */ "./resources/js/components/projectDashboard/dashboardOverview/absoluteView.js");
+/* harmony import */ var _InfoView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InfoView */ "./resources/js/components/projectDashboard/dashboardOverview/InfoView.js");
+/* harmony import */ var _PieView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PieView */ "./resources/js/components/projectDashboard/dashboardOverview/PieView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+var project_overview = [{
+  title: "Projekt 1",
+  description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+  due_date: "2022-06-10",
+  completed_tasks: 0,
+  failed_tasks: 1,
+  paused_tasks: 2,
+  in_progress_tasks: 2,
+  progress_percentage: 34,
+  members: [{
+    username: "Jogy",
+    pivot: {
+      can_create_tasks: "0",
+      can_assign_tasks: "0",
+      can_edit_tasks: "0",
+      can_create_tags: "0"
+    }
+  }, {
+    username: "Freddy",
+    pivot: {
+      can_create_tasks: "1",
+      can_assign_tasks: "1",
+      can_edit_tasks: "1",
+      can_create_tags: "1"
+    }
+  }]
+}];
+
 var dashboardOverView = function dashboardOverView() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "dashboardOverView"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "w-screen h-screen m-2 drop-shadow-xl",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "font-bold pl-4 pt-3 bg-white w-full rounded-t-xl",
+      children: "Projekt\xFCbersicht"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "flex w-full h-2/3 bg-white rounded-b-xl",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_PieView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        tasks: project_overview[0]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_InfoView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        project: project_overview[0]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_absoluteView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      tasks: project_overview[0]
+    })]
   });
 };
 
@@ -9385,6 +9606,39 @@ function RegisterPage() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RegisterPage);
+
+/***/ }),
+
+/***/ "./resources/js/progressBar.js":
+/*!*************************************!*\
+  !*** ./resources/js/progressBar.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var ProgressBar = function ProgressBar(_ref) {
+  var progressPercentage = _ref.progressPercentage;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: "h-5 w-full bg-gray-300 rounded-full",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      style: {
+        width: "".concat(progressPercentage, "%")
+      },
+      className: "h-full bg-blue rounded-full text-sm text-center",
+      children: [progressPercentage, "%"]
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProgressBar);
 
 /***/ }),
 
@@ -67685,6 +67939,395 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _iconContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./iconContext */ "./node_modules/react-icons/lib/esm/iconContext.js");
 
 
+
+
+/***/ }),
+
+/***/ "./node_modules/react-minimal-pie-chart/dist/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/react-minimal-pie-chart/dist/index.js ***!
+  \************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+(function (global, factory) {
+   true ? factory(exports, __webpack_require__(/*! react */ "./node_modules/react/index.js")) :
+  0;
+}(this, (function (exports, React) { 'use strict';
+
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+
+  function degreesToRadians(degrees) {
+    return degrees * Math.PI / 180;
+  }
+  function valueBetween(value, min, max) {
+    if (value > max) return max;
+    if (value < min) return min;
+    return value;
+  }
+  function extractPercentage(value, percentage) {
+    return percentage / 100 * value;
+  }
+  function bisectorAngle(startAngle, lengthAngle) {
+    return startAngle + lengthAngle / 2;
+  }
+  function shiftVectorAlongAngle(angle, distance) {
+    var angleRadians = degreesToRadians(angle);
+    return {
+      dx: distance * Math.cos(angleRadians),
+      dy: distance * Math.sin(angleRadians)
+    };
+  }
+  function isNumber(value) {
+    return typeof value === 'number';
+  }
+  function functionProp(prop, payload) {
+    return typeof prop === 'function' ? prop(payload) : prop;
+  }
+
+  function sumValues(data) {
+    var sum = 0;
+
+    for (var i = 0; i < data.length; i++) {
+      sum += data[i].value;
+    }
+
+    return sum;
+  } // Append "percentage", "degrees" and "startAngle" to each data entry
+
+
+  function extendData(_ref) {
+    var data = _ref.data,
+        totalAngle = _ref.lengthAngle,
+        totalValue = _ref.totalValue,
+        paddingAngle = _ref.paddingAngle,
+        chartStartAngle = _ref.startAngle;
+    var total = totalValue || sumValues(data);
+    var normalizedTotalAngle = valueBetween(totalAngle, -360, 360);
+    var numberOfPaddings = Math.abs(normalizedTotalAngle) === 360 ? data.length : data.length - 1;
+    var singlePaddingDegrees = Math.abs(paddingAngle) * Math.sign(totalAngle);
+    var degreesTakenByPadding = singlePaddingDegrees * numberOfPaddings;
+    var degreesTakenByPaths = normalizedTotalAngle - degreesTakenByPadding;
+    var lastSegmentEnd = 0;
+    var extendedData = []; // @NOTE: Shall we evaluate percentage accordingly to dataEntry.value's sign?
+
+    for (var i = 0; i < data.length; i++) {
+      var dataEntry = data[i];
+      var valueInPercentage = total === 0 ? 0 : dataEntry.value / total * 100;
+      var degrees = extractPercentage(degreesTakenByPaths, valueInPercentage);
+      var startAngle = lastSegmentEnd + chartStartAngle;
+      lastSegmentEnd = lastSegmentEnd + degrees + singlePaddingDegrees;
+      extendedData.push(Object.assign({
+        percentage: valueInPercentage,
+        startAngle: startAngle,
+        degrees: degrees
+      }, dataEntry));
+    }
+
+    return extendedData;
+  }
+
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
+
+    return target;
+  }
+
+  function ReactMinimalPieChartLabel(_ref) {
+    _ref.dataEntry;
+        _ref.dataIndex;
+        var props = _objectWithoutPropertiesLoose(_ref, ["dataEntry", "dataIndex"]);
+
+    return /*#__PURE__*/React__default['default'].createElement("text", Object.assign({
+      dominantBaseline: "central"
+    }, props));
+  }
+
+  function round(number) {
+    var divisor = 1e14; // 14 decimals
+
+    return Math.round((number + Number.EPSILON) * divisor) / divisor;
+  }
+
+  function evaluateTextAnchorPosition(_ref) {
+    var labelPosition = _ref.labelPosition,
+        lineWidth = _ref.lineWidth,
+        labelHorizontalShift = _ref.labelHorizontalShift;
+    var dx = round(labelHorizontalShift); // Label in the vertical center
+
+    if (dx === 0) {
+      return 'middle';
+    } // Outward label
+
+
+    if (labelPosition > 100) {
+      return dx > 0 ? 'start' : 'end';
+    } // Inward label
+
+
+    var innerRadius = 100 - lineWidth;
+
+    if (labelPosition < innerRadius) {
+      return dx > 0 ? 'end' : 'start';
+    } // Overlying label
+
+
+    return 'middle';
+  }
+
+  function renderLabelElement(renderLabel, labelProps) {
+    var label = renderLabel(labelProps);
+
+    if (typeof label === 'string' || typeof label === 'number') {
+      return /*#__PURE__*/React__default['default'].createElement(ReactMinimalPieChartLabel, Object.assign({
+        key: "label-" + (labelProps.dataEntry.key || labelProps.dataIndex)
+      }, labelProps), label);
+    }
+
+    if (React__default['default'].isValidElement(label)) {
+      return label;
+    }
+
+    return null;
+  }
+
+  function renderLabels(data, props) {
+    return data.map(function (dataEntry, index) {
+      var _functionProp;
+
+      var segmentsShift = (_functionProp = functionProp(props.segmentsShift, index)) != null ? _functionProp : 0;
+      var distanceFromCenter = extractPercentage(props.radius, props.labelPosition) + segmentsShift;
+
+      var _shiftVectorAlongAngl = shiftVectorAlongAngle(bisectorAngle(dataEntry.startAngle, dataEntry.degrees), distanceFromCenter),
+          dx = _shiftVectorAlongAngl.dx,
+          dy = _shiftVectorAlongAngl.dy; // This object is passed as argument to the "label" function prop
+
+
+      var labelRenderProps = {
+        x: props.center[0],
+        y: props.center[1],
+        dx: dx,
+        dy: dy,
+        textAnchor: evaluateTextAnchorPosition({
+          labelPosition: props.labelPosition,
+          lineWidth: props.lineWidth,
+          labelHorizontalShift: dx
+        }),
+        dataEntry: dataEntry,
+        dataIndex: index,
+        style: functionProp(props.labelStyle, index)
+      };
+      return props.label && renderLabelElement(props.label, labelRenderProps);
+    });
+  }
+
+  var partialCircle = function partialCircle(cx, cy, r, start, end) {
+    var length = end - start;
+    if (length === 0) return [];
+    var fromX = r * Math.cos(start) + cx;
+    var fromY = r * Math.sin(start) + cy;
+    var toX = r * Math.cos(end) + cx;
+    var toY = r * Math.sin(end) + cy;
+    var large = Math.abs(length) <= Math.PI ? '0' : '1';
+    var sweep = length < 0 ? '0' : '1';
+    return [['M', fromX, fromY], ['A', r, r, 0, large, sweep, toX, toY]];
+  };
+
+  var svgPartialCircle = partialCircle;
+
+  function makePathCommands(cx, cy, startAngle, lengthAngle, radius) {
+    var patchedLengthAngle = valueBetween(lengthAngle, -359.999, 359.999);
+    return svgPartialCircle(cx, cy, // center X and Y
+    radius, degreesToRadians(startAngle), degreesToRadians(startAngle + patchedLengthAngle)).map(function (command) {
+      return command.join(' ');
+    }).join(' ');
+  }
+  function ReactMinimalPieChartPath(_ref) {
+    var cx = _ref.cx,
+        cy = _ref.cy,
+        lengthAngle = _ref.lengthAngle,
+        lineWidth = _ref.lineWidth,
+        radius = _ref.radius,
+        _ref$shift = _ref.shift,
+        shift = _ref$shift === void 0 ? 0 : _ref$shift,
+        reveal = _ref.reveal,
+        rounded = _ref.rounded,
+        startAngle = _ref.startAngle,
+        title = _ref.title,
+        props = _objectWithoutPropertiesLoose(_ref, ["cx", "cy", "lengthAngle", "lineWidth", "radius", "shift", "reveal", "rounded", "startAngle", "title"]);
+
+    var pathRadius = radius - lineWidth / 2; //@NOTE This shift might be rendered as a translation in future
+
+    var _shiftVectorAlongAngl = shiftVectorAlongAngle(bisectorAngle(startAngle, lengthAngle), shift),
+        dx = _shiftVectorAlongAngl.dx,
+        dy = _shiftVectorAlongAngl.dy;
+
+    var pathCommands = makePathCommands(cx + dx, cy + dy, startAngle, lengthAngle, pathRadius);
+    var strokeDasharray;
+    var strokeDashoffset; // Animate/hide paths with "stroke-dasharray" + "stroke-dashoffset"
+    // https://css-tricks.com/svg-line-animation-works/
+
+    if (isNumber(reveal)) {
+      var pathLength = degreesToRadians(pathRadius) * lengthAngle;
+      strokeDasharray = Math.abs(pathLength);
+      strokeDashoffset = strokeDasharray - extractPercentage(strokeDasharray, reveal);
+    }
+
+    return /*#__PURE__*/React__default['default'].createElement("path", Object.assign({
+      d: pathCommands,
+      fill: "none",
+      strokeWidth: lineWidth,
+      strokeDasharray: strokeDasharray,
+      strokeDashoffset: strokeDashoffset,
+      strokeLinecap: rounded ? 'round' : undefined
+    }, props), title && /*#__PURE__*/React__default['default'].createElement("title", null, title));
+  }
+
+  function combineSegmentTransitionsStyle(duration, easing, customStyle) {
+    // Merge chart's animation CSS transition with "transition" found to customStyle
+    var transition = "stroke-dashoffset " + duration + "ms " + easing;
+
+    if (customStyle && customStyle.transition) {
+      transition = transition + "," + customStyle.transition;
+    }
+
+    return {
+      transition: transition
+    };
+  }
+
+  function getRevealValue(props) {
+    //@NOTE When animation is on, chart has to be fully revealed when reveal is not set
+    if (props.animate && !isNumber(props.reveal)) {
+      return 100;
+    }
+
+    return props.reveal;
+  }
+
+  function makeEventHandler(eventHandler, payload) {
+    return eventHandler && function (e) {
+      eventHandler(e, payload);
+    };
+  }
+
+  function renderSegments(data, props, revealOverride) {
+    // @NOTE this should go in Path component. Here for performance reasons
+    var reveal = revealOverride != null ? revealOverride : getRevealValue(props);
+    var radius = props.radius,
+        _props$center = props.center,
+        cx = _props$center[0],
+        cy = _props$center[1];
+    var lineWidth = extractPercentage(radius, props.lineWidth);
+    var paths = data.map(function (dataEntry, index) {
+      var segmentsStyle = functionProp(props.segmentsStyle, index);
+      return /*#__PURE__*/React__default['default'].createElement(ReactMinimalPieChartPath, {
+        cx: cx,
+        cy: cy,
+        key: dataEntry.key || index,
+        lengthAngle: dataEntry.degrees,
+        lineWidth: lineWidth,
+        radius: radius,
+        rounded: props.rounded,
+        reveal: reveal,
+        shift: functionProp(props.segmentsShift, index),
+        startAngle: dataEntry.startAngle,
+        title: dataEntry.title,
+        style: Object.assign({}, segmentsStyle, props.animate && combineSegmentTransitionsStyle(props.animationDuration, props.animationEasing, segmentsStyle)),
+        stroke: dataEntry.color,
+        tabIndex: props.segmentsTabIndex,
+        onBlur: makeEventHandler(props.onBlur, index),
+        onClick: makeEventHandler(props.onClick, index),
+        onFocus: makeEventHandler(props.onFocus, index),
+        onKeyDown: makeEventHandler(props.onKeyDown, index),
+        onMouseOver: makeEventHandler(props.onMouseOver, index),
+        onMouseOut: makeEventHandler(props.onMouseOut, index)
+      });
+    });
+
+    if (props.background) {
+      paths.unshift( /*#__PURE__*/React__default['default'].createElement(ReactMinimalPieChartPath, {
+        cx: cx,
+        cy: cy,
+        key: "bg",
+        lengthAngle: props.lengthAngle,
+        lineWidth: lineWidth,
+        radius: radius,
+        rounded: props.rounded,
+        startAngle: props.startAngle,
+        stroke: props.background
+      }));
+    }
+
+    return paths;
+  }
+
+  var defaultProps = {
+    animationDuration: 500,
+    animationEasing: 'ease-out',
+    center: [50, 50],
+    data: [],
+    labelPosition: 50,
+    lengthAngle: 360,
+    lineWidth: 100,
+    paddingAngle: 0,
+    radius: 50,
+    startAngle: 0,
+    viewBoxSize: [100, 100]
+  };
+  function ReactMinimalPieChart(props) {
+    var _useState = React.useState(props.animate ? 0 : null),
+        revealOverride = _useState[0],
+        setRevealOverride = _useState[1];
+
+    React.useEffect(function () {
+      if (props.animate) {
+        return startInitialAnimation();
+      }
+
+      function startInitialAnimation() {
+        var animationTimerId;
+        var animationRAFId;
+        animationTimerId = setTimeout(function () {
+          animationTimerId = null;
+          animationRAFId = requestAnimationFrame(function () {
+            animationRAFId = null;
+            setRevealOverride(null); // Start animation
+          });
+        });
+        return function () {
+          animationTimerId && clearTimeout(animationTimerId);
+          animationRAFId && cancelAnimationFrame(animationRAFId);
+        };
+      }
+    }, []);
+    var extendedData = extendData(props);
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
+      viewBox: "0 0 " + props.viewBoxSize[0] + " " + props.viewBoxSize[1],
+      width: "100%",
+      height: "100%",
+      className: props.className,
+      style: props.style
+    }, renderSegments(extendedData, props, revealOverride), props.label && renderLabels(extendedData, props), props.children);
+  }
+  ReactMinimalPieChart.defaultProps = defaultProps;
+
+  exports.PieChart = ReactMinimalPieChart;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+//# sourceMappingURL=index.js.map
 
 
 /***/ }),

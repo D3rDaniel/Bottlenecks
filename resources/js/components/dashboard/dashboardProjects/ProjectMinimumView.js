@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Arrow from '../../../../images/icons/arrow-black.png'
 import TaskMaximumView from './ProjectMaximumView'
 import { Link } from 'react-router-dom'
+import Progressbar from '../../../progressBar'
 
 const ProjectMinimumView = (props) => {
 
@@ -37,12 +38,13 @@ const ProjectMinimumView = (props) => {
 
             <label className="w-1/5 ml-3">{props.creator}</label>
 
-            <div className="w-1/5">
-                <div className="bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center">
+            <div className="w-1/5 mr-5">
+                {/* <div className="bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center">
                     <div className={`${progressCompleted} bg-green-400 rounded-full`}>
                         {props.progress}%
                     </div>
-                </div>
+                </div> */}
+                <Progressbar progressPercentage = {props.progress} />
             </div>
             
             <label className={`w-1/5`}>{props.startDate}</label>
