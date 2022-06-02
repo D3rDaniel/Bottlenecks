@@ -6,6 +6,7 @@ import MinView from './RoomsMinView'
 import Plus from '../../../../images/icons/plus.png'
 import CreateRoomButton from './CreateRoomButton'
 import NewRoomPopup from './popup/NewRoomPopup'
+import Loading from '../../../../images/icons/loading-spinner.png'
 
 const rooms = [
     {title : "Dösraum" , 
@@ -71,7 +72,10 @@ const dashboardRooms = (props) => {
         if(error.message.includes("No rooms found")) errormessage = "Keine Räume gefunden";
           return <div className="m-auto text-red font-bold">Error: {errormessage}</div>
       }else if(!isLoaded){
-          return <div className="m-auto text-darkgray">Loading..</div>
+          return (<div className="m-auto flex flex-row">
+          <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
+          <div className=" text-darkgray">Loading...</div>
+        </div>)
       }else if(loadedRooms.length < 1){
         return <div className="m-auto text-red font-bold">Keine Räume gefunden</div>
     }else {

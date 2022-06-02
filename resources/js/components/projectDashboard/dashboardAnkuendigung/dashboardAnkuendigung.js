@@ -2,6 +2,7 @@ import {React, useState, useEffect} from 'react'
 
 import Searchbar from './searchbar/SearchBar'
 import MinView from './AnkuendigungMinimumView'
+import Loading from '../../../../images/icons/loading-spinner.png'
 
 const messages = [
     {subject : "Ankündigung 1" , creator : "Maximilian" , created_at :  "22.04.2022" , message : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."},
@@ -38,7 +39,10 @@ const dashboardAnkuendigung = (props) => {
         if(error.message.includes("No announcements found")) errormessage = "Es gibt noch keine Ankündigungen"
           return <div className="m-auto text-red font-bold">Error: {errormessage}</div>
       }else if(!isLoaded){
-          return <div className="m-auto text-darkgray">Loading..</div>
+          return (<div className="m-auto flex flex-row">
+          <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
+          <div className=" text-darkgray">Loading...</div>
+        </div>)
       }else if(loadedAnnouncements.length < 1){
         return <div className="m-auto text-red font-bold">Keine Ankündigungen gefunden</div>
     }else {

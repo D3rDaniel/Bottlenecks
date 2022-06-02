@@ -4,6 +4,7 @@ import SearchBar from './searchbar/SearchBar'
 import TaskMinimumView from './TaskMinimumView'
 import NewTaskPopup from './popup/NewTaskPopup'
 import CreateTaskButton from './CreateTaskButton'
+import Loading from '../../../../images/icons/loading-spinner.png'
 
 const tasks = [
   {title: "Task1", status: "abgeschlossen", prio: "Hoch", completedDate: "06.05.2022" , date: "09.05.2022"},
@@ -46,7 +47,10 @@ function DashboardTasks(props) {
       if(error.message.includes("No tasks found")) errormessage = "Keine Tasks gefunden";
         return <div className="m-auto text-red font-bold">Error: {errormessage}</div>
     }else if(!isLoaded){
-        return <div className="m-auto text-darkgray">Loading..</div>
+        return (<div className="m-auto flex flex-row">
+        <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
+        <div className=" text-darkgray">Loading...</div>
+      </div>)
     }else if(loadedTasks.length < 1){
       return <div className="m-auto text-red font-bold">Keine Tasks gefunden</div>
   }else {

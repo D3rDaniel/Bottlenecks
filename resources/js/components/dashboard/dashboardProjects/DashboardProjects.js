@@ -3,6 +3,7 @@ import SearchBar from './searchbar/SearchBar'
 import ProjectMinimumView from './ProjectMinimumView'
 import CreateProjectButton from './CreateProjectButton'
 import NewProjectPopup from './popup/NewProjectPopup'
+import Loading from '../../../../images/icons/loading-spinner.png'
 
 const projects = [
   {title: "Frontend", creator: "Hans Jürgen" , progress: 70, startDate: "01.05.2022", date: "09.05.2022"},
@@ -46,7 +47,10 @@ function DashboardProjects (props) {
         if(error.message.includes("No projects found for this user.")) errormessage = "Du bist momentan in keinen Projekten!"
           return <div className='m-auto text-red font-bold'>Error: {errormessage}</div>
       }else if(!isLoaded){
-          return <div className='m-auto text-darkgray'>Loading..</div>
+          return (<div className="m-auto flex flex-row">
+          <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
+          <div className=" text-darkgray">Loading...</div>
+        </div>)
       }else if(loadedProjects.length < 1){
         return <div className='m-auto text-red font-bold'>Du bist momentan in keinen Projekten!</div>
     }else {
