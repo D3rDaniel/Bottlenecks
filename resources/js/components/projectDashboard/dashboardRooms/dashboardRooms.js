@@ -40,8 +40,12 @@ const rooms = [
 const dashboardRooms = (props) => {
 
   const [popupTrigger, setPopupTrigger] = useState(false)
+  const [popupTriggerBooking, setPopupTriggerBooking] = useState(false)
   const changePopupTriggerValue = () => {
     setPopupTrigger(!popupTrigger);
+  }
+  const changePopupTriggerValueBooking = () => {
+    setPopupTriggerBooking(!popupTriggerBooking);
   }
 
     const [error, setError] = useState(null);
@@ -70,14 +74,22 @@ const dashboardRooms = (props) => {
       if (error) {
         errormessage = error.message;
         if(error.message.includes("No rooms found")) errormessage = "Keine Räume gefunden";
-          return <div className="m-auto text-red font-bold">Error: {errormessage}</div>
+          return <div className="m-auto text-red font-bold">Error: {errormessage}</div> 
       }else if(!isLoaded){
           return (<div className="m-auto flex flex-row">
           <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
           <div className=" text-darkgray">Loading...</div>
         </div>)
       }else if(loadedRooms.length < 1){
-        return <div className="m-auto text-red font-bold">Keine Räume gefunden</div>
+        return (
+        <>
+          <div className="flex flex-col justify-center items-center w-full h-screen text-red font-bold">
+            <h2>Keine Räume gefunden</h2>
+            <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
+          </div>
+          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
+        </>
+        )
     }else {
 
   return (
@@ -98,6 +110,7 @@ const dashboardRooms = (props) => {
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
         <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
+        <RoomBookingPopup trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} />
     </div>
   )}
 }

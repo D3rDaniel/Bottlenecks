@@ -10,7 +10,7 @@ function NewRoomPopup({trigger, onClick}) {
     const [number, setNumber] = useState();
     const [open_at, setOpen_at] = useState();
     const [close_at, setClose_at] = useState();
-    const [open_on_weekend, setOpen_on_weekend] = useState();
+    const [open_at_weekend, setOpen_at_weekend] = useState(false);
     const [description, setDescription] = useState();
     const [address, setAddress] = useState();
     const [equipment, setEquipment] = useState();
@@ -20,7 +20,16 @@ function NewRoomPopup({trigger, onClick}) {
     const getNumber = (data) => {setNumber(data);}
     const getOpen_at = (data) => {setOpen_at(data);}
     const getClose_at = (data) => {setClose_at(data);}
-    const getOpen_on_weekend = (data) => {setOpen_on_weekend(data);}
+    const getOpen_at_weekend = (event) => {
+        if(event.target.checked){
+            setOpen_at_weekend(true);
+            console.log("should be true")
+        }
+        if(!event.target.checked){
+            setOpen_at_weekend(false);
+            console.log("should be false")
+        }
+    }
     const getDescription = (data) => {setDescription(data);}
     const getAddress = (data) => {setAddress(data);}
     const getEquipment = (data) => {setEquipment(data);}
@@ -34,7 +43,7 @@ function NewRoomPopup({trigger, onClick}) {
             number: number,
             open_at: open_at,
             close_at: close_at,
-            open_on_weekend: open_on_weekend,
+            open_at_weekend: open_at_weekend,
             address: address,
             description: description,
             equipment: equipment,
@@ -61,14 +70,17 @@ function NewRoomPopup({trigger, onClick}) {
 
                         <div className="w-full h-full p-6">
                             <div className="flex justify-between p-4 mb-4">
-                                <InputField  onChange={getName} placeholder="Name..."></InputField>
-                                <InputField  onChange={getSize} placeholder="Größe..."></InputField>
-                                <InputField  onChange={getNumber} placeholder="Nummer..."></InputField>
+                                <div><InputField  onChange={getName} placeholder="Name..."></InputField></div>
+                                <div className="px-1"><InputField  onChange={getSize} placeholder="Größe..."></InputField></div>
+                                <div className="px-1"><InputField  onChange={getNumber} placeholder="Nummer..."></InputField></div>
                             </div>
-                            <div className="flex justify-between p-4 mb-4">
-                                <InputField  onChange={getOpen_at} placeholder="Öffnet um..."></InputField>
-                                <InputField  onChange={getClose_at} placeholder="Schließt um..."></InputField>
-                                checkbox missing
+                            <div className="flex justify-center items-center p-4 mb-4">
+                                <div className="pr-3"><InputField  onChange={getOpen_at} placeholder="Öffnet um..."></InputField></div>
+                                <div className="pl-3"><InputField  onChange={getClose_at} placeholder="Schließt um..."></InputField></div>
+                            </div>
+                            <div className="flex justify-center items-center  p-4 mb-4">
+                                <input className="mr-6" id="weekend_checkbox" name="weekend_checkbox" type="checkbox" onChange={getOpen_at_weekend}/>
+                                <label  htmlFor='weekend_checkbox'>Offen am Wochenende</label>
                             </div>
                             <div className="p-4 mb-4">
                                 <InputField  onChange={getAddress} placeholder="Adresse..."></InputField>
