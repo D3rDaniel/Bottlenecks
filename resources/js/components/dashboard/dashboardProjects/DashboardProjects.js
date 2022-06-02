@@ -32,7 +32,7 @@ function DashboardProjects (props) {
           .then(response => response.json())
           .then((data) => {
             setIsLoaded(true);
-            setProjects(data["projects_created"]);  
+            setProjects(data["projects_created"].concat(data["project-member_of"]));  
             },(error) =>{
               setIsLoaded(true);
               setError(error);
@@ -41,10 +41,15 @@ function DashboardProjects (props) {
       }, []);
       
       if (error) {
-          return <div>Error: {error.message}</div>
+        let errormessage = error.message;
+        if(error.message.includes("User not found.")) errormessage = "Nutzer wurde nicht gefunden!";
+        if(error.message.includes("No projects found for this user.")) errormessage = "Du bist momentan in keinen Projekten!"
+          return <div className='m-auto text-red font-bold'>Error: {errormessage}</div>
       }else if(!isLoaded){
-          return <div>Loading..</div>
-      }else {
+          return <div className='m-auto text-darkgray'>Loading..</div>
+      }else if(loadedProjects.length < 1){
+        return <div className='m-auto text-red font-bold'>Du bist momentan in keinen Projekten!</div>
+    }else {
 
   return(
     <div className="flex flex-col w-full m-1 ml-2">

@@ -2436,12 +2436,21 @@ function DashboardAbgeschlosseneTasks(props) {
   }, []);
 
   if (error) {
+    errormessage = error.message;
+    if (error.message.includes("No tasks found")) errormessage = "Keine Tasks gefunden";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedTasks.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine Tasks gefunden"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -3178,12 +3187,21 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
   }, []);
 
   if (error) {
+    var errormessage = error.message;
+    if (error.message.includes("No announcements found")) errormessage = "Es gibt noch keine Ankündigungen";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedAnnouncements.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine Ank\xFCndigungen gefunden"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -3381,12 +3399,21 @@ function DashboardOffeneTasks(props) {
   }, []);
 
   if (error) {
+    errormessage = error.message;
+    if (error.message.includes("No tasks found")) errormessage = "Keine Tasks gefunden";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedTasks.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine Tasks gefunden"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -3811,7 +3838,7 @@ function DashboardProjects(props) {
       return response.json();
     }).then(function (data) {
       setIsLoaded(true);
-      setProjects(data["projects_created"]);
+      setProjects(data["projects_created"].concat(data["project-member_of"]));
     }, function (error) {
       setIsLoaded(true);
       setError(error);
@@ -3819,12 +3846,22 @@ function DashboardProjects(props) {
   }, []);
 
   if (error) {
+    var errormessage = error.message;
+    if (error.message.includes("User not found.")) errormessage = "Nutzer wurde nicht gefunden!";
+    if (error.message.includes("No projects found for this user.")) errormessage = "Du bist momentan in keinen Projekten!";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedProjects.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Du bist momentan in keinen Projekten!"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -5621,12 +5658,21 @@ var dashboardAnkuendigung = function dashboardAnkuendigung(props) {
   }, []);
 
   if (error) {
+    var errormessage = error.message;
+    if (error.message.includes("No announcements found")) errormessage = "Es gibt noch keine Ankündigungen";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedAnnouncements.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine Ank\xFCndigungen gefunden"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -6535,12 +6581,21 @@ var dashboardRooms = function dashboardRooms(props) {
   }, []);
 
   if (error) {
+    errormessage = error.message;
+    if (error.message.includes("No rooms found")) errormessage = "Keine Räume gefunden";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedRooms.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine R\xE4ume gefunden"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -7136,12 +7191,21 @@ var dashboardTags = function dashboardTags(props) {
   }, []);
 
   if (error) {
+    errormessage = error.message;
+    if (error.message.includes("No tags found")) errormessage = "Keine Tags gefunden";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedTags.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine Tags gefunden"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -7307,12 +7371,21 @@ function DashboardTasks(props) {
   }, []);
 
   if (error) {
+    errormessage = error.message;
+    if (error.message.includes("No tasks found")) errormessage = "Keine Tasks gefunden";
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      children: ["Error: ", error.message]
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
     });
   } else if (!isLoaded) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "m-auto text-darkgray",
       children: "Loading.."
+    });
+  } else if (loadedTasks.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine Tasks gefunden"
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {

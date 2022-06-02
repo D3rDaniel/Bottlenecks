@@ -33,10 +33,14 @@ const DashboardAnkündigungen = (props) => {
       }, []);
       
       if (error) {
-          return <div>Error: {error.message}</div>
+        let errormessage = error.message;
+        if(error.message.includes("No announcements found")) errormessage = "Es gibt noch keine Ankündigungen"
+          return <div className="m-auto text-red font-bold">Error: {errormessage}</div>
       }else if(!isLoaded){
-          return <div>Loading..</div>
-      }else {
+          return <div className="m-auto text-darkgray">Loading..</div>
+      }else if(loadedAnnouncements.length < 1){
+        return <div className="m-auto text-red font-bold">Keine Ankündigungen gefunden</div>
+    }else {
 
   return(
     <div className="flex flex-col w-full m-1 ml-2">

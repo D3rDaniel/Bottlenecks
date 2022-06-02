@@ -66,10 +66,14 @@ const dashboardRooms = (props) => {
           )
       }, []);
 
-    if (error) {
-        return <div>Error: {error.message}</div>
-    }else if(!isLoaded){
-        return <div>Loading..</div>
+      if (error) {
+        errormessage = error.message;
+        if(error.message.includes("No rooms found")) errormessage = "Keine Räume gefunden";
+          return <div className="m-auto text-red font-bold">Error: {errormessage}</div>
+      }else if(!isLoaded){
+          return <div className="m-auto text-darkgray">Loading..</div>
+      }else if(loadedRooms.length < 1){
+        return <div className="m-auto text-red font-bold">Keine Räume gefunden</div>
     }else {
 
   return (
