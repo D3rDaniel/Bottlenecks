@@ -121,30 +121,4 @@ class UserController extends Controller
 
     }
 
-    public function getTasks($id,$slug){
-        //check if slug is null
-
-        $user = User::find($id);
-        //check if user exists
-        if(empty($user)){
-            return response()->json(['success'=>false,'message'=>'User not found'],404);
-        }
-        $status = Status::where('slug',$slug)->first();
-        //check if status exists
-        if(empty($status)){
-            return response()->json(['success'=>false,'message'=>'Status not found'],404);
-        }
-
-        $tasks = $user->tasksAssigned()
-        ->with(['creator' => function ($query) {
-            $query->select('id', 'username');
-        },'project' => function ($query) {
-            $query->select('id', 'title');
-        },'priority','tag','status'])
-        ->where('status_id',$status->id)
-        ->orderBy('due_date','asc')
-        ->get();
-
-        return response()->json(['success'=>true,'tasks'=>$tasks],200);
-    }
 }

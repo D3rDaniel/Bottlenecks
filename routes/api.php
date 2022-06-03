@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\ProjectController;
+use App\Http\Controllers\API\ProjectOverviewController;
 use App\Http\Controllers\API\ProjectTaskController;
 use App\Http\Controllers\API\ProjectUserController;
 use App\Http\Controllers\API\TaskController;
@@ -40,7 +41,7 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
     Route::get('/project/{id}/tags',[ProjectController::class,'getTags']);
 
 //Project Overview
-    Route::get('project/{id}/overview',[\App\Http\Controllers\API\ProjectOverviewController::class,'show']);
+    Route::get('project/{id}/overview',[ProjectOverviewController::class,'show']);
 //Tasks
     Route::apiResource('task', TaskController::class);
     Route::put('task/{id}/complete', [TaskController::class,'completeTask']);
@@ -51,7 +52,7 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
 //User
     Route::apiResource('user', \App\Http\Controllers\API\UserController::class);
     Route::put('/user/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
-    Route::get('/user/{id}/tasks/{slug}',[\App\Http\Controllers\API\UserController::class,'getTasks']);
+    Route::get('/user/tasks/{slug}',[\App\Http\Controllers\API\TaskUserController::class,'getTasks']);
 
 //Room
     Route::apiResource('room', \App\Http\Controllers\API\RoomController::class);
