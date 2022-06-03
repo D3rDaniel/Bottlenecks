@@ -2210,7 +2210,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ReactApp() {
   var userID = 1;
-  var projectID = 1;
+  var projectID = 2;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_17__.jsx)("div", {
     className: "bg-customgray relative flex h-screen w-screen font-body",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_17__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Routes, {
@@ -6174,14 +6174,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var MonthView = function MonthView(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Date().getMonth() + 1),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Date()),
       _useState2 = _slicedToArray(_useState, 1),
       currentDate = _useState2[0];
 
   var checkTaskMonth = function checkTaskMonth(date) {
-    var checkMonth;
-    date.charAt(6) <= currentDate ? checkMonth = true : checkMonth = false;
-    return checkMonth;
+    var task_day = date.substring(10, 8);
+    var task_month = date.substring(7, 5);
+    var task_year = date.substring(4, 0);
+    var day_difference = parseInt(task_day) - currentDate.getDate();
+    var month_difference = parseInt(task_month) - (currentDate.getMonth() + 1);
+    var year_difference = parseInt(task_year) - currentDate.getFullYear(); //console.log("task day: " + task_day + ", current day: " + currentDate.getDate() + ", difference: " + day_difference)
+    //console.log("task month: " + task_month + ", current month: " + currentDate.getMonth() + ", difference: " + month_difference)
+    //console.log("task year: " + task_year + ", current year: " + currentDate.getFullYear() + ", difference: " + year_difference)
+
+    var total_difference = day_difference + month_difference * 31 + year_difference * 12 * 31; //console.log(total_difference);
+
+    if (total_difference >= 8 && total_difference < 32) return true;else return false;
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -6190,27 +6199,19 @@ var MonthView = function MonthView(props) {
       className: "mt-2 ml-5 font-bold",
       children: "Endet diesen Monat:"
     }), props.tasks.map(function (task, index) {
-      return checkTaskMonth(task.date) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return checkTaskMonth(task.due_date) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__["default"], {
         title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
         fullTitle: task.title,
-        description: "DummyDesc" //{task.description}
-        ,
+        description: task.description,
         comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
-        status: task.status //{task.status.title}
-        ,
-        prio: task.prio //{task.priority.title}
-        ,
+        status: task.status.title,
+        prio: task.priority.title,
         completedDate: task.completed_date === null ? "not completed" : task.completed_date,
-        date: task.date //{task.due_date}
-        ,
-        updated_at: "Dummy Updatet" //{task.updated_at.substring(0,10)}
-        ,
-        creator: "DummyErsteller" //{task.creator.username}
-        ,
-        assignee: "DummyAssign" //{task.assignee}
-        ,
-        tag: "dummyTag" //{task.tag.title == null ? "keine Tag" : task.tag.title}
-
+        date: task.due_date,
+        updated_at: task.updated_at.substring(0, 10),
+        creator: task.creator.username,
+        assignee: task.assignee,
+        tag: task.tag.title == null ? "keine Tag" : task.tag.title
       }, index) : null;
     })]
   });
@@ -6258,10 +6259,19 @@ var WeekView = function WeekView(props) {
       currentDate = _useState2[0];
 
   var checkTaskWeek = function checkTaskWeek(date) {
-    var checkWeek;
-    var week = new Date(Date.parse(date));
-    week <= currentDate ? checkWeek = true : checkWeek = false;
-    return checkWeek;
+    var task_day = date.substring(10, 8);
+    var task_month = date.substring(7, 5);
+    var task_year = date.substring(4, 0);
+    var day_difference = parseInt(task_day) - currentDate.getDate();
+    var month_difference = parseInt(task_month) - (currentDate.getMonth() + 1);
+    var year_difference = parseInt(task_year) - currentDate.getFullYear(); //console.log("task day: " + task_day + ", current day: " + currentDate.getDate() + ", difference: " + day_difference)
+    //console.log("task month: " + task_month + ", current month: " + currentDate.getMonth() + ", difference: " + month_difference)
+    //console.log("task year: " + task_year + ", current year: " + currentDate.getFullYear() + ", difference: " + year_difference)
+
+    if (year_difference < -1 || year_difference > 1) return false;
+    var total_difference = day_difference + month_difference * 31 + year_difference * 12 * 31; //console.log(total_difference);
+
+    if (total_difference >= 0 && total_difference < 8) return true;else return false;
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -6273,27 +6283,19 @@ var WeekView = function WeekView(props) {
       className: "mt-2 ml-5 font-bold",
       children: "Endet in einer Woche:"
     }), props.tasks.map(function (task, index) {
-      return checkTaskWeek(task.date) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return checkTaskWeek(task.due_date) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dashboardTasks_TaskMinimumView__WEBPACK_IMPORTED_MODULE_1__["default"], {
         title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
         fullTitle: task.title,
-        description: "DummyDesc" //{task.description}
-        ,
+        description: task.description,
         comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
-        status: task.status //{task.status.title}
-        ,
-        prio: task.prio //{task.priority.title}
-        ,
+        status: task.status.title,
+        prio: task.priority.title,
         completedDate: task.completed_date === null ? "not completed" : task.completed_date,
-        date: task.date //{task.due_date}
-        ,
-        updated_at: "Dummy Updatet" //{task.updated_at.substring(0,10)}
-        ,
-        creator: "DummyErsteller" //{task.creator.username}
-        ,
-        assignee: "DummyAssign" //{task.assignee}
-        ,
-        tag: "dummyTag" //{task.tag.title == null ? "keine Tag" : task.tag.title}
-
+        date: task.due_date,
+        updated_at: task.updated_at.substring(0, 10),
+        creator: task.creator.username,
+        assignee: task.assignee.username,
+        tag: task.tag.title == null ? "keine Tag" : task.tag.title
       }, index) : null;
     })]
   });
@@ -6316,10 +6318,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _dashboardTasks_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dashboardTasks/searchbar/SearchBar */ "./resources/js/components/projectDashboard/dashboardTasks/searchbar/SearchBar.js");
-/* harmony import */ var _WeekView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./WeekView */ "./resources/js/components/projectDashboard/dashboardDeadline/WeekView.js");
-/* harmony import */ var _MonthView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MonthView */ "./resources/js/components/projectDashboard/dashboardDeadline/MonthView.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/loading-spinner.png */ "./resources/images/icons/loading-spinner.png");
+/* harmony import */ var _dashboardTasks_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dashboardTasks/searchbar/SearchBar */ "./resources/js/components/projectDashboard/dashboardTasks/searchbar/SearchBar.js");
+/* harmony import */ var _WeekView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WeekView */ "./resources/js/components/projectDashboard/dashboardDeadline/WeekView.js");
+/* harmony import */ var _MonthView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MonthView */ "./resources/js/components/projectDashboard/dashboardDeadline/MonthView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6337,6 +6340,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
+var checkWorkingTasks = function checkWorkingTasks() {
+  var workingTasks = [];
+
+  for (var i = 0; i < loadedTasks.length; i++) {
+    if (loadedTasks[i].status.id !== 1) {
+      workingTasks.push(loadedTasks[i]);
+    }
+  }
+
+  ;
+  setTasksInWorking(workingTasks);
+};
 
 var tasks = [{
   title: "Task1",
@@ -6406,39 +6424,89 @@ var tasks = [{
   date: "2022-07-09"
 }];
 
-var dashboardDeadline = function dashboardDeadline() {
+var dashboardDeadline = function dashboardDeadline(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       tasksInWorking = _useState2[0],
       setTasksInWorking = _useState2[1];
 
-  var checkWorkingTasks = function checkWorkingTasks() {
-    var workingTasks = [];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      error = _useState4[0],
+      setError = _useState4[1];
 
-    for (var i = 0; i < tasks.length; i++) {
-      if (tasks[i].status !== "abgeschlossen") {
-        workingTasks.push(tasks[i]);
-      }
-    }
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isLoaded = _useState6[0],
+      setIsLoaded = _useState6[1];
 
-    ;
-    setTasksInWorking(workingTasks);
-  };
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      loadedTasks = _useState8[0],
+      setTasks = _useState8[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    checkWorkingTasks();
+    setIsLoaded(false);
+    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/tasks";
+    fetch(url, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      setIsLoaded(true);
+      var filteredTasks = [];
+
+      for (var i = 0; i < data["tasks"].length; i++) {
+        if (data["tasks"][i].completed_date == null) filteredTasks.push(data["tasks"][i]);
+      }
+
+      setTasks(filteredTasks);
+    }, function (error) {
+      setIsLoaded(true);
+      setError(error);
+    });
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "flex flex-col w-full mx-2 my-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_dashboardTasks_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "h-full w-full flex flex-col gap-10 mt-10",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_WeekView__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        tasks: tasksInWorking
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MonthView__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        tasks: tasksInWorking
+
+  if (error) {
+    errormessage = error.message;
+    if (error.message.includes("No tasks found")) errormessage = "Keine Tasks gefunden";
+    if (error.message.includes("Project not found.")) errormessage = "Projekt konnte nicht gefunden werden";
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
+    });
+  } else if (!isLoaded) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "m-auto flex flex-row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+        src: _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+        alt: "loading",
+        className: "animate-spin h-5 w-5 mr-2 mt-0.5"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: " text-darkgray",
+        children: "Loading..."
       })]
-    })]
-  });
+    });
+  } else if (loadedTasks.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Keine Tasks gefunden"
+    });
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "flex flex-col w-full mx-2 my-2",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_dashboardTasks_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "h-full w-full flex flex-col gap-10 mt-10",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_WeekView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          tasks: loadedTasks
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_MonthView__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          tasks: loadedTasks
+        })]
+      })]
+    });
+  }
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dashboardDeadline);
@@ -6467,7 +6535,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var InfoView = function InfoView(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "h-full w-1/2",
+    className: "h-full w-1/2 pr-3",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "font-bold",
       children: "Mitglieder"
@@ -6528,7 +6596,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var PieView = function PieView(props) {
   var completed = props.tasks.completed_tasks;
-  var progress = props.tasks.in_progress_tasks;
+  var progress = props.tasks["in-progress_tasks"];
   var failed = props.tasks.failed_tasks;
   var paused = props.tasks.paused_tasks;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -6538,6 +6606,7 @@ var PieView = function PieView(props) {
         var dataEntry = _ref.dataEntry;
         return dataEntry.value !== 0 ? dataEntry.title : "";
       },
+      startAngle: 270,
       labelStyle: function labelStyle(index) {
         return {
           fontSize: '5px',
@@ -6601,7 +6670,7 @@ var absoluteView = function absoluteView(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       children: ["in Bearbeitung: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
         className: "font-bold",
-        children: props.tasks.in_progress_tasks
+        children: props.tasks["in-progress_tasks"]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       children: ["Abgebrochen: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
@@ -6634,10 +6703,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _absoluteView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./absoluteView */ "./resources/js/components/projectDashboard/dashboardOverview/absoluteView.js");
-/* harmony import */ var _InfoView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InfoView */ "./resources/js/components/projectDashboard/dashboardOverview/InfoView.js");
-/* harmony import */ var _PieView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PieView */ "./resources/js/components/projectDashboard/dashboardOverview/PieView.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/loading-spinner.png */ "./resources/images/icons/loading-spinner.png");
+/* harmony import */ var _absoluteView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./absoluteView */ "./resources/js/components/projectDashboard/dashboardOverview/absoluteView.js");
+/* harmony import */ var _InfoView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./InfoView */ "./resources/js/components/projectDashboard/dashboardOverview/InfoView.js");
+/* harmony import */ var _PieView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PieView */ "./resources/js/components/projectDashboard/dashboardOverview/PieView.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -6672,23 +6755,82 @@ var project_overview = [{
   }]
 }];
 
-var dashboardOverView = function dashboardOverView() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "w-screen h-screen m-2 drop-shadow-xl",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      className: "font-bold pl-4 pt-3 bg-white w-full rounded-t-xl",
-      children: "Projekt\xFCbersicht"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "flex w-full h-2/3 bg-white rounded-b-xl",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_PieView__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        tasks: project_overview[0]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_InfoView__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        project: project_overview[0]
+var dashboardOverView = function dashboardOverView(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      error = _useState2[0],
+      setError = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isLoaded = _useState4[0],
+      setIsLoaded = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loadedOverview = _useState6[0],
+      setOverview = _useState6[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsLoaded(false);
+    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/overview";
+    fetch(url, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      setIsLoaded(true);
+      setOverview(data["project_overview"]);
+    }, function (error) {
+      setIsLoaded(true);
+      setError(error);
+    });
+  }, []);
+
+  if (error) {
+    var errormessage = error.message;
+    if (error.message.includes("Project not found.")) errormessage = "Projekt wurde nicht gefunden!";
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
+    });
+  } else if (!isLoaded) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "m-auto flex flex-row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+        src: _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+        alt: "loading",
+        className: "animate-spin h-5 w-5 mr-2 mt-0.5"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: " text-darkgray",
+        children: "Loading..."
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_absoluteView__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      tasks: project_overview[0]
-    })]
-  });
+    });
+  } else if (loadedOverview.length < 1) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "m-auto text-red font-bold",
+      children: "Projekt\xFCbersicht konnte nicht gefunden werden!"
+    });
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "w-screen h-screen m-2 drop-shadow-xl",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "font-bold pl-4 pt-3 bg-white w-full rounded-t-xl",
+        children: "Projekt\xFCbersicht"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "flex w-full h-2/3 bg-white rounded-b-xl",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_PieView__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          tasks: loadedOverview
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_InfoView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          project: loadedOverview
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_absoluteView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        tasks: loadedOverview
+      })]
+    });
+  }
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dashboardOverView);
@@ -8171,9 +8313,6 @@ function TaskMinimumView(props) {
         children: props.prio
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         className: "w-1/5",
-        children: props.completedDate
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-        className: "w-1/5",
         children: props.date
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "flex",
@@ -8680,16 +8819,13 @@ var elements = [{
   label: "Priorität",
   selected: false
 }, {
-  label: "Abgeschlossen",
-  selected: false
-}, {
   label: "Deadline",
   selected: false
 }];
 
 var SortList = function SortList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "flex w-full ml-20 mr-48",
+    className: "flex w-full ml-20",
     children: elements.map(function (element, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
         label: element.label,
@@ -9356,12 +9492,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Project_DeadlinePage = function Project_DeadlinePage() {
+var Project_DeadlinePage = function Project_DeadlinePage(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "flex w-screen",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       page: "deadline"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardDeadline_dashboardDeadline__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardDeadline_dashboardDeadline__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      projectID: props.projectID
+    })]
   });
 };
 
@@ -9384,19 +9522,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/projectDashboard/sidebar/Sidebar */ "./resources/js/components/projectDashboard/sidebar/Sidebar.js");
 /* harmony import */ var _components_projectDashboard_dashboardOverview_dashboardOverView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/projectDashboard/dashboardOverview/dashboardOverView */ "./resources/js/components/projectDashboard/dashboardOverview/dashboardOverView.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Project_TagsPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Project_TagsPage */ "./resources/js/pages/Project_TagsPage.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
 
 
-var Project_OverviewPage = function Project_OverviewPage() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+
+var Project_OverviewPage = function Project_OverviewPage(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "flex w-screen",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       page: "uebersicht"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardOverview_dashboardOverView__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_projectDashboard_dashboardOverview_dashboardOverView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      projectID: props.projectID
+    })]
   });
 };
 

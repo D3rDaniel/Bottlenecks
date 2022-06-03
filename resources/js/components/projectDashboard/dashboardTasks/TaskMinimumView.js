@@ -39,8 +39,6 @@ function TaskMinimumView (props) {
             
             <label className={`w-1/5 ${prioColor}`}>{props.prio}</label>
 
-            <label className="w-1/5">{props.completedDate}</label>
-
             <label className="w-1/5">{props.date}</label>
 
             <div  className="flex">

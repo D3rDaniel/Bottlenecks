@@ -5,13 +5,12 @@ const elements = [
     {label: "Titel", selected: false},
     {label: "Status", selected: false},
     {label: "Priorität", selected: false},
-    {label: "Abgeschlossen", selected: false},
     {label: "Deadline", selected: false}
   ];
 
 const SortList = () => {
   return (
-    <div className="flex w-full ml-20 mr-48">
+    <div className="flex w-full ml-20">
         {elements.map((element, index) => {
             return (
                 <Sortelement
