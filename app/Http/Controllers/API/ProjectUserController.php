@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 //Controller for operations of project-members
 class ProjectUserController extends Controller
@@ -60,7 +61,6 @@ class ProjectUserController extends Controller
             ['username',
             'project_id',
             'can_create_tasks',
-            'can_assign_tasks',
             'can_edit_tasks',
             'can_create_tags']);
 
@@ -119,8 +119,8 @@ class ProjectUserController extends Controller
      */
     public function update(UpdateProjectUserRequest $request, int $id): JsonResponse
     {
-        $data = $request->safe()->only(['can_create_tasks',
-            'can_assign_tasks',
+        $data = $request->safe()->only([
+            'can_create_tasks',
             'can_edit_tasks',
             'can_create_tags']);
 
@@ -136,8 +136,9 @@ class ProjectUserController extends Controller
                 'member'=>$member
             ];
 
-            return response()->json($res, 201);
+            return response()->json($res, 200);
         }
+        //TODO: fix that the exception is not handled when a false id is passed
         catch(ModelNotFoundException $e){
             $res = [
                 'success'=>false,

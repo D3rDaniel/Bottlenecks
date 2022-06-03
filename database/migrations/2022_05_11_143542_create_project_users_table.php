@@ -24,7 +24,7 @@ return new class extends Migration
             // Columns
             $table->boolean('can_create_tasks')->default(false);
             $table->boolean('can_edit_tasks')->default(false);
-            $table->boolean('can_assign_tasks')->default(false);
+            //$table->boolean('can_assign_tasks')->default(false);
             $table->boolean('can_create_tags')->default(false);
         });
     }

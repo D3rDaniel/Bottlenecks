@@ -27,7 +27,6 @@ class ProjectUserFactory extends Factory
                 'project_id' =>$project_id,
                 'can_create_tasks' => 1,
                 'can_edit_tasks' => 1,
-                'can_assign_tasks' => 1,
                 'can_create_tags'   => 1,
             ];
         }
