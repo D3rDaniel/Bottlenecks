@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTagRequest;
 use App\Models\Tag;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -12,12 +14,15 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param StoreTagRequest $request
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function store(StoreTagRequest $request)
+    public function store(StoreTagRequest $request): JsonResponse
     {
         $data = $request->safe()->only(['project_id','title','description']);
+
+        $this->authorize('create', [Tag::class, $data['project_id']]);
 
         $tag = Tag::create($data);
 
@@ -41,15 +46,18 @@ class TagController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the tag from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         try {
             $tag= Tag::findOrFail($id);
+
+            $this->authorize('delete', $tag);
 
             if($tag->delete()) {
                 return response()->json(['success' => true, 'message' => 'Tag deleted.'], 200);
