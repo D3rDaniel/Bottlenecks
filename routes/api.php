@@ -66,6 +66,7 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
 
 //Announcements
     Route::apiResource('/announcements',\App\Http\Controllers\API\AnnouncementController::class);
+    Route::get('/announcements/user/{user_id}',[\App\Http\Controllers\API\AnnouncementUserController::class,'show']);
     Route::get('/project/{project_id}/user/{user_id}/announcements', [\App\Http\Controllers\API\ProjectUserAnnouncementController::class, 'show']);
     Route::get('/user/{user_id}/announcements', [\App\Http\Controllers\API\UserAnnouncementController::class,'show']);
     Route::get('/project/{project_id}/announcements', [\App\Http\Controllers\API\ProjectAnnouncementController::class, 'show']);
