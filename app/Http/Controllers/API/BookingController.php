@@ -16,7 +16,7 @@ class BookingController extends Controller
 {
     /**
      * Display a listing of all bookings
-     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -32,7 +32,8 @@ class BookingController extends Controller
 
     /**
      * Store a new booking
-     *
+     * @param StoreBookingRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreBookingRequest $request)
     {

@@ -11,11 +11,15 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ *
+ */
 class AnnouncementController extends Controller
 {
     /**
      * Store a newly created Announcment
-     *
+     * @param StoreAnnouncementRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreAnnouncementRequest $request)
     {
@@ -44,7 +48,8 @@ class AnnouncementController extends Controller
 
     /**
      * Show project by id
-     *
+     * @param $project_id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($project_id)
     {
@@ -57,20 +62,11 @@ class AnnouncementController extends Controller
         return response()->json($announcements);
     }
 
-    public function showProjectUser($project_id,$user_id)
-    {
-        $announcements = Announcement::where('project_id',$project_id)->where('user_id',$user_id)->get();
-
-        if($announcements->isEmpty()){
-            return response()->json(['message' => 'No announcement found'], 404);
-        }
-
-        return response()->json($announcements);
-    }
-
     /**
      * Update announcement.
-     *
+     * @param UpdateAnnouncementRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateAnnouncementRequest $request, $id)
     {
@@ -96,7 +92,8 @@ class AnnouncementController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 
 class ProjectAnnouncementController extends Controller
 {
-
+    /**
+     * Show all announcements of a project
+     * @param $project_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($project_id)
     {
         $project = Project::find($project_id);

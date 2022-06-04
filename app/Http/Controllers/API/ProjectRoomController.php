@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ProjectRoomController extends Controller
 {
+    /**
+     * Show all roms of a project
+     * @param $projectId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index($projectId): \Illuminate\Http\JsonResponse
     {
         $project = Project::find($projectId);

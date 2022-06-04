@@ -11,16 +11,9 @@ use Illuminate\Http\Request;
 class RoomController extends Controller
 {
     /**
-     * Display all Rooms
-     *
-     */
-    public function index()
-    {
-
-    }
-
-    /**
      * Store a newly created room in storage.
+     * @param StoreRoomRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreRoomRequest $request)
     {
@@ -49,7 +42,8 @@ class RoomController extends Controller
 
     /**
      * Display a Room by Id.
-     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -64,7 +58,9 @@ class RoomController extends Controller
 
     /**
      * Update a room.
-     *
+     * @param UpdateRoomRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRoomRequest $request, $id)
     {
@@ -103,7 +99,8 @@ class RoomController extends Controller
 
     /**
      * Remove a room by id.
-     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class AnnouncementUserController extends Controller
 {
+    /**
+     * Show All Announcements for a User
+     * @param $user_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($user_id)
     {
         $user = User::find($user_id);
