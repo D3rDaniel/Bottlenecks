@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Status;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,7 @@ class TaskUserController
             ->where('status_id',$status->id)
             ->orderBy('due_date','asc')
             ->get();
+
 
         return response()->json(['success'=>true,'tasks'=>$tasks],200);
     }

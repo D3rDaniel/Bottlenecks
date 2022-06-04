@@ -19,7 +19,7 @@ class TaskPolicy
      * @param int $project_id
      * @return Response|bool
      */
-    public function viewAny(User $user, $project_id)
+    public function viewAny(User $user, int $project_id): Response|bool
     {
         return ($user->isMemberOfProject($project_id) || $user->isOwnerOfProject($project_id));
     }
@@ -89,7 +89,6 @@ class TaskPolicy
     }
 
 
-
     /**
      * Determine whether the user is the creator of the task
      * or the project owner in order to delete the model.
@@ -98,7 +97,7 @@ class TaskPolicy
      * @param Task $task
      * @return bool
      */
-    public function forceDelete(User $user, Task $task)
+    public function forceDelete(User $user, Task $task): bool
     {
         return ($user->isOwnerOfProject($task->project_id) || $user->id == $task->creator_user_id);
     }
@@ -111,7 +110,7 @@ class TaskPolicy
      * @param Task $task
      * @return Response|bool
      */
-    public function complete(User $user, Task $task)
+    public function complete(User $user, Task $task): Response|bool
     {
       if (($user->isOwnerOfProject($task->project_id)) || ($user->id == $task->creator_user_id) || ($user->id == $task->assignee_user_id)){
           return true;

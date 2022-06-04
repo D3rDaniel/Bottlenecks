@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Task extends Model
 {
@@ -25,32 +26,62 @@ class Task extends Model
         'completion_comment'
     ];
 
-    public function priority()
+    /**
+     * Get the priority of the task.
+     *
+     * @return BelongsTo
+     */
+    public function priority(): BelongsTo
     {
         return $this->belongsTo(Priority::class);
     }
 
-    public function project()
+    /**
+     * Get the project the task belongs to.
+     *
+     * @return BelongsTo
+     */
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
 
-    public function status()
+    /**
+     * Get the status of the task.
+     *
+     * @return BelongsTo
+     */
+    public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
     }
 
-    public function creator()
+    /**
+     * Get the creator of the task.
+     *
+     * @return BelongsTo user that created the task
+     */
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class,'creator_user_id');
     }
 
-    public function assignee()
+    /**
+     * Get the assignee of the task.
+     *
+     * @return BelongsTo user the task is assigned to
+     */
+    public function assignee(): BelongsTo
     {
         return $this->belongsTo(User::class,'assignee_user_id');
     }
 
-    public function tag()
+    /**
+     * Get the tag of the task.
+     *
+     * @return BelongsTo
+     */
+    public function tag(): BelongsTo
     {
         return $this->belongsTo(Tag::class);
     }

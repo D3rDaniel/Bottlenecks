@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Project;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Tag extends Model
 {
@@ -21,7 +22,12 @@ class Tag extends Model
         'updated_at'
     ];
 
-    public function project()
+    /**
+     * Get the project the tag belongs to.
+     *
+     * @return BelongsTo
+     */
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
