@@ -69,6 +69,11 @@ class User extends Authenticatable
         return $this->projectsWhereMember()->where('project_id',$project_id)->exists();
     }
 
+    public function canCreateTasks($project_id): bool
+    {
+        return $this->projectsWhereMember()->where('project_id',$project_id)->where('can_create_tasks','1')->exists();
+    }
+
     /**
      * Get the ProjectUser / Member Information for the project
      * whith the specified project_id and this user.
