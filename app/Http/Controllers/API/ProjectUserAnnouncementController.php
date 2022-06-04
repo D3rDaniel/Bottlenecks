@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ProjectUserAnnouncementController extends Controller
 {
+    /**
+     * Show all announcemnts of a user and project
+     * @param $project_id
+     * @param $user_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($project_id,$user_id)
     {
         $announcements = Announcement::where('project_id',$project_id)->where('user_id',$user_id)->get();

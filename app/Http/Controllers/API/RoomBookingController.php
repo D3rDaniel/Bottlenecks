@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 
 class RoomBookingController extends Controller
 {
-
+    /**
+     * Show all bookings for a room
+     * @param $room_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($room_id)
     {
         $room = Room::find($room_id);
