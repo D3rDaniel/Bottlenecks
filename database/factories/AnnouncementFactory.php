@@ -18,10 +18,13 @@ class AnnouncementFactory extends Factory
      */
     public function definition()
     {
+
+        $project = Project::all()->random();
+
         return [
             'subject' => $this->faker->word,
             'message' => $this->faker->sentence,
-            'user_id' => User::all()->random()->id,
+            'user_id' => Project::all()->random()->creator_user_id,
             'project_id' => Project::all()->random()->id,
         ];
     }

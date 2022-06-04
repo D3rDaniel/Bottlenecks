@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\User;
-use App\Models\Tag;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
@@ -20,32 +21,65 @@ class Project extends Model
         'completed_date'
     ];
 
-
-    public function creator(){
+    /**
+     * Get the user that owns the project.
+     *
+     * @return BelongsTo
+     */
+    public function creator(): BelongsTo
+    {
         return $this->belongsTo(User::class,'creator_user_id');
     }
 
+    /**
+     * Get the tags associated with the project.
+     *
+     * @return hasMany
+     */
     public function tags(){
         return $this->hasMany(Tag::class);
     }
 
-    public function tasks(){
+    /**
+     * Get the tasks associated with the project.
+     *
+     * @return hasMany
+     */
+    public function tasks(): HasMany
+    {
         return $this->hasMany(Task::class);
     }
 
-    public function members(){
+    /**
+     * Get the members of the project with all their rights.
+     *
+     * @return belongsToMany
+     */
+    public function members(): BelongsToMany
+    {
         return $this->belongsToMany(User::class,'project_users','project_id','user_id')
             ->withPivot('user_id','project_id','can_create_tasks','can_edit_tasks','can_create_tags');
     }
 
-    public function rooms(){
-        $this->hasMany(Room::class);
+    /**
+     * Get all rooms of the project.
+     *
+     * @return hasMany
+     */
+    public function rooms(): HasMany
+    {
+        return $this->hasMany(Room::class);
     }
 
-    public function calculateProgress(){
+    /**
+     * Calculates the number of tasks that are completed.
+     *
+     * @return integer Percentage of completed tasks
+     */
+    public function calculateProgress(): int
+    {
         $totalTasks = $this->tasks()->count();
         $completedTasks = $this->tasks()->where('status_id',1)->count();
-        $progress = ($totalTasks > 0) ? round(($completedTasks / $totalTasks) * 100) : 0;
-        return $progress;
+        return ($totalTasks > 0) ? round(($completedTasks / $totalTasks) * 100) : 0;
     }
 }

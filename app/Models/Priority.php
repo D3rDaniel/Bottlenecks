@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Priority extends Model
 {
@@ -16,7 +17,13 @@ class Priority extends Model
         'title'
     ];
 
-    public function tasks()
+
+    /**
+     * All Priorities that have this Priority.
+     *
+     * @return HasMany
+     */
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
