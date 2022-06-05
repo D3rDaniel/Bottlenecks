@@ -46,7 +46,7 @@ class User extends Authenticatable
     public function projectsWhereMember(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Project::class,'project_users')
-            ->withPivot(['can_edit_tasks','can_create_tasks','can_assign_tasks','can_create_tags'])->as('user_project_rights');
+            ->withPivot(['can_edit_tasks','can_create_tasks','can_create_tags'])->as('user_project_rights');
     }
 
     public function bookings(): \Illuminate\Database\Eloquent\Relations\HasMany
