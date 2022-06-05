@@ -95,11 +95,16 @@ class TaskPolicy
      *
      * @param User $user
      * @param Task $task
-     * @return bool
+     * @return Response|bool
      */
-    public function forceDelete(User $user, Task $task): bool
+    public function forceDelete(User $user, Task $task): Response
     {
-        return ($user->isOwnerOfProject($task->project_id) || $user->id == $task->creator_user_id);
+        if ($user->isOwnerOfProject($task->project_id) || $user->id == $task->creator_user_id){
+            return true;
+        }
+        else{
+            return $this->deny('User is neither owner of the project, nor the creator of the task.');
+        }
     }
 
     /**
