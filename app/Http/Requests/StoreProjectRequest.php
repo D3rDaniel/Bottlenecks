@@ -26,7 +26,6 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-                'creator_user_id' => 'required|exists:users,id',
                 'title' => 'required|string|max:255',
                 'description' => 'required|string|max:3000',
                 'due_date' => 'required|date',

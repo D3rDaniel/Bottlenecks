@@ -7,6 +7,9 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 
 class ProjectController extends Controller
@@ -14,15 +17,14 @@ class ProjectController extends Controller
     /**
      * Store a newly created project.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param StoreProjectRequest $request
+     * @return JsonResponse
      */
-    public function store(StoreProjectRequest $request)
+    public function store(StoreProjectRequest $request): JsonResponse
     {
-        $user = auth()->user();
 
-        $data = $request->safe()->only(['title','description','due_date','creator_user_id']);
-        $data['creator_user_id']=$user->id;
+        $data = $request->safe()->only(['title','description','due_date']);
+        $data['creator_user_id']=Auth::id();
 
         $project = Project::create($data);
 
@@ -42,7 +44,7 @@ class ProjectController extends Controller
      * Return the project specified by its id.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show($id)
     {
@@ -75,9 +77,9 @@ class ProjectController extends Controller
     /**
      * Update title, description and due_date of the project(id) in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(UpdateProjectRequest $request, $id)
     {
@@ -104,7 +106,7 @@ class ProjectController extends Controller
      * Remove the specified project from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy($id)
     {
@@ -127,7 +129,7 @@ class ProjectController extends Controller
      * to current date
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function completeProject($id)
     {
@@ -150,7 +152,7 @@ class ProjectController extends Controller
      * Get all of the the projects tags.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getTags($id)
     {

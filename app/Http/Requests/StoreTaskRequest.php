@@ -14,11 +14,6 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = auth()->user();
-        //TODO
-        //check if user is owner
-        //check if user is project member
-            //check if user is allowed to create tasks
         return true;
     }
 
@@ -30,8 +25,6 @@ class StoreTaskRequest extends FormRequest
     public function rules()
     {
         return [
-            //TODO:validate combination of user_id and project_id in project_users
-            'creator_user_id' => 'required|exists:users,id',
             'assignee_user_id' => 'required|exists:users,id',
             'project_id' => 'required|exists:projects,id',
             'status_id' => 'exists:statuses,id',

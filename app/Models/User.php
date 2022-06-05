@@ -46,7 +46,7 @@ class User extends Authenticatable
     public function projectsWhereMember(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Project::class,'project_users')
-            ->withPivot(['can_edit_tasks','can_create_tasks','can_create_announcements','can_create_tags'])->as('user_project_rights');
+            ->withPivot(['can_edit_tasks','can_create_tasks','can_create_tags'])->as('user_project_rights');
     }
 
     public function bookings(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -73,10 +73,7 @@ class User extends Authenticatable
     {
         return $this->projectsWhereMember()->where('project_id',$project_id)->where('can_create_tasks','1')->exists();
     }
-    public function canCreateAnnouncements($project_id): bool
-    {
-        return $this->projectsWhereMember()->where('project_id',$project_id)->where('can_create_announcements','1')->exists();
-    }
+
     /**
      * Get the ProjectUser / Member Information for the project
      * whith the specified project_id and this user.

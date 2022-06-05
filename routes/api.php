@@ -33,6 +33,9 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
 //add user by username
     Route::post('/project/add-new-user', [ProjectUserController::class,'store']);
 
+    //leave project
+    Route::delete('/project/{id}/leave', [ProjectUserController::class,'leaveProject']);
+
 //Project
     Route::post('/project', [ProjectController::class, 'store']);
     Route::get('/project/{id}', [ProjectController::class, 'show']);

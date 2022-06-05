@@ -12,16 +12,17 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 
-//Controller for operations of project-members
+//Controller for operations for/of project-members
 class ProjectUserController extends Controller
 {
     /**
      * Return a listing of all project members and their rights.
      *
      * @return JsonResponse
-     * @throws AuthorizationException
+     * @throws AuthorizationException if the user is not a member or the owner of the project
      */
     public function index($project_id)
     {
@@ -53,7 +54,7 @@ class ProjectUserController extends Controller
      *
      * @param StoreProjectUserRequest $request
      * @return JsonResponse
-     * @throws AuthorizationException
+     * @throws AuthorizationException if user is not the owner of the project
      */
     public function store(StoreProjectUserRequest $request): JsonResponse
     {
@@ -114,10 +115,10 @@ class ProjectUserController extends Controller
     /**
      * Update ProjectUsers (members) rights.
      *
-     * @param UpdateProjectUserRequest $request
-     * @param int $id
+     * @param UpdateProjectUserRequest $request - request with all data to update
+     * @param int $id ProjectUser id
      * @return JsonResponse
-     * @throws AuthorizationException
+     * @throws AuthorizationException if user is not owner of the project
      */
     public function update(UpdateProjectUserRequest $request, int $id): JsonResponse
     {
@@ -155,11 +156,11 @@ class ProjectUserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the ProjectUser from the Project.
      *
-     * @param int $id
+     * @param int $id - ProjectUser id
      * @return JsonResponse
-     * @throws AuthorizationException
+     * @throws AuthorizationException if the authenticated user is not the owner of the project
      */
     public function destroy(int $id): JsonResponse
     {
@@ -173,6 +174,40 @@ class ProjectUserController extends Controller
         if($member->delete()){
             return response()->json(['success'=>true,'message'=>'Deleted.'],200);
         }
+        return response()->json(['success'=>false],500);
+    }
+
+    /**
+     * Remove the currently authenticated user from
+     * the specified project.
+     *
+     * @param int $id - Project id
+     * @return JsonResponse
+     */
+    public function leaveProject(int $id): JsonResponse
+    {
+        $project = ProjectUser::find($id);
+        if(!$project){
+            return response()->json(['success'=>false,'message' => 'Project does not exist.'],404);
+        }
+
+        $user = Auth::user();
+        $member = ProjectUser::where('user_id',$user->id)->where('project_id',$id)->first();
+
+        if(!$member){
+            if($project->user_id == $user->id){
+                return response()->json(['success'=>false,'message' => 'You are the owner of this project.'],404);
+            }
+
+            return response()->json(['success'=>false,'message' => 'You are not a member of this project.'],404);
+
+
+        }
+
+        if($member->delete()){
+            return response()->json(['success'=>true,'message'=>'Successfully left the project.'],200);
+        }
+
         return response()->json(['success'=>false],500);
     }
 }
