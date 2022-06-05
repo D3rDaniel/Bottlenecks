@@ -48,6 +48,7 @@ class RoomController extends Controller
     public function show($id)
     {
         $room = Room::find($id);
+        $this->authorize('show', $room);
 
         if(empty($room)){
             return response()->json(['message'=>'Room not found'],404);
@@ -81,6 +82,7 @@ class RoomController extends Controller
 
         try {
             $room = Room::findOrFail($id);
+            $this->authorize('update', $room);
 
             $room->update($data);
             $res = [
@@ -105,6 +107,7 @@ class RoomController extends Controller
     public function destroy($id)
     {
         $room = Room::find($id);
+        $this->authorize('forceDelete', $room);
         if(empty($room)){
             return response()->json(['success' => false,'message'=>'Room not found'],404);
         }

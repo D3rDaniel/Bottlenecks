@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserAnnouncementController extends Controller
 {
@@ -14,14 +15,14 @@ class UserAnnouncementController extends Controller
      * @param $user_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($user_id)
+    public function show()
     {
-        $user = User::find($user_id);
+        $user = User::find(Auth::id());
 
         if (!$user) {
             return response()->json(['success'=>false,'message' => 'User not found'], 404);
         }
-        $announcements = Announcement::where('user_id',$user_id)->get();
+        $announcements = Announcement::where('user_id',$user->id)->get();
         $res = [
             'success'=>true,
             'user_id'=> $user->id,

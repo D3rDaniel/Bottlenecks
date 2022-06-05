@@ -62,7 +62,9 @@ class ProjectUserController extends Controller
             'project_id',
             'can_create_tasks',
             'can_edit_tasks',
-            'can_create_tags']);
+            'can_create_tags',
+                'can_create_announcements'
+            ]);
 
         $this->authorize('projectOwnerAction', [ProjectUser::class, $data['project_id']]);
 
@@ -122,7 +124,8 @@ class ProjectUserController extends Controller
         $data = $request->safe()->only([
             'can_create_tasks',
             'can_edit_tasks',
-            'can_create_tags']);
+            'can_create_tags',
+            'can_create_announcements']);
 
         try {
             $member = ProjectUser::findOrFail($id);

@@ -18,6 +18,8 @@ class ProjectAnnouncementController extends Controller
     {
         $project = Project::find($project_id);
 
+        $this->authorize('view', [$project]);
+
         if (!$project) {
             return response()->json(['success'=>false,'message' => 'Project not found'], 404);
         }

@@ -29,7 +29,8 @@ class StoreProjectUserRequest extends FormRequest
             'project_id' => 'required|exists:projects,id',
             'can_create_tasks'=>'required|boolean',
             'can_edit_tasks'=>'required|boolean',
-            'can_create_tags'=>'required|boolean'
+            'can_create_tags'=>'required|boolean',
+            'can_create_announcements'=>'required|boolean'
         ];
     }
 

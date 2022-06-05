@@ -21,18 +21,7 @@ class ProjectUserFactory extends Factory
     {
         $user_id= User::all()->random()->id;
         $project_id = Project::all()->random()->id;
-        $admin = Project::find($project_id)->where('creator_user_id',$user_id);
-        if($admin){
-            return [
-                'user_id' => $user_id,
-                'project_id' =>$project_id,
-                'can_create_tasks' => 1,
-                'can_edit_tasks' => 1,
-                'can_create_tags'   => 1,
-                'can_create_announcements'   => 1,
-            ];
-        }
-        else{
+
             return [
                 'user_id' => $user_id,
                 'project_id' => $project_id,
@@ -41,7 +30,7 @@ class ProjectUserFactory extends Factory
                 'can_create_announcements' => $this->faker->numberBetween(0,  1),
                 'can_create_tags'   => $this->faker->numberBetween(0,  1),
             ];
-        }
+
     }
     public function createAdmin($project){
         $projectUser = new ProjectUser();

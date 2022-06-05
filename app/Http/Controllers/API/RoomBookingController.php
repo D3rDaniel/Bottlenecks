@@ -18,6 +18,8 @@ class RoomBookingController extends Controller
     {
         $room = Room::find($room_id);
 
+        $this->authorize('viewAny', $room_id);
+
         if (!$room) {
             return response()->json(['success'=>false,'message' => 'Room not found'], 404);
         }

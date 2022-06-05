@@ -9,7 +9,10 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Announcement;
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -21,7 +24,7 @@ class AnnouncementController extends Controller
      * @param StoreAnnouncementRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreAnnouncementRequest $request)
+    public function store(StoreAnnouncementRequest $request):JsonResponse
     {
         $data = $request->validated();
 
@@ -31,6 +34,10 @@ class AnnouncementController extends Controller
                 'message' => 'User not part of project',
             ], 422);
         }
+
+        $this->authorize('create', [Announcement::class,$data['project_id']]);
+
+        $data['user_id'] = Auth::id();
 
         $announcement= Announcement::create($data);
 
@@ -43,7 +50,6 @@ class AnnouncementController extends Controller
         }
 
         return response()->json($res, $status);
-        //TODO: Generate EMAIL
     }
 
     /**
@@ -51,15 +57,27 @@ class AnnouncementController extends Controller
      * @param $project_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($project_id)
+    public function show($id):JsonResponse
     {
-        $announcements = Announcement::where('project_id',$project_id)->get();
+        try {
+            $announcement = Announcement::findOrFail($id);
 
-        if($announcements->isEmpty()){
-            return response()->json(['message' => 'No announcements found'], 404);
+            $this->authorize('view', $announcement);
+
+            $res = [
+                'success'=>true,
+                'task'=>$announcement
+            ];
+
+            return response()->json($res,200);
         }
-
-        return response()->json($announcements);
+        catch (ModelNotFoundException $e){
+            $res = [
+                'success'=>false,
+                'message'=>'Announcement was not found.'
+            ];
+            return response()->json($res,404);
+        }
     }
 
     /**
@@ -68,12 +86,14 @@ class AnnouncementController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateAnnouncementRequest $request, $id)
+    public function update(UpdateAnnouncementRequest $request, $id):JsonResponse
     {
         $data = $request->safe()->only(['subject', 'message']);
 
         try {
             $announcement = Announcement::findOrFail($id);
+
+            $this->authorize('update', $announcement);
 
             $announcement->update($data);
             $res = [
@@ -81,7 +101,7 @@ class AnnouncementController extends Controller
                 'user' => $announcement,
             ];
             return response()->json($res, 200);
-        } catch (\Exception $e) {
+        } catch (ModelNotFoundException $e) {
             $res = [
                 'success' => false,
                 'message' => 'Announcement was not found.'
@@ -95,20 +115,22 @@ class AnnouncementController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id):JsonResponse
     {
-        $announcement = Announcement::find($id);
-        if (!$announcement) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Announcement not found',
-            ], 404);
+        try {
+            $announcement = Announcement::findOrFail($id);
+
+            $this->authorize('forceDelete', $announcement);
         }
-        $announcement->delete();
-        return response()->json([
-            'success' => true,
-            'message' => 'Announcement deleted',
-        ], 200);
+        catch (ModelNotFoundException $e) {
+            return response()->json(['success'=>false, 'message' => 'Announcement not found'], 404);
+        }
+        if($announcement->delete()) {
+            return response()->json(['success' => true, 'message' => 'Announcement deleted.'], 200);
+        }
+        else {
+            return response()->json(['success'=>false,'message' => 'Announcement could not be deleted. Cause unknown.'], 500);
+        }
 
     }
 }

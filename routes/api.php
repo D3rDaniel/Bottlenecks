@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AnnouncementController;
 use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\API\ProjectOverviewController;
 use App\Http\Controllers\API\ProjectTaskController;
@@ -65,9 +66,11 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
     Route::get('/room/{room_id}/bookings', [\App\Http\Controllers\API\RoomBookingController::class,'show']);
 
 //Announcements
-    Route::apiResource('/announcements',\App\Http\Controllers\API\AnnouncementController::class);
-    Route::get('/announcements/user/{user_id}',[\App\Http\Controllers\API\AnnouncementUserController::class,'show']);
-    Route::get('/project/{project_id}/user/{user_id}/announcements', [\App\Http\Controllers\API\ProjectUserAnnouncementController::class, 'show']);
+    Route::post('/announcements', [\App\Http\Controllers\API\AnnouncementController::class, 'store']);
+    Route::delete('/announcements/{id}', [\App\Http\Controllers\API\AnnouncementController::class, 'destroy']);
+    //Route::apiResource('/announcements',\App\Http\Controllers\API\AnnouncementController::class);
+    Route::get('/announcements/user',[\App\Http\Controllers\API\AnnouncementUserController::class,'show']);
+    //Route::get('/project/{project_id}/user/{user_id}/announcements', [\App\Http\Controllers\API\ProjectUserAnnouncementController::class, 'show']);
     Route::get('/user/{user_id}/announcements', [\App\Http\Controllers\API\UserAnnouncementController::class,'show']);
     Route::get('/project/{project_id}/announcements', [\App\Http\Controllers\API\ProjectAnnouncementController::class, 'show']);
 }) ;

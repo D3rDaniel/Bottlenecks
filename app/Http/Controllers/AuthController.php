@@ -18,6 +18,8 @@ class AuthController extends Controller
             'password' => 'required|confirmed'
         ]);
 
+        $fields['password'] = Hash::make($fields['password']);
+
         $user = User::create(
             $fields
         );

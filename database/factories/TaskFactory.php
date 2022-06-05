@@ -30,6 +30,12 @@ class TaskFactory extends Factory
         }
         $members = $project->members()->get();
         $creator = $this->getRandomUser($members,$project->id);
+        if($creator==null||isset($creator->id)){
+            $creator_id = $project->creator()->get('id')->pluck('id')->first();
+        }
+        else{
+            $creator_id = $creator->id;
+        }
         if($status_id==1||$status_id==4){
             if($project->created_at>=new DateTime($project->due_date)){
                 $completed_date = $project->created_at->modify('+1 day');
@@ -47,7 +53,7 @@ class TaskFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->text,
-            'creator_user_id' => $creator,
+            'creator_user_id' => $creator_id,
             'assignee_user_id' => $members[$this->faker->numberBetween(0,count($members)-1)],
             'due_date' => $due_date,
             'completed_date' => $completed_date,

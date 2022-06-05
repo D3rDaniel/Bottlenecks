@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserBookingController extends Controller
 {
@@ -14,15 +15,15 @@ class UserBookingController extends Controller
      * @param $user_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($user_id)
+    public function show()
     {
-        $user = User::find($user_id);
+        $user = User::find(Auth::id());
 
         if (!$user) {
             return response()->json(['success'=>false,'message' => 'User not found'], 404);
         }
 
-        $bookings = Booking::where('user_id',$user_id)
+        $bookings = Booking::where('user_id',$user->id)
             ->with('room','user')
             ->get();
 

@@ -10,24 +10,11 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Nette\Utils\DateTime;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of all bookings
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
-    {
-        $bookings = Booking::get();
-
-        if($bookings->isEmpty()){
-            return response()->json(['message' => 'No bookings found'], 404);
-        }
-
-        return response()->json($bookings);
-    }
 
 
     /**
@@ -42,6 +29,8 @@ class BookingController extends Controller
 
         //check if date is on weekend and room is open on weekends
         $room = Room::find($data['room_id']);
+        $this->authorize('create', [Booking::class,$data['room_id']]);
+
         $date = Carbon::create($data['reservation_date']);
         if($room->opened_on_weekends==0&&$date->isWeekend()){
             return response()->json(['success'=>false,'message' => 'This room is not open at the weekend'], 422);
@@ -93,6 +82,7 @@ class BookingController extends Controller
     public function show($id)
     {
         $booking = Booking::find($id);
+        $this->authorize('view', $booking);
         if (!$booking) {
             return response()->json([
                 'message' => 'Booking not found',
@@ -123,6 +113,8 @@ class BookingController extends Controller
     public function destroy($id)
     {
         $booking = Booking::find($id);
+
+        $this->authorize('forceDelete', $booking);
         if (!$booking) {
             return response()->json([
                 'success' => false,

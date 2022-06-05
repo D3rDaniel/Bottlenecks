@@ -27,7 +27,8 @@ class UpdateProjectUserRequest extends FormRequest
         return [
             'can_create_tasks'=>'boolean',
             'can_edit_tasks'=>'boolean',
-            'can_create_tags'=>'boolean'
+            'can_create_tags'=>'boolean',
+            'can_create_announcements'=>'boolean'
         ];
     }
 
