@@ -11,15 +11,17 @@ const elements = [
 
 const SortList = (props) => {
 
-  const sortElements = () => {
-    props.sortElements();
+  const sortElements = (event, rotate) => {
+    console.log("Is rotatet? ", rotate)
+    props.sortElements(event, rotate);
   }
 
   return (
     <div className="flex w-full ml-20 mr-36">
         {elements.map((element, index) => {
             return (
-                <Sortelement
+                <Sortelement 
+                    id={index}
                     label={element.label}
                     selected={element.selected}
                     key={index}

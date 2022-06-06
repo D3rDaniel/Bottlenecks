@@ -18,7 +18,7 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
     <div className="my-5 ml-1">
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
             
-            <div class="flex justify-around w-11/12 items-center">
+            <div className="flex justify-around w-11/12 items-center">
                 <div className="w-1/6 pl-5">{props.roomname}</div>
                 <div className="w-1/6 pl-5">{props.roomnumber}</div>
                 <div className="w-1/6 pl-5">{props.created_at}</div>

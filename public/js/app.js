@@ -3584,7 +3584,7 @@ var ProjectMinimumViewOffeneTasks = function ProjectMinimumViewOffeneTasks(props
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex justify-evenly h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "flex justify-around w-4/5",
+        className: "flex justify-around w-4/5",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "",
           children: props.title
@@ -3791,6 +3791,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _popup_NewProjectPopup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./popup/NewProjectPopup */ "./resources/js/components/dashboard/dashboardProjects/popup/NewProjectPopup.js");
 /* harmony import */ var _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../images/icons/loading-spinner.png */ "./resources/images/icons/loading-spinner.png");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3856,6 +3864,16 @@ function DashboardProjects(props) {
       loadedProjects = _useState8[0],
       setProjects = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      filtered = _useState10[0],
+      setFiltered = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      filteredProjects = _useState12[0],
+      setFilteredProjects = _useState12[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/projects";
@@ -3875,14 +3893,92 @@ function DashboardProjects(props) {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log(loadedProjects);
-  }, [loadedProjects]);
+  }, [loadedProjects]); //DEF: Sortelements are saved with an ID starting from 0. Needs to be adapted depending on (quantitiy in) SortList !
 
-  var sortElements = function sortElements() {
-    var orderedProjects = loadedProjects.sort(function (a, b) {
-      return a.creator_user_id > b.creator_user_id ? 1 : b.creator_user_id > a.creator_user_id ? -1 : 0;
-    });
+  var sortElements = function sortElements(event, rotate) {
+    var IDTriggeredSortElement = event.target.id;
+    var orderedProjects;
+
+    switch (IDTriggeredSortElement) {
+      case "0":
+        if (rotate) {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
+          });
+        } else {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.title > b.title ? -1 : b.title > a.title ? 1 : 0;
+          });
+        }
+
+        break;
+
+      case "1":
+        if (rotate) {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.creator_user_id > b.creator_user_id ? 1 : b.creator_user_id > a.creator_user_id ? -1 : 0;
+          });
+        } else {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.creator_user_id > b.creator_user_id ? -1 : b.creator_user_id > a.creator_user_id ? 1 : 0;
+          });
+        }
+
+        break;
+
+      case '2':
+        if (rotate) {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.progress_percentage > b.progress_percentage ? 1 : b.progress_percentage > a.progress_percentage ? -1 : 0;
+          });
+        } else {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.progress_percentage > b.progress_percentage ? -1 : b.progress_percentage > a.progress_percentage ? 1 : 0;
+          });
+        }
+
+        break;
+
+      case '3':
+        if (rotate) {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.created_at > b.created_at ? 1 : b.created_at > a.created_at ? -1 : 0;
+          });
+        } else {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.created_at > b.created_at ? -1 : b.created_at > a.created_at ? 1 : 0;
+          });
+        }
+
+        break;
+
+      case '4':
+        if (rotate) {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.due_date > b.due_date ? 1 : b.due_date > a.due_date ? -1 : 0;
+          });
+        } else {
+          orderedProjects = _toConsumableArray(loadedProjects).sort(function (a, b) {
+            return a.due_date > b.due_date ? -1 : b.due_date > a.due_date ? 1 : 0;
+          });
+        }
+
+        break;
+
+      default:
+        console.log("default- shit");
+    }
+
     setProjects(orderedProjects);
-    console.log(loadedProjects);
+  };
+
+  var filterElements = function filterElements(inputValue, filtered) {
+    setFiltered(filtered);
+    var filteredProjectsBuffer;
+    filteredProjectsBuffer = _toConsumableArray(loadedProjects).filter(function (project) {
+      return project.title.toLowerCase().includes(inputValue);
+    });
+    setFilteredProjects(filteredProjectsBuffer);
   };
 
   if (error) {
@@ -3914,10 +4010,21 @@ function DashboardProjects(props) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "flex flex-col w-full m-1 ml-2",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        sortElements: sortElements
+        sortElements: sortElements,
+        filterElements: filterElements
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "h-full w-full",
-        children: loadedProjects.map(function (project, index) {
+        children: filtered ? filteredProjects.map(function (project, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            title: project.title.length > 30 ? project.title.substring(0, 27) + '...' : project.title,
+            fullTitle: project.title,
+            creator: project.creator_user_id,
+            progress: project.progress_percentage,
+            startDate: project.created_at.substring(0, 10),
+            date: project.due_date,
+            description: project.description
+          }, index);
+        }) : loadedProjects.map(function (project, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             title: project.title.length > 30 ? project.title.substring(0, 27) + '...' : project.title,
             fullTitle: project.title,
@@ -4340,15 +4447,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SearchBar = function SearchBar(props) {
-  var sortElements = function sortElements() {
-    props.sortElements();
+  var sortElements = function sortElements(event, rotate) {
+    props.sortElements(event, rotate);
+  };
+
+  var filterElements = function filterElements(inputValue, filtered) {
+    props.filterElements(inputValue, filtered);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "bg-blue rounded-xl h-20",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "flex",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CheckboxList__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        filterElements: filterElements
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CheckboxList__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "flex",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_SortList_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -4377,17 +4490,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _images_icons_search_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../images/icons/search.jpg */ "./resources/images/icons/search.jpg");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
-var SearchField = function SearchField() {
+
+var SearchField = function SearchField(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      inputValue = _useState2[0],
+      setInputValue = _useState2[1];
+
+  var changeInputValue = function changeInputValue(event) {
+    setInputValue(event.target.value.toLowerCase());
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var filtered = inputValue.trim().length != 0;
+    props.filterElements(inputValue, filtered);
+  }, [inputValue]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex justify-between w-1/2 h-7 bg-white rounded-xl ml-3 mt-3 items-center hover:cursor-text",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       placeholder: "Suchbegriff eingeben...",
-      className: "ml-3 w-full outline-none"
+      className: "ml-3 w-full outline-none",
+      onChange: changeInputValue
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
       className: "w-5 h-5 mr-4",
       src: _images_icons_search_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -4438,14 +4577,14 @@ var SortElement = function SortElement(props) {
       rotate = _useState2[0],
       setRotate = _useState2[1];
 
-  var sortElements = function sortElements() {
+  var sortElements = function sortElements(event) {
     if (rotate) {
       setRotate(false);
     } else {
       setRotate(true);
     }
 
-    props.sortElements();
+    props.sortElements(event, rotate);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -4454,6 +4593,7 @@ var SortElement = function SortElement(props) {
       className: "text-white",
       children: props.label
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+      id: props.id,
       src: _images_icons_arrow_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
       alt: "arrow",
       className: "w-4 h-4 mt-1.5 ml-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
@@ -4502,14 +4642,16 @@ var elements = [{
 }];
 
 var SortList = function SortList(props) {
-  var sortElements = function sortElements() {
-    props.sortElements();
+  var sortElements = function sortElements(event, rotate) {
+    console.log("Is rotatet? ", rotate);
+    props.sortElements(event, rotate);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "flex w-full ml-20 mr-36",
     children: elements.map(function (element, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        id: index,
         label: element.label,
         selected: element.selected,
         sortElements: sortElements
@@ -4726,7 +4868,7 @@ var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(p
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "flex justify-around w-11/12 items-center",
+        className: "flex justify-around w-11/12 items-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "w-1/6 pl-5",
           children: props.roomname

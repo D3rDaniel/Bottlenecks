@@ -1180,10 +1180,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity));
 }
-.text-gray-400{
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-}
 .placeholder-gray-600::-moz-placeholder{
   --tw-placeholder-opacity: 1;
   color: rgb(75 85 99 / var(--tw-placeholder-opacity));
@@ -1220,6 +1216,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .drop-shadow-xl{
   --tw-drop-shadow: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .transition{

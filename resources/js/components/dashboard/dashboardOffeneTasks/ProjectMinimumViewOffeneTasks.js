@@ -18,7 +18,7 @@ const ProjectMinimumViewOffeneTasks = (props) => {
     <div className="my-5 ml-1">
         <div className={`flex justify-evenly h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
             
-            <div class="flex justify-around w-4/5">
+            <div className="flex justify-around w-4/5">
                 <div className="">{props.title}</div>
                 <div className="">{props.project}</div>
                 <div className="">{props.deadline}</div>

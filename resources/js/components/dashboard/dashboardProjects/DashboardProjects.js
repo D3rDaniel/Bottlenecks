@@ -20,6 +20,8 @@ function DashboardProjects (props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadedProjects, setProjects] = useState([]);
+  const [filtered, setFiltered] = useState(false);
+  const [filteredProjects, setFilteredProjects] = useState([]);
 
     useEffect(() => {
         setIsLoaded(false);
@@ -45,11 +47,60 @@ function DashboardProjects (props) {
         console.log(loadedProjects)
       }, [loadedProjects])
 
-      const sortElements = () => {
-        const orderedProjects = loadedProjects.sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+
+      //DEF: Sortelements are saved with an ID starting from 0. Needs to be adapted depending on (quantitiy in) SortList !
+      const sortElements = (event, rotate) => {
+        const IDTriggeredSortElement = event.target.id
+        let orderedProjects;
+        switch(IDTriggeredSortElement){
+          case "0":
+            if(rotate){
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+            }else{
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+            }
+            break;
+          case "1":
+            if(rotate){
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+            }else{
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? -1: ((b.creator_user_id > a.creator_user_id) ? 1 : 0))
+            }
+            break;
+          case '2':
+            if(rotate){
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.progress_percentage > b.progress_percentage) ? 1: ((b.progress_percentage > a.progress_percentage) ? -1 : 0))
+            }else{
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.progress_percentage > b.progress_percentage) ? -1: ((b.progress_percentage > a.progress_percentage) ? 1 : 0))
+            }
+            break;
+          case '3':
+            if(rotate){
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.created_at > b.created_at) ? 1: ((b.created_at > a.created_at) ? -1 : 0))
+            }else{
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.created_at > b.created_at) ? -1: ((b.created_at > a.created_at) ? 1 : 0))
+            }
+            break;
+          case '4':
+            if(rotate){
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.due_date > b.due_date) ? 1: ((b.due_date > a.due_date) ? -1 : 0))
+            }else{
+              orderedProjects = [...loadedProjects].sort((a,b) => (a.due_date > b.due_date) ? -1: ((b.due_date > a.due_date) ? 1 : 0))
+            }
+            break;
+          default:
+            console.log("default- shit")
+        }
         setProjects(orderedProjects)
-        console.log(loadedProjects)
       }
+
+      const filterElements = (inputValue, filtered) => {
+        setFiltered(filtered)
+        let filteredProjectsBuffer
+        filteredProjectsBuffer = [...loadedProjects].filter((project) => project.title.toLowerCase().includes(inputValue))
+        setFilteredProjects(filteredProjectsBuffer)
+      }
+
       
       if (error) {
         let errormessage = error.message;
@@ -67,10 +118,12 @@ function DashboardProjects (props) {
 
   return(
     <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBar sortElements={sortElements}/>
+        <SearchBar sortElements={sortElements} filterElements={filterElements} />
         
         <div className="h-full w-full">
-          {loadedProjects.map((project, index) => {
+          {
+            filtered ? 
+            filteredProjects.map((project, index) => {
             
             return (
               <ProjectMinimumView
@@ -84,7 +137,26 @@ function DashboardProjects (props) {
                 key={index}>
               </ProjectMinimumView>
             )
-          })}
+          })
+          :
+          loadedProjects.map((project, index) => {
+            
+            return (
+              <ProjectMinimumView
+                title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
+                fullTitle = {project.title}
+                creator={project.creator_user_id}
+                progress={project.progress_percentage}
+                startDate={project.created_at.substring(0,10)}
+                date={project.due_date}
+                description={project.description}
+                key={index}>
+              </ProjectMinimumView>
+            )
+          })
+          
+          
+          }
         </div>
 
         <div className="flex justify-end">
