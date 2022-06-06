@@ -39,7 +39,17 @@ function DashboardProjects (props) {
               setError(error);
             }
           )
+          
       }, []);
+      useEffect(() => {
+        console.log(loadedProjects)
+      }, [loadedProjects])
+
+      const sortElements = () => {
+        const orderedProjects = loadedProjects.sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+        setProjects(orderedProjects)
+        console.log(loadedProjects)
+      }
       
       if (error) {
         let errormessage = error.message;
@@ -57,7 +67,7 @@ function DashboardProjects (props) {
 
   return(
     <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBar />
+        <SearchBar sortElements={sortElements}/>
         
         <div className="h-full w-full">
           {loadedProjects.map((project, index) => {

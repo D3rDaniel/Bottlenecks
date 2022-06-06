@@ -3873,6 +3873,17 @@ function DashboardProjects(props) {
       setError(error);
     });
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(loadedProjects);
+  }, [loadedProjects]);
+
+  var sortElements = function sortElements() {
+    var orderedProjects = loadedProjects.sort(function (a, b) {
+      return a.creator_user_id > b.creator_user_id ? 1 : b.creator_user_id > a.creator_user_id ? -1 : 0;
+    });
+    setProjects(orderedProjects);
+    console.log(loadedProjects);
+  };
 
   if (error) {
     var errormessage = error.message;
@@ -3902,7 +3913,9 @@ function DashboardProjects(props) {
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "flex flex-col w-full m-1 ml-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        sortElements: sortElements
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "h-full w-full",
         children: loadedProjects.map(function (project, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -4326,7 +4339,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var SearchBar = function SearchBar() {
+var SearchBar = function SearchBar(props) {
+  var sortElements = function sortElements() {
+    props.sortElements();
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "bg-blue rounded-xl h-20",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -4334,7 +4351,9 @@ var SearchBar = function SearchBar() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CheckboxList__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "flex",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_SortList_js__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_SortList_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        sortElements: sortElements
+      })
     })]
   });
 };
@@ -4366,9 +4385,9 @@ __webpack_require__.r(__webpack_exports__);
 var SearchField = function SearchField() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex justify-between w-1/2 h-7 bg-white rounded-xl ml-3 mt-3 items-center hover:cursor-text",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-      className: "pl-3 text-gray-400",
-      children: "Suchbegriff eingeben..."
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      placeholder: "Suchbegriff eingeben...",
+      className: "ml-3 w-full outline-none"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
       className: "w-5 h-5 mr-4",
       src: _images_icons_search_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -4413,32 +4432,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var SortElement = function SortElement(_ref) {
-  var label = _ref.label;
-
+var SortElement = function SortElement(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       rotate = _useState2[0],
       setRotate = _useState2[1];
 
-  var rotateArrow = function rotateArrow() {
+  var sortElements = function sortElements() {
     if (rotate) {
       setRotate(false);
     } else {
       setRotate(true);
     }
+
+    props.sortElements();
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex mt-1 w-1/5",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
       className: "text-white",
-      children: label
+      children: props.label
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
       src: _images_icons_arrow_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
       alt: "arrow",
       className: "w-4 h-4 mt-1.5 ml-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
-      onClick: rotateArrow
+      onClick: sortElements
     })]
   });
 };
@@ -4466,7 +4485,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var elements = [{
-  label: "Projetname",
+  label: "Projektname",
   selected: false
 }, {
   label: "Ersteller",
@@ -4482,13 +4501,18 @@ var elements = [{
   selected: false
 }];
 
-var SortList = function SortList() {
+var SortList = function SortList(props) {
+  var sortElements = function sortElements() {
+    props.sortElements();
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "flex w-full ml-20 mr-36",
     children: elements.map(function (element, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
         label: element.label,
-        selected: element.selected
+        selected: element.selected,
+        sortElements: sortElements
       }, index);
     })
   });

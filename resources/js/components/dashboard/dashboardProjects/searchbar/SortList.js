@@ -2,14 +2,19 @@ import React from 'react'
 import Sortelement from './SortElement'
 
 const elements = [
-    {label: "Projetname", selected: false},
+    {label: "Projektname", selected: false},
     {label: "Ersteller", selected: false},
     {label: "Fortschritt", selected: false},
     {label: "Erstellt am", selected: false},
     {label: "Endet am", selected: false}
   ];
 
-const SortList = () => {
+const SortList = (props) => {
+
+  const sortElements = () => {
+    props.sortElements();
+  }
+
   return (
     <div className="flex w-full ml-20 mr-36">
         {elements.map((element, index) => {
@@ -17,7 +22,8 @@ const SortList = () => {
                 <Sortelement
                     label={element.label}
                     selected={element.selected}
-                    key={index}>
+                    key={index}
+                    sortElements={sortElements}>
                 </Sortelement>
         )
         })}
