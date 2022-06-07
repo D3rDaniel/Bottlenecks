@@ -3,10 +3,10 @@ import {React, useState, useEffect} from 'react'
 import Searchbar from './searchbar/SearchBar'
 import MinView from './RoomsMinView'
 
-import Plus from '../../../../images/icons/plus.png'
 import CreateRoomButton from './CreateRoomButton'
 import NewRoomPopup from './popup/NewRoomPopup'
 import Loading from '../../../../images/icons/loading-spinner.png'
+import RoomBookingPopup from './popup/RoomBookingPopup'
 
 const rooms = [
     {title : "Dösraum" , 
@@ -99,7 +99,8 @@ const dashboardRooms = (props) => {
         <div className="h-full w-full">
             {loadedRooms.map((room, index) => {
                 return (
-                    <MinView 
+                    <MinView
+                        changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
                     ></MinView>

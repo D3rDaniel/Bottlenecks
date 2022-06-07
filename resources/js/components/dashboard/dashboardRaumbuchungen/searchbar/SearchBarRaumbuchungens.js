@@ -1,19 +1,26 @@
 import React from 'react'
 import SearchField from '../../dashboardProjects/searchbar/SearchField'
-import SortList from './SortListRaumbuchungen'
+import SortListRaumbuchungen from './SortListRaumbuchungen'
 
-function SearchBarAnkündigungen() {
+function SearchBarRaumbuchungen(props) {
+  const filterElements = (inputValue, filtered) => {
+    props.filterElements(inputValue, filtered)
+  }
+  const sortElements = (event, rotate) =>  {
+    props.sortElements(event, rotate);
+  }
+  
   return (
     <div className="bg-blue rounded-xl h-20">
       <div className="flex">
-        <SearchField />
+        <SearchField filterElements={filterElements}/>
       </div>
       
       <div className="flex">
-        <SortList />
+        <SortListRaumbuchungen sortElements={sortElements}/>
       </div>
     </div>
   )
 }
 
-export default SearchBarAnkündigungen
+export default SearchBarRaumbuchungen

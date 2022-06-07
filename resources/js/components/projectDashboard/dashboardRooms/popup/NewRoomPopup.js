@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
+import TimeChooser from '../../../forms/TimeChooser';
 
 function NewRoomPopup({trigger, onClick}) {
 
@@ -18,7 +18,7 @@ function NewRoomPopup({trigger, onClick}) {
     const getName = (data) => {setName(data);}
     const getSize = (data) => {setSize(data);}
     const getNumber = (data) => {setNumber(data);}
-    const getOpen_at = (data) => {setOpen_at(data);}
+    const getOpen_at = (data) => {setOpen_at(data); }
     const getClose_at = (data) => {setClose_at(data);}
     const getOpen_at_weekend = (event) => {
         if(event.target.checked){
@@ -58,6 +58,9 @@ function NewRoomPopup({trigger, onClick}) {
         })
         */
     }
+    const pickTime = (event) =>{
+        console.log(event)
+    }
     
 
   return ( trigger) ? (
@@ -75,8 +78,12 @@ function NewRoomPopup({trigger, onClick}) {
                                 <div className="px-1"><InputField  onChange={getNumber} placeholder="Nummer..."></InputField></div>
                             </div>
                             <div className="flex justify-center items-center p-4 mb-4">
-                                <div className="pr-3"><InputField  onChange={getOpen_at} placeholder="Öffnet um..."></InputField></div>
-                                <div className="pl-3"><InputField  onChange={getClose_at} placeholder="Schließt um..."></InputField></div>
+                               {/* <div className="pr-3"><InputField  onChange={getOpen_at} placeholder="Öffnet um..."></InputField></div>
+                                <div className="pl-3"><InputField  onChange={getClose_at} placeholder="Schließt um..."></InputField></div> */ }
+                                <label className='p-2 mr-4'>Öffent um:</label>
+                                <TimeChooser pickTime={getOpen_at} value={open_at}/>
+                                <label className='p-2 mr-4'>Schließt um:</label>
+                                <TimeChooser pickTime={getClose_at} value={close_at}/>
                             </div>
                             <div className="flex justify-center items-center  p-4 mb-4">
                                 <input className="mr-6" id="weekend_checkbox" name="weekend_checkbox" type="checkbox" onChange={getOpen_at_weekend}/>

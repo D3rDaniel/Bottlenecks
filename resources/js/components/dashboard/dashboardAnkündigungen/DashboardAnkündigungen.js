@@ -12,6 +12,8 @@ const DashboardAnkündigungen = (props) => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadedAnnouncements, setAnnouncements] = useState([]);
+  const [filtered, setFiltered] = useState(false)
+  const [filteredAnnouncements, setFilteredAnnouncements] = useState([])
 
     useEffect(() => {
         setIsLoaded(false);
@@ -32,6 +34,44 @@ const DashboardAnkündigungen = (props) => {
             }
           )
       }, []);
+
+
+      const filterElements = (inputValue, filtered) => {
+        setFiltered(filtered)
+        let filteredAnkuendigungenBuffer
+        filteredAnkuendigungenBuffer = [...loadedAnnouncements].filter((message) => message.title.toLowerCase().includes(inputValue))
+        setFilteredAnnouncements(filteredAnkuendigungenBuffer)
+      }
+      const sortElements = (event, rotate) =>{
+        const IDTriggeredSortElement = event.target.id
+            let orderedAnnouncements;
+            switch(IDTriggeredSortElement){
+              case "0":
+                if(rotate){
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.project > b.project) ? 1: ((b.project > a.project) ? -1 : 0))
+                }else{
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.project > b.project) ? -1: ((b.project > a.project) ? 1 : 0))
+                }
+                break;
+              case "1":
+                if(rotate){
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.created_at > b.created_at) ? 1: ((b.created_at > a.created_at) ? -1 : 0))
+                }else{
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.created_at > b.created_at) ? -1: ((b.created_at > a.created_at) ? 1 : 0))
+                }
+                break;
+              case '2':
+                if(rotate){
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+                }else{
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+                }
+                break;
+              default:
+                console.log("default- shit")
+            }
+            setFilteredAnnouncements(orderedAnnouncements)
+      }
       
       if (error) {
         let errormessage = error.message;
@@ -50,11 +90,12 @@ const DashboardAnkündigungen = (props) => {
 
   return(
     <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBarAnkündigungen />
+        <SearchBarAnkündigungen filterElements={filterElements} sortElements={sortElements} />
         
         <div className="h-full w-full">
-          {loadedAnnouncements.map((announcement, index) => {
-
+          {
+            filtered ?
+            filteredAnnouncements.map((announcement, index) => {
             return (
               <AnnouncementMinimumView
                 project={announcement.project_id}
@@ -65,7 +106,25 @@ const DashboardAnkündigungen = (props) => {
                 key={index}>
               </AnnouncementMinimumView>
             )
-          })}
+            })
+            
+            
+            :
+            loadedAnnouncements.map((announcement, index) => {
+            return (
+              <AnnouncementMinimumView
+                project={announcement.project_id}
+                created_at={announcement.created_at.substring(0, 10)}
+                updated_at={announcement.updated_at.substring(0, 10)}
+                title={announcement.subject}
+                description={announcement.message}
+                key={index}>
+              </AnnouncementMinimumView>
+            )
+          })
+          
+          
+          }
         </div>
 
     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchField from './SearchField'
 import CheckboxList from './CheckboxList'
-import SortList from './SortList.js'
+import SortList from './SortList'
 
 const SearchBar = (props) => {
   const sortElements = (event, rotate) =>  {

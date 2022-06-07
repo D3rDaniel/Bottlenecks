@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
+import DatePicker from 'react-date-picker';
 import DropDownSelect from '../../../forms/DropDownSelect';
 import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
@@ -21,18 +22,6 @@ function NewTaskPopup({trigger, onClick}) {
     const getTitle = (data) => {setTitle(data);}
     const getDeadline = (data) => {setDeadline(data);}
     const getDescription = (data) => {setDescription(data);}
-
-    { /* test if states are adapted
-        useEffect(() => {   
-        console.log("Worker:", worker)
-        console.log("Room:", room)
-        console.log("Priority:", priority)
-        console.log("Tag:", tag)
-        console.log("Title:", title)
-        console.log("Deadline:", deadline)
-        console.log("Description:", description)
-        },[worker, room, priority, tag, title, deadline, description])
-    */}
     
 
     const handleSubmit = (event) => {
@@ -43,7 +32,8 @@ function NewTaskPopup({trigger, onClick}) {
             worker: worker,
             room: room,
             priority: priority,
-            tag: tag
+            tag: tag,
+            description: description
         }
         console.log(task)
        /*
@@ -71,7 +61,8 @@ function NewTaskPopup({trigger, onClick}) {
                                 <InputField id="projectTitle" onChange={getTitle} placeholder="Titel..."></InputField>
                             </div>
                             <div className="mb-6">
-                                <InputField id="projectDeadline" onChange={getDeadline} placeholder="Deadline..."></InputField>
+                                <label className="p-2 mr-4">Deadline: </label>
+                                <DatePicker onChange={getDeadline} value={deadline} />
                             </div>
                             <div className="mb-6">
                                 <DropDownSelect title={"Bearbeiter auswählen"} onChange={getWorker} options={["muss", "noch", "dynamisch", "geladen", "werden"]}/>

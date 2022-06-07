@@ -1,4 +1,5 @@
 import React , {useState} from 'react'
+import DatePicker from 'react-date-picker';
 import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
 
@@ -9,7 +10,7 @@ function NewProjectPopup({trigger, onClick}) {
     const [deadline, setDeadline] = useState("")
 
     const getTitle = (data) => {setTitle(data);}
-    const getDeadline = (data) => {setDeadline(data);}
+    const getDeadline = (event) => {setDeadline(event);}
     const getDescription = (data) => {setDescription(data);}
 
     const handleSubmit = (event) => {
@@ -42,7 +43,9 @@ function NewProjectPopup({trigger, onClick}) {
                         <InputField id="projectTitle" onChange={getTitle} placeholder="Titel..."></InputField>
                     </div>
                     <div className="mb-6">
-                        <InputField id="projectDeadline" onChange={getDeadline} placeholder="Deadline..."></InputField>
+                        {/*<InputField id="projectDeadline" onChange={getDeadline} placeholder="Deadline..."></InputField> */}
+                        <label className="p-2 mr-4">Deadline: </label>
+                        <DatePicker onChange={getDeadline} value={deadline}/>
                     </div>
                     <div className="mb-6">
                         <TextArea id="description" onChange={getDescription} placeholder="Beschreibung..."></TextArea>

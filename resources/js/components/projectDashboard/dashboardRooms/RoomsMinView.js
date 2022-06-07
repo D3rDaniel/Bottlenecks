@@ -2,8 +2,14 @@ import React, {useState} from 'react'
 
 import Arrow from '../../../../images/icons/arrow-black.png'
 import MaxView from './RoomsMaxView'
+import BookingButton from './BookingButton'
 
 const RoomsMinView = (props) => {
+
+    const [popupTriggerBooking, setPopupTriggerBooking] = useState(false)
+    const changePopupTrigger = () => {
+        props.changePopupTriggerValueBooking(!popupTriggerBooking)
+    }
 
     const [rotate, setRotate] = useState(0);
 
@@ -19,7 +25,7 @@ const RoomsMinView = (props) => {
             <label className="w-1/4 min-w-max">{props.room.capacity}</label>
 
             <div className="flex ml-auto">
-                <button className="bg-blue w-28 h-8 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg">Buchen</button>
+                <BookingButton  onClick={changePopupTrigger}/>
                 <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
             </div>
         </div>

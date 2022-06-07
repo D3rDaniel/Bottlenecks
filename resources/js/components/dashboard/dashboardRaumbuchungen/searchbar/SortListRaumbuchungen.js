@@ -10,15 +10,22 @@ const elements = [
     {label: "Zeitraum", selected: false},
   ];
 
-const SortList = () => {
+const SortListRaumbuchungen = (props) => {
+
+  const sortElements = (event, rotate) => {
+    props.sortElements(event, rotate);
+  }
+
   return (
     <div className="flex w-full ml-20 mr-36">
         {elements.map((element, index) => {
             return (
                 <SortElement
+                    id={index}
                     label={element.label}
                     selected={element.selected}
-                    key={index}>
+                    key={index}
+                    sortElements={sortElements}>
                 </SortElement>
         )
         })}
@@ -27,4 +34,4 @@ const SortList = () => {
   )
 }
 
-export default SortList
+export default SortListRaumbuchungen

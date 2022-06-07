@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import SearchBar from './searchbar/SearchBarAbgeschlosseneTasks'
+import SearchBarAbgeschlosseneTasks from './searchbar/SearchBarAbgeschlosseneTasks'
 import ProjectMinimumView from './ProjectMinimumViewAbgeschlosseneTasks'
 import Loading from '../../../../images/icons/loading-spinner.png'
 
@@ -13,6 +13,9 @@ function DashboardAbgeschlosseneTasks(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadedTasks, setTasks] = useState([]);
+  const [filtered, setFiltered] = useState(false)
+  const [filteredTasks, setFilteredTasks] = useState([])
+
 
     useEffect(() => {
         setIsLoaded(false);
@@ -33,6 +36,65 @@ function DashboardAbgeschlosseneTasks(props) {
             }
           )
       }, []);
+
+
+      const filterElements = (inputValue, filtered) => {
+        setFiltered(filtered)
+        let filteredTasksBuffer
+        filteredTasksBuffer = [...loadedTasks].filter((task) => task.title.toLowerCase().includes(inputValue))
+        setFilteredTasks(filteredTasksBuffer)
+      }
+      const sortElements = (event, rotate) =>{
+        const IDTriggeredSortElement = event.target.id
+            let orderedTasks;
+            switch(IDTriggeredSortElement){
+              case "0":
+                if(rotate){
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+                }else{
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+                }
+                break;
+              case "1":
+                if(rotate){
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.project > b.project) ? 1: ((b.project > a.project) ? -1 : 0))
+                }else{
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.project > b.project) ? -1: ((b.project > a.project) ? 1 : 0))
+                }
+                break;
+              case '2':
+                if(rotate){
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.deadline > b.deadline) ? 1: ((b.deadline > a.deadline) ? -1 : 0))
+                }else{
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.deadline > b.deadline) ? -1: ((b.deadline > a.deadline) ? 1 : 0))
+                }
+                break;
+              case '3':
+                if(rotate){
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.tag > b.tag) ? 1: ((b.tag > a.tag) ? -1 : 0))
+                }else{
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.tag > b.tag) ? -1: ((b.tag > a.tag) ? 1 : 0))
+                }
+                break;
+              case '4':
+                if(rotate){
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.room > b.room) ? 1: ((b.room > a.room) ? -1 : 0))
+                }else{
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.room > b.room) ? -1: ((b.room > a.room) ? 1 : 0))
+                }
+                break;
+              case '5':
+                if(rotate){
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.priority > b.priority) ? 1: ((b.priority > a.priority) ? -1 : 0))
+                }else{
+                  orderedTasks = [...loadedTasks].sort((a,b) => (a.priority > b.priority) ? -1: ((b.priority > a.priority) ? 1 : 0))
+                }
+                break;
+              default:
+                console.log("default- shit")
+            }
+            setTasks(orderedTasks)
+      }
       
       if (error) {
         errormessage = error.message;
@@ -49,10 +111,12 @@ function DashboardAbgeschlosseneTasks(props) {
 
   return (
     <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBar />
+        <SearchBarAbgeschlosseneTasks sortElements={sortElements} filterElements={filterElements} />
         
         <div className="h-full w-full">
-          {loadedTasks.map((task, index) => {
+          {
+            filtered?
+            filteredTasks.map((task, index) => {
             return (
               <ProjectMinimumView
                 title={(task.title.length > 28) ? task.title.substring(0,25)+'...' : task.title}
@@ -70,7 +134,31 @@ function DashboardAbgeschlosseneTasks(props) {
                 key={index}>
               </ProjectMinimumView>
             )
-          })}
+          })
+          :
+            
+            loadedTasks.map((task, index) => {
+            return (
+              <ProjectMinimumView
+                title={(task.title.length > 28) ? task.title.substring(0,25)+'...' : task.title}
+                fullTitle = {task.title}                
+                project={(task.project.title.length > 28) ? task.project.title.substring(0,25)+'...' : task.project.title}
+                created_at={task.created_at.substring(0,10)}
+                deadline={task.due_date}
+                finished_at={task.completed_date == null ? "kein Datum" : task.completed_date}
+                priority={task.priority.title}
+                tag={task.tag.title}
+                finished_state={task.status.title}
+                description={task.description}
+                finish_comment={task.completion_comment == null ? "kein Kommentar angegeben" : task.completion_comment}
+                room={task.room == null ? "kein Raum angegeben" : task.room}
+                key={index}>
+              </ProjectMinimumView>
+            )
+          })
+          
+          
+          }
         </div>
 
     </div>

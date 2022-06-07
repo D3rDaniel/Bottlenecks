@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
+import DropDownSelect from '../../../forms/DropDownSelect'
+import DatePicker from '../../../forms/DatePicker';
+import TimeChooser from '../../../forms/TimeChooser';
 
 function RoomBookingPopup({trigger, onClick}) {
 
@@ -39,17 +42,25 @@ function RoomBookingPopup({trigger, onClick}) {
     <div className="w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ">
         <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
             
-            <div className="w-full">
+            <div className="w-full h-2/3">
                 <form className="bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20" onSubmit={handleSubmit}>
                 <h3 className="items-center mb-6 text-5xl font-body">Raum buchen</h3>
 
-                        <div className="flex justify-center items-center h-screen">
+                        <div className="flex justify-center items-center">
                             <div className="w-1/2 px-4">
                                 <div className="mb-4"><DropDownSelect title={"Raum auswählen"} onChange={getRoom} options={["muss", "noch", "dynamisch", "geladen", "werden"]}/></div>
-                                <div className="mb-4"><InputField  onChange={getDate} placeholder="Datum..."></InputField></div>
+                                <div className="mb-4 flex justify-center items-center">
+                                    <label className='p-2 mr-4'>Datum:</label>
+                                    <DatePicker onChange={getDate} value={date}/></div>
                                 <div className="flex justify-center items-center">
-                                    <div className="px-1"><InputField  onChange={getFrom} placeholder="Von..."></InputField></div>
-                                    <div className="px-1"><InputField  onChange={getTo} placeholder="Bis..."></InputField></div>
+                                    <div className="px-1">
+                                        <label className='p-2 mr-2'>Von:</label>
+                                        <TimeChooser onChange={getFrom} value={from}/>
+                                    </div>
+                                    <div className="px-1">
+                                        <label className='p-2 mr-2'>Bis:</label>
+                                        <TimeChooser onChange={getTo} value={to}/>
+                                    </div>
                                 </div>
                             </div>
                             <div className="w-1/2 px-4">
