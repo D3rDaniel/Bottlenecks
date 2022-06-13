@@ -14,9 +14,8 @@ const projects = [
 
 function DashboardProjects (props) {
   const [popupTrigger, setPopupTrigger] = useState(false)
-  const changePopupTriggerValue = () => {
-    setPopupTrigger(!popupTrigger);
-  }
+
+  const changePopupTriggerValue = () => {setPopupTrigger(!popupTrigger);}
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -41,10 +40,7 @@ function DashboardProjects (props) {
               setIsLoaded(true);
               setError(error);})
       }, []);
-      useEffect(() => {
-      }, [loadedProjects])
-
-
+      
       //DEF: Sortelements are saved with an ID starting from 0. Needs to be adapted depending on (quantitiy in) SortList !
       const sortElements = (event, rotate) => {
         const IDTriggeredSortElement = event.target.id
@@ -99,69 +95,77 @@ function DashboardProjects (props) {
       }
 
       
-      if (error) {
-        let errormessage = error.message;
-        if(error.message.includes("User not found.")) errormessage = "Nutzer wurde nicht gefunden!";
-        if(error.message.includes("No projects found for this user.")) errormessage = "Du bist momentan in keinen Projekten!"
-          return <div className='m-auto text-red font-bold'>Error: {errormessage}</div>
-      }else if(!isLoaded){
-          return (<div className="m-auto flex flex-row">
+    if (error) {
+      let errormessage = error.message;
+      if(error.response.data.message.includes("User not found.")) errormessage = "Nutzer wurde nicht gefunden!";
+      if(error.response.data.message.includes("No projects found for this user.")) errormessage = "Du bist momentan in keinen Projekten!"
+
+      return (
+        <div className="flex flex-col w-full m-1 ml-2">
+          <div className='m-auto text-red font-bold'>{errormessage}</div>
+          {errormessage === "Du bist momentan in keinen Projekten!" ? 
+            <div className="flex justify-end">
+              <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
+            </div> : ""}
+            <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token}/>
+        </div>)
+    }else if(!isLoaded){
+      return (
+        <div className="m-auto flex flex-row">
           <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
           <div className=" text-darkgray">Loading...</div>
         </div>)
-      }else if(loadedProjects.length < 1){
-        return <div className='m-auto text-red font-bold'>Du bist momentan in keinen Projekten!</div>
     }else {
-
-  return(
-    <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBar sortElements={sortElements} filterElements={filterElements} />
-        
-        <div className="h-full w-full">
-          {
-            filtered ? 
-            filteredProjects.map((project, index) => {
-            
-            return (
-              <ProjectMinimumView
-                title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
-                fullTitle = {project.title}
-                creator={project.creator_user_id}
-                progress={project.progress_percentage}
-                startDate={project.created_at.substring(0,10)}
-                date={project.due_date}
-                description={project.description}
-                key={index}>
-              </ProjectMinimumView>
-            )
-          })
-          :
-          loadedProjects.map((project, index) => {
-            
-            return (
-              <ProjectMinimumView
-                title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
-                fullTitle = {project.title}
-                creator={project.creator_user_id}
-                progress={project.progress_percentage}
-                startDate={project.created_at.substring(0,10)}
-                date={project.due_date}
-                description={project.description}
-                key={index}>
-              </ProjectMinimumView>
-            )
-          })
+      return(
+        <div className="flex flex-col w-full m-1 ml-2">
+          <SearchBar sortElements={sortElements} filterElements={filterElements} />
           
-          
-          }
-        </div>
+          <div className="h-full w-full">
+            {
+              filtered ? 
+              filteredProjects.map((project, index) => {
+              
+              return (
+                <ProjectMinimumView
+                  title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
+                  fullTitle = {project.title}
+                  creator={project.creator_user_id}
+                  progress={project.progress_percentage}
+                  startDate={project.created_at.substring(0,10)}
+                  date={project.due_date}
+                  description={project.description}
+                  key={index}>
+                </ProjectMinimumView>
+              )
+            })
+            :
+            loadedProjects.map((project, index) => {
+              
+              return (
+                <ProjectMinimumView
+                  title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
+                  fullTitle = {project.title}
+                  creator={project.creator_user_id}
+                  progress={project.progress_percentage}
+                  startDate={project.created_at.substring(0,10)}
+                  date={project.due_date}
+                  description={project.description}
+                  key={index}>
+                </ProjectMinimumView>
+              )
+            })
+            
+            
+            }
+          </div>
 
-        <div className="flex justify-end">
-          <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
+          <div className="flex justify-end">
+            <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
+          </div>
+          <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token}/>
         </div>
-        <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue}/>
-    </div>
-  )}
+      )
+    }
 }
 
 export default DashboardProjects

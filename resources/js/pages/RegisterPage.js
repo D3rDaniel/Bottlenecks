@@ -1,9 +1,15 @@
-import {React, useState} from 'react'
+import {React, useState, useContext } from 'react'
 import InputField from '../components/forms/InputField'
 import Logo from '../../images/logo.jpg'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import UserContext from '../store/user-context';
 
 function RegisterPage() {
+
+    const userCtx = useContext(UserContext);
+    const navigate = useNavigate();
+    const baseURL = "http://127.0.0.1:8000/api/"
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -11,6 +17,46 @@ function RegisterPage() {
     const [username, setUserName] = useState("")
     const [password, setPassword] = useState("")
     const [pwdConfirm, setPwdConfirm] = useState("")
+
+    const checkInput = () => {
+        return true;
+    }
+
+    const userRegistration = () => {
+        if(checkInput()){
+            const registrionData = {
+                email : email,
+                username : username,
+                first_name : firstName,
+                last_name : lastName,
+                password : password,
+                password_confirmation : pwdConfirm
+            }
+
+            axios.post(baseURL+'register', registrionData).then(function(response){
+                if(response.status === 201){
+                    alert("Sie haben sich erfolgreich registiert!");
+                    handleLogin();
+                }else alert("Fehler bei der Registrierung");
+            })
+        }
+    }
+
+    const handleLogin = () => {
+        const loginData = {
+            "email" : email,
+            "password" : password
+        }
+    
+        axios.post(baseURL+'login', loginData).then(function(response){
+            if(response.data.success == true) {
+                userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.bearer_token);
+                navigate('/');
+            }
+            else alert("Anmeldung fehlgeschlagen!");
+        })
+
+    }
 
   return (
     <div className="m-auto bg-white rounded-xl w-1/3 p-5">
@@ -42,7 +88,7 @@ function RegisterPage() {
                 </div>
                 <div className="flex items-center justify-between">
                     <Link to="/Login" className='text-blue underline'>Du bist bereits registriert?</Link>
-                    <button className="bg-blue hover:bg-darkblue text-white font-bold py-2 px-4 rounded-xl" type="button" onClick={function(){console.log(email + " " + password)}}>
+                    <button className="bg-blue hover:bg-darkblue text-white font-bold py-2 px-4 rounded-xl" type="button" onClick={userRegistration}>
                     Registrieren
                     </button>
                 </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import Sidebar from '../components/projectDashboard/sidebar/Sidebar'
 import DashboardTasks from '../components/projectDashboard/dashboardTasks/DashboardTasks'
-import Project_TagsPage from './Project_TagsPage';
 
 const ProjectPage = (props) => {
 

@@ -3,7 +3,7 @@ import DatePicker from 'react-date-picker';
 import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
 
-function NewProjectPopup({trigger, onClick}) {
+function NewProjectPopup({trigger, onClick, token}) {
 
     const [description, setDescription] = useState("")
     const [title, setTitle] = useState("")
@@ -13,31 +13,41 @@ function NewProjectPopup({trigger, onClick}) {
     const getDeadline = (event) => {setDeadline(event);}
     const getDescription = (data) => {setDescription(data);}
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
 
-        const project = {
+    const handleSubmit = () => {
+        let year = deadline.getFullYear();
+        let month = deadline.getMonth() < 10 ? "0"+ (deadline.getMonth()+1) : deadline.getMonth();
+        let day = deadline.getDate() < 10 ? "0"+deadline.getDate() : deadline.getDate();
+
+        const projectData = {
             title: title,
-            deadline: deadline,
-            description: description
+            description: description,
+            due_date: year + "-" + month + "-" + day
         }
-        console.log(project)
-       /*
+
        const url = "http://127.0.0.1:8000/api/project/"
-       axios.post(url, {project})
+
+       axios.post(url, projectData , {
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+       })
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            if(res.status === 201){
+                alert("Projekt wurder erfolgreich erstellt!");
+            }else{
+                alert("Es ist etwas schief gelaufen");
+            }
+            
         })
-        */
+        
     }
 
-  return ( trigger) ? (
+  return ( trigger ) ? (
     <div className="w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ">
         <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
-            
-            <div className="w-full">
-                <form className="bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20" onSubmit={handleSubmit}>
+            <div className="bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20">
                     <h3 className="items-center mb-6 text-5xl font-body">Projekt erstellen</h3>
                     <div className="mb-4">
                         <InputField id="projectTitle" onChange={getTitle} placeholder="Titel..."></InputField>
@@ -51,15 +61,9 @@ function NewProjectPopup({trigger, onClick}) {
                         <TextArea id="description" onChange={getDescription} placeholder="Beschreibung..."></TextArea>
                     </div>
                     <div className="flex items-center justify-between">
-                        <button onClick={onClick} className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="button">
-                        Abbruch
-                        </button>
-                        <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="submit" >
-                        Erstellen
-                        </button>
-                        
+                        <button onClick={onClick} className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline">Abbruch</button>
+                        <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" onClick={handleSubmit}>Erstellen</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>

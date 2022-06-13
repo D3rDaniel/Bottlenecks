@@ -29,7 +29,7 @@ const Sidebar = (props) => {
           desc="Info" 
           selected="false">
         </SidebarButtonElement>
-        <SignOut></SignOut>
+        <SignOut token={props.token}></SignOut>
       </div>
       
     </div>
