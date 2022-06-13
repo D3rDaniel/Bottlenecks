@@ -2,6 +2,7 @@ import {React, useState, useEffect} from 'react'
 
 import TagElement from './TagElement'
 import Input from './TagInputField'
+import Loading from '../../../../images/icons/loading-spinner.png'
 
 const tags = [
     {name : "Tag1"},
@@ -34,10 +35,17 @@ const dashboardTags = (props) => {
           )
       }, []);
 
-    if (error) {
-        return <div>Error: {error.message}</div>
-    }else if(!isLoaded){
-        return <div>Loading..</div>
+      if (error) {
+        errormessage = error.message;
+        if(error.message.includes("No tags found")) errormessage = "Keine Tags gefunden";
+          return <div className="m-auto text-red font-bold">Error: {errormessage}</div>
+      }else if(!isLoaded){
+          return (<div className="m-auto flex flex-row">
+          <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
+          <div className=" text-darkgray">Loading...</div>
+        </div>)
+      }else if(loadedTags.length < 1){
+        return <div className="m-auto text-red font-bold">Keine Tags gefunden</div>
     }else {
 
   return (

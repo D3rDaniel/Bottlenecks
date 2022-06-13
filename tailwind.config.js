@@ -1,5 +1,3 @@
-const percentageWidth = require("tailwindcss-percentage-width");
-
 module.exports = {
   content: [
     "./resources/**/*.blade.php",
@@ -10,7 +8,9 @@ module.exports = {
     extend: {
         colors: {
             'customgray':'#F3F3F3',
+            'darkgray':'#ADADAD',
             'blue':'#42A8FD',
+            'darkblue':'#0D2481',
             'red':'#FF3838',
             'lightorange':'#FFBB29',
             'darkorange':'#FF8D17'
@@ -20,7 +20,4 @@ module.exports = {
         }
     },
   },
-  plugins: [
-    percentageWidth
-  ],
 }

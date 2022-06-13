@@ -1,14 +1,18 @@
-import React from 'react'
+import {React, useContext} from 'react'
 import DashboardAnkündigungen from '../components/dashboard/dashboardAnkündigungen/DashboardAnkündigungen'
 import Sidebar from '../components/dashboard/sidebar/Sidebar'
+import UserContext from '../store/user-context';
+import { Navigate } from 'react-router-dom';
 
-function AnkündigungenPage(props) {
-  return (
+function AnkündigungenPage() {
+  
+  const userCtx = useContext(UserContext);
+
+    return userCtx.user_id == null || userCtx.user_id == undefined ? <Navigate replace to='/Login'/> : 
     <div className='flex w-screen'>
-            <Sidebar></Sidebar>
-            <DashboardAnkündigungen userID={props.userID}></DashboardAnkündigungen>
+            <Sidebar username={userCtx.user_name}/>
+            <DashboardAnkündigungen userID={userCtx.user_id}/>
     </div>
-  )
 }
 
 export default AnkündigungenPage

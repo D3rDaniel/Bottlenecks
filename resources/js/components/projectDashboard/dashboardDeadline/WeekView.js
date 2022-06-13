@@ -6,12 +6,25 @@ const WeekView = (props) => {
     const [currentDate] = useState(new Date());
 
     const checkTaskWeek = (date) => {
-        let checkWeek;
-        let week = new Date(Date.parse(date));
-        
-        (week <= currentDate) ? checkWeek = true : checkWeek = false;
+        let task_day = date.substring(10,8);
+        let task_month = date.substring(7,5);
+        let task_year = date.substring(4,0);
 
-        return checkWeek;
+        let day_difference = parseInt(task_day)-currentDate.getDate();
+        let month_difference = parseInt(task_month)-(currentDate.getMonth()+1);
+        let year_difference = parseInt(task_year)-currentDate.getFullYear();
+
+        //console.log("task day: " + task_day + ", current day: " + currentDate.getDate() + ", difference: " + day_difference)
+        //console.log("task month: " + task_month + ", current month: " + currentDate.getMonth() + ", difference: " + month_difference)
+        //console.log("task year: " + task_year + ", current year: " + currentDate.getFullYear() + ", difference: " + year_difference)
+
+        if(year_difference < -1 || year_difference > 1) return false
+        let total_difference = day_difference + (month_difference*31) + (year_difference*12*31)
+
+        //console.log(total_difference);
+
+        if(total_difference >= 0 && total_difference < 8) return true;
+        else return false;
     }
 
     useEffect( () => {
@@ -22,20 +35,20 @@ const WeekView = (props) => {
     <div className="w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl">
         <div className="mt-2 ml-5 font-bold">Endet in einer Woche:</div>
         {props.tasks.map((task, index) => {
-            return (checkTaskWeek(task.date) ? (      
+            return (checkTaskWeek(task.due_date) ? (      
             <MinView
                 title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
                 fullTitle = {task.title}
-                description = {"DummyDesc"}//{task.description}
+                description = {task.description}
                 comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                status = {task.status}//{task.status.title}
-                prio = {task.prio}//{task.priority.title}
+                status = {task.status.title}
+                prio = {task.priority.title}
                 completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
-                date = {task.date}//{task.due_date}
-                updated_at = {"Dummy Updatet"}//{task.updated_at.substring(0,10)}
-                creator = {"DummyErsteller"}//{task.creator.username}
-                assignee = {"DummyAssign"}//{task.assignee}
-                tag = {"dummyTag"}//{task.tag.title == null ? "keine Tag" : task.tag.title}
+                date = {task.due_date}
+                updated_at = {task.updated_at.substring(0,10)}
+                creator = {task.creator.username}
+                assignee = {task.assignee.username}
+                tag = {task.tag.title == null ? "keine Tag" : task.tag.title}
                 key={index}>
             </MinView>
             ) : (null))

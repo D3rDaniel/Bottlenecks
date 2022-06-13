@@ -3,9 +3,10 @@ import {React, useState, useEffect} from 'react'
 import Searchbar from './searchbar/SearchBar'
 import MinView from './RoomsMinView'
 
-import Plus from '../../../../images/icons/plus.png'
 import CreateRoomButton from './CreateRoomButton'
 import NewRoomPopup from './popup/NewRoomPopup'
+import Loading from '../../../../images/icons/loading-spinner.png'
+import RoomBookingPopup from './popup/RoomBookingPopup'
 
 const rooms = [
     {title : "Dösraum" , 
@@ -39,8 +40,12 @@ const rooms = [
 const dashboardRooms = (props) => {
 
   const [popupTrigger, setPopupTrigger] = useState(false)
+  const [popupTriggerBooking, setPopupTriggerBooking] = useState(false)
   const changePopupTriggerValue = () => {
     setPopupTrigger(!popupTrigger);
+  }
+  const changePopupTriggerValueBooking = () => {
+    setPopupTriggerBooking(!popupTriggerBooking);
   }
 
     const [error, setError] = useState(null);
@@ -66,10 +71,25 @@ const dashboardRooms = (props) => {
           )
       }, []);
 
-    if (error) {
-        return <div>Error: {error.message}</div>
-    }else if(!isLoaded){
-        return <div>Loading..</div>
+      if (error) {
+        errormessage = error.message;
+        if(error.message.includes("No rooms found")) errormessage = "Keine Räume gefunden";
+          return <div className="m-auto text-red font-bold">Error: {errormessage}</div> 
+      }else if(!isLoaded){
+          return (<div className="m-auto flex flex-row">
+          <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
+          <div className=" text-darkgray">Loading...</div>
+        </div>)
+      }else if(loadedRooms.length < 1){
+        return (
+        <>
+          <div className="flex flex-col justify-center items-center w-full h-screen text-red font-bold">
+            <h2>Keine Räume gefunden</h2>
+            <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
+          </div>
+          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
+        </>
+        )
     }else {
 
   return (
@@ -79,7 +99,8 @@ const dashboardRooms = (props) => {
         <div className="h-full w-full">
             {loadedRooms.map((room, index) => {
                 return (
-                    <MinView 
+                    <MinView
+                        changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
                     ></MinView>
@@ -90,6 +111,7 @@ const dashboardRooms = (props) => {
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
         <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
+        <RoomBookingPopup trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} />
     </div>
   )}
 }

@@ -10,16 +10,23 @@ const elements = [
     {label: "Priorität", selected: false},
   ];
 
-const SortListOffeneTasks = () => {
+const SortListOffeneTasks = (props) => {
+
+  const sortElements = (event, rotate) => {
+    props.sortElements(event, rotate);
+  }
+
   return (
     <>
       <div className="flex w-4/5 pl-20 justify-around">
         {elements.map((element, index) => {
             return (
                 <SortElement
+                    id={index}
                     label={element.label}
                     selected={element.selected}
-                    key={index}>
+                    key={index}
+                    sortElements={sortElements}>
                 </SortElement>
         )
         })}

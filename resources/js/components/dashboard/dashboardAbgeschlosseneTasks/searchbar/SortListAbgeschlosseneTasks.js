@@ -12,16 +12,21 @@ const elements = [
     {label: "Abschluss", selected: false},
   ];
 
-const SortListAbgeschlosseneTasks = () => {
+const SortListAbgeschlosseneTasks = (props) => {
+  const sortElements = (event, rotate) =>{
+    props.sortElements(event, rotate)
+  }
   return (
     <>
       <div className="flex w-11/12 pl-16 justify-around">
         {elements.map((element, index) => {
             return (
                 <SortElement
+                  id={index}
                     label={element.label}
                     selected={element.selected}
-                    key={index}>
+                    key={index}
+                    sortElements={sortElements}>
                 </SortElement>
         )
         })}
