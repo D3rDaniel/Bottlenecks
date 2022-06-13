@@ -1,16 +1,18 @@
-import React from 'react'
+import {React, useContext} from 'react'
 import Sidebar from '../components/dashboard/sidebar/Sidebar'
 import DashboardOffeneTasks from '../components/dashboard/dashboardOffeneTasks/DashboardOffeneTasks'
-import PreviousMap from 'postcss/lib/previous-map';
+import UserContext from '../store/user-context';
+import { Navigate } from 'react-router-dom';
 
-function OffeneTasksPage(props) {
+function OffeneTasksPage() {
 
-  return (
+  const userCtx = useContext(UserContext);
+
+    return userCtx.user_id == null || userCtx.user_id == undefined ? <Navigate replace to='/Login'/> : 
     <div className='flex w-screen'>
-            <Sidebar></Sidebar>
-            <DashboardOffeneTasks userID={props.userID}></DashboardOffeneTasks>
+            <Sidebar username={userCtx.user_name}/>
+            <DashboardOffeneTasks userID={userCtx.user_id}/>
     </div>
-  )
 }
 
 export default OffeneTasksPage

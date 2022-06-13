@@ -44,7 +44,6 @@ function DashboardProjects (props) {
           
       }, []);
       useEffect(() => {
-        console.log(loadedProjects)
       }, [loadedProjects])
 
 

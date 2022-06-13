@@ -1,14 +1,18 @@
-import React from 'react'
-import Sidebar from '../components/dashboard/sidebar/Sidebar'
-import DashboardProjects from '../components/dashboard/dashboardProjects/DashboardProjects'
+import {React, useContext} from 'react';
+import Sidebar from '../components/dashboard/sidebar/Sidebar';
+import DashboardProjects from '../components/dashboard/dashboardProjects/DashboardProjects';
+import UserContext from '../store/user-context';
+import { Navigate } from 'react-router-dom';
 
-const DashboardPage = (props) => {
-    return(
+function DashboardPage () {
+
+    const userCtx = useContext(UserContext);
+
+    return userCtx.user_id == null || userCtx.user_id == undefined ? <Navigate replace to='/Login'/> : 
         <div className='flex w-screen'>
-            <Sidebar/>
-            <DashboardProjects userID={props.userID}/>
+            <Sidebar username={userCtx.user_name}/>
+            <DashboardProjects userID={userCtx.user_id}/>
         </div>
-    )
 }
 
 export default DashboardPage

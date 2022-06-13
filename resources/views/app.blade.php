@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Stiva - Easily Manage Your Tasks</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="256x256" href="{{ asset('/images/stivaLogo_nobg.png') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>

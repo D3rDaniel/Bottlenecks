@@ -1,42 +1,52 @@
-import React from 'react'
+import {React, useState} from 'react'
 import InputField from '../components/forms/InputField'
 import Logo from '../../images/logo.jpg'
 import {Link} from 'react-router-dom'
 
 function RegisterPage() {
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [username, setUserName] = useState("")
+    const [password, setPassword] = useState("")
+    const [pwdConfirm, setPwdConfirm] = useState("")
+
   return (
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div class="items-center"><img src= {Logo} alt="logo" className="h-16 w-16 mr-2 pl-2 float-left "></img></div>
-        <div class="items-center"><h2 class="text-center pb-6 text-5xl">Registrieren</h2></div>
-        <div class="w-full">
-            <form class="bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4">
-            <div class="mb-4">
-                <InputField id="name" placeholder="Name..."></InputField>
-            </div>
-            <div class="mb-6">
-                <InputField id="email" placeholder="Email..."></InputField>
-            </div>
-            <div class="mb-4">
-                <InputField id="username" placeholder="Username..."></InputField>
-            </div>
-            <div class="mb-4">
-                <InputField id="password" placeholder="Passwort..."></InputField>
-            </div>
-            <div class="mb-4">
-                <InputField id="password_again" placeholder="Passwort wiederholen..."></InputField>
-            </div>
-            <div class="flex items-center justify-end">
-                <Link to='/login'><a class="inline-block align-baseline mr-16 font-bold text-sm text-blue-500 hover:text-blue" type="button">
-                Bereits registriert?
-                </a></Link>
-                
-                <button class="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="button">
-                Registrieren
-                </button>
-                
-            </div>
-            </form>
+    <div className="m-auto bg-white rounded-xl w-1/3 p-5">
+        <div className='flex flex-row border-b-2 border-blue mb-5 pb-2'>
+            <img src= {Logo} alt="logo" className='w-12 h-fit'></img>
+            <div className="font-bold text-3xl mt-auto mb-auto">Registrieren</div>
         </div>
+            <form className="p-5">
+                <div className='mb-4 flex flex-row'>
+                    <div className="pr-1">
+                    <InputField id="first_name" placeholder="Vorname" onChange={setFirstName}></InputField>
+                </div>
+                <div className="pl-1">
+                    <InputField id="last_name" placeholder="Nachname" onChange={setLastName}></InputField>
+                </div>
+                </div>
+                
+                <div className="mb-2">
+                    <InputField id="email" placeholder="E-Mail" onChange={setEmail}></InputField>
+                </div>
+                <div className="mb-6">
+                    <InputField id="username" placeholder="Nutzername" onChange={setUserName}></InputField>
+                </div>
+                <div className="mb-2">
+                    <InputField id="password" placeholder="Passwort" onChange={setPassword}></InputField>
+                </div>
+                <div className="mb-6">
+                    <InputField id="pwd_confirm" placeholder="Passwort bestätigen" onChange={setPwdConfirm}></InputField>
+                </div>
+                <div className="flex items-center justify-between">
+                    <Link to="/Login" className='text-blue underline'>Du bist bereits registriert?</Link>
+                    <button className="bg-blue hover:bg-darkblue text-white font-bold py-2 px-4 rounded-xl" type="button" onClick={function(){console.log(email + " " + password)}}>
+                    Registrieren
+                    </button>
+                </div>
+            </form>
     </div>
   )
 }
