@@ -22,7 +22,7 @@ function LoginPage() {
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               );
 
-        let passwordIsValid = (password.length >= 8 && !password.contains(' '))
+        let passwordIsValid = (password.length >= 8)
 
         if(emailIsValid && passwordIsValid) return true
         else {
@@ -41,18 +41,18 @@ function LoginPage() {
     }
 
     function handleLogin(){
-        if(true){
+        if(checkInput()){
             const loginData = {
                 "email" : email,
                 "password" : password
             }
 
             const url = "http://127.0.0.1:8000/api/login";
-            axios.post(url, loginData).then(response => response.json())
-            .then((data) => {
-                if(data.success) {
-                    userCtx.login(data.username.id, data.username.username, data.username.email, data.bearer_token);
-                    alert("Erfolgreich angemeldet!")
+            axios.post(url, loginData).then(function(response){
+                if(response.data.success == true) {
+                    userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.bearer_token);
+                    alert("Erfolgreich angemeldet!");
+                    navigate('/');
                 }
                 else alert("Anmeldung fehlgeschlagen!");
             })

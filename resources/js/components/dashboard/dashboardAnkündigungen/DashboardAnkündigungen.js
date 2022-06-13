@@ -1,7 +1,9 @@
-import {React, useState, useEffect } from 'react'
-import AnnouncementMinimumView from './AnnouncementMinimumView'
-import SearchBarAnkündigungen from './searchbar/SearchBarAnkündigungen'
-import Loading from '../../../../images/icons/loading-spinner.png'
+import {React, useState, useEffect } from 'react';
+import AnnouncementMinimumView from './AnnouncementMinimumView';
+import SearchBarAnkündigungen from './searchbar/SearchBarAnkündigungen';
+import Loading from '../../../../images/icons/loading-spinner.png';
+import axios from 'axios';
+
 const tasks = [
   {project: "Projekt aB", created_at: "01.01.2022" , title: "Message 1", description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
   {project: "Projekt 420", created_at: "20.04.2022" , title: "Message 2", description: "afasdfafdöafhöosdSMOKEWEEDEVERYDAYjöadfhaöNOTREALLY"},
@@ -19,20 +21,17 @@ const DashboardAnkündigungen = (props) => {
         setIsLoaded(false);
         const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/announcements"
 
-        fetch(url, {
+        axios.get(url, {
           headers: {
             'Accept': 'application/json',
+            'Authorization': 'Bearer ' + props.token
           }
         })
-          .then(response => response.json())
-          .then((data) => {
-            setIsLoaded(true);
-            setAnnouncements(data["announcements"]);  
+          .then(function(response) {setIsLoaded(true);
+            setAnnouncements(response.data["announcements"]);  
             },(error) =>{
               setIsLoaded(true);
-              setError(error);
-            }
-          )
+              setError(error);})
       }, []);
 
 

@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react'
 import SearchBarAbgeschlosseneTasks from './searchbar/SearchBarAbgeschlosseneTasks'
 import ProjectMinimumView from './ProjectMinimumViewAbgeschlosseneTasks'
 import Loading from '../../../../images/icons/loading-spinner.png'
+import axios from 'axios'
 
 const elements = [
   {project: "Projekt aB", created_at: "01.01.2022" , title: "Title2", deadline: "25.05.2022", finished_at:"24.05.2022", priority: "hoch", tag:"back-end", finished_state:"abgeschlossen", description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", room: "A009", finish_comment: "War ganz easy, Abschlusskommentar"},
@@ -21,20 +22,18 @@ function DashboardAbgeschlosseneTasks(props) {
         setIsLoaded(false);
         const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/tasks/completed";
 
-        fetch(url, {
+        axios.get(url, {
           headers: {
             'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + props.token
           }
         })
-          .then(response => response.json())
-          .then((data) => {
-            setIsLoaded(true);
-            setTasks(data["tasks"]);  
+          .then(function(response) {setIsLoaded(true);
+            setTasks(response.data["tasks"]);
             },(error) =>{
               setIsLoaded(true);
-              setError(error);
-            }
-          )
+              setError(error);})
       }, []);
 
 

@@ -4,6 +4,7 @@ import ProjectMinimumView from './ProjectMinimumView'
 import CreateProjectButton from './CreateProjectButton'
 import NewProjectPopup from './popup/NewProjectPopup'
 import Loading from '../../../../images/icons/loading-spinner.png'
+import axios from 'axios'
 
 const projects = [
   {title: "Frontend", creator: "Hans Jürgen" , progress: 70, startDate: "01.05.2022", date: "09.05.2022"},
@@ -27,21 +28,18 @@ function DashboardProjects (props) {
         setIsLoaded(false);
         const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/projects";
 
-        fetch(url, {
+        axios.get(url, {
           headers: {
             'Accept': 'application/json',
+            'Authorization': 'Bearer ' + props.token
           }
         })
-          .then(response => response.json())
-          .then((data) => {
-            setIsLoaded(true);
-            setProjects(data["projects_created"].concat(data["project-member_of"]));  
+          .then(function(response) {setIsLoaded(true);
+            console.log(response)
+            setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
             },(error) =>{
               setIsLoaded(true);
-              setError(error);
-            }
-          )
-          
+              setError(error);})
       }, []);
       useEffect(() => {
       }, [loadedProjects])
