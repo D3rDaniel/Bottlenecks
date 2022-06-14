@@ -23,6 +23,7 @@ class AnnouncementController extends Controller
      * Store a newly created Announcment
      * @param StoreAnnouncementRequest $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(StoreAnnouncementRequest $request):JsonResponse
     {
@@ -54,15 +55,16 @@ class AnnouncementController extends Controller
 
     /**
      * Show project by id
-     * @param $project_id
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id):JsonResponse
     {
         try {
             $announcement = Announcement::findOrFail($id);
 
-            $this->authorize('view', $announcement);
+            $this->authorize('view', [$announcement]);
 
             $res = [
                 'success'=>true,
@@ -85,6 +87,7 @@ class AnnouncementController extends Controller
      * @param UpdateAnnouncementRequest $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateAnnouncementRequest $request, $id):JsonResponse
     {
@@ -93,7 +96,7 @@ class AnnouncementController extends Controller
         try {
             $announcement = Announcement::findOrFail($id);
 
-            $this->authorize('update', $announcement);
+            $this->authorize('update', [$announcement]);
 
             $announcement->update($data);
             $res = [
@@ -120,7 +123,7 @@ class AnnouncementController extends Controller
         try {
             $announcement = Announcement::findOrFail($id);
 
-            $this->authorize('forceDelete', $announcement);
+            $this->authorize('forceDelete', [$announcement]);
         }
         catch (ModelNotFoundException $e) {
             return response()->json(['success'=>false, 'message' => 'Announcement not found'], 404);

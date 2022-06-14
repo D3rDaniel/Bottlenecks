@@ -17,7 +17,7 @@ class ProjectRoomController extends Controller
     public function index($projectId): \Illuminate\Http\JsonResponse
     {
         $project = Project::find($projectId);
-        $this->authorize('viewAny', $projectId);
+        $this->authorize('viewAny', [Room::class,$projectId]);
         if (!$project) {
             return response()->json(['success'=>false,'message' => 'Project not found'], 404);
         }

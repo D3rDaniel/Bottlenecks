@@ -82,7 +82,7 @@ class BookingController extends Controller
     public function show($id)
     {
         $booking = Booking::find($id);
-        $this->authorize('view', $booking);
+        $this->authorize('view', [$booking]);
         if (!$booking) {
             return response()->json([
                 'message' => 'Booking not found',
@@ -101,7 +101,7 @@ class BookingController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
-        //TODO: Update funktion
+
     }
 
     /**
@@ -114,7 +114,7 @@ class BookingController extends Controller
     {
         $booking = Booking::find($id);
 
-        $this->authorize('forceDelete', $booking);
+        $this->authorize('forceDelete', [$booking]);
         if (!$booking) {
             return response()->json([
                 'success' => false,
