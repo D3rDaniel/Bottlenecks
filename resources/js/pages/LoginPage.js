@@ -55,7 +55,7 @@ function LoginPage() {
                     navigate('/');
                 }
                 else alert("Anmeldung fehlgeschlagen!");
-            })
+            }).catch(function (error) {if (error.response) alert("Anmeldung fehlgeschlagen, es wurde kein Nutzer mit dieser E-Mail gefunden")})
         }
         else alert("Eingabe ist ungültig!");
     }
