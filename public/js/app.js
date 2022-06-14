@@ -2846,7 +2846,7 @@ function DashboardAbgeschlosseneTasks(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/tasks/completed";
+    var url = "http://127.0.0.1:8000/api/user/tasks/completed";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -4191,7 +4191,7 @@ function DashboardOffeneTasks(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/tasks/in-progress";
+    var url = "http://127.0.0.1:8000/api/user/tasks/in-progress";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',

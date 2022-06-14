@@ -20,7 +20,7 @@ function DashboardAbgeschlosseneTasks(props) {
 
     useEffect(() => {
         setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/tasks/completed";
+        const url = "http://127.0.0.1:8000/api/user/tasks/completed";
 
         axios.get(url, {
           headers: {
