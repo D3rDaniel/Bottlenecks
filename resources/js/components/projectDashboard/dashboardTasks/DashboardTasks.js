@@ -57,7 +57,7 @@ function DashboardTasks(props) {
       <div className="flex flex-col w-full mx-1 my-2">
           <SearchBar />
 
-          <div className="h-full w-full">
+          <div className="h-full w-full overflow-y-scroll">
             {loadedTasks.map((task, index) => {
               return (
                 <TaskMinimumView

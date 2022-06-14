@@ -875,6 +875,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .overflow-scroll{
   overflow: scroll;
 }
+.overflow-y-scroll{
+  overflow-y: scroll;
+}
 .rounded-full{
   border-radius: 9999px;
 }

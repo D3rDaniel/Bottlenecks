@@ -4829,7 +4829,7 @@ function DashboardProjects(props) {
         sortElements: sortElements,
         filterElements: filterElements
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "h-full w-full",
+        className: "h-full w-full overflow-y-scroll",
         children: filtered ? filteredProjects.map(function (project, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_ProjectMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             title: project.title.length > 30 ? project.title.substring(0, 27) + '...' : project.title,
@@ -9641,7 +9641,7 @@ function DashboardTasks(props) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "flex flex-col w-full mx-1 my-2",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "h-full w-full",
+        className: "h-full w-full overflow-y-scroll",
         children: loadedTasks.map(function (task, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,

@@ -119,7 +119,7 @@ function DashboardProjects (props) {
         <div className="flex flex-col w-full m-1 ml-2">
           <SearchBar sortElements={sortElements} filterElements={filterElements} />
           
-          <div className="h-full w-full">
+          <div className="h-full w-full overflow-y-scroll">
             {
               filtered ? 
               filteredProjects.map((project, index) => {
