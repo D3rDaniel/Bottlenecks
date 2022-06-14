@@ -16,23 +16,21 @@ const dashboardAnkuendigung = (props) => {
     const [loadedAnnouncements, setAnnouncements] = useState([]);
 
     useEffect(() => {
-        setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/announcements";
-        fetch(url, {
-          headers: {
-            'Accept': 'application/json',
-          }
-        })
-          .then(response => response.json())
-          .then((data) => {
+      setIsLoaded(false);
+      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/announcements";
+  
+      axios.get(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + props.token
+        }
+      })
+        .then(function(response) {setIsLoaded(true);
+          setAnnouncements(response.data["announcements"]);  
+          },(error) =>{
             setIsLoaded(true);
-            setAnnouncements(data["announcements"]);
-            },(error) =>{
-              setIsLoaded(true);
-              setError(error);
-            }
-          )
-      }, []);
+            setError(error);})
+    }, []);
 
       if (error) {
         let errormessage = error.message;

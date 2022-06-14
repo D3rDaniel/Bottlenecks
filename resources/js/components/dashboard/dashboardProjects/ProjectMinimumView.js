@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Arrow from '../../../../images/icons/arrow-black.png'
 import TaskMaximumView from './ProjectMaximumView'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Progressbar from '../../../progressBar'
+import ProjectContext from '../../../store/project-context'
 
 const ProjectMinimumView = (props) => {
+
+    const projectCtx = useContext(ProjectContext);
+    const navigate = useNavigate();
+
+    function handleOpenProject(){
+        projectCtx.select(props.id, props.fullTitle, props.creator);
+        navigate("/project")
+    }
 
     const [progressCompleted, setProgressCompleted] = useState("w-0%")
     const [rotate, setRotate] = useState(0);
@@ -52,7 +61,7 @@ const ProjectMinimumView = (props) => {
             <label className="w-1/5">{props.date}</label>
 
             <div  className="flex ml-auto">
-                <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" ><Link to='/project'>Öffnen</Link></button>
+                <button type='button' onClick={handleOpenProject} className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" ><Link to='/project'>Öffnen</Link></button>
                 <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
             </div>
         {rotate ? <TaskMaximumView title={props.fullTitle} description={props.description}/> : null}

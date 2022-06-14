@@ -1,10 +1,10 @@
 import {React, useState, useEffect} from 'react'
-
 import SearchBar from './searchbar/SearchBar'
 import TaskMinimumView from './TaskMinimumView'
 import NewTaskPopup from './popup/NewTaskPopup'
 import CreateTaskButton from './CreateTaskButton'
 import Loading from '../../../../images/icons/loading-spinner.png'
+import axios from 'axios'
 
 const tasks = [
   {title: "Task1", status: "abgeschlossen", prio: "Hoch", completedDate: "06.05.2022" , date: "09.05.2022"},
@@ -24,23 +24,21 @@ function DashboardTasks(props) {
   const [loadedTasks, setTasks] = useState([]);
 
   useEffect(() => {
-      setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
-      fetch(url, {
-        headers: {
-          'Accept': 'application/json',
-        }
-      })
-        .then(response => response.json())
-        .then((data) => {
+    setIsLoaded(false);
+    const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
+
+    axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    })
+      .then(function(response) {setIsLoaded(true);
+        setTasks(response.data["tasks"]);  
+        },(error) =>{
           setIsLoaded(true);
-          setTasks(data["tasks"]);
-          },(error) =>{
-            setIsLoaded(true);
-            setError(error);
-          }
-        )
-    }, []);
+          setError(error);})
+  }, []);
       
     if (error) {
       errormessage = error.message;

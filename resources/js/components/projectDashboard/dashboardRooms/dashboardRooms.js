@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from 'react'
+import axios from 'axios'
 
 import Searchbar from './searchbar/SearchBar'
 import MinView from './RoomsMinView'
@@ -53,28 +54,24 @@ const dashboardRooms = (props) => {
     const [loadedRooms, setRooms] = useState([]);
 
     useEffect(() => {
-        setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
-        fetch(url, {
-          headers: {
-            'Accept': 'application/json',
-          }
-        })
-          .then(response => response.json())
-          .then((data) => {
-            setIsLoaded(true);
-            setRooms(data["rooms"]);
-            },(error) =>{
-              setIsLoaded(true);
-              setError(error);
-            }
-          )
-      }, []);
+      setIsLoaded(false);
+      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
+  
+      axios.get(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + props.token
+        }
+      })
+        .then(function(response) {setIsLoaded(true);
+          setRooms(response.data["rooms"]);  
+          }).catch(function(response){
+              setIsLoaded(true)
+              setError(true)})
+    }, []);
 
       if (error) {
-        errormessage = error.message;
-        if(error.message.includes("No rooms found")) errormessage = "Keine Räume gefunden";
-          return <div className="m-auto text-red font-bold">Error: {errormessage}</div> 
+          return <div className="m-auto text-red font-bold">Es ist ein Fehler aufgetreten!</div> 
       }else if(!isLoaded){
           return (<div className="m-auto flex flex-row">
           <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>

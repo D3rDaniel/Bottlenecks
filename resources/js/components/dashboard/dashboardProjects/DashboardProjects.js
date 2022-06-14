@@ -34,7 +34,6 @@ function DashboardProjects (props) {
           }
         })
           .then(function(response) {setIsLoaded(true);
-            console.log(response)
             setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
             },(error) =>{
               setIsLoaded(true);
@@ -129,6 +128,7 @@ function DashboardProjects (props) {
                 <ProjectMinimumView
                   title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
                   fullTitle = {project.title}
+                  id = {project.id}
                   creator={project.creator_user_id}
                   progress={project.progress_percentage}
                   startDate={project.created_at.substring(0,10)}
@@ -145,6 +145,7 @@ function DashboardProjects (props) {
                 <ProjectMinimumView
                   title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
                   fullTitle = {project.title}
+                  id = {project.id}
                   creator={project.creator_user_id}
                   progress={project.progress_percentage}
                   startDate={project.created_at.substring(0,10)}
