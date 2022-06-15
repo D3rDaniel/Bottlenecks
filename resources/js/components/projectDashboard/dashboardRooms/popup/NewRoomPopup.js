@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
-import TimeChooser from '../../../forms/TimeChooser';
+import UserContext from '../../../../store/user-context'
 
 function NewRoomPopup({trigger, onClick}) {
+    const user = useContext(UserContext);
 
     const [name, setName] = useState();
     const [size, setSize] = useState();
     const [number, setNumber] = useState();
     const [open_at, setOpen_at] = useState();
     const [close_at, setClose_at] = useState();
-    const [open_at_weekend, setOpen_at_weekend] = useState(false);
+    const [open_at_weekend, setOpen_at_weekend] = useState(0);
     const [description, setDescription] = useState();
     const [address, setAddress] = useState();
     const [equipment, setEquipment] = useState();
@@ -20,16 +21,17 @@ function NewRoomPopup({trigger, onClick}) {
     const getNumber = (data) => {setNumber(data);}
     const getOpen_at = (data) => {setOpen_at(data); }
     const getClose_at = (data) => {setClose_at(data);}
+
     const getOpen_at_weekend = (event) => {
         if(event.target.checked){
-            setOpen_at_weekend(true);
-            console.log("should be true")
+            setOpen_at_weekend(1);
         }
+
         if(!event.target.checked){
-            setOpen_at_weekend(false);
-            console.log("should be false")
+            setOpen_at_weekend(0);
         }
     }
+
     const getDescription = (data) => {setDescription(data);}
     const getAddress = (data) => {setAddress(data);}
     const getEquipment = (data) => {setEquipment(data);}
@@ -38,26 +40,34 @@ function NewRoomPopup({trigger, onClick}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         const room = {
-            name: name,
-            size: size,
-            number: number,
-            open_at: open_at,
-            close_at: close_at,
-            open_at_weekend: open_at_weekend,
-            address: address,
+            title: name,
+            capacity: size,
+            room_number: number,
+            opening_time: open_at,
+            closing_time: close_at,
+            opened_on_weekends: open_at_weekend,
+            address_info: address,
             description: description,
-            equipment: equipment,
+            equipment_info: equipment,
         }
-        console.log(room)
-       /*
+
        const url = "http://127.0.0.1:8000/api/room/"; 
-       axios.post(url, {room})
+        axios.post(url, room, {
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + user.user_token
+            }
+        })
         .then(res => {
             console.log(res);
             console.log(res.data);
         })
-        */
+        .catch(res => {
+            console.log(res);
+        })
+
     }
+    
     const pickTime = (event) =>{
         console.log(event)
     }
@@ -81,9 +91,9 @@ function NewRoomPopup({trigger, onClick}) {
                                {/* <div className="pr-3"><InputField  onChange={getOpen_at} placeholder="Öffnet um..."></InputField></div>
                                 <div className="pl-3"><InputField  onChange={getClose_at} placeholder="Schließt um..."></InputField></div> */ }
                                 <label className='p-2 mr-4'>Öffent um:</label>
-                                <TimeChooser pickTime={getOpen_at} value={open_at}/>
+                                <input type="time" onChange={e => {setOpen_at(e.target.value+":00")}}></input>
                                 <label className='p-2 mr-4'>Schließt um:</label>
-                                <TimeChooser pickTime={getClose_at} value={close_at}/>
+                                <input type="time" onChange={e => {setClose_at(e.target.value+":00")}}></input>
                             </div>
                             <div className="flex justify-center items-center  p-4 mb-4">
                                 <input className="mr-6" id="weekend_checkbox" name="weekend_checkbox" type="checkbox" onChange={getOpen_at_weekend}/>
@@ -109,8 +119,6 @@ function NewRoomPopup({trigger, onClick}) {
                         <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="submit">
                         Erstellen
                         </button>
-                        
-                        
                     </div>
                 </form>
             </div>

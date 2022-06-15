@@ -8559,7 +8559,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../forms/InputField */ "./resources/js/components/forms/InputField.js");
 /* harmony import */ var _forms_TextArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../forms/TextArea */ "./resources/js/components/forms/TextArea.js");
-/* harmony import */ var _forms_TimeChooser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../forms/TimeChooser */ "./resources/js/components/forms/TimeChooser.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../store/user-context */ "./resources/js/store/user-context.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -8583,6 +8583,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function NewRoomPopup(_ref) {
   var trigger = _ref.trigger,
       onClick = _ref.onClick;
+  var user = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
       _useState2 = _slicedToArray(_useState, 2),
@@ -8609,7 +8610,7 @@ function NewRoomPopup(_ref) {
       close_at = _useState10[0],
       setClose_at = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState12 = _slicedToArray(_useState11, 2),
       open_at_weekend = _useState12[0],
       setOpen_at_weekend = _useState12[1];
@@ -8651,13 +8652,11 @@ function NewRoomPopup(_ref) {
 
   var getOpen_at_weekend = function getOpen_at_weekend(event) {
     if (event.target.checked) {
-      setOpen_at_weekend(true);
-      console.log("should be true");
+      setOpen_at_weekend(1);
     }
 
     if (!event.target.checked) {
-      setOpen_at_weekend(false);
-      console.log("should be false");
+      setOpen_at_weekend(0);
     }
   };
 
@@ -8676,25 +8675,28 @@ function NewRoomPopup(_ref) {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var room = {
-      name: name,
-      size: size,
-      number: number,
-      open_at: open_at,
-      close_at: close_at,
-      open_at_weekend: open_at_weekend,
-      address: address,
+      title: name,
+      capacity: size,
+      room_number: number,
+      opening_time: open_at,
+      closing_time: close_at,
+      opened_on_weekends: open_at_weekend,
+      address_info: address,
       description: description,
-      equipment: equipment
+      equipment_info: equipment
     };
-    console.log(room);
-    /*
-    const url = "http://127.0.0.1:8000/api/room/"; 
-    axios.post(url, {room})
-     .then(res => {
-         console.log(res);
-         console.log(res.data);
-     })
-     */
+    var url = "http://127.0.0.1:8000/api/room/";
+    axios.post(url, room, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + user.user_token
+      }
+    }).then(function (res) {
+      console.log(res);
+      console.log(res.data);
+    })["catch"](function (res) {
+      console.log(res);
+    });
   };
 
   var pickTime = function pickTime(event) {
@@ -8740,15 +8742,19 @@ function NewRoomPopup(_ref) {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 className: "p-2 mr-4",
                 children: "\xD6ffent um:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_TimeChooser__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                pickTime: getOpen_at,
-                value: open_at
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                type: "time",
+                onChange: function onChange(e) {
+                  setOpen_at(e.target.value + ":00");
+                }
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 className: "p-2 mr-4",
                 children: "Schlie\xDFt um:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_TimeChooser__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                pickTime: getClose_at,
-                value: close_at
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                type: "time",
+                onChange: function onChange(e) {
+                  setClose_at(e.target.value + ":00");
+                }
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "flex justify-center items-center  p-4 mb-4",
