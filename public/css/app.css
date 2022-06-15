@@ -642,6 +642,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-16{
   margin-right: 4rem;
 }
+.mb-20{
+  margin-bottom: 5rem;
+}
 .block{
   display: block;
 }
@@ -1123,6 +1126,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pl-16{
   padding-left: 4rem;
 }
+.pl-7{
+  padding-left: 1.75rem;
+}
+.pb-10{
+  padding-bottom: 2.5rem;
+}
+.pr-12{
+  padding-right: 3rem;
+}
+.pr-16{
+  padding-right: 4rem;
+}
+.pr-\[72px\]{
+  padding-right: 72px;
+}
 .text-center{
   text-align: center;
 }
@@ -1197,6 +1215,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-green-600{
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity));
+}
+.text-gray-500{
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 .underline{
   -webkit-text-decoration-line: underline;

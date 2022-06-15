@@ -3300,37 +3300,6 @@ var SortListAbgeschlosseneTasks = function SortListAbgeschlosseneTasks(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/dashboardAccountVerwalten/ChangeEmailAndPasswordButton.js":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/dashboardAccountVerwalten/ChangeEmailAndPasswordButton.js ***!
-  \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-function ChangeEmailAndPasswordButton(_ref) {
-  var onClick = _ref.onClick;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-    className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
-    type: "button",
-    onClick: onClick,
-    children: "Passwort / Email \xE4ndern"
-  });
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChangeEmailAndPasswordButton);
-
-/***/ }),
-
 /***/ "./resources/js/components/dashboard/dashboardAccountVerwalten/DashboardAccountVerwalten.js":
 /*!**************************************************************************************************!*\
   !*** ./resources/js/components/dashboard/dashboardAccountVerwalten/DashboardAccountVerwalten.js ***!
@@ -3344,10 +3313,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../forms/InputField */ "./resources/js/components/forms/InputField.js");
-/* harmony import */ var _ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChangeEmailAndPasswordButton */ "./resources/js/components/dashboard/dashboardAccountVerwalten/ChangeEmailAndPasswordButton.js");
-/* harmony import */ var _popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./popup/ChangePasswordAndEmailPopup */ "./resources/js/components/dashboard/dashboardAccountVerwalten/popup/ChangePasswordAndEmailPopup.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3365,182 +3333,119 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-function DashboardAccountVerwalten() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+function DashboardAccountVerwalten(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
-      popupTrigger = _useState2[0],
-      setPopupTrigger = _useState2[1];
+      userName = _useState2[0],
+      setUserName = _useState2[1];
 
-  var changePopupTriggerValue = function changePopupTriggerValue() {
-    setPopupTrigger(!popupTrigger);
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      firstName = _useState4[0],
+      setFirstName = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      lastName = _useState6[0],
+      setLastName = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      email = _useState8[0],
+      setEmail = _useState8[1];
+
+  var changeInputs = function changeInputs() {
+    var url = "http://127.0.0.1:8000/api/user/" + props.user.user_id;
+    axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': props.token
+      }
+    }).then(function (response) {
+      console.log(response);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "flex flex-col w-full m-1 ml-2",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "w-full h-full bg-white",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_popup_ChangePasswordAndEmailPopup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        trigger: popupTrigger,
-        onClick: changePopupTriggerValue
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        className: "text-5xl pt-5 pl-9",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "text-5xl pt-5 pl-9 pb-10",
         children: "Profil"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "w-full",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
-          className: "bg-white shadow-md rounded-lg w-720 px-10 pt-12 pb-14 mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                className: "pr-4",
-                htmlFor: "username",
-                children: "Nutzername:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                id: "username",
-                value: "person123"
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-              className: "pr-4",
-              children: "Passwort:"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                className: "pr-10",
-                htmlFor: "forename",
-                children: "Vorname:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                id: "forename",
-                value: "Max"
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                className: "pr-7",
-                htmlFor: "lastname",
-                children: "Nachname:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                className: "w-36",
-                id: "lastname",
-                value: "Mustermann"
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "mb-16",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-              className: "pr-4",
-              children: "Email:"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "flex items-center justify-between",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-              className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
-              type: "button",
-              children: "\xC4nderungen speichern"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ChangeEmailAndPasswordButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
-              onClick: changePopupTriggerValue
-            })]
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-6 flex ml-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "pr-4",
+            htmlFor: "username",
+            children: "Nutzername:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            onChange: function onChange(e) {
+              return setUserName(e.target.value);
+            },
+            placeholder: props.user.user_name,
+            className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           })]
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-6 flex ml-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "pr-10",
+            htmlFor: "forename",
+            children: "Vorname:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            onChange: function onChange(e) {
+              return setFirstName(e.target.value);
+            },
+            type: "text",
+            placeholder: props.user.user_firstName,
+            className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-6 flex ml-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "pr-7 ",
+            htmlFor: "lastname",
+            children: "Nachname:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            onChange: function onChange(e) {
+              return setLastName(e.target.value);
+            },
+            type: "text",
+            placeholder: props.user.user_lastName,
+            className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-20 flex ml-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "pr-[72px]",
+            children: "Email:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            onChange: function onChange(e) {
+              return setEmail(e.target.value);
+            },
+            type: "text",
+            placeholder: props.user.user_email,
+            className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "flex justify-center",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+            onClick: changeInputs,
+            children: "\xC4nderungen speichern"
+          })
+        })]
       })]
     })
   });
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardAccountVerwalten);
-
-/***/ }),
-
-/***/ "./resources/js/components/dashboard/dashboardAccountVerwalten/popup/ChangePasswordAndEmailPopup.js":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/dashboardAccountVerwalten/popup/ChangePasswordAndEmailPopup.js ***!
-  \**********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _forms_InputField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../forms/InputField */ "./resources/js/components/forms/InputField.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-function ChangePasswordAndEmailPopup(_ref) {
-  var trigger = _ref.trigger,
-      onClick = _ref.onClick;
-  return trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      className: "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "w-full",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
-          className: "bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-            className: "items-center mb-6 text-5xl font-body",
-            children: "Passwort oder Email \xE4ndern"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              id: "oldPassword",
-              placeholder: "altes Passwort..."
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              id: "newPassword",
-              placeholder: "neues Passwort..."
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              id: "repeatnewPassword",
-              placeholder: "Passwort wiederholen..."
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "mb-6",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              id: "email",
-              placeholder: "Email..."
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-            className: "flex items-center justify-between",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-              onClick: onClick,
-              className: "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
-              type: "button",
-              children: "Abbruch"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-              className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
-              type: "button",
-              children: "Erstellen"
-            })]
-          })]
-        })
-      })
-    })
-  }) : "";
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChangePasswordAndEmailPopup);
 
 /***/ }),
 
@@ -11761,8 +11666,8 @@ function UserContextProvider(props) {
       user_id: null,
       user_name: null,
       user_email: null,
-      user_first_name: null,
-      user_last_name: null,
+      user_firstName: null,
+      user_lastName: null,
       user_token: null
     });
   }
@@ -11771,8 +11676,8 @@ function UserContextProvider(props) {
     user_id: userLogin.user_id,
     user_name: userLogin.user_name,
     user_email: userLogin.user_email,
-    user_first_name: userLogin.user_firstName,
-    user_last_name: userLogin.user_lastName,
+    user_firstName: userLogin.user_firstName,
+    user_lastName: userLogin.user_lastName,
     user_token: userLogin.user_token,
     login: setLogin,
     clear: clearLogin
