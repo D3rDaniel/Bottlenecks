@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import Loading from '../../../../images/icons/loading-spinner.png'
+import axios from 'axios';
 
 import Absolut from './absoluteView';
 import InfoView from './InfoView';
@@ -26,25 +27,22 @@ const dashboardOverView = (props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedOverview, setOverview] = useState({});
   
-      useEffect(() => {
-          setIsLoaded(false);
-          const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/overview";
+    useEffect(() => {
+      setIsLoaded(false);
+      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/overview";
   
-          fetch(url, {
-            headers: {
-              'Accept': 'application/json',
-            }
-          })
-            .then(response => response.json())
-            .then((data) => {
-              setIsLoaded(true);
-              setOverview(data["project_overview"]);  
-              },(error) =>{
-                setIsLoaded(true);
-                setError(error);
-              }
-            )
-        }, []);
+      axios.get(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + props.token
+        }
+      })
+        .then(function(response) {setIsLoaded(true);
+          setOverview(response.data["project_overview"]);  
+          },(error) =>{
+            setIsLoaded(true);
+            setError(error);})
+    }, []);
         
         if (error) {
           let errormessage = error.message;

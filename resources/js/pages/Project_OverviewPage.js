@@ -1,16 +1,21 @@
-import React from 'react'
+import {React, useContext} from 'react'
+import { Navigate } from 'react-router-dom'
 
 import Sidebar from '../components/projectDashboard/sidebar/Sidebar'
 import Overview from '../components/projectDashboard/dashboardOverview/dashboardOverView'
-import Project_TagsPage from './Project_TagsPage'
+import UserContext from '../store/user-context'
+import ProjectContext from '../store/project-context'
 
-const Project_OverviewPage = (props) => {
-  return (
+const Project_OverviewPage = () => {
+
+  const userCtx = useContext(UserContext);
+  const projectCtx = useContext(ProjectContext);
+
+  return userCtx.user_id == null || userCtx.user_id == undefined || projectCtx.project_id == null || projectCtx.project_id == undefined? <Navigate replace to='/Login'/> : 
     <div className='flex w-screen'>
         <Sidebar page="uebersicht"/>
-        <Overview projectID ={props.projectID}/>  
+        <Overview token={userCtx.user_token} projectID ={projectCtx.project_id}/>  
     </div>
-  )
 }
 
 export default Project_OverviewPage

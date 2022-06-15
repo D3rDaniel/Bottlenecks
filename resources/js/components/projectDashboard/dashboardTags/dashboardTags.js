@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from 'react'
+import axios from 'axios'
 
 import TagElement from './TagElement'
 import Input from './TagInputField'
@@ -17,23 +18,21 @@ const dashboardTags = (props) => {
     const [loadedTags, setTags] = useState([]);
 
     useEffect(() => {
-        setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tags";
-        fetch(url, {
-          headers: {
-            'Accept': 'application/json',
-          }
-        })
-          .then(response => response.json())
-          .then((data) => {
+      setIsLoaded(false);
+      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tags";
+  
+      axios.get(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + props.token
+        }
+      })
+        .then(function(response) {setIsLoaded(true);
+          setTags(response.data["tags"]);  
+          },(error) =>{
             setIsLoaded(true);
-            setTags(data["tags"]);
-            },(error) =>{
-              setIsLoaded(true);
-              setError(error);
-            }
-          )
-      }, []);
+            setError(error);})
+    }, []);
 
       if (error) {
         errormessage = error.message;

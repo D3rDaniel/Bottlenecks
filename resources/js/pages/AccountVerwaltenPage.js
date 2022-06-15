@@ -11,7 +11,7 @@ function AccountVerwaltenPage() {
     return userCtx.user_id == null || userCtx.user_id == undefined ? <Navigate replace to='/Login'/> : 
       <div className='flex w-screen'>
               <Sidebar username={userCtx.user_name}/>
-              <DashboardAccountVerwalten userID={userCtx.user_id} token={userCtx.user_token}/>
+              <DashboardAccountVerwalten user={userCtx} token={userCtx.user_token}/>
       </div>
 }
 

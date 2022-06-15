@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Loading from '../../../../images/icons/loading-spinner.png'
+import axios from 'axios'
 
 import Searchbar from '../dashboardTasks/searchbar/SearchBar'
 import WeekView from './WeekView'
@@ -31,27 +32,27 @@ const tasks = [
   ]
 
 const dashboardDeadline = (props) => {
-    const [tasksInWorking, setTasksInWorking] = useState([]);
 
     const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadedTasks, setTasks] = useState([]);
 
   useEffect(() => {
-      setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
-      fetch(url, {
-        headers: {
-          'Accept': 'application/json',
-        }
-      })
-        .then(response => response.json())
-        .then((data) => {
+    setIsLoaded(false);
+    const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
+
+    axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    })
+      .then(function(response) {
           setIsLoaded(true);
 
             let filteredTasks = []
-            for(let i = 0; i < data["tasks"].length; i++){
-                if(data["tasks"][i].completed_date == null) filteredTasks.push(data["tasks"][i]);
+            for(let i = 0; i < response.data["tasks"].length; i++){
+                if(response.data["tasks"][i].completed_date == null) filteredTasks.push(response.data["tasks"][i]);
             }
 
             setTasks(filteredTasks)

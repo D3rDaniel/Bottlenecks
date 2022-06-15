@@ -4,6 +4,8 @@ const UserContext = createContext({
     user_id: null,
     user_name: null,
     user_email: null,
+    user_fistName: null,
+    user_lastName: null,
     user_token: null,
 
     clear: () => {},
@@ -14,11 +16,13 @@ export function UserContextProvider (props) {
 
     const [userLogin, setUserLogin] = useState({})
 
-    function setLogin(id, name, email, token){
+    function setLogin(id, name, email, firstName, lastName, token){
         setUserLogin({
             user_id: id,
             user_name: name,
             user_email: email,
+            user_firstName: firstName,
+            user_lastName: lastName,
             user_token: token
         })
     }
@@ -28,6 +32,8 @@ export function UserContextProvider (props) {
             user_id: null,
             user_name: null,
             user_email: null,
+            user_first_name: null,
+            user_last_name: null,
             user_token: null
         })
         
@@ -37,6 +43,8 @@ export function UserContextProvider (props) {
         user_id: userLogin.user_id,
         user_name: userLogin.user_name,
         user_email: userLogin.user_email,
+        user_first_name: userLogin.user_firstName,
+        user_last_name: userLogin.user_lastName,
         user_token: userLogin.user_token,
 
         login: setLogin,
