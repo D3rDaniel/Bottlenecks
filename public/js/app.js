@@ -10735,7 +10735,7 @@ function AccountVerwaltenPage() {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_dashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       username: userCtx.user_name
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_dashboard_dashboardAccountVerwalten_DashboardAccountVerwalten__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      userID: userCtx.user_id,
+      user: userCtx,
       token: userCtx.user_token
     })]
   });
@@ -10920,7 +10920,7 @@ function LoginPage() {
       var url = "http://127.0.0.1:8000/api/login";
       axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, loginData).then(function (response) {
         if (response.data.success == true) {
-          userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.bearer_token);
+          userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.username.first_name, response.data.username.last_name, response.data.bearer_token);
           alert("Erfolgreich angemeldet!");
           navigate('/');
         } else alert("Anmeldung fehlgeschlagen!");
@@ -11733,6 +11733,8 @@ var UserContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createConte
   user_id: null,
   user_name: null,
   user_email: null,
+  user_fistName: null,
+  user_lastName: null,
   user_token: null,
   clear: function clear() {},
   login: function login(id, name, email, token) {}
@@ -11743,11 +11745,13 @@ function UserContextProvider(props) {
       userLogin = _useState2[0],
       setUserLogin = _useState2[1];
 
-  function setLogin(id, name, email, token) {
+  function setLogin(id, name, email, firstName, lastName, token) {
     setUserLogin({
       user_id: id,
       user_name: name,
       user_email: email,
+      user_firstName: firstName,
+      user_lastName: lastName,
       user_token: token
     });
   }
@@ -11757,6 +11761,8 @@ function UserContextProvider(props) {
       user_id: null,
       user_name: null,
       user_email: null,
+      user_first_name: null,
+      user_last_name: null,
       user_token: null
     });
   }
@@ -11765,6 +11771,8 @@ function UserContextProvider(props) {
     user_id: userLogin.user_id,
     user_name: userLogin.user_name,
     user_email: userLogin.user_email,
+    user_first_name: userLogin.user_firstName,
+    user_last_name: userLogin.user_lastName,
     user_token: userLogin.user_token,
     login: setLogin,
     clear: clearLogin
