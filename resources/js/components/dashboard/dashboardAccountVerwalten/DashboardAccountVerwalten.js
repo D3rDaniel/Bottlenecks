@@ -2,23 +2,40 @@ import React, {useState} from 'react'
 import axios from 'axios'
 
 function DashboardAccountVerwalten(props) {
-    const [userName, setUserName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
+
+    const [firstName, setFirstName] = useState(props.user.user_firstName);
+    const [lastName, setLastName] = useState(props.user.user_lastName);
+    const [email, setEmail] = useState(props.user.user_email);
+
+    const checkInputs = () => {
+        firstName === props.user.user_firstName ? setFirstName(props.user.user_firstName) : "";
+        lastName === props.user.user_lastName ? setLastName(props.user.user_lastName) : "";
+        email === props.user.user_email ? setEmail(props.user.user_email) : "";
+    }
 
     const changeInputs = () => {
         const url = "http://127.0.0.1:8000/api/user/"+props.user.user_id;
 
-        axios.put(url, {
+        checkInputs();
+        
+        const userData = {
+            "fist_name" : firstName,
+            "last_name" : lastName,
+            "email" : email
+        }
+
+        axios.put(url, userData, {
             headers: { 
                 'Accept': 'application/json',
-                'Authorization' : props.token
+                'Authorization' : 'Bearer ' + props.token
             }
         }).then(function(response) {
-            console.log(response);
+            alert("Benutzerdaten erfolgreich geändert");
+            props.user.user_firstName = firstName;
+            props.user.user_lastName = lastName;
+            props.user.user_email = email;
         }).catch(function(error){
-            console.log(error);
+            alert(error.response.data.errors.email);
         });
     }
   
@@ -30,8 +47,8 @@ function DashboardAccountVerwalten(props) {
 
           <div className="w-full">
               <div className="mb-6 flex ml-3">
-                  <label className="pr-4" htmlFor="username">Nutzername:</label>
-                  <input type="text" onChange={e => setUserName(e.target.value)} placeholder={props.user.user_name} className="bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></input>
+                  <label className="pr-4">Nutzername:</label>
+                  <label className="pl-10 text-blue">{props.user.user_name}</label>
               </div>
 
               <div className="mb-6 flex ml-3">

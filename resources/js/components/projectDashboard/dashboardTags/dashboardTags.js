@@ -17,6 +17,8 @@ const dashboardTags = (props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedTags, setTags] = useState([]);
 
+
+
     useEffect(() => {
       setIsLoaded(false);
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tags";
@@ -52,18 +54,20 @@ const dashboardTags = (props) => {
         <div className="flex flex-col justify-between bg-white h-2/3 w-2/3 rounded-xl">
             <div>
                 <h1 className="font-bold mt-4 ml-5 text-xl">Tags</h1>
-                <div className=" mt-5 ml-10">
+                <div className=" mt-5 ml-10 mr-5">
                     {loadedTags.map((tag, index) => {
                         return (
                             <TagElement
                                 name={tag.title}
+                                id={tag.id}
+                                token={props.token}
                                 key={index}>
                             </TagElement>
                         )
                     })}
                 </div>  
             </div>
-            <Input />
+            <Input projectID = {props.projectID} token={props.token}/>
         </div>
     </div>
   )}

@@ -38,7 +38,7 @@ const DashboardAnkündigungen = (props) => {
       const filterElements = (inputValue, filtered) => {
         setFiltered(filtered)
         let filteredAnkuendigungenBuffer
-        filteredAnkuendigungenBuffer = [...loadedAnnouncements].filter((message) => message.title.toLowerCase().includes(inputValue))
+        //filteredAnkuendigungenBuffer = [...loadedAnnouncements].filter((message) => message.title.toLowerCase().includes(inputValue))
         setFilteredAnnouncements(filteredAnkuendigungenBuffer)
       }
       const sortElements = (event, rotate) =>{

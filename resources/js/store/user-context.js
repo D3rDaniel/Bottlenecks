@@ -4,7 +4,7 @@ const UserContext = createContext({
     user_id: null,
     user_name: null,
     user_email: null,
-    user_fistName: null,
+    user_firstName: null,
     user_lastName: null,
     user_token: null,
 
