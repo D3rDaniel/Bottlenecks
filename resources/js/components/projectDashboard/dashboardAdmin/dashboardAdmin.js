@@ -53,7 +53,7 @@ const dashboardAdmin = (props) => {
                     <AnkuendigungView projectID = {props.projectID} userID = {props.userID} token={props.token}/>
                 </div>
                 
-                <MemberView members = {project_overview[0].members} projectID = {props.projectID} token={props.token}/>
+                <MemberView projectID = {props.projectID} token={props.token}/>
             </div>
         )
     }
