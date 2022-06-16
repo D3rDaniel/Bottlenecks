@@ -13,7 +13,7 @@ const Project_AdminPage = () => {
   return  userCtx.user_id == null || userCtx.user_id == undefined || projectCtx.project_id == null || projectCtx.project_id == undefined? <Navigate replace to='/Login'/> : (
     <div className='flex w-screen'>
         <Sidebar page="admin"/>
-        <Admin token={userCtx.user_token} projectID={projectCtx.project_id}/>  
+        <Admin token={userCtx.user_token} userID = {userCtx.user_id} projectID={projectCtx.project_id}/>  
     </div>
   )
 }

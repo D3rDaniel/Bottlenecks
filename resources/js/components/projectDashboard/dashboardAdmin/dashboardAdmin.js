@@ -50,7 +50,7 @@ const dashboardAdmin = (props) => {
             <div className="h-screen w-screen flex justify-center items-center ml-10 mr-5">
                 <div className="flex flex-col justify-center h-full w-full mr-5 gap-10">
                     <ProjectView project = {project} token={props.token}/>
-                    <AnkuendigungView />
+                    <AnkuendigungView projectID = {props.projectID} userID = {props.userID} token={props.token}/>
                 </div>
                 
                 <MemberView members = {project_overview[0].members}/>

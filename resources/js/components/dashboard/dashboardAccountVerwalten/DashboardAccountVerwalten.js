@@ -9,13 +9,23 @@ function DashboardAccountVerwalten(props) {
 
     const changeInputs = () => {
         const url = "http://127.0.0.1:8000/api/user/"+props.user.user_id;
-        let checkEmail = email === props.user.user_email ? "" : `email : ${email}`;
+
+        let userData = {};
+
+        email === props.user.user_email ? 
+            userData = {
+                "first_name" : firstName,
+                "last_name" : lastName,
+            }
+        : 
+            userData = {
+                "first_name" : firstName,
+                "last_name" : lastName,
+                "email" : email
+            }
+        ;
+
         
-        const userData = {
-            "fist_name" : firstName,
-            "last_name" : lastName,
-            checkEmail
-        }
 
         axios.put(url, userData, {
             headers: { 

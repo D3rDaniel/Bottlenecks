@@ -2,9 +2,10 @@ import React , {useState} from 'react'
 
 import Pencil from '../../../../images/icons/stift.png'
 import Kreuz from '../../../../images/icons/kreuz.png'
+import { useNavigate } from 'react-router-dom'
 
 const AdminProjectView = (props) => {
-    
+    const navigate = useNavigate();
 
     const [editButton , setEditButton] = useState(false);
     const [newDueDate , setNewDueDate] = useState(props.project.due_date);
@@ -32,6 +33,22 @@ const AdminProjectView = (props) => {
             alert("Projektdaten erfolgreich geändert");
         }).catch(function(error){
             console.log(error.response.data);
+        });
+    }
+
+    const deleteProject = () =>{
+        const url = "http://127.0.0.1:8000/api/project/"+props.project.id;
+
+        axios.delete(url, {
+            headers: { 
+                'Accept': 'application/json',
+                'Authorization' : 'Bearer ' + props.token
+            }
+        }).then(function() {
+            alert("Projekt wurde erfolgreich gelöscht");
+            navigate('/');
+        }).catch(function(error){
+            console.log(error.response);
         });
     }
 
@@ -67,7 +84,7 @@ const AdminProjectView = (props) => {
                 }
                 <div className="flex justify-center bg-red rounded-xl h-8 w-44 mb-2 mr-2">
                     <img src={Kreuz} alt="Kreuz" className="h-5 w-5 mt-1.5 mr-3"></img>
-                    <button className="text-white hover:font-bold">Projekt löschen</button>
+                    <button className="text-white hover:font-bold" onClick={deleteProject} >Projekt löschen</button>
                 </div>    
             </div>
         </div>

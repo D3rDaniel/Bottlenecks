@@ -3351,11 +3351,14 @@ function DashboardAccountVerwalten(props) {
 
   var changeInputs = function changeInputs() {
     var url = "http://127.0.0.1:8000/api/user/" + props.user.user_id;
-    var checkEmail = email === props.user.user_email ? "" : "email : ".concat(email);
-    var userData = {
-      "fist_name": firstName,
+    var userData = {};
+    email === props.user.user_email ? userData = {
+      "first_name": firstName,
+      "last_name": lastName
+    } : userData = {
+      "first_name": firstName,
       "last_name": lastName,
-      checkEmail: checkEmail
+      "email": email
     };
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, userData, {
       headers: {
@@ -6478,12 +6481,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _images_icons_megaphone_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/megaphone.png */ "./resources/images/icons/megaphone.png");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
-var AdminAnkuendigungView = function AdminAnkuendigungView() {
+
+var AdminAnkuendigungView = function AdminAnkuendigungView(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      subject = _useState2[0],
+      setSubject = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      message = _useState4[0],
+      setMessage = _useState4[1];
+
+  var handleAnnouncement = function handleAnnouncement() {
+    var url = "http://127.0.0.1:8000/api/announcements";
+    var announcment = {
+      subject: subject,
+      message: message,
+      user_id: props.userID,
+      project_id: props.projectID
+    };
+    axios.post(url, announcment, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (response) {
+      alert("Ankündigung veröffentlicht");
+    })["catch"](function (error) {
+      console.log(error.response.data);
+    });
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "bg-white rounded-xl w-full h-1/3 drop-shadow-xl",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -6495,10 +6540,16 @@ var AdminAnkuendigungView = function AdminAnkuendigungView() {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           type: "text",
           placeholder: "Titel..",
+          onChange: function onChange(e) {
+            setSubject(e.target.value);
+          },
           className: "font-bold ml-4 mt-2 outline-none w-11/12 bg-gray-200 p-1 rounded-md drop-shadow-md placeholder-gray-600"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
           type: "text",
           rows: "3",
+          onChange: function onChange(e) {
+            setMessage(e.target.value);
+          },
           className: "ml-4 mt-2 outline-none w-11/12 mr-5 rounded-md drop-shadow-md bg-gray-200 pl-1"
         })]
       })]
@@ -6512,6 +6563,7 @@ var AdminAnkuendigungView = function AdminAnkuendigungView() {
           className: "h-5 w-5 mt-1.5 mr-3"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "text-white hover:font-bold",
+          onClick: handleAnnouncement,
           children: "Ver\xF6ffentlichen"
         })]
       })
@@ -6538,6 +6590,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _images_icons_stift_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/stift.png */ "./resources/images/icons/stift.png");
 /* harmony import */ var _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../images/icons/kreuz.png */ "./resources/images/icons/kreuz.png");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -6557,7 +6610,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var AdminProjectView = function AdminProjectView(props) {
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       editButton = _useState2[0],
@@ -6599,6 +6655,21 @@ var AdminProjectView = function AdminProjectView(props) {
       alert("Projektdaten erfolgreich geändert");
     })["catch"](function (error) {
       console.log(error.response.data);
+    });
+  };
+
+  var deleteProject = function deleteProject() {
+    var url = "http://127.0.0.1:8000/api/project/" + props.project.id;
+    axios["delete"](url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function () {
+      alert("Projekt wurde erfolgreich gelöscht");
+      navigate('/');
+    })["catch"](function (error) {
+      console.log(error.response);
     });
   };
 
@@ -6672,6 +6743,7 @@ var AdminProjectView = function AdminProjectView(props) {
             className: "h-5 w-5 mt-1.5 mr-3"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             className: "text-white hover:font-bold",
+            onClick: deleteProject,
             children: "Projekt l\xF6schen"
           })]
         })]
@@ -7044,7 +7116,11 @@ var dashboardAdmin = function dashboardAdmin(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AdminProjectView__WEBPACK_IMPORTED_MODULE_1__["default"], {
           project: project,
           token: props.token
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          projectID: props.projectID,
+          userID: props.userID,
+          token: props.token
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MemberView__WEBPACK_IMPORTED_MODULE_3__["default"], {
         members: project_overview[0].members
       })]
@@ -11249,6 +11325,7 @@ var Project_AdminPage = function Project_AdminPage() {
       page: "admin"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_projectDashboard_dashboardAdmin_dashboardAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], {
       token: userCtx.user_token,
+      userID: userCtx.user_id,
       projectID: projectCtx.project_id
     })]
   });
