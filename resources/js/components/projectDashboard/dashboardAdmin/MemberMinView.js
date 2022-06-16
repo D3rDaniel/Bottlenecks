@@ -4,7 +4,7 @@ import Arrow from '../../../../images/icons/arrow-black.png'
 import MemberMaxView from './MemberMaxView'
 
 const MemberMinView = (props) => {
-
+    console.log(props.member);
     const [rotate, setRotate] = useState(0);
 
     const rotateArrow = () => { rotate ? setRotate(false) : setRotate(true) }
@@ -19,7 +19,7 @@ const MemberMinView = (props) => {
             
             <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
         </div>
-        {rotate ? <MemberMaxView rights={props.member.pivot}></MemberMaxView> : null}
+        {rotate ? <MemberMaxView member={props.member} token={props.token}></MemberMaxView> : null}
     </div>
   )
 }
