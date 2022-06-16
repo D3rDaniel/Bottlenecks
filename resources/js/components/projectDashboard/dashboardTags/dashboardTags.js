@@ -46,7 +46,12 @@ const dashboardTags = (props) => {
           <div className=" text-darkgray">Loading...</div>
         </div>)
       }else if(loadedTags.length < 1){
-        return <div className="m-auto text-red font-bold">Keine Tags gefunden</div>
+        return (
+            <div className="m-auto w-1/2">
+                <div className="text-red font-bold text-center mb-5">Keine Tags gefunden</div>
+                <Input projectID = {props.projectID} token={props.token}/>
+            </div>
+        )
     }else {
 
   return (

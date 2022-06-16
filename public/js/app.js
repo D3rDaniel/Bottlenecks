@@ -9304,7 +9304,7 @@ var TagInputField = function TagInputField(props) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "mx-5 mb-4 flex drop-shadow-md",
+    className: "flex drop-shadow-md",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
       type: "text",
       placeholder: "Titel...",
@@ -9430,9 +9430,15 @@ var dashboardTags = function dashboardTags(props) {
       })]
     });
   } else if (loadedTags.length < 1) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      className: "m-auto text-red font-bold",
-      children: "Keine Tags gefunden"
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "m-auto w-1/2",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "text-red font-bold text-center mb-5",
+        children: "Keine Tags gefunden"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TagInputField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        projectID: props.projectID,
+        token: props.token
+      })]
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
