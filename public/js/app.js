@@ -3349,19 +3349,13 @@ function DashboardAccountVerwalten(props) {
       email = _useState6[0],
       setEmail = _useState6[1];
 
-  var checkInputs = function checkInputs() {
-    firstName === props.user.user_firstName ? setFirstName(props.user.user_firstName) : "";
-    lastName === props.user.user_lastName ? setLastName(props.user.user_lastName) : "";
-    email === props.user.user_email ? setEmail(props.user.user_email) : "";
-  };
-
   var changeInputs = function changeInputs() {
     var url = "http://127.0.0.1:8000/api/user/" + props.user.user_id;
-    checkInputs();
+    var checkEmail = email === props.user.user_email ? "" : "email : ".concat(email);
     var userData = {
       "fist_name": firstName,
       "last_name": lastName,
-      "email": email
+      checkEmail: checkEmail
     };
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, userData, {
       headers: {
@@ -6569,8 +6563,43 @@ var AdminProjectView = function AdminProjectView(props) {
       editButton = _useState2[0],
       setEditButton = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.project.due_date),
+      _useState4 = _slicedToArray(_useState3, 2),
+      newDueDate = _useState4[0],
+      setNewDueDate = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.project.title),
+      _useState6 = _slicedToArray(_useState5, 2),
+      newTitle = _useState6[0],
+      setNewTitle = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.project.description),
+      _useState8 = _slicedToArray(_useState7, 2),
+      newDescription = _useState8[0],
+      setNewDescription = _useState8[1];
+
   var changeView = function changeView() {
     editButton ? setEditButton(false) : setEditButton(true);
+  };
+
+  var handleNewData = function handleNewData() {
+    changeView();
+    var url = "http://127.0.0.1:8000/api/project/" + props.project.id;
+    var projectData = {
+      title: newTitle,
+      description: newDescription,
+      due_date: newDueDate
+    };
+    axios.put(url, projectData, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (response) {
+      alert("Projektdaten erfolgreich geändert");
+    })["catch"](function (error) {
+      console.log(error.response.data);
+    });
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -6580,49 +6609,71 @@ var AdminProjectView = function AdminProjectView(props) {
       children: editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "text",
-          placeholder: props.project[0].title,
+          placeholder: newTitle,
+          onChange: function onChange(e) {
+            setNewTitle(e.target.value);
+          },
           className: "font-bold ml-4 mt-2 outline-none w-11/12 p-1 rounded-md drop-shadow-md bg-gray-200 placeholder-gray-600"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
           type: "text",
           rows: "4",
-          className: "ml-4 mt-4 outline-none w-11/12 mr-5 rounded-md drop-shadow-md bg-gray-200 placeholder-gray-600",
-          children: props.project[0].description
+          placeholder: newDescription,
+          onChange: function onChange(e) {
+            setNewDescription(e.target.value);
+          },
+          className: "ml-4 mt-4 outline-none w-11/12 mr-5 rounded-md drop-shadow-md bg-gray-200 placeholder-gray-600"
         })]
       }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "font-bold ml-4 mt-2",
-          children: props.project[0].title
+          children: newTitle
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "ml-4 mt-4",
-          children: props.project[0].description
+          children: newDescription
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "flex justify-end items-center h-1/6",
-      children: [editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        className: "bg-lightorange rounded-xl h-8 w-48 text-white hover:font-bold  mb-2 mr-2",
-        onClick: changeView,
-        children: "Speichern"
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "flex justify-center bg-lightorange rounded-xl h-8 w-36 mb-2 mr-2",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          src: _images_icons_stift_png__WEBPACK_IMPORTED_MODULE_1__["default"],
-          alt: "stift",
-          className: "h-5 w-5 mt-1 mr-3"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-          className: "text-white hover:font-bold",
-          onClick: changeView,
-          children: "Bearbeiten"
+      className: "flex justify-between items-center h-1/6",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "font-bold ml-4 mr-2",
+          children: "Fertigstellung bis:"
+        }), editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "date",
+          onChange: function onChange(e) {
+            setNewDueDate(e.target.value);
+          }
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: newDueDate
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "flex justify-center bg-red rounded-xl h-8 w-44 mb-2 mr-2",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          src: _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_2__["default"],
-          alt: "Kreuz",
-          className: "h-5 w-5 mt-1.5 mr-3"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-          className: "text-white hover:font-bold",
-          children: "Projekt l\xF6schen"
+        className: "flex",
+        children: [editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "bg-lightorange rounded-xl h-8 w-48 text-white hover:font-bold  mb-2 mr-2",
+          onClick: handleNewData,
+          children: "Speichern"
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex justify-center bg-lightorange rounded-xl h-8 w-36 mb-2 mr-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: _images_icons_stift_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+            alt: "stift",
+            className: "h-5 w-5 mt-1 mr-3"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            className: "text-white hover:font-bold",
+            onClick: changeView,
+            children: "Bearbeiten"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex justify-center bg-red rounded-xl h-8 w-44 mb-2 mr-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_2__["default"],
+            alt: "Kreuz",
+            className: "h-5 w-5 mt-1.5 mr-3"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            className: "text-white hover:font-bold",
+            children: "Projekt l\xF6schen"
+          })]
         })]
       })]
     })]
@@ -6886,7 +6937,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdminProjectView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminProjectView */ "./resources/js/components/projectDashboard/dashboardAdmin/AdminProjectView.js");
 /* harmony import */ var _AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdminAnkuendigungView */ "./resources/js/components/projectDashboard/dashboardAdmin/AdminAnkuendigungView.js");
 /* harmony import */ var _MemberView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MemberView */ "./resources/js/components/projectDashboard/dashboardAdmin/MemberView.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../images/icons/loading-spinner.png */ "./resources/images/icons/loading-spinner.png");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -6894,7 +6959,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var dashboardAdmin = function dashboardAdmin() {
+
+
+
+var dashboardAdmin = function dashboardAdmin(props) {
   var project_overview = [{
     title: "Projekt 1",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
@@ -6916,17 +6984,72 @@ var dashboardAdmin = function dashboardAdmin() {
       }
     }]
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "h-screen w-screen flex justify-center items-center ml-10 mr-5",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "flex flex-col justify-center h-full w-full mr-5 gap-10",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AdminProjectView__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        project: project_overview
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MemberView__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      members: project_overview[0].members
-    })]
-  });
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      error = _useState2[0],
+      setError = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isLoaded = _useState4[0],
+      setIsLoaded = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      project = _useState6[0],
+      setProject = _useState6[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsLoaded(false);
+    var url = "http://127.0.0.1:8000/api/project/" + props.projectID;
+    axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (response) {
+      setIsLoaded(true);
+      setProject(response.data.project);
+    }, function (error) {
+      setIsLoaded(true);
+      setError(error);
+    });
+  }, []);
+
+  if (error) {
+    errormessage = error.message;
+    if (error.message.includes("No Project found")) errormessage = "Kein Projekt gefunden";
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "m-auto text-red font-bold",
+      children: ["Error: ", errormessage]
+    });
+  } else if (!isLoaded) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "m-auto flex flex-row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+        src: _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_4__["default"],
+        alt: "loading",
+        className: "animate-spin h-5 w-5 mr-2 mt-0.5"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        className: " text-darkgray",
+        children: "Loading..."
+      })]
+    });
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "h-screen w-screen flex justify-center items-center ml-10 mr-5",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "flex flex-col justify-center h-full w-full mr-5 gap-10",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AdminProjectView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          project: project,
+          token: props.token
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MemberView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        members: project_overview[0].members
+      })]
+    });
+  }
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dashboardAdmin);
@@ -10433,8 +10556,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images_logo_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../images/logo.jpg */ "./resources/images/logo.jpg");
 /* harmony import */ var _images_icons_info_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../images/icons/info.jpg */ "./resources/images/icons/info.jpg");
 /* harmony import */ var _store_project_context__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../store/project-context */ "./resources/js/store/project-context.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -10449,39 +10574,40 @@ __webpack_require__.r(__webpack_exports__);
 
 var Sidebar = function Sidebar(props) {
   var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_7__["default"]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_8__["default"]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     className: "flex flex-col min-w-max w-72 justify-between mt-1",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
       className: "mb-10",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
         className: "rounded-xl bg-white h-16 mb-10",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Link, {
           to: "/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
             src: _images_logo_jpg__WEBPACK_IMPORTED_MODULE_5__["default"],
             alt: "logo",
             className: "h-16 w-16 mr-2 pl-2 float-left hover:cursor-pointer"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h1", {
           className: "font-bold text-xl mt-1",
           children: "Projekt"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h2", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
             className: "text-darkorange",
             children: projectCtx.project_title.length > 20 ? projectCtx.project_title.toString().substring(0, 19) + "..." : projectCtx.project_title
           })
         })]
-      }), props.isAdmin === true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_AdminButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }), userCtx.user_id === projectCtx.project_admin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_AdminButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
         selected: props.page
       }) : ""]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SidebarButtonList__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_SidebarButtonList__WEBPACK_IMPORTED_MODULE_2__["default"], {
       selected: props.page
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SidebarButtonElement__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_SidebarButtonElement__WEBPACK_IMPORTED_MODULE_3__["default"], {
         img: _images_icons_info_jpg__WEBPACK_IMPORTED_MODULE_6__["default"],
         desc: "Info",
         selected: "false"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SignOutButton__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_SignOutButton__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
     })]
   });
 };
@@ -11071,8 +11197,7 @@ var ProjectPage = function ProjectPage() {
     className: "flex w-screen",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       page: "",
-      projectTitle: projectCtx.project_title,
-      isAdmin: userCtx.user_id === projectCtx.project_admin ? true : false
+      projectTitle: projectCtx.project_title
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_projectDashboard_dashboardTasks_DashboardTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
       token: userCtx.user_token,
       projectID: projectCtx.project_id
@@ -11099,7 +11224,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/projectDashboard/sidebar/Sidebar */ "./resources/js/components/projectDashboard/sidebar/Sidebar.js");
 /* harmony import */ var _components_projectDashboard_dashboardAdmin_dashboardAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/projectDashboard/dashboardAdmin/dashboardAdmin */ "./resources/js/components/projectDashboard/dashboardAdmin/dashboardAdmin.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _store_project_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/project-context */ "./resources/js/store/project-context.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
 
 
 
@@ -11107,11 +11238,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Project_AdminPage = function Project_AdminPage() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  return userCtx.user_id == null || userCtx.user_id == undefined || projectCtx.project_id == null || projectCtx.project_id == undefined ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Navigate, {
+    replace: true,
+    to: "/Login"
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "flex w-screen",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       page: "admin"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_projectDashboard_dashboardAdmin_dashboardAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_projectDashboard_dashboardAdmin_dashboardAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      token: userCtx.user_token,
+      projectID: projectCtx.project_id
+    })]
   });
 };
 

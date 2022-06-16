@@ -12,7 +12,7 @@ const ProjectPage = () => {
 
     return userCtx.user_id == null || userCtx.user_id == undefined || projectCtx.project_id == null || projectCtx.project_id == undefined? <Navigate replace to='/Login'/> : 
     <div className='flex w-screen'>
-            <Sidebar page="" projectTitle={projectCtx.project_title} isAdmin={userCtx.user_id === projectCtx.project_admin ? true : false }></Sidebar>
+            <Sidebar page="" projectTitle={projectCtx.project_title}></Sidebar>
             <DashboardTasks token={userCtx.user_token} projectID={projectCtx.project_id}></DashboardTasks>
         </div>
 }
