@@ -50,7 +50,7 @@ const MemberView = (props) => {
                     })}  
                 </div>
             </div>
-            <InputField />
+            <InputField token={props.token} projectID={props.projectID}/>
         </div>)
     }
 }
