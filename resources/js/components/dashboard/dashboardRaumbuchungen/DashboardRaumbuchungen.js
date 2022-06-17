@@ -32,9 +32,6 @@ function DashboardRaumbuchungen(props) {
             setError(true)})
   },[] );
 
-  useEffect(() => {
-    console.log("loadedRooms: ",loadedBookings)
-  }, [loadedBookings])
 
   const sortElements = (event, rotate) =>{
     const IDTriggeredSortElement = event.target.id
