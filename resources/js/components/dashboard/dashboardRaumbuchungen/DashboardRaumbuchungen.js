@@ -1,130 +1,177 @@
-import React, {useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import ProjectMinimumViewRaumbuchungen from './ProjectMinimumViewRaumbuchungen'
 import SearchBarRaumbuchungen from './searchbar/SearchBarRaumbuchungens'
+import UserContext from '../../../store/user-context'
+import axios from 'axios'
+import Loading from '../../../../images/icons/loading-spinner.png'
 
-const buchungen = [
-  {roomname: "Bücherrei", roomnumber: "019", created_at: "12.04.2022", roomsize: "12", day_of_booking: "04.06.2022", period: "12:00 - 14:00", 
-  description: "blablaafohasfhadsfhdafjadsöfhdasöfhdaöfhdöafhadsofjködhfaoödfhaööööööööööööööööakdhfodhfköadhfadhfködashfödhgöiadfhgöiadfhad adökfhadsöofh aöfhoöadshf öasodfh ödas f.  ! ladfh öakdsfhaös hf.",
-  equipment: "beamer", open_at:"Mo-Fr 9-12", 
-  full_address: {city: "Hof", plz: "95028", address: "Alfons-Goppel-Platz 1", building: "B", room: "019"}}
-]
 
-function DashboardRaumbuchungen() {
+function DashboardRaumbuchungen(props) {
 
-  const [loadedRooms, setRooms] = useState([])
+  const user = useContext(UserContext)
+
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedBookings, setBookings] = useState({})
   const [filtered, setFiltered] = useState(false)
-  const [filteredRooms, setFilteredRooms] = useState([])
+  const [filteredBookings, setFilteredBookings] = useState([])
+
+  useEffect(() => {
+    setIsLoaded(false);
+    const url = "http://127.0.0.1:8000/api/user/"+user.user_id+"/bookings";
+    axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    })
+      .then(function(response) {setIsLoaded(true);
+        setBookings(response.data.bookings);  
+        }).catch(function(response){
+            setIsLoaded(true)
+            setError(true)})
+  },[] );
+
+  useEffect(() => {
+    console.log("loadedRooms: ",loadedBookings)
+  }, [loadedBookings])
 
   const sortElements = (event, rotate) =>{
     const IDTriggeredSortElement = event.target.id
-    let orderedRooms;
+    let orderedBookings;
     switch(IDTriggeredSortElement){
       case "0":
         if(rotate){
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.roomname > b.roomname) ? 1: ((b.roomname > a.roomname) ? -1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.title > b.room.title) ? 1: ((b.room.title > a.room.title) ? -1 : 0))
         }else{
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.roomname > b.roomname) ? -1: ((b.roomname > a.roomname) ? 1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.title > b.room.title) ? -1: ((b.room.title > a.room.title) ? 1 : 0))
         }
         break;
       case "1":
         if(rotate){
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.roomnumber > b.roomnumber) ? 1: ((b.roomnumber > a.roomnumber) ? -1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.room_number > b.room.room_number) ? 1: ((b.room.room_number > a.room.room_number) ? -1 : 0))
         }else{
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.roomnumber > b.roomnumber) ? -1: ((b.roomnumber > a.roomnumber) ? 1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.room_number > b.room.room_number) ? -1: ((b.room.room_number > a.room.room_number) ? 1 : 0))
         }
         break;
       case '2':
         if(rotate){
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.created_at > b.created_at) ? 1: ((b.created_at > a.created_at) ? -1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.created_at > b.room.created_at) ? 1: ((b.room.created_at > a.room.created_at) ? -1 : 0))
         }else{
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.created_at > b.created_at) ? -1: ((b.created_at > a.created_at) ? 1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.created_at > b.room.created_at) ? -1: ((b.room.created_at > a.room.created_at) ? 1 : 0))
         }
         break;
       case '3':
         if(rotate){
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.roomsize > b.roomsize) ? 1: ((b.roomsize > a.roomsize) ? -1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.capacity > b.room.capacity) ? 1: ((b.room.capacity > a.room.capacity) ? -1 : 0))
         }else{
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.roomsize > b.roomsize) ? -1: ((b.roomsize > a.roomsize) ? 1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.room.capacity > b.room.capacity) ? -1: ((b.room.capacity > a.room.capacity) ? 1 : 0))
         }
         break;
       case '4':
         if(rotate){
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.day_of_booking > b.day_of_booking) ? 1: ((b.day_of_booking > a.day_of_booking) ? -1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.reservation_date > b.reservation_date) ? 1: ((b.reservation_date > a.reservation_date) ? -1 : 0))
         }else{
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.day_of_booking > b.day_of_booking) ? -1: ((b.day_of_booking > a.day_of_booking) ? 1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.reservation_date > b.reservation_date) ? -1: ((b.reservation_date > a.reservation_date) ? 1 : 0))
         }
         break;
       case '5':
         if(rotate){
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.period > b.period) ? 1: ((b.period > a.period) ? -1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.start_time > b.start_time) ? 1: ((b.start_time > a.start_time) ? -1 : 0))
         }else{
-          orderedRooms = [...loadedRooms].sort((a,b) => (a.period > b.period) ? -1: ((b.period > a.period) ? 1 : 0))
+          orderedBookings = [...loadedBookings].sort((a,b) => (a.start_time > b.start_time) ? -1: ((b.start_time > a.start_time) ? 1 : 0))
         }
         break;
       default:
         console.log("default- shit")
+        return;
     }
-    setRooms(orderedRooms)
+    setBookings(orderedBookings)
   }
   const filterElements = (inputValue, filtered) =>{
     setFiltered(filtered)
-    let filteredRoomsBuffer
-    filteredRoomsBuffer = [...loadedRooms].filter((room) => room.roomname.toLowerCase().includes(inputValue))
-    setFilteredRooms(filteredRoomsBuffer)
+    let filteredBookingsBuffer
+    filteredBookingsBuffer = [...loadedBookings].filter((booking) => booking.room.title.toLowerCase().includes(inputValue))
+    setFilteredBookings(filteredBookingsBuffer)
   }
-  return (
-    <div className="flex flex-col w-full m-1 ml-2">
-        <SearchBarRaumbuchungen sortElements={sortElements} filterElements={filterElements} />
-        
-        <div className='h-full w-full'>
-           {
-             filtered ? 
 
-             filteredRooms.map((booking, index) => {
-             return(
-              <ProjectMinimumViewRaumbuchungen
-              roomname={booking.roomname}
-              roomnumber={booking.roomnumber}
-              created_at={booking.created_at}
-              roomsize={booking.roomsize}
-              day_of_booking={booking.day_of_booking}
-              period={booking.period}
-              description={booking.description}
-              equipment={booking.equipment}
-              open_at={booking.open_at}
-              full_address={booking.full_address}
-              key={index} >
-              </ProjectMinimumViewRaumbuchungen>
-             )
-           })
 
-           :   
 
-             buchungen.map((booking, index) => {
-             return(
-              <ProjectMinimumViewRaumbuchungen
-              roomname={booking.roomname}
-              roomnumber={booking.roomnumber}
-              created_at={booking.created_at}
-              roomsize={booking.roomsize}
-              day_of_booking={booking.day_of_booking}
-              period={booking.period}
-              description={booking.description}
-              equipment={booking.equipment}
-              open_at={booking.open_at}
-              full_address={booking.full_address}
-              key={index} >
-              </ProjectMinimumViewRaumbuchungen>
-             )
-             
-           })
-           
-           
-           }
-        </div>
-
+  if (error) {
+    return <div className="m-auto text-red font-bold">Es ist ein Fehler aufgetreten!</div> 
+  }else if(!isLoaded){
+    return (<div className="m-auto flex flex-row">
+    <img src={Loading} alt="loading" className='animate-spin h-5 w-5 mr-2 mt-0.5'/>
+    <div className=" text-darkgray">Loading...</div>
+  </div>)
+  }else if(loadedBookings.length < 1){
+    return (
+  <>
+    <div className="flex flex-col justify-center items-center w-full h-screen text-red font-bold">
+      <h2>Aktuell keine Buchungen vorhanden</h2>
     </div>
-  )
+  </>
+    )
+  }else {
+    return (
+      <div className="flex flex-col w-full m-1 ml-2">
+          <SearchBarRaumbuchungen sortElements={sortElements} filterElements={filterElements} />
+          
+          <div className='h-full w-full'>
+            {
+              filtered ? 
+
+              filteredBookings.map((booking, index) => {
+              return(
+                <ProjectMinimumViewRaumbuchungen
+                id={booking.id}
+                room_number={booking.room.room_number}
+                title={booking.room.title}
+                created_at={booking.room.created_at.substring(0,10)}
+                capacity={booking.room.capacity}
+                reservation_date={booking.reservation_date}
+                start_time={booking.start_time.substring(0,5)}
+                end_time={booking.end_time.substring(0,5)}
+
+                description={booking.room.description}
+                equipment_info={booking.room.equipment_info}
+                opening_time={booking.room.opening_time.substring(0,5)}
+                closing_time={booking.room.closing_time.substring(0,5)}
+                address_info={booking.room.address_info}
+                key={index} >
+                </ProjectMinimumViewRaumbuchungen>
+              )
+            })
+
+            :   
+            loadedBookings.map((booking, index) => {
+              return(
+                <ProjectMinimumViewRaumbuchungen
+                id={booking.id}
+                room_number={booking.room.room_number}
+                title={booking.room.title}
+                created_at={booking.room.created_at.substring(0,10)}
+                capacity={booking.room.capacity}
+                reservation_date={booking.reservation_date}
+                start_time={booking.start_time.substring(0,5)}
+                end_time={booking.end_time.substring(0,5)}
+
+                description={booking.room.description}
+                equipment_info={booking.room.equipment_info}
+                opening_time={booking.room.opening_time.substring(0,5)}
+                closing_time={booking.room.closing_time.substring(0,5)}
+                address_info={booking.room.address_info}
+                key={index} >
+                </ProjectMinimumViewRaumbuchungen>
+              )
+            })
+            
+            } 
+          </div>
+
+      </div>
+    )
+  }
 }
 
 export default DashboardRaumbuchungen

@@ -3,15 +3,22 @@ import React from 'react'
 import SearchField from './SearchField' 
 import SortList from './SortList.js'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const sortElements = (event, rotate) =>  {
+    props.sortElements(event, rotate);
+  }
+
+  const filterElements = (inputValue, filtered) => {
+    props.filterElements(inputValue, filtered)
+  }
   return (
     <div className="bg-blue rounded-xl h-20">
         <div className="flex">
-            <SearchField />
+            <SearchField filterElements={filterElements}/>
         </div>
       
       <div className="flex">
-        <SortList />
+        <SortList sortElements={sortElements}/>
       </div>
     </div>
   )

@@ -58,7 +58,6 @@ const dashboardRooms = (props) => {
 
     useEffect(() => {
       setIsLoaded(false);
-      console.log(props.projectID)
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
   
       axios.get(url, {
@@ -76,6 +75,7 @@ const dashboardRooms = (props) => {
 
     const sortElements = (event, rotate) => {
       const IDTriggeredSortElement = event.target.id
+      console.log(loadedRooms)
       let orderedRooms;
       switch(IDTriggeredSortElement){
         case "0":
@@ -87,13 +87,28 @@ const dashboardRooms = (props) => {
           break;
         case "1":
           if(rotate){
-            orderedRooms = [...loadedRooms].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.room_number > b.room_number) ? 1: ((b.room_number > a.room_number) ? -1 : 0))
           }else{
-            orderedRooms = [...loadedRooms].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? -1: ((b.creator_user_id > a.creator_user_id) ? 1 : 0))
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.room_number > b.room_number) ? -1: ((b.room_number > a.room_number) ? 1 : 0))
+          }
+          break;
+        case "2":
+          if(rotate){
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.created_at > b.created_at) ? 1: ((b.created_at > a.created_at) ? -1 : 0))
+          }else{
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.created_at > b.created_at) ? -1: ((b.created_at > a.created_at) ? 1 : 0))
+          }
+          break;
+        case "3":
+          if(rotate){
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.capacity > b.capacity) ? 1: ((b.capacity > a.capacity) ? -1 : 0))
+          }else{
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.capacity > b.capacity) ? -1: ((b.capacity > a.capacity) ? 1 : 0))
           }
           break;
         default:
           console.log("default- shit")
+          return;
       }
       setRooms(orderedRooms)
     }
@@ -101,7 +116,7 @@ const dashboardRooms = (props) => {
     const filterElements = (inputValue, filtered) => {
       setFiltered(filtered)
       let filteredRoomsBuffer
-      filteredRoomsBuffer = [...loadedAnnouncements].filter((message) => message.subject.toLowerCase().includes(inputValue))
+      filteredRoomsBuffer = [...loadedRooms].filter((room) => room.title.toLowerCase().includes(inputValue))
       setFilteredRooms(filteredRoomsBuffer)
     }
 

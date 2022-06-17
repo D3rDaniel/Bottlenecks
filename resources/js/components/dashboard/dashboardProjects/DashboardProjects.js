@@ -34,13 +34,14 @@ function DashboardProjects (props) {
           }
         })
           .then(function(response) {setIsLoaded(true);
+            console.log(response)
             setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
             },(error) =>{
               setIsLoaded(true);
               setError(error);})
       }, []);
       
-      //DEF: Sortelements are saved with an ID starting from 0. Needs to be adapted depending on (quantitiy in) SortList !
+      
       const sortElements = (event, rotate) => {
         const IDTriggeredSortElement = event.target.id
         let orderedProjects;

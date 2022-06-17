@@ -20,9 +20,9 @@ const RoomsMinView = (props) => {
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
             
             <label className="ml-12 w-1/4 min-w-max">{props.room.title}</label>
-            <label className="w-1/4 min-w-max">{props.room.room_number}</label>
-            <label className="w-1/4 min-w-max">{props.room.created_at.substring(0,10)}</label>
-            <label className="w-1/4 min-w-max">{props.room.capacity}</label>
+            <label className="w-1/4 min-w-max pl-16">{props.room.room_number}</label>
+            <label className="w-1/4 min-w-max pl-28">{props.room.created_at.substring(0,10)}</label>
+            <label className="w-1/4 min-w-max pl-40">{props.room.capacity}</label>
 
             <div className="flex ml-auto">
                 <BookingButton  onClick={changePopupTrigger}/>
