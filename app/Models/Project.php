@@ -58,7 +58,7 @@ class Project extends Model
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class,'project_users','project_id','user_id')
-            ->withPivot('user_id','project_id','can_create_tasks','can_edit_tasks','can_create_tags');
+            ->withPivot('user_id','id','project_id','can_create_tasks','can_edit_tasks','can_create_tags');
     }
 
     /**

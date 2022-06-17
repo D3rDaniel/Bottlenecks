@@ -12,7 +12,7 @@ const MemberMaxView = (props) => {
     const handleCheckbox = (value, right) =>{
         value === true ? value = 1 : value = 0;
 
-        const url = "http://127.0.0.1:8000/api/project-member/"+props.member.id; //Es wird die id von der Tabelle project_users benötigt
+        const url = "http://127.0.0.1:8000/api/project-member/"+props.member.pivot.id; //Es wird die id von der Tabelle project_users benötigt
         axios.put(url, right+":"+value , {
             headers: {
               'Accept': 'application/json',
@@ -23,7 +23,7 @@ const MemberMaxView = (props) => {
     }
 
     const deleteMember = () => {
-        const url = "http://127.0.0.1:8000/api/project-member/"+props.member.id; //Es wird die id von der Tabelle project_users benötigt
+        const url = "http://127.0.0.1:8000/api/project-member/"+props.member.pivot.id; //Es wird die id von der Tabelle project_users benötigt
 
         axios.delete(url, {
             headers: {
