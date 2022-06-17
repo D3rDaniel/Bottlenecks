@@ -871,9 +871,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .overflow-auto{
   overflow: auto;
 }
-.overflow-scroll{
-  overflow: scroll;
-}
 .overflow-y-hidden{
   overflow-y: hidden;
 }

@@ -115,7 +115,7 @@ function DashboardTasks(props) {
                   updated_at = {task.updated_at.substring(0,10)}
                   creator = {task.creator.username}
                   assignee = {task.assignee}
-                  tag = {task.tag.title == null ? "keine Tag" : task.tag.title}
+                  tag = {task.tag === null ? "keine Tag" : task.tag.title}
                   key={index}>
                 </TaskMinimumView>
               )
@@ -136,7 +136,7 @@ function DashboardTasks(props) {
                   updated_at = {task.updated_at.substring(0,10)}
                   creator = {task.creator.username}
                   assignee = {task.assignee}
-                  tag = {task.tag.title == null ? "keine Tag" : task.tag.title}
+                  tag = {task.tag === null ? "keine Tag" : task.tag.title}
                   key={index}>
                 </TaskMinimumView>
               )
