@@ -4,9 +4,9 @@ function ProjectMaximumViewRaumbuchungen (props) {
   return (
     <div className='flex justify-center w-full bg-white rounded-xl shadow-bottom p-2'>
       <div className="flex justify-center w-11/12 mr-2">
-        <div className="px-1 mr-3 w-2/4">
+      <div className="px-1 mr-3 w-2/4">
             <h1 className="font-bold">Beschreibung</h1>
-            <div className="h-full w-full overflow-scroll">{props.description}</div>
+            <div className="h-full w-full overflow-x-scroll overflow-y-hidden"><p>{props.description}</p></div>
         </div>
         <div className="px-1 mr-3 w-1/4">
             <div className="h-1/2 px-3 ">
@@ -30,7 +30,9 @@ function ProjectMaximumViewRaumbuchungen (props) {
         </div>
     </div>
   <div className="w-1/12">
-    <button>Buchung löschen</button>
+    <button className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="button">
+                      Buchung löschen
+      </button>
   </div>
     </div>
   

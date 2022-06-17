@@ -22,6 +22,8 @@ function DashboardTasks(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadedTasks, setTasks] = useState([]);
+  const [filtered, setFiltered] = useState(false);
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
     setIsLoaded(false);
@@ -39,6 +41,37 @@ function DashboardTasks(props) {
           setIsLoaded(true);
           setError(error);})
   }, []);
+
+  const sortElements = (event, rotate) => {
+    const IDTriggeredSortElement = event.target.id
+    let orderedTasks;
+    switch(IDTriggeredSortElement){
+      case "0":
+        if(rotate){
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+        }else{
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+        }
+        break;
+      case "1":
+        if(rotate){
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+        }else{
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? -1: ((b.creator_user_id > a.creator_user_id) ? 1 : 0))
+        }
+        break;
+      default:
+        console.log("default- shit")
+    }
+    setTasks(orderedTasks)
+  }
+
+  const filterElements = (inputValue, filtered) => {
+    setFiltered(filtered)
+    let filteredTasksBuffer
+    filteredTasksBuffer = [...loadedTasks].filter((task) => task.title.toLowerCase().includes(inputValue))
+    setFilteredRooms(filteredTasksBuffer)
+  }
       
     if (error) {
       errormessage = error.message;
@@ -50,15 +83,25 @@ function DashboardTasks(props) {
         <div className=" text-darkgray">Loading...</div>
       </div>)
     }else if(loadedTasks.length < 1){
-      return <div className="m-auto text-red font-bold">Keine Tasks gefunden</div>
+      return (
+        <>
+            <div className="m-auto text-red font-bold">
+                 <h2>Keine Tasks gefunden</h2>
+                 <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
+              </div>
+              <NewTaskPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token} user_id={props.userID} project_id={props.projectID}/>
+        </>
+        )
   }else {
 
     return(
       <div className="flex flex-col w-full mx-1 my-2">
-          <SearchBar />
+          <SearchBar sortElements={sortElements} filterElements={filterElements}/>
 
           <div className="h-full w-full overflow-y-scroll">
-            {loadedTasks.map((task, index) => {
+            {
+              filtered?
+              filteredTasks.map((task, index) => {
               return (
                 <TaskMinimumView
                   title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
@@ -76,7 +119,30 @@ function DashboardTasks(props) {
                   key={index}>
                 </TaskMinimumView>
               )
-            })}
+            })
+            
+              :
+              loadedTasks.map((task, index) => {
+              return (
+                <TaskMinimumView
+                  title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
+                  fullTitle = {task.title}
+                  description = {task.description}
+                  comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
+                  status = {task.status.title}
+                  prio = {task.priority.title}
+                  completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
+                  date = {task.due_date}
+                  updated_at = {task.updated_at.substring(0,10)}
+                  creator = {task.creator.username}
+                  assignee = {task.assignee}
+                  tag = {task.tag.title == null ? "keine Tag" : task.tag.title}
+                  key={index}>
+                </TaskMinimumView>
+              )
+            })
+            
+            }
           </div>
 
           <div className="w-full flex justify-end">

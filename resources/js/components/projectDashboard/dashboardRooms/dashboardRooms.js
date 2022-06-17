@@ -52,6 +52,9 @@ const dashboardRooms = (props) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedRooms, setRooms] = useState([]);
+    const [filtered, setFiltered] = useState(false);
+    const [filteredRooms, setFilteredRooms] = useState([]);
+
 
     useEffect(() => {
       setIsLoaded(false);
@@ -68,7 +71,38 @@ const dashboardRooms = (props) => {
           }).catch(function(response){
               setIsLoaded(true)
               setError(true)})
-    }, []);
+    },[] );
+
+    const sortElements = (event, rotate) => {
+      const IDTriggeredSortElement = event.target.id
+      let orderedRooms;
+      switch(IDTriggeredSortElement){
+        case "0":
+          if(rotate){
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+          }else{
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+          }
+          break;
+        case "1":
+          if(rotate){
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+          }else{
+            orderedRooms = [...loadedRooms].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? -1: ((b.creator_user_id > a.creator_user_id) ? 1 : 0))
+          }
+          break;
+        default:
+          console.log("default- shit")
+      }
+      setRooms(orderedRooms)
+    }
+
+    const filterElements = (inputValue, filtered) => {
+      setFiltered(filtered)
+      let filteredRoomsBuffer
+      filteredRoomsBuffer = [...loadedAnnouncements].filter((message) => message.subject.toLowerCase().includes(inputValue))
+      setFilteredRooms(filteredRoomsBuffer)
+    }
 
       if (error) {
           return <div className="m-auto text-red font-bold">Es ist ein Fehler aufgetreten!</div> 
@@ -84,17 +118,19 @@ const dashboardRooms = (props) => {
             <h2>Keine Räume gefunden</h2>
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
           </div>
-          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
+          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} projectID={props.projectID}/>
         </>
         )
     }else {
 
   return (
     <div className="flex flex-col w-full mx-1 my-2">
-        <Searchbar />
+        <Searchbar filterElements={filterElements} sortElements={sortElements}/>
 
         <div className="h-full w-full">
-            {loadedRooms.map((room, index) => {
+        {
+              filtered?
+              filteredRooms.map((room, index) => {
                 return (
                     <MinView
                         changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
@@ -102,7 +138,20 @@ const dashboardRooms = (props) => {
                         key = {index}
                     ></MinView>
                 )
-            })}
+            })
+              
+              :
+              loadedRooms.map((room, index) => {
+                return (
+                    <MinView
+                        changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
+                        room = {room}
+                        key = {index}
+                    ></MinView>
+                )
+            })
+            
+            }
         </div>
         <div className="w-full flex justify-end">
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  

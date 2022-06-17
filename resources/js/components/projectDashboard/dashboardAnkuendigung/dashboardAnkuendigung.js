@@ -14,6 +14,8 @@ const dashboardAnkuendigung = (props) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedAnnouncements, setAnnouncements] = useState([]);
+    const [filtered, setFiltered] = useState(false);
+    const [filteredAnnouncements, setFilteredAnnouncements] = useState([]);
 
     useEffect(() => {
       setIsLoaded(false);
@@ -32,6 +34,37 @@ const dashboardAnkuendigung = (props) => {
             setError(error);})
     }, []);
 
+    const sortElements = (event, rotate) => {
+      const IDTriggeredSortElement = event.target.id
+      let orderedAnnouncements;
+      switch(IDTriggeredSortElement){
+        case "0":
+          if(rotate){
+            orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+          }else{
+            orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+          }
+          break;
+        case "1":
+          if(rotate){
+            orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+          }else{
+            orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? -1: ((b.creator_user_id > a.creator_user_id) ? 1 : 0))
+          }
+          break;
+        default:
+          console.log("default- shit")
+      }
+      setAnnouncements(orderedAnnouncements)
+    }
+
+    const filterElements = (inputValue, filtered) => {
+      setFiltered(filtered)
+      let filteredAnnouncementsBuffer
+      filteredAnnouncementsBuffer = [...loadedAnnouncements].filter((message) => message.subject.toLowerCase().includes(inputValue))
+      setFilteredAnnouncements(filteredAnnouncementsBuffer)
+    }
+
       if (error) {
         let errormessage = error.message;
         if(error.message.includes("No announcements found")) errormessage = "Es gibt noch keine Ankündigungen"
@@ -47,17 +80,34 @@ const dashboardAnkuendigung = (props) => {
 
     return (
         <div className="flex flex-col w-full mx-1 my-2">
-          <Searchbar />
+          <Searchbar sortElements={sortElements} filterElements={filterElements}/>
+
 
           <div className="h-full w-full">
-              {loadedAnnouncements.map((announcement, index) => {
+          {
+                filtered?
+                
+                filteredAnnouncements.map((announcement, index) => {
                   return (
                       <MinView 
                           message = {announcement}
                           key = {index}
                       ></MinView>
                   )
-              })}
+              })
+
+              :
+                loadedAnnouncements.map((announcement, index) => {
+                  return (
+                      <MinView 
+                          message = {announcement}
+                          key = {index}
+                      ></MinView>
+                  )
+              })
+              
+              
+              }
           </div>
         </div>
     )}

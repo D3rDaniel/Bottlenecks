@@ -778,20 +778,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-44{
   width: 11rem;
 }
+.w-32{
+  width: 8rem;
+}
+.w-4{
+  width: 1rem;
+}
 .w-52{
   width: 13rem;
 }
 .w-2\/3{
   width: 66.666667%;
 }
-.w-32{
-  width: 8rem;
-}
 .w-72{
   width: 18rem;
-}
-.w-4{
-  width: 1rem;
 }
 .min-w-max{
   min-width: -webkit-max-content;
@@ -873,6 +873,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .overflow-scroll{
   overflow: scroll;
+}
+.overflow-y-hidden{
+  overflow-y: hidden;
+}
+.overflow-x-scroll{
+  overflow-x: scroll;
 }
 .overflow-y-scroll{
   overflow-y: scroll;

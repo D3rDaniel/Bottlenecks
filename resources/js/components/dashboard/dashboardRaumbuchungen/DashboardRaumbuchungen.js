@@ -69,7 +69,7 @@ function DashboardRaumbuchungen() {
   const filterElements = (inputValue, filtered) =>{
     setFiltered(filtered)
     let filteredRoomsBuffer
-    filteredRoomsBuffer = [...loadedRooms].filter((room) => room.title.toLowerCase().includes(inputValue))
+    filteredRoomsBuffer = [...loadedRooms].filter((room) => room.roomname.toLowerCase().includes(inputValue))
     setFilteredRooms(filteredRoomsBuffer)
   }
   return (
@@ -78,7 +78,7 @@ function DashboardRaumbuchungen() {
         
         <div className='h-full w-full'>
            {
-             /* filtered ? 
+             filtered ? 
 
              filteredRooms.map((booking, index) => {
              return(
@@ -98,7 +98,7 @@ function DashboardRaumbuchungen() {
              )
            })
 
-           :   */
+           :   
 
              buchungen.map((booking, index) => {
              return(

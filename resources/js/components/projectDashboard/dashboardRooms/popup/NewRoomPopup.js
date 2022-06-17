@@ -3,7 +3,7 @@ import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
 import UserContext from '../../../../store/user-context'
 
-function NewRoomPopup({trigger, onClick}) {
+function NewRoomPopup({trigger, onClick, projectID}) {
     const user = useContext(UserContext);
 
     const [name, setName] = useState();
@@ -19,8 +19,6 @@ function NewRoomPopup({trigger, onClick}) {
     const getName = (data) => {setName(data);}
     const getSize = (data) => {setSize(data);}
     const getNumber = (data) => {setNumber(data);}
-    const getOpen_at = (data) => {setOpen_at(data); }
-    const getClose_at = (data) => {setClose_at(data);}
 
     const getOpen_at_weekend = (event) => {
         if(event.target.checked){
@@ -49,6 +47,7 @@ function NewRoomPopup({trigger, onClick}) {
             address_info: address,
             description: description,
             equipment_info: equipment,
+            project_id: projectID
         }
 
        const url = "http://127.0.0.1:8000/api/room/"; 
@@ -59,18 +58,18 @@ function NewRoomPopup({trigger, onClick}) {
             }
         })
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            if(res.status === 201){
+                alert("Raum wurder erfolgreich erstellt!");
+            }else{
+                alert("Es ist etwas schief gelaufen");
+            }
+            
         })
-        .catch(res => {
-            console.log(res);
+        .catch(error => {
+            alert("Bitte überprüfe deine Eingaben auf Richtigkeit. ")
         })
-
     }
     
-    const pickTime = (event) =>{
-        console.log(event)
-    }
     
 
   return ( trigger) ? (
