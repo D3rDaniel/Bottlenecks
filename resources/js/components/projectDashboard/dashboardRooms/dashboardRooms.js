@@ -58,6 +58,7 @@ const dashboardRooms = (props) => {
 
     useEffect(() => {
       setIsLoaded(false);
+      console.log(props.projectID)
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
   
       axios.get(url, {
@@ -118,7 +119,7 @@ const dashboardRooms = (props) => {
             <h2>Keine Räume gefunden</h2>
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
           </div>
-          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} projectID={props.projectID}/>
+          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID}/>
         </>
         )
     }else {

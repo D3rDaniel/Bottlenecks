@@ -2,9 +2,11 @@ import React, {useEffect, useState, useContext} from 'react'
 import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
 import UserContext from '../../../../store/user-context'
+import ProjectContext from '../../../../store/project-context';
 
-function NewRoomPopup({trigger, onClick, projectID}) {
+function NewRoomPopup(props) {
     const user = useContext(UserContext);
+    const project = useContext(ProjectContext);
 
     const [name, setName] = useState();
     const [size, setSize] = useState();
@@ -37,6 +39,7 @@ function NewRoomPopup({trigger, onClick, projectID}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log("projectID: ",project.project_id)
         const room = {
             title: name,
             capacity: size,
@@ -47,7 +50,7 @@ function NewRoomPopup({trigger, onClick, projectID}) {
             address_info: address,
             description: description,
             equipment_info: equipment,
-            project_id: projectID
+            project_id: project.project_id
         }
 
        const url = "http://127.0.0.1:8000/api/room/"; 
@@ -72,7 +75,7 @@ function NewRoomPopup({trigger, onClick, projectID}) {
     
     
 
-  return ( trigger) ? (
+  return ( props.trigger) ? (
     <div className="w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ">
         <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
             
@@ -112,7 +115,7 @@ function NewRoomPopup({trigger, onClick, projectID}) {
                         </div>
                     
                     <div className="flex items-center justify-between">
-                        <button onClick={onClick} className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="button">
+                        <button onClick={props.onClick} className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="button">
                         Abbruch
                         </button>
                         <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="submit">
