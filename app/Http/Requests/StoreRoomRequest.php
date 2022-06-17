@@ -33,7 +33,8 @@ class StoreRoomRequest extends FormRequest
             'address_info' => 'string|max:500',
             'opening_time' => 'date_format:H:i:s',
             'closing_time' => 'date_format:H:i:s|after:opening_time',
-            'opened_on_weekends'=>'integer|digits_between:0,1'
+            'opened_on_weekends'=>'integer|digits_between:0,1',
+            'project_id' => 'required|exists:projects,id',
         ];
     }
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator): array
