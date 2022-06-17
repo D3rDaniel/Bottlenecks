@@ -4,7 +4,7 @@ import SearchBarRaumbuchungen from './searchbar/SearchBarRaumbuchungens'
 
 const buchungen = [
   {roomname: "Bücherrei", roomnumber: "019", created_at: "12.04.2022", roomsize: "12", day_of_booking: "04.06.2022", period: "12:00 - 14:00", 
-  description: "blablaafohasfhadsfhdafjadsöfhdasöfhdaöfhdöafhadsofjködhfaoödfhaööööööööööööööööakdhfodhfköadhfadhfködashfödhgöiadfhgöiadfhad adökfhadsöofh aöfhoöadshf öasodfh ödas f.  ! ladfh öakdsfhaös hf.",
+  description: "blablaafohasfhadsfhdafjadsöfhdasöfhdaöfhdöafhadsofjködhfaoödfhaööööööööööööööööakdhfodhfköadhfadhfködashfödhgöiadfhgöiadfhad adökfhadsöofh \nöfhoöadshf öasodfh ödas f.  ! ladfh öakdsfhaös hf.",
   equipment: "beamer", open_at:"Mo-Fr 9-12", 
   full_address: {city: "Hof", plz: "95028", address: "Alfons-Goppel-Platz 1", building: "B", room: "019"}}
 ]

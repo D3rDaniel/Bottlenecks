@@ -6,15 +6,22 @@ const elements = [
     {label: "Veröffentlicht", selected: false}
   ];
 
-const SortList = () => {
+const SortList = (props) => {
+
+  const sortElements = (event, rotate) => {
+    console.log("Is rotatet? ", rotate)
+    props.sortElements(event, rotate);
+  }
   return (
     <div className="flex w-full ml-20 mr-28">
         {elements.map((element, index) => {
             return (
                 <Sortelement
+                    id={index}
                     label={element.label}
                     selected={element.selected}
-                    key={index}>
+                    key={index}
+                    sortElements={sortElements}>
                 </Sortelement>
         )
         })}

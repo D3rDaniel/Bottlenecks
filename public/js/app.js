@@ -3776,7 +3776,7 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
     setFiltered(filtered);
     var filteredAnkuendigungenBuffer;
     filteredAnkuendigungenBuffer = _toConsumableArray(loadedAnnouncements).filter(function (message) {
-      return message.title.toLowerCase().includes(inputValue);
+      return message.subject.toLowerCase().includes(inputValue);
     });
     setFilteredAnnouncements(filteredAnkuendigungenBuffer);
   };
@@ -3789,11 +3789,11 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
       case "0":
         if (rotate) {
           orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
-            return a.project > b.project ? 1 : b.project > a.project ? -1 : 0;
+            return a.project_id > b.project_id ? 1 : b.project_id > a.project_id ? -1 : 0;
           });
         } else {
           orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
-            return a.project > b.project ? -1 : b.project > a.project ? 1 : 0;
+            return a.project_id > b.project_id ? -1 : b.project_id > a.project_id ? 1 : 0;
           });
         }
 
@@ -3815,11 +3815,24 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
       case '2':
         if (rotate) {
           orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
-            return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
+            return a.updated_at > b.updated_at ? 1 : b.updated_at > a.updated_at ? -1 : 0;
           });
         } else {
           orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
-            return a.title > b.title ? -1 : b.title > a.title ? 1 : 0;
+            return a.updated_at > b.updated_at ? -1 : b.updated_at > a.updated_at ? 1 : 0;
+          });
+        }
+
+        break;
+
+      case '3':
+        if (rotate) {
+          orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
+            return a.subject > b.subject ? 1 : b.subject > a.subject ? -1 : 0;
+          });
+        } else {
+          orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
+            return a.subject > b.subject ? -1 : b.subject > a.subject ? 1 : 0;
           });
         }
 
@@ -3829,7 +3842,7 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
         console.log("default- shit");
     }
 
-    setFilteredAnnouncements(orderedAnnouncements);
+    setAnnouncements(orderedAnnouncements);
   };
 
   if (error) {
@@ -3975,6 +3988,7 @@ var elements = [{
 
 var SortList = function SortList(props) {
   var sortElements = function sortElements(event, rotate) {
+    console.log("Is rotatet? ", rotate);
     props.sortElements(event, rotate);
   };
 
@@ -5329,7 +5343,9 @@ var SearchField = function SearchField(props) {
       setInputValue = _useState2[1];
 
   var changeInputValue = function changeInputValue(event) {
-    setInputValue(event.target.value.toLowerCase());
+    var valueString = event.target.value;
+    console.log("is it undefined?", valueString === undefined ? "yes" : "no");
+    setInputValue(valueString === undefined ? "" : valueString.toLowerCase());
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -5458,7 +5474,6 @@ var elements = [{
 
 var SortList = function SortList(props) {
   var sortElements = function sortElements(event, rotate) {
-    console.log("Is rotatet? ", rotate);
     props.sortElements(event, rotate);
   };
 
@@ -5527,7 +5542,7 @@ var buchungen = [{
   roomsize: "12",
   day_of_booking: "04.06.2022",
   period: "12:00 - 14:00",
-  description: "blablaafohasfhadsfhdafjadsöfhdasöfhdaöfhdöafhadsofjködhfaoödfhaööööööööööööööööakdhfodhfköadhfadhfködashfödhgöiadfhgöiadfhad adökfhadsöofh aöfhoöadshf öasodfh ödas f.  ! ladfh öakdsfhaös hf.",
+  description: "blablaafohasfhadsfhdafjadsöfhdasöfhdaöfhdöafhadsofjködhfaoödfhaööööööööööööööööakdhfodhfköadhfadhfködashfödhgöiadfhgöiadfhad adökfhadsöofh \nöfhoöadshf öasodfh ödas f.  ! ladfh öakdsfhaös hf.",
   equipment: "beamer",
   open_at: "Mo-Fr 9-12",
   full_address: {
@@ -5732,8 +5747,10 @@ function ProjectMaximumViewRaumbuchungen(props) {
           className: "font-bold",
           children: "Beschreibung"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "h-full w-full overflow-scroll",
-          children: props.description
+          className: "h-full w-full overflow-x-scroll overflow-y-hidden",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+            children: props.description
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "px-1 mr-3 w-1/4",
@@ -5775,8 +5792,10 @@ function ProjectMaximumViewRaumbuchungen(props) {
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "w-1/12",
+      className: "w-1/12 pt-5",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
+        type: "button",
         children: "Buchung l\xF6schen"
       })
     })]
@@ -6498,7 +6517,7 @@ function TimeChooser(props) {
 
   var pickTime = function pickTime(event) {
     setTime(event);
-    props.onChange(event);
+    props.pickTime(event);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -7109,6 +7128,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AnkuendigungMinimumView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnkuendigungMinimumView */ "./resources/js/components/projectDashboard/dashboardAnkuendigung/AnkuendigungMinimumView.js");
 /* harmony import */ var _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../images/icons/loading-spinner.png */ "./resources/images/icons/loading-spinner.png");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -7160,6 +7187,16 @@ var dashboardAnkuendigung = function dashboardAnkuendigung(props) {
       loadedAnnouncements = _useState6[0],
       setAnnouncements = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      filtered = _useState8[0],
+      setFiltered = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      filteredAnnouncements = _useState10[0],
+      setFilteredAnnouncements = _useState10[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/announcements";
@@ -7177,6 +7214,53 @@ var dashboardAnkuendigung = function dashboardAnkuendigung(props) {
       setError(error);
     });
   }, []);
+
+  var sortElements = function sortElements(event, rotate) {
+    var IDTriggeredSortElement = event.target.id;
+    var orderedAnnouncements;
+
+    switch (IDTriggeredSortElement) {
+      case "0":
+        if (rotate) {
+          orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
+            return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
+          });
+        } else {
+          orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
+            return a.title > b.title ? -1 : b.title > a.title ? 1 : 0;
+          });
+        }
+
+        break;
+
+      case "1":
+        if (rotate) {
+          orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
+            return a.creator_user_id > b.creator_user_id ? 1 : b.creator_user_id > a.creator_user_id ? -1 : 0;
+          });
+        } else {
+          orderedAnnouncements = _toConsumableArray(loadedAnnouncements).sort(function (a, b) {
+            return a.creator_user_id > b.creator_user_id ? -1 : b.creator_user_id > a.creator_user_id ? 1 : 0;
+          });
+        }
+
+        break;
+
+      default:
+        console.log("default- shit");
+    }
+
+    setAnnouncements(orderedAnnouncements);
+  };
+
+  var filterElements = function filterElements(inputValue, filtered) {
+    setFiltered(filtered);
+    var filteredAnnouncementsBuffer;
+    filteredAnnouncementsBuffer = _toConsumableArray(loadedAnnouncements).filter(function (message) {
+      return message.subject.toLowerCase().includes(inputValue);
+    });
+    setFilteredAnnouncements(filteredAnnouncementsBuffer);
+  };
 
   if (error) {
     var errormessage = error.message;
@@ -7205,9 +7289,16 @@ var dashboardAnkuendigung = function dashboardAnkuendigung(props) {
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "flex flex-col w-full mx-1 my-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        sortElements: sortElements,
+        filterElements: filterElements
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "h-full w-full",
-        children: loadedAnnouncements.map(function (announcement, index) {
+        children: filtered ? filteredAnnouncements.map(function (announcement, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AnkuendigungMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            message: announcement
+          }, index);
+        }) : loadedAnnouncements.map(function (announcement, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AnkuendigungMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             message: announcement
           }, index);
@@ -7243,15 +7334,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var SearchBar = function SearchBar() {
+var SearchBar = function SearchBar(props) {
+  var sortElements = function sortElements(event, rotate) {
+    props.sortElements(event, rotate);
+  };
+
+  var filterElements = function filterElements(inputValue, filtered) {
+    props.filterElements(inputValue, filtered);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "bg-blue rounded-xl h-20",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "flex",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SearchField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        filterElements: filterElements
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "flex",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SortList_js__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SortList_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        sortElements: sortElements
+      })
     })]
   });
 };
@@ -7275,17 +7378,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _images_icons_search_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../images/icons/search.jpg */ "./resources/images/icons/search.jpg");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
-var SearchField = function SearchField() {
+
+var SearchField = function SearchField(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      inputValue = _useState2[0],
+      setInputValue = _useState2[1];
+
+  var changeInputValue = function changeInputValue(event) {
+    setInputValue(event.target.value.toLowerCase());
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var filtered = inputValue.trim().length != 0;
+    props.filterElements(inputValue, filtered);
+  }, [inputValue]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex h-7 w-full bg-white rounded-xl mt-3 items-center mx-10",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       placeholder: "Suchbegriff eingeben...",
-      className: " ml-3 w-full outline-none"
+      className: " ml-3 w-full outline-none",
+      onChange: changeInputValue
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
       className: "w-5 h-5 mr-4 mt-1 hover:cursor-pointer",
       src: _images_icons_search_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -7390,13 +7519,20 @@ var elements = [{
   selected: false
 }];
 
-var SortList = function SortList() {
+var SortList = function SortList(props) {
+  var sortElements = function sortElements(event, rotate) {
+    console.log("Is rotatet? ", rotate);
+    props.sortElements(event, rotate);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "flex w-full ml-20 mr-28",
     children: elements.map(function (element, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SortElement__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        id: index,
         label: element.label,
-        selected: element.selected
+        selected: element.selected,
+        sortElements: sortElements
       }, index);
     })
   });
@@ -8395,6 +8531,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images_icons_loading_spinner_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../images/icons/loading-spinner.png */ "./resources/images/icons/loading-spinner.png");
 /* harmony import */ var _popup_RoomBookingPopup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./popup/RoomBookingPopup */ "./resources/js/components/projectDashboard/dashboardRooms/popup/RoomBookingPopup.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8507,6 +8651,63 @@ var dashboardRooms = function dashboardRooms(props) {
       loadedRooms = _useState10[0],
       setRooms = _useState10[1];
 
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      filtered = _useState12[0],
+      setFiltered = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      filteredRooms = _useState14[0],
+      setFilteredRooms = _useState14[1];
+
+  var sortElements = function sortElements(event, rotate) {
+    var IDTriggeredSortElement = event.target.id;
+    var orderedRooms;
+
+    switch (IDTriggeredSortElement) {
+      case "0":
+        if (rotate) {
+          orderedRooms = _toConsumableArray(loadedRooms).sort(function (a, b) {
+            return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
+          });
+        } else {
+          orderedRooms = _toConsumableArray(loadedRooms).sort(function (a, b) {
+            return a.title > b.title ? -1 : b.title > a.title ? 1 : 0;
+          });
+        }
+
+        break;
+
+      case "1":
+        if (rotate) {
+          orderedRooms = _toConsumableArray(loadedRooms).sort(function (a, b) {
+            return a.creator_user_id > b.creator_user_id ? 1 : b.creator_user_id > a.creator_user_id ? -1 : 0;
+          });
+        } else {
+          orderedRooms = _toConsumableArray(loadedRooms).sort(function (a, b) {
+            return a.creator_user_id > b.creator_user_id ? -1 : b.creator_user_id > a.creator_user_id ? 1 : 0;
+          });
+        }
+
+        break;
+
+      default:
+        console.log("default- shit");
+    }
+
+    setAnnouncements(orderedRooms);
+  };
+
+  var filterElements = function filterElements(inputValue, filtered) {
+    setFiltered(filtered);
+    var filteredRoomsBuffer;
+    filteredRoomsBuffer = _toConsumableArray(loadedAnnouncements).filter(function (message) {
+      return message.subject.toLowerCase().includes(inputValue);
+    });
+    setFilteredAnnouncements(filteredRoomsBuffer);
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/rooms";
@@ -8562,9 +8763,17 @@ var dashboardRooms = function dashboardRooms(props) {
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "flex flex-col w-full mx-1 my-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_searchbar_SearchBar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        filterElements: filterElements,
+        sortElements: sortElements
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "h-full w-full",
-        children: loadedRooms.map(function (room, index) {
+        children: filtered ? filteredRooms.map(function (room, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            changePopupTriggerValueBooking: changePopupTriggerValueBooking,
+            room: room
+          }, index);
+        }) : loadedRooms.map(function (room, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             changePopupTriggerValueBooking: changePopupTriggerValueBooking,
             room: room
@@ -8742,10 +8951,6 @@ function NewRoomPopup(_ref) {
          console.log(res.data);
      })
      */
-  };
-
-  var pickTime = function pickTime(event) {
-    console.log(event);
   };
 
   return trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -9506,6 +9711,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var tasks = [{
   title: "Task1",
   status: "abgeschlossen",
@@ -9589,9 +9795,19 @@ function DashboardTasks(props) {
       })]
     });
   } else if (loadedTasks.length < 1) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "m-auto text-red font-bold",
-      children: "Keine Tasks gefunden"
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "m-auto text-red font-bold",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+          children: "Keine Tasks gefunden"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_CreateTaskButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          popupTrigger: popupTrigger,
+          onClick: changePopupTriggerValue
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_popup_NewTaskPopup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        trigger: popupTrigger,
+        onClick: changePopupTriggerValue
+      })]
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {

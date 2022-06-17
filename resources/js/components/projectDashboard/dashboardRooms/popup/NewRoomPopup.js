@@ -58,9 +58,7 @@ function NewRoomPopup({trigger, onClick}) {
         })
         */
     }
-    const pickTime = (event) =>{
-        console.log(event)
-    }
+
     
 
   return ( trigger) ? (

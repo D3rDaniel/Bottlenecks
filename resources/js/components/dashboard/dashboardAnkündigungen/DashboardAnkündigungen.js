@@ -39,7 +39,7 @@ const DashboardAnkündigungen = (props) => {
       const filterElements = (inputValue, filtered) => {
         setFiltered(filtered)
         let filteredAnkuendigungenBuffer
-        filteredAnkuendigungenBuffer = [...loadedAnnouncements].filter((message) => message.title.toLowerCase().includes(inputValue))
+        filteredAnkuendigungenBuffer = [...loadedAnnouncements].filter((message) => message.subject.toLowerCase().includes(inputValue))
         setFilteredAnnouncements(filteredAnkuendigungenBuffer)
       }
       const sortElements = (event, rotate) =>{
@@ -47,10 +47,11 @@ const DashboardAnkündigungen = (props) => {
             let orderedAnnouncements;
             switch(IDTriggeredSortElement){
               case "0":
+                
                 if(rotate){
-                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.project > b.project) ? 1: ((b.project > a.project) ? -1 : 0))
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.project_id > b.project_id) ? 1: ((b.project_id > a.project_id) ? -1 : 0))
                 }else{
-                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.project > b.project) ? -1: ((b.project > a.project) ? 1 : 0))
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.project_id > b.project_id) ? -1: ((b.project_id > a.project_id) ? 1 : 0))
                 }
                 break;
               case "1":
@@ -62,15 +63,22 @@ const DashboardAnkündigungen = (props) => {
                 break;
               case '2':
                 if(rotate){
-                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.updated_at > b.updated_at) ? 1: ((b.updated_at > a.updated_at) ? -1 : 0))
                 }else{
-                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.updated_at > b.updated_at) ? -1: ((b.updated_at > a.updated_at) ? 1 : 0))
+                }
+                break;
+              case '3':
+                if(rotate){
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.subject > b.subject) ? 1: ((b.subject > a.subject) ? -1 : 0))
+                }else{
+                  orderedAnnouncements = [...loadedAnnouncements].sort((a,b) => (a.subject > b.subject) ? -1: ((b.subject > a.subject) ? 1 : 0))
                 }
                 break;
               default:
                 console.log("default- shit")
             }
-            setFilteredAnnouncements(orderedAnnouncements)
+            setAnnouncements(orderedAnnouncements)
       }
       
       if (error) {

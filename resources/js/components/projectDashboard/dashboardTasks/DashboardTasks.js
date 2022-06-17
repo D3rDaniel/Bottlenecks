@@ -52,7 +52,16 @@ function DashboardTasks(props) {
         <div className=" text-darkgray">Loading...</div>
       </div>)
     }else if(loadedTasks.length < 1){
-      return <div className="m-auto text-red font-bold">Keine Tasks gefunden</div>
+      return (
+      <>
+          <div className="m-auto text-red font-bold">
+               <h2>Keine Tasks gefunden</h2>
+               <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
+            </div>
+            <NewTaskPopup trigger={popupTrigger} onClick={changePopupTriggerValue}/>
+      </>
+      )
+        
   }else {
 
     return(

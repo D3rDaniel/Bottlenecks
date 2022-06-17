@@ -6,7 +6,7 @@ function TimeChooser(props) {
 
   const pickTime = (event) => {
     setTime(event)
-    props.onChange(event)
+    props.pickTime(event)
   }
   return (
     <div>

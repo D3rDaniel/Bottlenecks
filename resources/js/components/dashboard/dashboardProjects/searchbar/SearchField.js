@@ -5,7 +5,9 @@ const SearchField = (props) => {
   const [inputValue, setInputValue] = useState("")
 
   const changeInputValue = (event) => {
-    setInputValue(event.target.value.toLowerCase())
+    let valueString = event.target.value;
+    console.log("is it undefined?" ,valueString === undefined ? "yes" : "no")
+    setInputValue(valueString === undefined ? "" : valueString.toLowerCase())
   }
   useEffect(() => {
     let filtered = inputValue.trim().length != 0 

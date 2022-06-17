@@ -10,6 +10,7 @@ const elements = [
 
 const SortList = (props) => {
   const sortElements = (event, rotate) =>{
+    console.log("Is rotatet? ", rotate)
     props.sortElements(event, rotate)
   }
   return (
