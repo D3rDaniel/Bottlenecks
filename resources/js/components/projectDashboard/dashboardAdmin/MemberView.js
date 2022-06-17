@@ -36,7 +36,17 @@ const MemberView = (props) => {
           <div className=" text-darkgray">Loading...</div>
         </div>)
       }else if(loadedMembers.length < 1){
-        return <div className="m-auto text-red font-bold">Keine Mitglieder gefunden</div>
+        return (
+            <div className="bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between">
+            <div>
+                <div className="font-bold mt-2 ml-1">Mitglieder</div>
+                <div className="p-5 text-red">
+                     Es sind noch keine Mitgllieder vorhanden!
+                </div>
+            </div>
+            <InputField token={props.token} projectID={props.projectID}/>
+            </div>)
+
     }else {  
     return (
         <div className="bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between">
