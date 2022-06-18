@@ -34,7 +34,6 @@ function DashboardProjects (props) {
           }
         })
           .then(function(response) {setIsLoaded(true);
-            console.log(response)
             setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
             },(error) =>{
               setIsLoaded(true);

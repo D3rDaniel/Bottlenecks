@@ -57,7 +57,6 @@ function NewTaskPopup(props) {
             })
             setAllTags(Object.values(tagKeyValues))
         })
-        console.log(tagKeyValues)
         //get rooms
         axios.get(urlRooms,{
             headers: {
@@ -69,7 +68,6 @@ function NewTaskPopup(props) {
             res.data.rooms.map(room =>{
                 roomKeyValues[room.id] = room.title
             })
-            console.log("after first obj: ", roomKeyValues)
             setAllRooms(Object.values(roomKeyValues))
         })
         //get prios
@@ -106,16 +104,17 @@ function NewTaskPopup(props) {
         event.preventDefault();
         const task = {
             title: title,
-            due_date: deadline,
+            project_id: project.project_id,
+            due_date: deadline.getFullYear()+"-"+((deadline.getMonth()+1) < 10 ? "0"+(deadline.getMonth()+1) : (deadline.getMonth()+1))+"-"+(deadline.getDate() < 10 ? "0"+ deadline.getDate() : deadline.getDate()),
+            due_time: "00:00",
             assignee_user_id: member,
-            room: room,
-            priority: priority,
-
-            tag: tag,
-            description: description
+            room_id: room,
+            priority_id: priority,
+            tag_id: tag,
+            description: description,
+            status_id: 2
         }
-        console.log(task)
-       
+       console.log(task)
        const url = "http://127.0.0.1:8000/api/task/"
        axios.post(url, task , {
         headers: {

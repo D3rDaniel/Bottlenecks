@@ -5,10 +5,6 @@ function DropDownSelect(props) {
     const data = Array.from(props.options)
     const [selects, setSelects] = useState("");
 
-    useEffect(() => {
-        console.log(data)
-    },[data])
-
     const handleChange = (e) => {
         setSelects(e.target.value)
         props.onChange(e.target.value)

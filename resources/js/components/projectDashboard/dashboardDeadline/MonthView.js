@@ -36,14 +36,14 @@ const MonthView = (props) => {
                 fullTitle = {task.title}
                 description = {task.description}
                 comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                status = {task.status.title}
-                prio = {task.priority.title}
+                status = {task.status !== null ? task.status.title : "kein Status"}
+                prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                 completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
                 date = {task.due_date}
                 updated_at = {task.updated_at.substring(0,10)}
                 creator = {task.creator.username}
                 assignee = {task.assignee}
-                tag = {task.tag.title == null ? "keine Tag" : task.tag.title}
+                tag = {task.tag == null ? "keine Tag" : task.tag.title}
                 key={index}>
             </MinView>
             ) : (null))

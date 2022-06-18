@@ -4,6 +4,7 @@ import TaskMaximumView from './TaskMaximumView'
 
 function TaskMinimumView (props) {
 
+
     const [prioColor, setPrioColor] = useState("text-black");
     const [rotate, setRotate] = useState(0);
 

@@ -5,6 +5,7 @@ import NewTaskPopup from './popup/NewTaskPopup'
 import CreateTaskButton from './CreateTaskButton'
 import Loading from '../../../../images/icons/loading-spinner.png'
 import axios from 'axios'
+import { BsChevronCompactLeft } from 'react-icons/bs'
 
 const tasks = [
   {title: "Task1", status: "abgeschlossen", prio: "Hoch", completedDate: "06.05.2022" , date: "09.05.2022"},
@@ -61,7 +62,6 @@ function DashboardTasks(props) {
         }
         break;
       default:
-        console.log("default- shit")
     }
     setTasks(orderedTasks)
   }
@@ -108,14 +108,14 @@ function DashboardTasks(props) {
                   fullTitle = {task.title}
                   description = {task.description}
                   comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                  status = {task.status.title}
-                  prio = {task.priority.title}
-                  completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
+                  status = {task.status !== null? task.status.title : "kein status"}
+                  prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
+                  completedDate = {(task.completed_date === null ? "nicht abgeschlossen" : task.completed_date)}
                   date = {task.due_date}
                   updated_at = {task.updated_at.substring(0,10)}
                   creator = {task.creator.username}
                   assignee = {task.assignee}
-                  tag = {task.tag === null ? "keine Tag" : task.tag.title}
+                  tag = {task.tag === null ? "kein Tag" : task.tag.title}
                   key={index}>
                 </TaskMinimumView>
               )
@@ -129,8 +129,8 @@ function DashboardTasks(props) {
                   fullTitle = {task.title}
                   description = {task.description}
                   comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                  status = {task.status.title}
-                  prio = {task.priority.title}
+                  status = {task.status !== null? task.status.title : "kein status"}
+                  prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
                   date = {task.due_date}
                   updated_at = {task.updated_at.substring(0,10)}
@@ -152,7 +152,7 @@ function DashboardTasks(props) {
             </div> */}
             <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        <NewTaskPopup trigger={popupTrigger} onClick={changePopupTriggerValue}/>
+        <NewTaskPopup token={props.token} trigger={popupTrigger} onClick={changePopupTriggerValue}/>
       </div>
     )}
 }
