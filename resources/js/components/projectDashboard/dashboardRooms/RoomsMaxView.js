@@ -51,7 +51,7 @@ const RoomsMaxView = (props) => {
         </div>
 
         <div className="w-1/4 flex flex-col justify-end pb-5 items-end">
-            <button className="bg-red h-8 w-28 rounded-xl text-white mr-12 hover:font-bold">Verlassen</button>
+            <button className="bg-red h-8 w-28 rounded-xl text-white mr-12 hover:font-bold">Löschen</button>
         </div>        
     </div>
   )

@@ -15,7 +15,7 @@ const ProjectMaximumViewOffeneTasks = ({title, description, deadline}) => {
       </div>
       <div className="flex w-1/2 p-3 items-end">
         <div className='flex justify-between items-end'>
-          <button className="bg-amber-500 w-36 h-6 px-3 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}Bearbeiten</button>
+          {/*<button className="bg-amber-500 w-36 h-6 px-3 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >Bearbeiten</button>*/}
           <button className="bg-red w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}Löschen</button>
         </div>
       </div>

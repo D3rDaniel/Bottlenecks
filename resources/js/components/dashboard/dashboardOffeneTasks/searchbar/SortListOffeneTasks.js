@@ -6,7 +6,7 @@ const elements = [
     {label: "Projekt", selected: false},
     {label: "Deadline", selected: false},
     {label: "Tag", selected: false},
-    {label: "Raum", selected: false},
+    //{label: "Raum", selected: false},
     {label: "Priorität", selected: false},
   ];
 

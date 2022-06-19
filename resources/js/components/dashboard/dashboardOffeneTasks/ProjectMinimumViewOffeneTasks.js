@@ -23,10 +23,10 @@ const ProjectMinimumViewOffeneTasks = (props) => {
                 <div className="">{props.project}</div>
                 <div className="">{props.deadline}</div>
                 <div className="">{props.tag}</div>
-                <div className="">{props.room}</div>
+                {/*<div className="">{props.room}</div>*/}
                 <div className="">{props.priority}</div>
             </div>
-            <div className='w-1/5'>
+            <div className=''>
                 <div className='flex justify-between'>
                     <button className="bg-amber-300 w-36 h-6 px-3 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}in Bearbeitung</button>
                     <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}Abschließen</button>

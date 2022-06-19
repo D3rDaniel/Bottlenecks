@@ -34,7 +34,7 @@ function TaskMaximumView(props){
                 <div>{props.tag}</div>
             </div>
             <div className="mr-12  mb-4 mt-auto">
-                <button className="bg-lightorange w-36 h-6 mr-8 rounded-xl text-white hover:font-bold drop-shadow-lg">Bearbeiten</button>
+                {/*<button className="bg-lightorange w-36 h-6 mr-8 rounded-xl text-white hover:font-bold drop-shadow-lg">Bearbeiten</button>*/}
                 <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg">Task abbrechen</button>
             </div>
         </div>
