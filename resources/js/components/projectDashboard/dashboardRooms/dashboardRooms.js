@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 
 import Searchbar from './searchbar/SearchBar'
@@ -8,37 +8,11 @@ import CreateRoomButton from './CreateRoomButton'
 import NewRoomPopup from './popup/NewRoomPopup'
 import Loading from '../../../../images/icons/loading-spinner.png'
 import RoomBookingPopup from './popup/RoomBookingPopup'
-
-const rooms = [
-    {title : "Dösraum" , 
-    room_number : "100" , 
-    created_at : "11.05.2022" ,
-    capacity : "20" , 
-    equipment_info : "Bett" , 
-    time : {opening_time : "12:00" , closing_time : "13:00" , openend_on_weekends : "0"} , 
-    address_info : {city : "Hof" , plz : "95028" , address : "Hofstr. 1" , appartment : "B"} ,
-    description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"} ,
-
-    {title : "Actionraum" , 
-    room_number : "223" , 
-    created_at : "11.05.2022" ,
-    capacity : "42" , 
-    equipment_info : "Stühle" , 
-    time : {opening_time : "12:00" , closing_time : "13:00" , openend_on_weekends : "1"} , 
-    address_info : {city : "Naila" , plz : "12345" , address : "Hofstr. 1" , appartment : "A"} ,
-    description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"} ,
-
-    {title : "T-Raum" , 
-    room_number : "666" , 
-    created_at : "11.05.2022" ,
-    capacity : "235" , 
-    equipment_info : "Tafel" , 
-    time : {opening_time : "12:00" , closing_time : "13:00" , openend_on_weekends : "0"} , 
-    address_info : {city : "Bayreuth" , plz : "11111" , address : "Baystr. 1" , appartment : "C"} ,
-    description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"}
-]
+import UserContext from '../../../store/user-context'
 
 const dashboardRooms = (props) => {
+
+  const user = useContext(UserContext)
 
   const [popupTrigger, setPopupTrigger] = useState(false)
   const [popupTriggerBooking, setPopupTriggerBooking] = useState(false)
@@ -173,7 +147,7 @@ const dashboardRooms = (props) => {
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
         <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
-        <RoomBookingPopup trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} />
+        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} />
     </div>
   )}
 }

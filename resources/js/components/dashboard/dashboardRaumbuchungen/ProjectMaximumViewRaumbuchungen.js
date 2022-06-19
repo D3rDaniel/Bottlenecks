@@ -1,6 +1,21 @@
+import axios from 'axios';
 import React from 'react'
 
 function ProjectMaximumViewRaumbuchungen (props) {
+
+  const deleteBooking = () => {
+    const url = "http://127.0.0.1:8000/api/bookings/"+props.id;
+    axios.delete(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    })
+    .then(res => {
+      if(res.status == 201) alert("Buchung erfolgreich gelöscht")
+      props.onClick() //rerender  parent
+    })
+  }
   return (
     <div className='flex justify-center w-full bg-white -mt-2 shadow-bottom p-2'>
       <div className="flex justify-center w-11/12 mr-2">
@@ -26,7 +41,7 @@ function ProjectMaximumViewRaumbuchungen (props) {
         </div>
     </div>
   <div className="w-1/12 pr-5 pt-5">
-    <button className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-2  rounded focus:outline-none focus:shadow-outline" type="button">
+    <button className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-2  rounded focus:outline-none focus:shadow-outline" type="button" onClick={deleteBooking}>
                       Buchung löschen
       </button>
   </div>

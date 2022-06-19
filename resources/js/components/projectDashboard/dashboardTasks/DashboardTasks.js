@@ -18,15 +18,10 @@ function DashboardTasks(props) {
   const [popupTrigger, setPopupTrigger] = useState(false)
   const changePopupTriggerValue = () => {
     setPopupTrigger(!popupTrigger);
+    getTasks();
   }
 
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [loadedTasks, setTasks] = useState([]);
-  const [filtered, setFiltered] = useState(false);
-  const [filteredTasks, setFilteredTasks] = useState([]);
-
-  useEffect(() => {
+  const getTasks = () =>{
     setIsLoaded(false);
     const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
 
@@ -37,10 +32,21 @@ function DashboardTasks(props) {
       }
     })
       .then(function(response) {setIsLoaded(true);
+        console.log("res-tasks-id: ", response.data["tasks"])
         setTasks(response.data["tasks"]);  
         },(error) =>{
           setIsLoaded(true);
           setError(error);})
+  }
+
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedTasks, setTasks] = useState([]);
+  const [filtered, setFiltered] = useState(false);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+
+  useEffect(() => {
+    getTasks();
   }, []);
 
   const sortElements = (event, rotate) => {
@@ -70,8 +76,9 @@ function DashboardTasks(props) {
     setFiltered(filtered)
     let filteredTasksBuffer
     filteredTasksBuffer = [...loadedTasks].filter((task) => task.title.toLowerCase().includes(inputValue))
-    setFilteredRooms(filteredTasksBuffer)
+    setFilteredTasks(filteredTasksBuffer)
   }
+
       
     if (error) {
       errormessage = error.message;
@@ -102,13 +109,15 @@ function DashboardTasks(props) {
             {
               filtered?
               filteredTasks.map((task, index) => {
+                
               return (
                 <TaskMinimumView
+                  id={task.id}
                   title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
                   fullTitle = {task.title}
                   description = {task.description}
                   comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                  status = {task.status !== null? task.status.title : "kein status"}
+                  status = {task.status !== null? task.status.id : "kein status"}
                   prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "nicht abgeschlossen" : task.completed_date)}
                   date = {task.due_date}
@@ -116,20 +125,23 @@ function DashboardTasks(props) {
                   creator = {task.creator.username}
                   assignee = {task.assignee}
                   tag = {task.tag === null ? "kein Tag" : task.tag.title}
-                  key={index}>
+                  key={index}
+                  token={props.token}>
                 </TaskMinimumView>
               )
             })
             
               :
               loadedTasks.map((task, index) => {
+                console.log(task.status.id)
               return (
                 <TaskMinimumView
+                  id={task.id}
                   title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
                   fullTitle = {task.title}
                   description = {task.description}
                   comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                  status = {task.status !== null? task.status.title : "kein status"}
+                  status = {task.status !== null? task.status : "kein status"}
                   prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
                   date = {task.due_date}
@@ -137,7 +149,8 @@ function DashboardTasks(props) {
                   creator = {task.creator.username}
                   assignee = {task.assignee}
                   tag = {task.tag === null ? "keine Tag" : task.tag.title}
-                  key={index}>
+                  key={index}
+                  token={props.token}>
                 </TaskMinimumView>
               )
             })

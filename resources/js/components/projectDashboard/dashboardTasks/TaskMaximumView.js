@@ -1,6 +1,23 @@
 import React from 'react'
+import axios from 'axios';
 
 function TaskMaximumView(props){
+
+    const closeTask = () =>{
+        const url = "http://127.0.0.1:8000/api/task/"+props.id;
+        axios.delete(url,{
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + props.token
+            }
+        })
+        .then(res => {
+            console.log("res-close-delete: ", res)
+            if(res.status == 201) alert("Task erfolgreich gelöscht")
+            props.onClick() //rerender parent-component if possible 
+        })
+        .catch(error => console.log("error: ", error))    
+    }
 
   return (
     <div className="bg-white rounded-xl -mt-5 shadow-bottom">        
@@ -34,8 +51,7 @@ function TaskMaximumView(props){
                 <div>{props.tag}</div>
             </div>
             <div className="mr-12  mb-4 mt-auto">
-                {/*<button className="bg-lightorange w-36 h-6 mr-8 rounded-xl text-white hover:font-bold drop-shadow-lg">Bearbeiten</button>*/}
-                <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg">Task abbrechen</button>
+                {props.status.id !== 1? <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={closeTask}>Task abbrechen</button> : null }
             </div>
         </div>
     </div>

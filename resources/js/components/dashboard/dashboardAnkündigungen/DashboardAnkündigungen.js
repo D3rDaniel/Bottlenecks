@@ -28,7 +28,7 @@ const DashboardAnkündigungen = (props) => {
           }
         })
           .then(function(response) {setIsLoaded(true);
-            setAnnouncements(response.data["announcements"]);  
+            setAnnouncements(response.data["announcements"]);
             },(error) =>{
               setIsLoaded(true);
               setError(error);})

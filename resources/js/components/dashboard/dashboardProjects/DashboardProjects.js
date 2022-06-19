@@ -82,6 +82,7 @@ function DashboardProjects (props) {
             break;
           default:
             console.log("default- shit")
+            return;
         }
         setProjects(orderedProjects)
       }

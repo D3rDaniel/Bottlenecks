@@ -27,7 +27,8 @@ const Sidebar = (props) => {
         <SidebarButtonElement
           img={InfoIcon}
           desc="Info" 
-          selected="false">
+          selected="false"
+          url="info">
         </SidebarButtonElement>
         <SignOut token={props.token}></SignOut>
       </div>
