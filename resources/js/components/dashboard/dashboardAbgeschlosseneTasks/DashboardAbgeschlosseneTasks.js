@@ -90,7 +90,6 @@ function DashboardAbgeschlosseneTasks(props) {
                 }
                 break;
               default:
-                console.log("default- shit")
             }
             setTasks(orderedTasks)
       }
@@ -124,12 +123,13 @@ function DashboardAbgeschlosseneTasks(props) {
                 created_at={task.created_at.substring(0,10)}
                 deadline={task.due_date}
                 finished_at={task.completed_date == null ? "kein Datum" : task.completed_date}
-                priority={task.priority.title}
-                tag={task.tag.title}
+                priority={task.priority === null ? "keine Priorität" : task.priority.title}
+                tag={task.tag === null ? "kein Tag" : task.tag.title}
                 finished_state={task.status.title}
                 description={task.description}
                 finish_comment={task.completion_comment == null ? "kein Kommentar angegeben" : task.completion_comment}
                 room={task.room == null ? "kein Raum angegeben" : task.room}
+                project_id={task.project.id}
                 key={index}>
               </ProjectMinimumView>
             )
@@ -145,12 +145,13 @@ function DashboardAbgeschlosseneTasks(props) {
                 created_at={task.created_at.substring(0,10)}
                 deadline={task.due_date}
                 finished_at={task.completed_date == null ? "kein Datum" : task.completed_date}
-                priority={task.priority.title}
-                tag={task.tag.title}
+                priority={task.priority === null ? "keine Priorität" : task.priority.title}
+                tag={task.tag === null ? "kein Tag" : task.tag.title}
                 finished_state={task.status.title}
                 description={task.description}
                 finish_comment={task.completion_comment == null ? "kein Kommentar angegeben" : task.completion_comment}
                 room={task.room == null ? "kein Raum angegeben" : task.room}
+                project_id={task.project.id}
                 key={index}>
               </ProjectMinimumView>
             )

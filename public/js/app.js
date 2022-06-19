@@ -2949,7 +2949,6 @@ function DashboardAbgeschlosseneTasks(props) {
         break;
 
       default:
-        console.log("default- shit");
     }
 
     setTasks(orderedTasks);
@@ -2995,12 +2994,13 @@ function DashboardAbgeschlosseneTasks(props) {
             created_at: task.created_at.substring(0, 10),
             deadline: task.due_date,
             finished_at: task.completed_date == null ? "kein Datum" : task.completed_date,
-            priority: task.priority.title,
-            tag: task.tag.title,
+            priority: task.priority === null ? "keine Priorität" : task.priority.title,
+            tag: task.tag === null ? "kein Tag" : task.tag.title,
             finished_state: task.status.title,
             description: task.description,
             finish_comment: task.completion_comment == null ? "kein Kommentar angegeben" : task.completion_comment,
-            room: task.room == null ? "kein Raum angegeben" : task.room
+            room: task.room == null ? "kein Raum angegeben" : task.room,
+            project_id: task.project.id
           }, index);
         }) : loadedTasks.map(function (task, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ProjectMinimumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -3010,12 +3010,13 @@ function DashboardAbgeschlosseneTasks(props) {
             created_at: task.created_at.substring(0, 10),
             deadline: task.due_date,
             finished_at: task.completed_date == null ? "kein Datum" : task.completed_date,
-            priority: task.priority.title,
-            tag: task.tag.title,
+            priority: task.priority === null ? "keine Priorität" : task.priority.title,
+            tag: task.tag === null ? "kein Tag" : task.tag.title,
             finished_state: task.status.title,
             description: task.description,
             finish_comment: task.completion_comment == null ? "kein Kommentar angegeben" : task.completion_comment,
-            room: task.room == null ? "kein Raum angegeben" : task.room
+            room: task.room == null ? "kein Raum angegeben" : task.room,
+            project_id: task.project.id
           }, index);
         })
       })]
@@ -3096,9 +3097,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.png */ "./resources/images/icons/arrow-black.png");
 /* harmony import */ var _ProjectMaximumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumViewAbgeschlosseneTasks */ "./resources/js/components/dashboard/dashboardAbgeschlosseneTasks/ProjectMaximumViewAbgeschlosseneTasks.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var _store_project_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../store/project-context */ "./resources/js/store/project-context.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3117,11 +3121,36 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlosseneTasks(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       rotate = _useState2[0],
       setRotate = _useState2[1];
+
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
+
+  var handleOpenProject = function handleOpenProject(id) {
+    var url = "http://127.0.0.1:8000/api/project/" + id;
+    axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + userCtx.user_token
+      }
+    }).then(function (response) {
+      var project = response.data["project"];
+
+      if (project) {
+        projectCtx.select(project.id, project.title, project.creator_user_id);
+        alert("project set with id " + projectCtx.project_id + " data: " + project);
+        navigate('/project');
+      } else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");
+    });
+  };
 
   var rotateArrow = function rotateArrow() {
     if (rotate) {
@@ -3131,47 +3160,51 @@ var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlo
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "my-5 ml-1",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         "class": "flex justify-around w-11/12 items-center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-5",
           children: props.title
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-5",
           children: props.project
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-12",
           children: props.finished_at
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-12",
           children: props.priority
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-12",
           children: props.tag
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-12",
           children: props.finished_state
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "w-1/12",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
           className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
+          type: "button",
+          onClick: function onClick() {
+            handleOpenProject(props.project_id);
+          },
           children: "\xD6ffnen"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex ml-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
           src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__["default"],
           alt: "maxView",
           className: "h-7 w-7 mx-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
           onClick: rotateArrow
         }), "            "]
       })]
-    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ProjectMaximumViewAbgeschlosseneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
       title: props.fullTitle,
       description: props.description,
       room: props.room,
@@ -5751,8 +5784,7 @@ function DashboardRaumbuchungen(props) {
             opening_time: booking.room.opening_time.substring(0, 5),
             closing_time: booking.room.closing_time.substring(0, 5),
             address_info: booking.room.address_info,
-            onClick: getBookings,
-            token: props.token
+            project: booking.room.project_id
           }, index);
         }) : loadedBookings.map(function (booking, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ProjectMinimumViewRaumbuchungen__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -5769,8 +5801,7 @@ function DashboardRaumbuchungen(props) {
             opening_time: booking.room.opening_time.substring(0, 5),
             closing_time: booking.room.closing_time.substring(0, 5),
             address_info: booking.room.address_info,
-            onClick: getBookings,
-            token: props.token
+            project: booking.room.project_id
           }, index);
         })
       })]
@@ -5892,9 +5923,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.png */ "./resources/images/icons/arrow-black.png");
 /* harmony import */ var _ProjectMaximumViewRaumbuchungen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumViewRaumbuchungen */ "./resources/js/components/dashboard/dashboardRaumbuchungen/ProjectMaximumViewRaumbuchungen.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var _store_project_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../store/project-context */ "./resources/js/store/project-context.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5913,11 +5947,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       rotate = _useState2[0],
       setRotate = _useState2[1];
+
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
 
   var rotateArrow = function rotateArrow() {
     if (rotate) {
@@ -5927,47 +5968,69 @@ var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(p
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  var handleOpenProject = function handleOpenProject(id) {
+    var url = "http://127.0.0.1:8000/api/project/" + id;
+    axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + userCtx.user_token
+      }
+    }).then(function (response) {
+      var project = response.data["project"];
+
+      if (project) {
+        projectCtx.select(project.id, project.title, project.creator_user_id);
+        alert("project set with id " + projectCtx.project_id + " data: " + project);
+        navigate('/project/rooms');
+      } else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "my-5 ml-1",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex justify-around w-11/12 items-center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-20",
           children: props.title
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-20",
           children: props.room_number
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-16",
           children: props.created_at
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-20",
           children: props.capacity
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-12",
           children: props.reservation_date
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "w-1/6 pl-12",
           children: "".concat(props.start_time, " - ").concat(props.end_time)
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "w-1/12",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+          type: "button",
+          onClick: function onClick() {
+            handleOpenProject(props.project);
+          },
           className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
           children: "\xD6ffnen"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex ml-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
           src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__["default"],
           alt: "maxView",
           className: "h-7 w-7 mx-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
           onClick: rotateArrow
         }), "            "]
       })]
-    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumViewRaumbuchungen__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ProjectMaximumViewRaumbuchungen__WEBPACK_IMPORTED_MODULE_2__["default"], {
       description: props.description,
       equipment_info: props.equipment_info,
       opening_time: props.opening_time,

@@ -1,10 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Arrow from '../../../../images/icons/arrow-black.png'
 import TaskMaximumView from './ProjectMaximumViewAbgeschlosseneTasks'
+import UserContext from '../../../store/user-context'
+import ProjectContext from '../../../store/project-context'
 
 const ProjectMinimumViewAbgeschlosseneTasks = (props) => {
 
     const [rotate, setRotate] = useState(0);
+
+    const userCtx = useContext(UserContext);
+    const projectCtx = useContext(ProjectContext);
+
+    const navigate = useNavigate();
+
+    const handleOpenProject = (id) => {
+        const url = "http://127.0.0.1:8000/api/project/"+id;
+
+        axios.get(url, {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + userCtx.user_token
+            }
+          })
+            .then(function(response) {
+                let project = response.data["project"]
+              if(project){
+                projectCtx.select(project.id, project.title, project.creator_user_id);
+                alert("project set with id " + projectCtx.project_id + " data: " + project)
+                navigate('/project');
+            }
+            else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");
+        });
+        
+    }
 
     const rotateArrow = () => { 
         if(rotate){
@@ -29,7 +58,7 @@ const ProjectMinimumViewAbgeschlosseneTasks = (props) => {
                 <div className="w-1/6 pl-12">{props.finished_state}</div>
             </div>
             <div className='w-1/12'>
-                <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}Öffnen</button>
+                <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" type="button" onClick={function(){handleOpenProject(props.project_id)}}>Öffnen</button>
             </div>
             
 

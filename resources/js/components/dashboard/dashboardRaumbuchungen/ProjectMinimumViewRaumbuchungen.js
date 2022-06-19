@@ -33,7 +33,6 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
           })
             .then(function(response) {
                 let project = response.data["project"]
-                console.log(response)
               if(project){
                 projectCtx.select(project.id, project.title, project.creator_user_id);
                 alert("project set with id " + projectCtx.project_id + " data: " + project)
