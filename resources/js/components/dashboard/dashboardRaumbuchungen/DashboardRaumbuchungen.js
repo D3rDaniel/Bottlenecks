@@ -16,7 +16,9 @@ function DashboardRaumbuchungen(props) {
   const [filtered, setFiltered] = useState(false)
   const [filteredBookings, setFilteredBookings] = useState([])
 
-  useEffect(() => {
+  
+
+  const getBookings = () =>{
     setIsLoaded(false);
     const url = "http://127.0.0.1:8000/api/user/"+user.user_id+"/bookings";
     axios.get(url, {
@@ -31,6 +33,10 @@ function DashboardRaumbuchungen(props) {
         }).catch(function(response){
             setIsLoaded(true)
             setError(true)})
+  }
+
+  useEffect(() => {
+    getBookings()
   },[] );
 
 

@@ -13,7 +13,8 @@ const SortList = (props) => {
     props.sortElements(event, rotate);
   }
   return (
-    <div className="flex w-full ml-20 mr-16">
+    <>
+    <div className="flex justify-around ml-6 w-4/5 items-center">
         {elements.map((element, index) => {
             return (
                 <Sortelement
@@ -26,6 +27,9 @@ const SortList = (props) => {
         )
         })}
     </div>
+    <div className="w-1/5"></div>
+    </>
+    
   )
 }
 

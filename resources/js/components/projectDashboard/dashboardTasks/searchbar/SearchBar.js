@@ -8,7 +8,6 @@ const SearchBar = () => {
     <div className="bg-blue rounded-xl h-20">
       <div className="flex">
         <SearchField />
-        <CheckboxList />
       </div>
       
       <div className="flex">

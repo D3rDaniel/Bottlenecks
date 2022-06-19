@@ -59,14 +59,11 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
             <div className='w-1/12'>
                 <button type="button" onClick={function(){handleOpenProject(props.project)}} className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}Öffnen</button>
             </div>
-            
-
-
             <div  className="flex ml-auto">
                 <img src={Arrow} alt="maxView" className={`h-7 w-7 mx-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
             </div>
         {rotate ? <TaskMaximumView description={props.description} equipment_info={props.equipment_info}
-                                opening_time={props.opening_time} closing_time={props.closing_time} address_info={props.address_info} /> : null}
+                                opening_time={props.opening_time} closing_time={props.closing_time} address_info={props.address_info} id={props.id} token={props.token} onClick={props.onClick}/> : null}
     </div>
     
   )

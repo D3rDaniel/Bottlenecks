@@ -16,16 +16,20 @@ const RoomsMinView = (props) => {
     const rotateArrow = () => { rotate ? setRotate(false) : setRotate(true) }
 
     return (
-    <div className="my-5 mx-8">
+    <div className="my-5 ">
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
-            
-            <label className="ml-12 w-1/4 min-w-max">{props.room.title}</label>
-            <label className="w-1/4 min-w-max pl-16">{props.room.room_number}</label>
-            <label className="w-1/4 min-w-max pl-28">{props.room.created_at.substring(0,10)}</label>
-            <label className="w-1/4 min-w-max pl-40">{props.room.capacity}</label>
 
-            <div className="flex ml-auto">
-                <BookingButton  onClick={changePopupTrigger}/>
+            <div className="flex justify-around w-4/5 items-center">
+                <div className="w-1/6 pl-2">{props.room.title}</div>
+                <div className="w-1/6 pl-2">{props.room.room_number}</div>
+                <div className="w-1/6 pl-2">{props.room.created_at.substring(0,10)}</div>
+                <div className="w-1/6 pl-22">{props.room.capacity}</div>
+            </div>
+            <div className='w-1/5'>
+                <BookingButton  className="mr-5" onClick={changePopupTrigger}/>
+            </div>
+
+            <div className="flex  my-auto">
                 <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
             </div>
         </div>

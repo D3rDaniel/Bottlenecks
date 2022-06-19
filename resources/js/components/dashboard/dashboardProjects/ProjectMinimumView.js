@@ -4,8 +4,10 @@ import TaskMaximumView from './ProjectMaximumView'
 import { Link, useNavigate } from 'react-router-dom'
 import Progressbar from '../../../progressBar'
 import ProjectContext from '../../../store/project-context'
+import axios from 'axios'
 
 const ProjectMinimumView = (props) => {
+
 
     const projectCtx = useContext(ProjectContext);
     const navigate = useNavigate();
@@ -15,12 +17,24 @@ const ProjectMinimumView = (props) => {
         navigate("/project")
     }
 
+    const [creatorUser, setCreatorUser] = useState();
     const [progressCompleted, setProgressCompleted] = useState("w-0%")
     const [rotate, setRotate] = useState(0);
 
     const fillProgressBar = () => {
         let progressString = Math.round(props.progress).toString();
         setProgressCompleted("w-"+ progressString + "%");
+    }
+
+    const getUsernameFromUserID = () => {
+        const url = "http://127.0.0.1:8000/api/user/"+props.creator+"/name"; //api not done yet prob.
+        axios.get(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + props.token
+              }
+        })
+        .then(res => setCreatorUser(res))
     }
 
     const rotateArrow = () => { 
@@ -31,13 +45,9 @@ const ProjectMinimumView = (props) => {
         }
     }
 
-    //TestMethode 
-    const test = () => {
-        console.log(rotate);
-    }
-
     useEffect(() => {
         fillProgressBar();
+        getUsernameFromUserID(); //wait for api
     });
 
   return (
@@ -48,11 +58,6 @@ const ProjectMinimumView = (props) => {
             <label className="w-1/5 ml-3">{props.creator}</label>
 
             <div className="w-1/5 mr-5">
-                {/* <div className="bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center">
-                    <div className={`${progressCompleted} bg-green-400 rounded-full`}>
-                        {props.progress}%
-                    </div>
-                </div> */}
                 <Progressbar progressPercentage = {props.progress} />
             </div>
             
