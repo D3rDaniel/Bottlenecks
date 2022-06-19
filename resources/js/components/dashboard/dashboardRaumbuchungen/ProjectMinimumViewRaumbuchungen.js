@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Arrow from '../../../../images/icons/arrow-black.png'
 import TaskMaximumView from './ProjectMaximumViewRaumbuchungen'
+import UserContext from '../../../store/user-context'
+import ProjectContext from '../../../store/project-context'
 
 const ProjectMinimumViewRaumbuchungen = (props) => {
 
     const [rotate, setRotate] = useState(0);
+
+    const userCtx = useContext(UserContext);
+    const projectCtx = useContext(ProjectContext);
+
+    const navigate = useNavigate();
 
     const rotateArrow = () => { 
         if(rotate){
@@ -12,6 +20,28 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
         }else{
             setRotate(true);
         }
+    }
+
+    const handleOpenProject = (id) => {
+        const url = "http://127.0.0.1:8000/api/project/"+id;
+
+        axios.get(url, {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + userCtx.user_token
+            }
+          })
+            .then(function(response) {
+                let project = response.data["project"]
+                console.log(response)
+              if(project){
+                projectCtx.select(project.id, project.title, project.creator_user_id);
+                alert("project set with id " + projectCtx.project_id + " data: " + project)
+                navigate('/project/rooms');
+            }
+            else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");
+        });
+        
     }
 
   return (
@@ -27,7 +57,7 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
                 <div className="w-1/6 pl-12">{`${props.start_time} - ${props.end_time}` }</div>
             </div>
             <div className='w-1/12'>
-                <button className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}Öffnen</button>
+                <button type="button" onClick={function(){handleOpenProject(props.project)}} className="bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg" >{/*<Link to='/project'>Öffnen</Link>*/}Öffnen</button>
             </div>
             
 

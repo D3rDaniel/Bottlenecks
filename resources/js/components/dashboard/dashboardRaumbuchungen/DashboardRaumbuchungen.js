@@ -25,7 +25,8 @@ function DashboardRaumbuchungen(props) {
         'Authorization': 'Bearer ' + props.token
       }
     })
-      .then(function(response) {setIsLoaded(true);
+      .then(function(response) {
+        setIsLoaded(true);
         setBookings(response.data.bookings);  
         }).catch(function(response){
             setIsLoaded(true)
@@ -135,6 +136,7 @@ function DashboardRaumbuchungen(props) {
                 opening_time={booking.room.opening_time.substring(0,5)}
                 closing_time={booking.room.closing_time.substring(0,5)}
                 address_info={booking.room.address_info}
+                project={booking.room.project_id}
                 key={index} >
                 </ProjectMinimumViewRaumbuchungen>
               )
@@ -158,6 +160,7 @@ function DashboardRaumbuchungen(props) {
                 opening_time={booking.room.opening_time.substring(0,5)}
                 closing_time={booking.room.closing_time.substring(0,5)}
                 address_info={booking.room.address_info}
+                project={booking.room.project_id}
                 key={index} >
                 </ProjectMinimumViewRaumbuchungen>
               )
