@@ -26,17 +26,6 @@ const ProjectMinimumView = (props) => {
         setProgressCompleted("w-"+ progressString + "%");
     }
 
-    const getUsernameFromUserID = () => {
-        const url = "http://127.0.0.1:8000/api/user/"+props.creator+"/name"; //api not done yet prob.
-        axios.get(url, {
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + props.token
-              }
-        })
-        .then(res => setCreatorUser(res))
-    }
-
     const rotateArrow = () => { 
         if(rotate){
             setRotate(false);
@@ -44,11 +33,6 @@ const ProjectMinimumView = (props) => {
             setRotate(true);
         }
     }
-
-    useEffect(() => {
-        fillProgressBar();
-        getUsernameFromUserID(); //wait for api
-    });
 
   return (
     <div className="my-5 ml-1">

@@ -5002,19 +5002,6 @@ var ProjectMinimumView = function ProjectMinimumView(props) {
     setProgressCompleted("w-" + progressString + "%");
   };
 
-  var getUsernameFromUserID = function getUsernameFromUserID() {
-    var url = "http://127.0.0.1:8000/api/user/" + props.creator + "/name"; //api not done yet prob.
-
-    axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + props.token
-      }
-    }).then(function (res) {
-      return setCreatorUser(res);
-    });
-  };
-
   var rotateArrow = function rotateArrow() {
     if (rotate) {
       setRotate(false);
@@ -5023,10 +5010,6 @@ var ProjectMinimumView = function ProjectMinimumView(props) {
     }
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    fillProgressBar();
-    getUsernameFromUserID(); //wait for api
-  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "my-5 ml-1",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
