@@ -13,7 +13,7 @@ const Project_OverviewPage = () => {
 
   return userCtx.user_id == null || userCtx.user_id == undefined || projectCtx.project_id == null || projectCtx.project_id == undefined? <Navigate replace to='/Login'/> : 
     <div className='flex w-screen'>
-        <Sidebar page="uebersicht"/>
+        <Sidebar page="uebersicht" token={userCtx.user_token}/>
         <Overview token={userCtx.user_token} projectID ={projectCtx.project_id}/>  
     </div>
 }

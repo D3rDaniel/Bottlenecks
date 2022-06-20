@@ -4,6 +4,7 @@ import Arrow from '../../../../images/icons/arrow-black.png'
 import TaskMaximumView from './ProjectMaximumViewAbgeschlosseneTasks'
 import UserContext from '../../../store/user-context'
 import ProjectContext from '../../../store/project-context'
+import axios from 'axios'
 
 const ProjectMinimumViewAbgeschlosseneTasks = (props) => {
 

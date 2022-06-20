@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from 'react'
+import axios from 'axios'
 
 import Searchbar from './searchbar/SearchBar'
 import MinView from './AnkuendigungMinimumView'

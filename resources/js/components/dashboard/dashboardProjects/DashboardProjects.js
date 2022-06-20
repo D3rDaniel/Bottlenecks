@@ -130,7 +130,7 @@ function DashboardProjects (props) {
                   title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
                   fullTitle = {project.title}
                   id = {project.id}
-                  creator={project.creator_user_id}
+                  creator={project.creator ? project.creator.username : props.username}
                   progress={project.progress_percentage}
                   startDate={project.created_at.substring(0,10)}
                   date={project.due_date}
@@ -147,7 +147,7 @@ function DashboardProjects (props) {
                   title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
                   fullTitle = {project.title}
                   id = {project.id}
-                  creator={project.creator_user_id}
+                  creator={project.creator ? project.creator.username : props.username}
                   progress={project.progress_percentage}
                   startDate={project.created_at.substring(0,10)}
                   date={project.due_date}
