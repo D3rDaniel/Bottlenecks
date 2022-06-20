@@ -4255,9 +4255,9 @@ function DashboardOffeneTasks(props) {
             fullTitle: task.title,
             project: task.project.title.length > 30 ? task.project.title.substring(0, 27) + '...' : task.project.title,
             deadline: task.due_date,
-            tag: task.tag.title,
+            tag: task.tag ? task.tag.title : "kein Tag",
             room: task.room == null ? "kein Raum angegeben" : task.room,
-            priority: task.priority.title,
+            priority: task.priority ? task.priority.title : "keine Priorität",
             description: task.description
           }, index);
         }) : loadedTasks.map(function (task, index) {
@@ -4266,9 +4266,9 @@ function DashboardOffeneTasks(props) {
             fullTitle: task.title,
             project: task.project.title.length > 30 ? task.project.title.substring(0, 27) + '...' : task.project.title,
             deadline: task.due_date,
-            tag: task.tag.title,
+            tag: task.tag ? task.tag.title : "kein Tag",
             room: task.room == null ? "kein Raum angegeben" : task.room,
-            priority: task.priority.title,
+            priority: task.priority ? task.priority.title : "keine Priorität",
             description: task.description
           }, index);
         })
