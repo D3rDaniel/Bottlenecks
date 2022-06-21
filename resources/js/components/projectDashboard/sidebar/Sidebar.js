@@ -32,6 +32,7 @@ const Sidebar = (props) => {
       {/* Footer */}
       <div>
         <SidebarButtonElement
+          url="info"
           img={InfoIcon}
           desc="Info" 
           selected="false">
