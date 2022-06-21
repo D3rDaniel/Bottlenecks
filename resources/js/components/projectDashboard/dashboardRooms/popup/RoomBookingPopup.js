@@ -22,7 +22,7 @@ function RoomBookingPopup(props) {
             start_time: from+":00",
             end_time:to+":00"
         }
-       
+       console.log(booking)
        const url = "http://127.0.0.1:8000/api/bookings"; 
        axios.post(url, booking, {
         headers:{
@@ -31,6 +31,7 @@ function RoomBookingPopup(props) {
         }
        })
         .then(res => {
+            console.log("res-booking: ", res)
             if(res.status == 200){
                 props.onClick()
                 alert("Buchung erfolgreich erstellt")

@@ -4,7 +4,7 @@ import InputField from '../../../forms/InputField';
 import TextArea from '../../../forms/TextArea';
 import axios from 'axios';
 
-function NewProjectPopup({trigger, onClick, token}) {
+function NewProjectPopup(props) {
 
     const [description, setDescription] = useState("")
     const [title, setTitle] = useState("")
@@ -31,12 +31,14 @@ function NewProjectPopup({trigger, onClick, token}) {
        axios.post(url, projectData , {
         headers: {
             'Accept': 'application/json',
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + props.token
         }
        })
         .then(res => {
             if(res.status === 201){
                 alert("Projekt wurder erfolgreich erstellt!");
+                props.onClick()
+                props.getData()
             }else{
                 alert("Es ist etwas schief gelaufen");
             }
@@ -45,7 +47,7 @@ function NewProjectPopup({trigger, onClick, token}) {
         
     }
 
-  return ( trigger ) ? (
+  return ( props.trigger ) ? (
     <div className="w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ">
         <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
             <div className="bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20">
@@ -62,7 +64,7 @@ function NewProjectPopup({trigger, onClick, token}) {
                         <TextArea id="description" onChange={getDescription} placeholder="Beschreibung..."></TextArea>
                     </div>
                     <div className="flex items-center justify-between">
-                        <button onClick={onClick} className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline">Abbruch</button>
+                        <button onClick={props.onClick} className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline">Abbruch</button>
                         <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" onClick={handleSubmit}>Erstellen</button>
                     </div>
             </div>

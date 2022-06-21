@@ -143,7 +143,8 @@ function DashboardRaumbuchungen(props) {
                 closing_time={booking.room.closing_time.substring(0,5)}
                 address_info={booking.room.address_info}
                 project={booking.room.project_id}
-                key={index} >
+                key={index} 
+                getData={getBookings}>
                 </ProjectMinimumViewRaumbuchungen>
               )
             })
@@ -167,7 +168,8 @@ function DashboardRaumbuchungen(props) {
                 closing_time={booking.room.closing_time.substring(0,5)}
                 address_info={booking.room.address_info}
                 project={booking.room.project_id}
-                key={index} >
+                key={index} 
+                getData={getBookings}>
                 </ProjectMinimumViewRaumbuchungen>
               )
             })

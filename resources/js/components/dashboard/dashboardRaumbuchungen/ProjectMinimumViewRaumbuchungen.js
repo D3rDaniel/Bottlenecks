@@ -63,7 +63,7 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
                 <img src={Arrow} alt="maxView" className={`h-7 w-7 mx-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
             </div>
         {rotate ? <TaskMaximumView description={props.description} equipment_info={props.equipment_info}
-                                opening_time={props.opening_time} closing_time={props.closing_time} address_info={props.address_info} id={props.id} token={props.token} onClick={props.onClick}/> : null}
+                                opening_time={props.opening_time} closing_time={props.closing_time} address_info={props.address_info} id={props.id} token={userCtx.user_token} onClick={props.getData}/> : null}
     </div>
     
   )

@@ -23,21 +23,25 @@ function DashboardProjects (props) {
   const [filtered, setFiltered] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState([]);
 
-    useEffect(() => {
-        setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/projects";
+  const getData = () =>{
+    setIsLoaded(false);
+    const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/projects";
 
-        axios.get(url, {
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + props.token
-          }
-        })
-          .then(function(response) {setIsLoaded(true);
-            setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
-            },(error) =>{
-              setIsLoaded(true);
-              setError(error);})
+    axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    })
+      .then(function(response) {setIsLoaded(true);
+        setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
+        },(error) =>{
+          setIsLoaded(true);
+          setError(error);})
+  }
+
+    useEffect(() => {
+        getData()
       }, []);
       
       
@@ -164,7 +168,7 @@ function DashboardProjects (props) {
           <div className="flex justify-end">
             <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
           </div>
-          <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token}/>
+          <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token} getData={getData}/>
         </div>
       )
     }

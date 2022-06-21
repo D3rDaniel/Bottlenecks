@@ -43,7 +43,8 @@ const dashboardRooms = (props) => {
         }
       })
         .then(function(response) {setIsLoaded(true);
-          setRooms(response.data["rooms"]);  
+          setRooms(response.data["rooms"]); 
+          console.log(response.data["rooms"]) 
           }).catch(function(response){
               setIsLoaded(true)
               setError(true)})

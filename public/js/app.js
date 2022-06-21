@@ -4870,7 +4870,7 @@ function DashboardProjects(props) {
       filteredProjects = _useState12[0],
       setFilteredProjects = _useState12[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  var getData = function getData() {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/projects";
     axios__WEBPACK_IMPORTED_MODULE_6___default().get(url, {
@@ -4885,6 +4885,10 @@ function DashboardProjects(props) {
       setIsLoaded(true);
       setError(error);
     });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getData();
   }, []);
 
   var sortElements = function sortElements(event, rotate) {
@@ -5047,7 +5051,8 @@ function DashboardProjects(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_popup_NewProjectPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         trigger: popupTrigger,
         onClick: changePopupTriggerValue,
-        token: props.token
+        token: props.token,
+        getData: getData
       })]
     });
   }
@@ -5265,11 +5270,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function NewProjectPopup(_ref) {
-  var trigger = _ref.trigger,
-      onClick = _ref.onClick,
-      token = _ref.token;
-
+function NewProjectPopup(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       description = _useState2[0],
@@ -5310,18 +5311,20 @@ function NewProjectPopup(_ref) {
     axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, projectData, {
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
       if (res.status === 201) {
         alert("Projekt wurder erfolgreich erstellt!");
+        props.onClick();
+        props.getData();
       } else {
         alert("Es ist etwas schief gelaufen");
       }
     });
   };
 
-  return trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+  return props.trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
     className: "w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
@@ -5356,7 +5359,7 @@ function NewProjectPopup(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "flex items-center justify-between",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-            onClick: onClick,
+            onClick: props.onClick,
             className: "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
             children: "Abbruch"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
@@ -5937,7 +5940,8 @@ function DashboardRaumbuchungen(props) {
             opening_time: booking.room.opening_time.substring(0, 5),
             closing_time: booking.room.closing_time.substring(0, 5),
             address_info: booking.room.address_info,
-            project: booking.room.project_id
+            project: booking.room.project_id,
+            getData: getBookings
           }, index);
         }) : loadedBookings.map(function (booking, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ProjectMinimumViewRaumbuchungen__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -5954,7 +5958,8 @@ function DashboardRaumbuchungen(props) {
             opening_time: booking.room.opening_time.substring(0, 5),
             closing_time: booking.room.closing_time.substring(0, 5),
             address_info: booking.room.address_info,
-            project: booking.room.project_id
+            project: booking.room.project_id,
+            getData: getBookings
           }, index);
         })
       })]
@@ -6193,8 +6198,8 @@ var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(p
       closing_time: props.closing_time,
       address_info: props.address_info,
       id: props.id,
-      token: props.token,
-      onClick: props.onClick
+      token: userCtx.user_token,
+      onClick: props.getData
     }) : null]
   });
 };
@@ -9341,6 +9346,7 @@ var dashboardRooms = function dashboardRooms(props) {
     }).then(function (response) {
       setIsLoaded(true);
       setRooms(response.data["rooms"]);
+      console.log(response.data["rooms"]);
     })["catch"](function (response) {
       setIsLoaded(true);
       setError(true);
@@ -9849,6 +9855,7 @@ function RoomBookingPopup(props) {
       start_time: from + ":00",
       end_time: to + ":00"
     };
+    console.log(booking);
     var url = "http://127.0.0.1:8000/api/bookings";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, booking, {
       headers: {
@@ -9856,6 +9863,8 @@ function RoomBookingPopup(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
+      console.log("res-booking: ", res);
+
       if (res.status == 200) {
         props.onClick();
         alert("Buchung erfolgreich erstellt");
