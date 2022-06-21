@@ -28,6 +28,8 @@ const dashboardRooms = (props) => {
     const [loadedRooms, setRooms] = useState([]);
     const [filtered, setFiltered] = useState(false);
     const [filteredRooms, setFilteredRooms] = useState([]);
+    const [roomName, setRoomName] = useState()
+    const [roomID, setRoomID] = useState()
 
 
     useEffect(() => {
@@ -94,6 +96,13 @@ const dashboardRooms = (props) => {
       setFilteredRooms(filteredRoomsBuffer)
     }
 
+    const getRoomName = (data) => {
+      setRoomName(data)
+    }
+    const getRoomID = (data) => {
+      setRoomID(data)
+    }
+
       if (error) {
           return <div className="m-auto text-red font-bold">Es ist ein Fehler aufgetreten!</div> 
       }else if(!isLoaded){
@@ -123,9 +132,13 @@ const dashboardRooms = (props) => {
               filteredRooms.map((room, index) => {
                 return (
                     <MinView
+                        id={room.id}
                         changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
+                        token={props.token}
+                        getRoomName={getRoomName}
+                        getRoomID={getRoomID}
                     ></MinView>
                 )
             })
@@ -134,9 +147,13 @@ const dashboardRooms = (props) => {
               loadedRooms.map((room, index) => {
                 return (
                     <MinView
+                        id={room.id}
                         changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
+                        token={props.token}
+                        getRoomID={getRoomID}
+                        getRoomName={getRoomName}
                     ></MinView>
                 )
             })
@@ -147,7 +164,7 @@ const dashboardRooms = (props) => {
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
         <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
-        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} />
+        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} roomName={roomName} roomID={roomID}/>
     </div>
   )}
 }
