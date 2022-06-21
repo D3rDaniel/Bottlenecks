@@ -45,11 +45,16 @@ function TaskMaximumView(props){
             </div>
         </div>  
         
-        <div className="flex justify-between">
-            <div className="ml-8 pt-5 pb-2">
+        <div className={props.status.id == 1? "flex" : "flex justify-between"}>
+            <div className="ml-8 pt-5 pb-2 w-1/3">
                 <h1 className="font-bold">Tag:</h1>
                 <div>{props.tag}</div>
             </div>
+            {props.status.id == 1 ?
+            <div className="pt-5 pb-2 w-1/3">
+                <h1 className='font-bold'>Abschlusskommentar:</h1>
+                <div>{props.comment}</div>
+            </div> : null}
             <div className="mr-12  mb-4 mt-auto">
                 {props.status.id !== 1? <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={closeTask}>Task abbrechen</button> : null }
             </div>

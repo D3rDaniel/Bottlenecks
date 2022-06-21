@@ -3168,7 +3168,7 @@ var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlo
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        "class": "flex justify-around w-11/12 items-center",
+        className: "flex justify-around w-11/12 items-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "w-1/6 pl-5",
           children: props.title
@@ -4014,6 +4014,131 @@ function DashboardInfo() {
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboard/dashboardOffeneTasks/CompletionPopup.js":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/dashboard/dashboardOffeneTasks/CompletionPopup.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+var CompletionPopup = function CompletionPopup(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+  var handleChange = function handleChange(e) {
+    setValue(e.target.value);
+  };
+
+  var handleCompletionDummy = function handleCompletionDummy() {
+    console.log("Task Nr. " + props.id);
+    console.log("Kommentar: " + value);
+    props.close();
+  };
+
+  var handleCompletion = function handleCompletion() {
+    var url = "http://127.0.0.1:8000/api/task/" + props.id + "/complete";
+    axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
+      completion_comment: value
+    }, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + userCtx.user_token
+      }
+    }).then(function (response) {
+      console.log(response);
+
+      if (response.data.success == true) {
+        alert("Task wurde erfolgreich abgeschlossen!");
+      } else {
+        alert("Es ist ein Fehler aufgetreten!");
+      }
+
+      props.close();
+    });
+  };
+
+  return props.trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    className: "fixed top-0 right-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex flex-col p-5 relative bg-white rounded-xl",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "font-bold text-xl mb-3",
+        children: "M\xF6chtest du diese Task abschlie\xDFen?"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex flex-row mb-5",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex flex-col mr-5 w-1/2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "mb-1 font-bold",
+            children: "Abschlusskommentar"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+            onChange: handleChange,
+            id: "completion_comment",
+            placeholder: "dein abschlie\xDFender Kommentar ...",
+            className: "p-2 rounded-xl border-2 border-gray-300"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "flex flex-col ml-auto w-1/2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "font-bold mb-1",
+            children: "Deadline"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "mb-3",
+            children: props.deadline ? props.deadline : "keine Deadline"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "w-full flex flex-row justify-between",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: props.close,
+          className: "bg-red text-white w-1/4 py-1 rounded-xl drop-shadow-xl mr-3 text-center hover:font-bold",
+          children: "Abbrechen"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: handleCompletion,
+          className: "bg-blue text-white w-1/4 py-1 rounded-xl drop-shadow-xl ml-auto text-center hover:font-bold",
+          children: "Best\xE4tigen"
+        })]
+      })]
+    })
+  }) : null;
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CompletionPopup);
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboard/dashboardOffeneTasks/DashboardOffeneTasks.js":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/dashboard/dashboardOffeneTasks/DashboardOffeneTasks.js ***!
@@ -4261,7 +4386,8 @@ function DashboardOffeneTasks(props) {
             tag: task.tag ? task.tag.title : "kein Tag",
             room: task.room == null ? "kein Raum angegeben" : task.room,
             priority: task.priority ? task.priority.title : "keine Priorität",
-            description: task.description
+            description: task.description,
+            id: task.id
           }, index);
         }) : loadedTasks.map(function (task, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ProjectMinimumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -4272,7 +4398,8 @@ function DashboardOffeneTasks(props) {
             tag: task.tag ? task.tag.title : "kein Tag",
             room: task.room == null ? "kein Raum angegeben" : task.room,
             priority: task.priority ? task.priority.title : "keine Priorität",
-            description: task.description
+            description: task.description,
+            id: task.id
           }, index);
         })
       })]
@@ -4358,8 +4485,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.png */ "./resources/images/icons/arrow-black.png");
-/* harmony import */ var _ProjectMaximumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectMaximumViewOffeneTasks */ "./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMaximumViewOffeneTasks.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _CompletionPopup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CompletionPopup */ "./resources/js/components/dashboard/dashboardOffeneTasks/CompletionPopup.js");
+/* harmony import */ var _ProjectMaximumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProjectMaximumViewOffeneTasks */ "./resources/js/components/dashboard/dashboardOffeneTasks/ProjectMaximumViewOffeneTasks.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4378,11 +4506,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var ProjectMinimumViewOffeneTasks = function ProjectMinimumViewOffeneTasks(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       rotate = _useState2[0],
       setRotate = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      popupTrigger = _useState4[0],
+      setPopupTrigger = _useState4[1];
 
   var rotateArrow = function rotateArrow() {
     if (rotate) {
@@ -4392,50 +4526,60 @@ var ProjectMinimumViewOffeneTasks = function ProjectMinimumViewOffeneTasks(props
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "my-5 ml-1",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "my-5 ml-1 z-0",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CompletionPopup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      id: props.id,
+      deadline: props.deadline,
+      trigger: popupTrigger,
+      close: function close() {
+        setPopupTrigger(false);
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "flex justify-evenly h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "flex justify-around w-4/5",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "",
           children: props.title
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "",
           children: props.project
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "",
           children: props.deadline
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "",
           children: props.tag
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "",
           children: props.priority
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "flex justify-between",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             className: "bg-amber-300 w-36 h-6 px-3 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
             children: "in Bearbeitung"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            onClick: function onClick() {
+              setPopupTrigger(true);
+            },
             className: "bg-blue w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
             children: "Abschlie\xDFen"
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "flex ml-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
           src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_1__["default"],
           alt: "maxView",
           className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
           onClick: rotateArrow
         }), "            "]
       })]
-    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ProjectMaximumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ProjectMaximumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_3__["default"], {
       description: props.description,
       title: props.fullTitle,
       deadline: props.deadline
@@ -10535,7 +10679,7 @@ function DashboardTasks(props) {
             title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
             fullTitle: task.title,
             description: task.description,
-            comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
+            comment: task.completion_comment === null ? "-ohne Kommentar-" : task.completion_comment,
             status: task.status !== null ? task.status : "kein status",
             prio: task.priority !== null ? task.priority.title : "keine Priorität",
             completedDate: task.completed_date === null ? "not completed" : task.completed_date,
@@ -10648,16 +10792,24 @@ function TaskMaximumView(props) {
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "flex justify-between",
+      className: props.status.id == 1 ? "flex" : "flex justify-between",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "ml-8 pt-5 pb-2",
+        className: "ml-8 pt-5 pb-2 w-1/3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           className: "font-bold",
           children: "Tag:"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           children: props.tag
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      }), props.status.id == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "pt-5 pb-2 w-1/3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+          className: "font-bold",
+          children: "Abschlusskommentar:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: props.comment
+        })]
+      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "mr-12  mb-4 mt-auto",
         children: props.status.id !== 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg",
@@ -10690,7 +10842,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../images/icons/arrow-black.png */ "./resources/images/icons/arrow-black.png");
 /* harmony import */ var _TaskMaximumView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TaskMaximumView */ "./resources/js/components/projectDashboard/dashboardTasks/TaskMaximumView.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _dashboard_dashboardOffeneTasks_CompletionPopup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../dashboard/dashboardOffeneTasks/CompletionPopup */ "./resources/js/components/dashboard/dashboardOffeneTasks/CompletionPopup.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -10711,6 +10864,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function TaskMinimumView(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("text-black"),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10721,6 +10875,11 @@ function TaskMinimumView(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       rotate = _useState4[0],
       setRotate = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      popupTrigger = _useState6[0],
+      setPopupTrigger = _useState6[1];
 
   var changePrioColor = function changePrioColor() {
     switch (props.prio) {
@@ -10741,36 +10900,19 @@ function TaskMinimumView(props) {
     }
   };
 
-  var closeTask = function closeTask() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id + "/complete";
-    axios__WEBPACK_IMPORTED_MODULE_0___default().put(url, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + props.token
-      }
-    }).then(function (res) {
-      console.log("res-close-task: ", res);
-      if (res.status == 201) alert("Task erfolgreich abgeschlossen");
-      props.onClick(); //rerender parent-component
-    })["catch"](function (error) {
-      return console.log("error: ", error);
-    });
-  };
-
-  var openAgain = function openAgain() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id + "/complete";
-    axios__WEBPACK_IMPORTED_MODULE_0___default().put(url, {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + props.token
-      }
-    }).then(function (res) {
-      console.log("res-close-task: ", res);
-      if (res.status == 201) alert("Task erfolgreich abgeschlossen");
-      props.onClick(); //rerender parent-component
-    })["catch"](function (error) {
-      return console.log("error: ", error);
-    });
+  var openAgain = function openAgain() {//    const url = "http://127.0.0.1:8000/api/task/"+props.id+"/complete";
+    //    axios.put(url,{
+    //        headers: {
+    //            'Accept': 'application/json',
+    //            'Authorization': 'Bearer ' + props.token
+    //        }
+    //    })
+    //    .then(res => {
+    //        console.log("res-close-task: ", res)
+    //        if(res.status == 201) alert("Task erfolgreich abgeschlossen")
+    //        props.onClick() //rerender parent-component
+    //    })
+    //    .catch(error => console.log("error: ", error))  
   };
 
   var rotateArrow = function rotateArrow() {
@@ -10780,41 +10922,48 @@ function TaskMinimumView(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     changePrioColor();
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "my-5 ml-8 mr-8",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_dashboard_dashboardOffeneTasks_CompletionPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      id: props.id,
+      deadline: props.date,
+      trigger: popupTrigger,
+      close: function close() {
+        setPopupTrigger(false);
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "flex h-14 bg-white ".concat(rotate ? null : "drop-shadow-md", " rounded-xl items-center"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
         className: "ml-12 w-1/5",
         children: props.title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
         className: "w-1/5",
         children: props.status.title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
         className: "w-1/5 ".concat(prioColor),
         children: props.prio
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
         className: "w-1/5",
         children: props.date
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "flex",
-        children: props.status.id == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        children: props.status.id == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
             onClick: openAgain,
-            children: "Wieder \xD6ffnen"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+            children: "Abgeschlossen"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
             src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
             alt: "maxView",
             className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
             onClick: rotateArrow
           })]
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
-            onClick: closeTask,
+            onClick: setPopupTrigger,
             children: "Abschlie\xDFen"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
             src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
             alt: "maxView",
             className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
@@ -10822,9 +10971,10 @@ function TaskMinimumView(props) {
           })]
         })
       })]
-    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_TaskMaximumView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TaskMaximumView__WEBPACK_IMPORTED_MODULE_3__["default"], {
       title: props.fullTitle,
       description: props.description,
+      comment: props.comment,
       assignee: props.assignee,
       creator: props.creator,
       updated_at: props.updated_at,
