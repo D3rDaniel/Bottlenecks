@@ -28,7 +28,6 @@ const ProjectMinimumViewAbgeschlosseneTasks = (props) => {
                 let project = response.data["project"]
               if(project){
                 projectCtx.select(project.id, project.title, project.creator_user_id);
-                alert("project set with id " + projectCtx.project_id + " data: " + project)
                 navigate('/project');
             }
             else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");

@@ -19,6 +19,7 @@ import Project_TagsPage from './pages/Project_TagsPage';
 import { UserContextProvider } from './store/user-context';
 import {ProjectContextProvider} from './store/project-context';
 import InfoPage from './pages/InfoPage';
+import ProjectInfoPage from './pages/ProjectInfoPage'
 
 export default function ReactApp() {
 
@@ -44,6 +45,7 @@ export default function ReactApp() {
                     <Route path='/project/uebersicht' element={<Project_UebersichtPage/>}/>
                     <Route path='/project/rooms' element={<Project_RoomsPage/>}/>
                     <Route path='/project/tags' element={<Project_TagsPage/>}/>
+                    <Route path='/project/info' element={<ProjectInfoPage/>}/>
                 </Routes>
                 </ProjectContextProvider>
             </UserContextProvider>

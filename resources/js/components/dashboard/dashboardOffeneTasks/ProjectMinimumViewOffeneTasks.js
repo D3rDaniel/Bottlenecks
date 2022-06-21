@@ -42,7 +42,7 @@ const ProjectMinimumViewOffeneTasks = (props) => {
             <div  className="flex ml-auto">
                 <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>            </div>
             </div>
-        {rotate ? <TaskMaximumView description={props.description} title={props.fullTitle} deadline={props.deadline} /> : null}
+        {rotate ? <TaskMaximumView id={props.id} description={props.description} title={props.fullTitle} deadline={props.deadline} /> : null}
     </div>
     
   )

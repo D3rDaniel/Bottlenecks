@@ -806,6 +806,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-72{
   width: 18rem;
 }
+.w-56{
+  width: 14rem;
+}
 .min-w-max{
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
@@ -1002,6 +1005,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .bg-gray-400\/\[\.7\]{
   background-color: rgb(156 163 175 / .7);
+}
+.bg-orange-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
 }
 .bg-opacity-50{
   --tw-bg-opacity: 0.5;
