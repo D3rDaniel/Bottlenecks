@@ -6,7 +6,7 @@ const RoomsMaxView = (props) => {
     const handleSubmit = (event) => {
         console.log("should room id: ", props.room.id)
         console.log("should token: ", props.token)
-        const url = "http://127.0.0.1:8000/api/room/"+props.room.roomID
+        const url = "http://127.0.0.1:8000/api/room/"+props.room.id
 
         axios.delete(url, {
             headers: {
@@ -15,9 +15,12 @@ const RoomsMaxView = (props) => {
             }
           })
           .then(res => {
-            if(res == 201) alert("Erfolgreich gelöscht")
-            if(res == 401) alert("Keine Berechtigung")
-            if(res == 403) alert("Keine Berechtigung")
+            console.log(res)
+            if(res.status == 200) {
+                alert("Erfolgreich gelöscht")
+                props.getData()
+            }
+            if(res.status == 401) alert("Keine Berechtigung")
           })
           .catch(error => console.log(error))
     }

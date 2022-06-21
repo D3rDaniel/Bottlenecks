@@ -35,7 +35,7 @@ const RoomsMinView = (props) => {
                 <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img>
             </div>
         </div>
-        {rotate ? <MaxView room={props.room} token={props.token}></MaxView> : null}
+        {rotate ? <MaxView room={props.room} token={props.token} getData={props.getData}></MaxView> : null}
     </div>
     )
 }

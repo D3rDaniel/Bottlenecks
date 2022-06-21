@@ -9,11 +9,9 @@ function RoomBookingPopup(props) {
 
 
     const [date, setDate] = useState();
-    const [room, setRoom] = useState();
     const [from, setFrom] = useState("08:00:00");
     const [to, setTo] = useState("09:00:00");
 
-    const getRoom = (data) => {setRoom(data);}
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,7 +22,6 @@ function RoomBookingPopup(props) {
             start_time: from+":00",
             end_time:to+":00"
         }
-        console.log(booking)
        
        const url = "http://127.0.0.1:8000/api/bookings"; 
        axios.post(url, booking, {
@@ -34,8 +31,10 @@ function RoomBookingPopup(props) {
         }
        })
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            if(res.status == 200){
+                props.onClick()
+                alert("Buchung erfolgreich erstellt")
+            }
         })
         
     }

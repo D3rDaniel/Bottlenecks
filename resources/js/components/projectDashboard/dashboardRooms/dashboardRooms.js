@@ -21,6 +21,7 @@ const dashboardRooms = (props) => {
   }
   const changePopupTriggerValueBooking = () => {
     setPopupTriggerBooking(!popupTriggerBooking);
+    if(popupTriggerBooking) getData() //true bs async
   }
 
     const [error, setError] = useState(null);
@@ -31,8 +32,7 @@ const dashboardRooms = (props) => {
     const [roomName, setRoomName] = useState()
     const [roomID, setRoomID] = useState()
 
-
-    useEffect(() => {
+    const getData = () =>{
       setIsLoaded(false);
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
   
@@ -47,6 +47,10 @@ const dashboardRooms = (props) => {
           }).catch(function(response){
               setIsLoaded(true)
               setError(true)})
+    }
+
+    useEffect(() => {
+      getData()
     },[] );
 
     const sortElements = (event, rotate) => {
@@ -139,6 +143,7 @@ const dashboardRooms = (props) => {
                         token={props.token}
                         getRoomName={getRoomName}
                         getRoomID={getRoomID}
+                        getData={getData}
                     ></MinView>
                 )
             })
@@ -154,6 +159,7 @@ const dashboardRooms = (props) => {
                         token={props.token}
                         getRoomID={getRoomID}
                         getRoomName={getRoomName}
+                        getData={getData}
                     ></MinView>
                 )
             })

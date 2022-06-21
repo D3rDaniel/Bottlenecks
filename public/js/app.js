@@ -8986,16 +8986,21 @@ var RoomsMaxView = function RoomsMaxView(props) {
   var handleSubmit = function handleSubmit(event) {
     console.log("should room id: ", props.room.id);
     console.log("should token: ", props.token);
-    var url = "http://127.0.0.1:8000/api/room/" + props.room.roomID;
+    var url = "http://127.0.0.1:8000/api/room/" + props.room.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      if (res == 201) alert("Erfolgreich gelöscht");
-      if (res == 401) alert("Keine Berechtigung");
-      if (res == 403) alert("Keine Berechtigung");
+      console.log(res);
+
+      if (res.status == 200) {
+        alert("Erfolgreich gelöscht");
+        props.getData();
+      }
+
+      if (res.status == 401) alert("Keine Berechtigung");
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -9179,7 +9184,8 @@ var RoomsMinView = function RoomsMinView(props) {
       })]
     }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RoomsMaxView__WEBPACK_IMPORTED_MODULE_2__["default"], {
       room: props.room,
-      token: props.token
+      token: props.token,
+      getData: props.getData
     }) : null]
   });
 };
@@ -9263,6 +9269,7 @@ var dashboardRooms = function dashboardRooms(props) {
 
   var changePopupTriggerValueBooking = function changePopupTriggerValueBooking() {
     setPopupTriggerBooking(!popupTriggerBooking);
+    if (popupTriggerBooking) getData(); //true bs async
   };
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
@@ -9300,7 +9307,7 @@ var dashboardRooms = function dashboardRooms(props) {
       roomID = _useState18[0],
       setRoomID = _useState18[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  var getData = function getData() {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/rooms";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
@@ -9315,6 +9322,10 @@ var dashboardRooms = function dashboardRooms(props) {
       setIsLoaded(true);
       setError(true);
     });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getData();
   }, []);
 
   var sortElements = function sortElements(event, rotate) {
@@ -9448,7 +9459,8 @@ var dashboardRooms = function dashboardRooms(props) {
             room: room,
             token: props.token,
             getRoomName: getRoomName,
-            getRoomID: getRoomID
+            getRoomID: getRoomID,
+            getData: getData
           }, index);
         }) : loadedRooms.map(function (room, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -9457,7 +9469,8 @@ var dashboardRooms = function dashboardRooms(props) {
             room: room,
             token: props.token,
             getRoomID: getRoomID,
-            getRoomName: getRoomName
+            getRoomName: getRoomName,
+            getData: getData
           }, index);
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
@@ -9611,7 +9624,6 @@ function NewRoomPopup(props) {
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
-    console.log("projectID: ", project.project_id);
     var room = {
       title: name,
       capacity: size,
@@ -9633,6 +9645,7 @@ function NewRoomPopup(props) {
     }).then(function (res) {
       if (res.status === 201) {
         alert("Raum wurder erfolgreich erstellt!");
+        props.onClick();
       } else {
         alert("Es ist etwas schief gelaufen");
       }
@@ -9794,24 +9807,15 @@ function RoomBookingPopup(props) {
       date = _useState2[0],
       setDate = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("08:00:00"),
       _useState4 = _slicedToArray(_useState3, 2),
-      room = _useState4[0],
-      setRoom = _useState4[1];
+      from = _useState4[0],
+      setFrom = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("08:00:00"),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("09:00:00"),
       _useState6 = _slicedToArray(_useState5, 2),
-      from = _useState6[0],
-      setFrom = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("09:00:00"),
-      _useState8 = _slicedToArray(_useState7, 2),
-      to = _useState8[0],
-      setTo = _useState8[1];
-
-  var getRoom = function getRoom(data) {
-    setRoom(data);
-  };
+      to = _useState6[0],
+      setTo = _useState6[1];
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
@@ -9822,7 +9826,6 @@ function RoomBookingPopup(props) {
       start_time: from + ":00",
       end_time: to + ":00"
     };
-    console.log(booking);
     var url = "http://127.0.0.1:8000/api/bookings";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, booking, {
       headers: {
@@ -9830,8 +9833,10 @@ function RoomBookingPopup(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      console.log(res);
-      console.log(res.data);
+      if (res.status == 200) {
+        props.onClick();
+        alert("Buchung erfolgreich erstellt");
+      }
     });
   };
 
