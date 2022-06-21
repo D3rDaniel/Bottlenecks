@@ -140,7 +140,7 @@ function DashboardTasks(props) {
                   title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
                   fullTitle = {task.title}
                   description = {task.description}
-                  comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
+                  comment = {(task.completion_comment === null ? "-ohne Kommentar-" : task.completion_comment)}
                   status = {task.status !== null? task.status : "kein status"}
                   prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}

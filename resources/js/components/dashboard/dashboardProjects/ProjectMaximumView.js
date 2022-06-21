@@ -9,7 +9,7 @@ const ProjectMaximumView = (props) => {
     </div>
     <div className="ml-auto mt-5 w-1/4">
     </div> 
-    <button className="bg-red w-28 h-6 rounded-xl mr-12  mb-4 mt-auto text-white hover:font-bold drop-shadow-lg">Verlassen</button>
+    {/*<button className="bg-red w-28 h-6 rounded-xl mr-12  mb-4 mt-auto text-white hover:font-bold drop-shadow-lg">Verlassen</button>*/}
   </div>
   )
 }

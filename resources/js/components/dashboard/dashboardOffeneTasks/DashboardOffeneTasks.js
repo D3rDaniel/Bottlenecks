@@ -125,6 +125,7 @@ function DashboardOffeneTasks(props) {
                 room={task.room == null ? "kein Raum angegeben" : task.room}
                 priority={task.priority ? task.priority.title : "keine Priorität"}
                 description={task.description}
+                id={task.id}
                 key={index}
                 >
               </ProjectMinimumViewOffeneTasks>
@@ -144,6 +145,7 @@ function DashboardOffeneTasks(props) {
                 room={task.room == null ? "kein Raum angegeben" : task.room}
                 priority={task.priority ? task.priority.title : "keine Priorität"}
                 description={task.description}
+                id={task.id}
                 key={index}
                 >
               </ProjectMinimumViewOffeneTasks>

@@ -13,7 +13,7 @@ const Project_TagsPage = () => {
 
   return userCtx.user_id == null || userCtx.user_id == undefined || projectCtx.project_id == null || projectCtx.project_id == undefined? <Navigate replace to='/Login'/> : 
     <div className='flex w-screen'>
-        <Sidebar page="tags"/>
+        <Sidebar page="tags" token={userCtx.user_token}/>
         <Tags token={userCtx.user_token} projectID={projectCtx.project_id}/>  
     </div>
 }

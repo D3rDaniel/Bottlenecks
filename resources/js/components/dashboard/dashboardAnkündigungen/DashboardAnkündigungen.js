@@ -105,7 +105,7 @@ const DashboardAnkündigungen = (props) => {
             filteredAnnouncements.map((announcement, index) => {
             return (
               <AnnouncementMinimumView
-                project={announcement.project_id}
+                project={announcement.project.title}
                 created_at={announcement.created_at.substring(0, 10)}
                 updated_at={announcement.updated_at.substring(0, 10)}
                 title={announcement.subject}
@@ -120,7 +120,7 @@ const DashboardAnkündigungen = (props) => {
             loadedAnnouncements.map((announcement, index) => {
             return (
               <AnnouncementMinimumView
-                project={announcement.project_id}
+                project={announcement.project.title}
                 created_at={announcement.created_at.substring(0, 10)}
                 updated_at={announcement.updated_at.substring(0, 10)}
                 title={announcement.subject}
