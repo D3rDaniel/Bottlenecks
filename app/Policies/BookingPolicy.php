@@ -46,8 +46,9 @@ class BookingPolicy
      */
     public function create(User $user,int $room_id):Response|bool
     {
+        //TODO: Fix ID Bug
         $room = Room::findOrFail($room_id);
-        $project_id = $room->project()->get()->id;
+        $project_id = $room->project()->get('id')->pluck('id')->first();
 
         if($user->isOwnerOfProject($project_id)){
             return true;

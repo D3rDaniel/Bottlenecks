@@ -8983,9 +8983,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9002,7 +9004,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 var RoomsMaxView = function RoomsMaxView(props) {
+  var handleSubmit = function handleSubmit(event) {
+    console.log("should room id: ", props.room.id);
+    console.log("should token: ", props.token);
+    var url = "http://127.0.0.1:8000/api/room/" + props.room.roomID;
+    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (res) {
+      if (res == 201) alert("Erfolgreich gelöscht");
+      if (res == 401) alert("Keine Berechtigung");
+      if (res == 403) alert("Keine Berechtigung");
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  };
+
   var city = props.room.address_info;
   var building = city.substring(0, city.indexOf(','));
 
@@ -9014,69 +9035,70 @@ var RoomsMaxView = function RoomsMaxView(props) {
 
   city = city.replace(building + ',', '');
   building = building.substring(0, building.length - helper.length);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "w-1/4 ml-5 mt-5 pb-5",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "font-bold",
         children: "Beschreibung:"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
         className: "mt-5",
         children: props.room.description
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "w-1/4 mt-5 pb-5 ml-4 flex flex-col justify-between ",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "font-bold",
           children: "Ausstattung:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: props.room.equipment_info
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "font-bold",
           children: "\xD6ffnungszeiten:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
           children: [props.room.opened_on_weekends === "0" ? "Mo-Fr " : "Mo-So", ": ", props.room.opening_time, " - ", props.room.closing_time, " Uhr"]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "w-1/4 mt-5 pb-5",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "font-bold",
         children: "Zu finden:"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "Stadt: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: city
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "PLZ: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: plz
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "Adresse: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: building
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "Raum: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: props.room.room_number
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "w-1/4 flex flex-col justify-end pb-5 items-end",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
         className: "bg-red h-8 w-28 rounded-xl text-white mr-12 hover:font-bold",
+        onClick: handleSubmit,
         children: "L\xF6schen"
       })
     })]
@@ -9130,6 +9152,8 @@ var RoomsMinView = function RoomsMinView(props) {
       setPopupTriggerBooking = _useState2[1];
 
   var changePopupTrigger = function changePopupTrigger() {
+    props.getRoomName(props.room.title);
+    props.getRoomID(props.room.id);
     props.changePopupTriggerValueBooking(!popupTriggerBooking);
   };
 
@@ -9177,7 +9201,8 @@ var RoomsMinView = function RoomsMinView(props) {
         })
       })]
     }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RoomsMaxView__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      room: props.room
+      room: props.room,
+      token: props.token
     }) : null]
   });
 };
@@ -9288,6 +9313,16 @@ var dashboardRooms = function dashboardRooms(props) {
       filteredRooms = _useState14[0],
       setFilteredRooms = _useState14[1];
 
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState16 = _slicedToArray(_useState15, 2),
+      roomName = _useState16[0],
+      setRoomName = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState18 = _slicedToArray(_useState17, 2),
+      roomID = _useState18[0],
+      setRoomID = _useState18[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/rooms";
@@ -9380,6 +9415,14 @@ var dashboardRooms = function dashboardRooms(props) {
     setFilteredRooms(filteredRoomsBuffer);
   };
 
+  var getRoomName = function getRoomName(data) {
+    setRoomName(data);
+  };
+
+  var getRoomID = function getRoomID(data) {
+    setRoomID(data);
+  };
+
   if (error) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       className: "m-auto text-red font-bold",
@@ -9423,13 +9466,21 @@ var dashboardRooms = function dashboardRooms(props) {
         className: "h-full w-full",
         children: filtered ? filteredRooms.map(function (room, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            id: room.id,
             changePopupTriggerValueBooking: changePopupTriggerValueBooking,
-            room: room
+            room: room,
+            token: props.token,
+            getRoomName: getRoomName,
+            getRoomID: getRoomID
           }, index);
         }) : loadedRooms.map(function (room, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            id: room.id,
             changePopupTriggerValueBooking: changePopupTriggerValueBooking,
-            room: room
+            room: room,
+            token: props.token,
+            getRoomID: getRoomID,
+            getRoomName: getRoomName
           }, index);
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
@@ -9445,7 +9496,9 @@ var dashboardRooms = function dashboardRooms(props) {
         token: props.token,
         trigger: popupTriggerBooking,
         onClick: changePopupTriggerValueBooking,
-        user_id: user.user_id
+        user_id: user.user_id,
+        roomName: roomName,
+        roomID: roomID
       })]
     });
   }
@@ -9786,7 +9839,7 @@ function RoomBookingPopup(props) {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var booking = {
-      room_id: 1,
+      room_id: props.roomID,
       user_id: props.user_id,
       reservation_date: date,
       start_time: from + ":00",
@@ -9820,14 +9873,16 @@ function RoomBookingPopup(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "flex justify-center items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "w-1/2 px-4",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "mb-4",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_DropDownSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                  title: "Raum auswählen",
-                  onChange: getRoom,
-                  options: ["muss", "noch", "dynamisch", "geladen", "werden"]
-                })
+              className: "w-1/2 px-4 ",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "mb-4 flex justify-center items-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                  className: "mr-4 p-2",
+                  children: "Raum: "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                  className: " p-2",
+                  children: props.roomName
+                })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "mb-4 flex justify-center items-center",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {

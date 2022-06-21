@@ -7,7 +7,6 @@ import DropDownSelect from '../../../forms/DropDownSelect'
 
 function RoomBookingPopup(props) {
 
-    
 
     const [date, setDate] = useState();
     const [room, setRoom] = useState();
@@ -19,7 +18,7 @@ function RoomBookingPopup(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         const booking = {
-            room_id: 1,
+            room_id: props.roomID,
             user_id: props.user_id,
             reservation_date: date,
             start_time: from+":00",
@@ -51,9 +50,10 @@ function RoomBookingPopup(props) {
                 <h3 className="items-center mb-6 text-5xl font-body">Raum buchen</h3>
 
                         <div className="flex justify-center items-center">
-                            <div className="w-1/2 px-4">
-                                <div className="mb-4">
-                                    <DropDownSelect title={"Raum auswählen"} onChange={getRoom} options={["muss", "noch", "dynamisch", "geladen", "werden"]}/>
+                            <div className="w-1/2 px-4 ">
+                                <div className="mb-4 flex justify-center items-center">
+                                    <label className="mr-4 p-2">Raum: </label>
+                                    <label className=" p-2">{props.roomName}</label>
                                 </div>
                                 <div className="mb-4 flex justify-center items-center">
                                     <label className='p-2 mr-4'>Datum:</label>
