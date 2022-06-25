@@ -513,6 +513,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 2.5rem;
   margin-right: 2.5rem;
 }
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
 .mb-5{
   margin-bottom: 1.25rem;
 }
@@ -814,6 +818,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-3{
   width: 0.75rem;
+}
+.w-3\/4{
+  width: 75%;
 }
 .min-w-max{
   min-width: -webkit-max-content;
