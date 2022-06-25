@@ -36,11 +36,9 @@ function NewTaskPopup(props) {
 
     useEffect(() => {
         tagKeyValues = {}; memberKeyValues = {}; prioKeyValues = {}
-        console.log("preloaded_members: ", allMember)
         const urlTags = "http://127.0.0.1:8000/api/project/"+project.project_id+"/tags";
         const urlPriorities = "http://127.0.0.1:8000/api/priorities/all"
         const urlWorker = "http://127.0.0.1:8000/api/project/"+project.project_id+"/members"
-        console.log("project-id: ", project.project_id)
         //get tags
         axios.get(urlTags,{
             headers: {
@@ -75,7 +73,6 @@ function NewTaskPopup(props) {
               }
         })
         .then((res) => {
-            console.log("members in project",project.project_id,": ", res.data.members)
             res.data.members.map(member => {
                 memberKeyValues[member.id] = member.username
             })

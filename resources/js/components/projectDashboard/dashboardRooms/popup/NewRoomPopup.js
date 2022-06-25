@@ -77,7 +77,7 @@ function NewRoomPopup(props) {
     
 
   return ( props.trigger) ? (
-    <div className="w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ">
+    <div className="w-screen h-full rounded-lg bg-gray-400/[.7] fixed ">
         <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
             
             <div className="w-full">

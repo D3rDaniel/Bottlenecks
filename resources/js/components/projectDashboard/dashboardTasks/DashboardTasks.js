@@ -90,13 +90,7 @@ function DashboardTasks(props) {
   const filterElements = (inputValue, filtered) => {
     setFiltered(filtered)
     let filteredTasksBuffer
-    console.log("loadedTasks: ", loadedTasks)
-    filteredTasksBuffer = [...loadedTasks].filter((task) => {
-      console.log("tasks: ", task)
-      task.title.toLowerCase().includes(inputValue)
-      console.log("filtered true? ", task.title.toLowerCase().includes(inputValue))
-    })
-    console.log("filteredTaskBuffer: ", filteredTasksBuffer)
+    filteredTasksBuffer = [...loadedTasks].filter((task) => task.title.toLowerCase().includes(inputValue))
     setFilteredTasks(filteredTasksBuffer)
   }
 

@@ -6,7 +6,6 @@ const SearchField = (props) => {
 
   const changeInputValue = (event) => {
     let valueString = event.target.value;
-    console.log("is it undefined?" ,valueString === undefined ? "yes" : "no")
     console.log("inputString: ", valueString)
     setInputValue(valueString === undefined ? "" : valueString.toLowerCase())
   }
