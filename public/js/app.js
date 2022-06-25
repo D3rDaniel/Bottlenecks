@@ -10237,7 +10237,7 @@ var TagElement = function TagElement(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (response) {
-      console.log(response);
+      alert("Tag wurde erfolgreich entfernt");
     })["catch"](function (response) {
       console.log(response);
     });
@@ -10314,7 +10314,7 @@ var TagInputField = function TagInputField(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (response) {
-      console.log(response);
+      alert("Tag wurde erfolgreich erstellt");
     })["catch"](function (response) {
       console.log(response);
     });

@@ -25,7 +25,7 @@ const TagInputField = (props) => {
       }
      })
     .then(function(response) {
-        console.log(response);
+        alert("Tag wurde erfolgreich erstellt");
     }).catch(function(response){
         console.log(response);
     })

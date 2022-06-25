@@ -14,7 +14,7 @@ const TagElement = (props) => {
       }
      })
     .then(function(response) {
-        console.log(response);
+       alert("Tag wurde erfolgreich entfernt");
     }).catch(function(response){
         console.log(response);
     })
