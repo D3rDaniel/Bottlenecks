@@ -8269,7 +8269,7 @@ var MonthView = function MonthView(props) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl",
+    className: "w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl z-0",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "mt-2 ml-5 font-bold",
       children: "Endet diesen Monat:"
@@ -8279,7 +8279,7 @@ var MonthView = function MonthView(props) {
         fullTitle: task.title,
         description: task.description,
         comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
-        status: task.status !== null ? task.status.title : "kein Status",
+        status: task.status,
         prio: task.priority !== null ? task.priority.title : "keine Priorität",
         completedDate: task.completed_date === null ? "not completed" : task.completed_date,
         date: task.due_date,
@@ -8353,7 +8353,7 @@ var WeekView = function WeekView(props) {
     currentDate.setDate(currentDate.getDate() + 7);
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl",
+    className: "w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl z-0",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "mt-2 ml-5 font-bold",
       children: "Endet in einer Woche:"
@@ -8363,7 +8363,7 @@ var WeekView = function WeekView(props) {
         fullTitle: task.title,
         description: task.description,
         comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
-        status: task.status !== null ? task.status.title : "kein Status",
+        status: task.status,
         prio: task.priority !== null ? task.priority.title : "keine Priorität",
         completedDate: task.completed_date === null ? "not completed" : task.completed_date,
         date: task.due_date,
@@ -11269,7 +11269,7 @@ function NewTaskPopup(props) {
       });
       setAllMember(Object.values(memberKeyValues));
     });
-  }, []);
+  }, [project]);
 
   function getKeyByValue(object, value) {
     return Object.keys(object).find(function (key) {
@@ -11740,6 +11740,7 @@ __webpack_require__.r(__webpack_exports__);
 var Sidebar = function Sidebar(props) {
   var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_7__["default"]);
   var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_8__["default"]);
+  console.log(userCtx.user_name + " " + projectCtx.project_admin);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     className: "flex flex-col min-w-max w-72 justify-between mt-1",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
@@ -11762,7 +11763,7 @@ var Sidebar = function Sidebar(props) {
             children: projectCtx.project_title.length > 20 ? projectCtx.project_title.toString().substring(0, 19) + "..." : projectCtx.project_title
           })
         })]
-      }), userCtx.user_id === projectCtx.project_admin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_AdminButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }), userCtx.user_name === projectCtx.project_admin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_AdminButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
         selected: props.page
       }) : ""]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_SidebarButtonList__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -12250,7 +12251,7 @@ function LoginPage() {
     var emailIsValid = String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     var passwordIsValid = password.length >= 8;
     if (emailIsValid && passwordIsValid) return true;else {
-      return false;
+      return true;
     }
   }
 

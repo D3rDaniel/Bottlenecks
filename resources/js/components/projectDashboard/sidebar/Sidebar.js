@@ -14,6 +14,8 @@ const Sidebar = (props) => {
   const projectCtx = useContext(ProjectContext);
   const userCtx = useContext(UserContext);
 
+  console.log(userCtx.user_name + " " + projectCtx.project_admin)
+
   return (
     <div className="flex flex-col min-w-max w-72 justify-between mt-1">
       
@@ -24,7 +26,7 @@ const Sidebar = (props) => {
                 <h1 className="font-bold text-xl mt-1">Projekt</h1>
                 <h2><span className="text-darkorange">{projectCtx.project_title.length > 20 ? projectCtx.project_title.toString().substring(0,19)+"..." : projectCtx.project_title}</span></h2>
             </div>    
-            {userCtx.user_id === projectCtx.project_admin ? <Admin selected={props.page}></Admin> : ""}
+            {userCtx.user_name === projectCtx.project_admin ? <Admin selected={props.page}></Admin> : ""}
         </div>
         
         <SidebarButtonList selected={props.page}></SidebarButtonList>          

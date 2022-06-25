@@ -26,7 +26,7 @@ function LoginPage() {
 
         if(emailIsValid && passwordIsValid) return true
         else {
-            return false
+            return true
         }
     }
 

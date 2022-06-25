@@ -27,7 +27,7 @@ const MonthView = (props) => {
     }
 
   return (
-    <div className="w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl">
+    <div className="w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl z-0">
         <div className="mt-2 ml-5 font-bold">Endet diesen Monat:</div>
         {props.tasks.map((task, index) => {
             return (checkTaskMonth(task.due_date) ? (      
@@ -36,7 +36,7 @@ const MonthView = (props) => {
                 fullTitle = {task.title}
                 description = {task.description}
                 comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                status = {task.status !== null ? task.status.title : "kein Status"}
+                status = {task.status}
                 prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                 completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
                 date = {task.due_date}
