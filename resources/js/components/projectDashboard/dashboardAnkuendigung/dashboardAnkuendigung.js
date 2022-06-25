@@ -54,7 +54,6 @@ const dashboardAnkuendigung = (props) => {
           }
           break;
         default:
-          console.log("default- shit")
       }
       setAnnouncements(orderedAnnouncements)
     }

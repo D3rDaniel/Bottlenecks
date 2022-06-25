@@ -44,7 +44,6 @@ const dashboardRooms = (props) => {
       })
         .then(function(response) {setIsLoaded(true);
           setRooms(response.data["rooms"]); 
-          console.log(response.data["rooms"]) 
           }).catch(function(response){
               setIsLoaded(true)
               setError(true)})
@@ -56,7 +55,6 @@ const dashboardRooms = (props) => {
 
     const sortElements = (event, rotate) => {
       const IDTriggeredSortElement = event.target.id
-      console.log(loadedRooms)
       let orderedRooms;
       switch(IDTriggeredSortElement){
         case "0":
@@ -88,7 +86,6 @@ const dashboardRooms = (props) => {
           }
           break;
         default:
-          console.log("default- shit")
           return;
       }
       setRooms(orderedRooms)

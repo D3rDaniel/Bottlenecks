@@ -10,9 +10,6 @@ const TagInputField = (props) => {
   const addTagToProject = () => {
     const url = "http://127.0.0.1:8000/api/tag";
 
-
-    console.log(props.token);
-
     const data = {
       "project_id" : props.projectID,
       "title" : tag

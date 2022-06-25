@@ -32,7 +32,6 @@ function DashboardTasks(props) {
       }
     })
       .then(function(response) {setIsLoaded(true);
-        console.log("res-tasks-id: ", response.data["tasks"])
         setTasks(response.data["tasks"]);  
         },(error) =>{
           setIsLoaded(true);
@@ -133,7 +132,6 @@ function DashboardTasks(props) {
             
               :
               loadedTasks.map((task, index) => {
-                console.log(task.status.id)
               return (
                 <TaskMinimumView
                   id={task.id}

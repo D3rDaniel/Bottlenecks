@@ -30,16 +30,6 @@ function LoginPage() {
         }
     }
 
-    function handleLoginDummy(){
-        userCtx.login(2, "Johann_Esmatus", "dummy@email.com", "DummyT0k3n")
-        console.log(userCtx.user_id);
-        console.log(userCtx.user_name);
-        console.log(userCtx.user_email);
-        console.log(userCtx.user_token);
-
-        navigate('/');
-    }
-
     function handleLogin(){
         if(checkInput()){
             const loginData = {

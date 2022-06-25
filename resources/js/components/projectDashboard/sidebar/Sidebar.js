@@ -14,8 +14,6 @@ const Sidebar = (props) => {
   const projectCtx = useContext(ProjectContext);
   const userCtx = useContext(UserContext);
 
-  console.log(userCtx.user_name + " " + projectCtx.project_admin)
-
   return (
     <div className="flex flex-col min-w-max w-72 justify-between mt-1">
       

@@ -3785,7 +3785,6 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
         break;
 
       default:
-        console.log("default- shit");
     }
 
     setAnnouncements(orderedAnnouncements);
@@ -4065,12 +4064,6 @@ var CompletionPopup = function CompletionPopup(props) {
     setValue(e.target.value);
   };
 
-  var handleCompletionDummy = function handleCompletionDummy() {
-    console.log("Task Nr. " + props.id);
-    console.log("Kommentar: " + value);
-    props.close();
-  };
-
   var handleCompletion = function handleCompletion() {
     var url = "http://127.0.0.1:8000/api/task/" + props.id + "/complete";
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
@@ -4081,8 +4074,6 @@ var CompletionPopup = function CompletionPopup(props) {
         'Authorization': 'Bearer ' + userCtx.user_token
       }
     }).then(function (response) {
-      console.log(response);
-
       if (response.data.success == true) {
         alert("Task wurde erfolgreich abgeschlossen!");
       } else {
@@ -4326,7 +4317,6 @@ function DashboardOffeneTasks(props) {
         break;
 
       default:
-        console.log("default- shit");
     }
 
     setTasks(orderedTasks);
@@ -4962,7 +4952,6 @@ function DashboardProjects(props) {
         break;
 
       default:
-        console.log("default- shit");
         return;
     }
 
@@ -5541,7 +5530,6 @@ var SearchField = function SearchField(props) {
 
   var changeInputValue = function changeInputValue(event) {
     var valueString = event.target.value;
-    console.log("is it undefined?", valueString === undefined ? "yes" : "no");
     setInputValue(valueString === undefined ? "" : valueString.toLowerCase());
   };
 
@@ -5671,7 +5659,6 @@ var elements = [{
 
 var SortList = function SortList(props) {
   var sortElements = function sortElements(event, rotate) {
-    console.log("Is rotatet? ", rotate);
     props.sortElements(event, rotate);
   };
 
@@ -5875,7 +5862,6 @@ function DashboardRaumbuchungen(props) {
         break;
 
       default:
-        console.log("default- shit");
         return;
     }
 
@@ -7173,12 +7159,12 @@ var MemberMaxView = function MemberMaxView(props) {
       createTasks = _useState2[0],
       setCreateTasks = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tasks),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_edit_tasks),
       _useState4 = _slicedToArray(_useState3, 2),
       editTasks = _useState4[0],
       setEditTasks = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tasks),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tags),
       _useState6 = _slicedToArray(_useState5, 2),
       createTags = _useState6[0],
       setCreateTags = _useState6[1];
@@ -7335,8 +7321,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var MemberMinView = function MemberMinView(props) {
-  console.log(props.member);
-
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       rotate = _useState2[0],
@@ -7899,7 +7883,6 @@ var dashboardAnkuendigung = function dashboardAnkuendigung(props) {
         break;
 
       default:
-        console.log("default- shit");
     }
 
     setAnnouncements(orderedAnnouncements);
@@ -8865,8 +8848,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var RoomsMaxView = function RoomsMaxView(props) {
   var handleSubmit = function handleSubmit(event) {
-    console.log("should room id: ", props.room.id);
-    console.log("should token: ", props.token);
     var url = "http://127.0.0.1:8000/api/room/" + props.room.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
       headers: {
@@ -8874,8 +8855,6 @@ var RoomsMaxView = function RoomsMaxView(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      console.log(res);
-
       if (res.status == 200) {
         alert("Erfolgreich gelöscht");
         props.getData();
@@ -9199,7 +9178,6 @@ var dashboardRooms = function dashboardRooms(props) {
     }).then(function (response) {
       setIsLoaded(true);
       setRooms(response.data["rooms"]);
-      console.log(response.data["rooms"]);
     })["catch"](function (response) {
       setIsLoaded(true);
       setError(true);
@@ -9212,7 +9190,6 @@ var dashboardRooms = function dashboardRooms(props) {
 
   var sortElements = function sortElements(event, rotate) {
     var IDTriggeredSortElement = event.target.id;
-    console.log(loadedRooms);
     var orderedRooms;
 
     switch (IDTriggeredSortElement) {
@@ -9269,7 +9246,6 @@ var dashboardRooms = function dashboardRooms(props) {
         break;
 
       default:
-        console.log("default- shit");
         return;
     }
 
@@ -10083,7 +10059,6 @@ __webpack_require__.r(__webpack_exports__);
 var TagElement = function TagElement(props) {
   var removeTag = function removeTag() {
     var url = "http://127.0.0.1:8000/api/tag/" + props.id;
-    console.log(props.token);
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -10156,7 +10131,6 @@ var TagInputField = function TagInputField(props) {
 
   var addTagToProject = function addTagToProject() {
     var url = "http://127.0.0.1:8000/api/tag";
-    console.log(props.token);
     var data = {
       "project_id": props.projectID,
       "title": tag
@@ -10471,7 +10445,6 @@ function DashboardTasks(props) {
       }
     }).then(function (response) {
       setIsLoaded(true);
-      console.log("res-tasks-id: ", response.data["tasks"]);
       setTasks(response.data["tasks"]);
     }, function (error) {
       setIsLoaded(true);
@@ -10617,7 +10590,6 @@ function DashboardTasks(props) {
             token: props.token
           }, index);
         }) : loadedTasks.map(function (task, index) {
-          console.log(task.status.id);
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
             id: task.id,
             title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
@@ -11143,7 +11115,6 @@ function NewTaskPopup(props) {
       description: description,
       status_id: 2
     };
-    console.log(task);
     var url = "http://127.0.0.1:8000/api/task/";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, task, {
       headers: {
@@ -11593,7 +11564,6 @@ __webpack_require__.r(__webpack_exports__);
 var Sidebar = function Sidebar(props) {
   var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_7__["default"]);
   var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_8__["default"]);
-  console.log(userCtx.user_name + " " + projectCtx.project_admin);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     className: "flex flex-col min-w-max w-72 justify-between mt-1",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
@@ -11788,7 +11758,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SignOutButton = function SignOutButton(props) {
-  console.log(props.token);
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var logout = function logout() {
@@ -12113,15 +12082,6 @@ function LoginPage() {
     if (emailIsValid && passwordIsValid) return true;else {
       return true;
     }
-  }
-
-  function handleLoginDummy() {
-    userCtx.login(2, "Johann_Esmatus", "dummy@email.com", "DummyT0k3n");
-    console.log(userCtx.user_id);
-    console.log(userCtx.user_name);
-    console.log(userCtx.user_email);
-    console.log(userCtx.user_token);
-    navigate('/');
   }
 
   function handleLogin() {

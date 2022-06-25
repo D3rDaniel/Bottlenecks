@@ -5,8 +5,8 @@ const MemberMaxView = (props) => {
     const url = "http://127.0.0.1:8000/api/project-member/"+props.member.pivot.id;
 
     const [createTasks , setCreateTasks] = useState(props.member.pivot.can_create_tasks);
-    const [editTasks , setEditTasks] = useState(props.member.pivot.can_create_tasks);
-    const [createTags , setCreateTags] = useState(props.member.pivot.can_create_tasks);
+    const [editTasks , setEditTasks] = useState(props.member.pivot.can_edit_tasks);
+    const [createTags , setCreateTags] = useState(props.member.pivot.can_create_tags);
  
     const handleCheckbox = (value, right) =>{
         value.target.checked === true ? value = 1 : value = 0;

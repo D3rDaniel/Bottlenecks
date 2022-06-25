@@ -87,7 +87,6 @@ function DashboardRaumbuchungen(props) {
         }
         break;
       default:
-        console.log("default- shit")
         return;
     }
     setBookings(orderedBookings)

@@ -71,7 +71,6 @@ function DashboardOffeneTasks(props) {
             }
             break;
           default:
-            console.log("default- shit")
         }
         setTasks(orderedTasks)
   }

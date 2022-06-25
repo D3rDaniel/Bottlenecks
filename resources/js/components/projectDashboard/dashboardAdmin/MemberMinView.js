@@ -4,7 +4,6 @@ import Arrow from '../../../../images/icons/arrow-black.png'
 import MemberMaxView from './MemberMaxView'
 
 const MemberMinView = (props) => {
-    console.log(props.member);
     const [rotate, setRotate] = useState(0);
 
     const rotateArrow = () => { rotate ? setRotate(false) : setRotate(true) }

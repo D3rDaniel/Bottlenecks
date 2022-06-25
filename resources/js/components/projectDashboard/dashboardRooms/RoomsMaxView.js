@@ -4,8 +4,6 @@ import React, {useState} from 'react'
 const RoomsMaxView = (props) => {
 
     const handleSubmit = (event) => {
-        console.log("should room id: ", props.room.id)
-        console.log("should token: ", props.token)
         const url = "http://127.0.0.1:8000/api/room/"+props.room.id
 
         axios.delete(url, {
@@ -15,7 +13,6 @@ const RoomsMaxView = (props) => {
             }
           })
           .then(res => {
-            console.log(res)
             if(res.status == 200) {
                 alert("Erfolgreich gelöscht")
                 props.getData()

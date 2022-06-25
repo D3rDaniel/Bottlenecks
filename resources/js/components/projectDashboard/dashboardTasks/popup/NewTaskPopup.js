@@ -95,7 +95,6 @@ function NewTaskPopup(props) {
             description: description,
             status_id: 2
         }
-       console.log(task)
        const url = "http://127.0.0.1:8000/api/task/"
        axios.post(url, task , {
         headers: {

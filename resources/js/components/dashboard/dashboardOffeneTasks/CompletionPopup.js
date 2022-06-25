@@ -12,12 +12,6 @@ const CompletionPopup = (props) => {
         setValue(e.target.value)
     }
 
-    const handleCompletionDummy = () => {
-        console.log("Task Nr. "+props.id);
-        console.log("Kommentar: "+value);
-        props.close();
-    }
-
     const handleCompletion = () => {
         const url = "http://127.0.0.1:8000/api/task/"+props.id+"/complete";
 
@@ -29,7 +23,6 @@ const CompletionPopup = (props) => {
               'Authorization': 'Bearer ' + userCtx.user_token
             }})
         .then(function(response) {
-          console.log(response)
           if(response.data.success == true) {alert("Task wurde erfolgreich abgeschlossen!");}
           else {alert("Es ist ein Fehler aufgetreten!");}
           props.close();

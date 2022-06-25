@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const SignOutButton = (props) => {
-  console.log(props.token);
   const navigate = useNavigate();
   
   const logout = () => {
