@@ -29,12 +29,12 @@ class AnnouncementController extends Controller
     {
         $data = $request->validated();
 
-        if(!(Project::find($data['project_id'])->members()->find($data['user_id']))){
+        /*if(!(Project::find($data['project_id'])->members()->find($data['user_id']))){
             return response()->json([
                 'success' => false,
                 'message' => 'User not part of project',
             ], 422);
-        }
+        }*/
 
         $this->authorize('create', [Announcement::class,$data['project_id']]);
 
