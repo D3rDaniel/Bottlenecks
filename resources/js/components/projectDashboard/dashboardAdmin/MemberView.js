@@ -48,7 +48,7 @@ const MemberView = (props) => {
             </div>)
     }else {  
     return (
-        <div className="bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between">
+        <div className="bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between overflow-auto">
             <div>
                 <div className="font-bold mt-2 ml-1">Mitglieder</div>
                 <div className="h-full w-full">

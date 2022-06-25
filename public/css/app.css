@@ -470,6 +470,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .m-2{
   margin: 0.5rem;
 }
+.m-3{
+  margin: 0.75rem;
+}
 .my-5{
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
@@ -722,6 +725,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-20{
   height: 5rem;
 }
+.h-3{
+  height: 0.75rem;
+}
 .w-full{
   width: 100%;
 }
@@ -806,6 +812,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-72{
   width: 18rem;
 }
+.w-3{
+  width: 0.75rem;
+}
 .min-w-max{
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
@@ -883,6 +892,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .overflow-auto{
   overflow: auto;
+}
+.overflow-y-auto{
+  overflow-y: auto;
+}
+.overflow-x-hidden{
+  overflow-x: hidden;
 }
 .overflow-y-hidden{
   overflow-y: hidden;

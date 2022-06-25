@@ -7173,25 +7173,15 @@ var MemberMaxView = function MemberMaxView(props) {
       createTasks = _useState2[0],
       setCreateTasks = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tasks),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_edit_tasks),
       _useState4 = _slicedToArray(_useState3, 2),
-      assignTasks = _useState4[0],
-      setAssignTasks = _useState4[1];
+      editTasks = _useState4[0],
+      setEditTasks = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tasks),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tags),
       _useState6 = _slicedToArray(_useState5, 2),
-      editTasks = _useState6[0],
-      setEditTasks = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tasks),
-      _useState8 = _slicedToArray(_useState7, 2),
-      createTags = _useState8[0],
-      setCreateTags = _useState8[1];
-  /*     let createTasks = (props.member.pivot.can_create_tasks === 0) ? false : true;
-      let assignTasks = (props.member.pivot.can_assign_tasks === "0") ? false : true;
-      let editTasks = (props.member.pivot.can_edit_tasks === 0) ? false : true;
-      let createTags = (props.member.pivot.can_create_tags === 0) ? false : true; */
-
+      createTags = _useState6[0],
+      setCreateTags = _useState6[1];
 
   var handleCheckbox = function handleCheckbox(value, right) {
     value.target.checked === true ? value = 1 : value = 0;
@@ -7207,19 +7197,12 @@ var MemberMaxView = function MemberMaxView(props) {
 
       case 2:
         changeData = {
-          can_assign_tasks: value
-        };
-        setAssignTasks(value);
-        break;
-
-      case 3:
-        changeData = {
           can_edit_tasks: value
         };
         setEditTasks(value);
         break;
 
-      case 4:
+      case 3:
         changeData = {
           can_create_tags: value
         };
@@ -7282,7 +7265,7 @@ var MemberMaxView = function MemberMaxView(props) {
             id: "edit Task",
             defaultChecked: editTasks,
             onChange: function onChange(e) {
-              handleCheckbox(e, 3);
+              handleCheckbox(e, 2);
             }
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             htmlFor: "edit Task",
@@ -7295,7 +7278,7 @@ var MemberMaxView = function MemberMaxView(props) {
             id: "create Tag",
             defaultChecked: createTags,
             onChange: function onChange(e) {
-              handleCheckbox(e, 4);
+              handleCheckbox(e, 3);
             }
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             htmlFor: "create Tag",
@@ -7303,17 +7286,13 @@ var MemberMaxView = function MemberMaxView(props) {
             children: "Tag erstellen"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "flex justify-center bg-red rounded-xl h-8 w-32 mr-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          src: _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_2__["default"],
-          alt: "Kreuz",
-          className: "h-4 w-4 mt-2 mr-3"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-          className: "text-white hover:font-bold",
-          onClick: deleteMember,
-          children: "Entfernen"
-        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "flex justify-center items-center bg-red rounded-md h-8 mr-3 border border-black",
+        onClick: deleteMember,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "text-white m-3",
+          children: "entfernen"
+        })
       })]
     })]
   });
@@ -7504,7 +7483,7 @@ var MemberView = function MemberView(props) {
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      className: "bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between",
+      className: "bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between overflow-auto",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "font-bold mt-2 ml-1",
@@ -12157,7 +12136,6 @@ function LoginPage() {
       axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, loginData).then(function (response) {
         if (response.data.success == true) {
           userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.username.first_name, response.data.username.last_name, response.data.bearer_token);
-          alert("Erfolgreich angemeldet!");
           navigate('/');
         } else alert("Anmeldung fehlgeschlagen!");
       })["catch"](function (error) {
