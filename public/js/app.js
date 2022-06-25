@@ -2587,8 +2587,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var _pages_DashboardPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/DashboardPage */ "./resources/js/pages/DashboardPage.js");
 /* harmony import */ var _pages_ProjectPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/ProjectPage */ "./resources/js/pages/ProjectPage.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var _pages_LoginPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/LoginPage */ "./resources/js/pages/LoginPage.js");
 /* harmony import */ var _pages_RegisterPage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/RegisterPage */ "./resources/js/pages/RegisterPage.js");
 /* harmony import */ var _pages_Ank_ndigungenPage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/AnkündigungenPage */ "./resources/js/pages/AnkündigungenPage.js");
@@ -2605,7 +2605,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/user-context */ "./resources/js/store/user-context.js");
 /* harmony import */ var _store_project_context__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/project-context */ "./resources/js/store/project-context.js");
 /* harmony import */ var _pages_InfoPage__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/InfoPage */ "./resources/js/pages/InfoPage.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _pages_ProjectInfoPage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/ProjectInfoPage */ "./resources/js/pages/ProjectInfoPage.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -2630,60 +2632,63 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ReactApp() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)("div", {
     className: "bg-customgray relative flex h-screen w-screen font-body",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_store_user_context__WEBPACK_IMPORTED_MODULE_17__.UserContextProvider, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_store_project_context__WEBPACK_IMPORTED_MODULE_18__.ProjectContextProvider, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Routes, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_store_user_context__WEBPACK_IMPORTED_MODULE_17__.UserContextProvider, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_store_project_context__WEBPACK_IMPORTED_MODULE_18__.ProjectContextProvider, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Routes, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             exact: true,
             path: "/",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_DashboardPage__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_DashboardPage__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/login",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_LoginPage__WEBPACK_IMPORTED_MODULE_4__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_LoginPage__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/register",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_RegisterPage__WEBPACK_IMPORTED_MODULE_5__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_RegisterPage__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/ankuendigungen",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_Ank_ndigungenPage__WEBPACK_IMPORTED_MODULE_6__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_Ank_ndigungenPage__WEBPACK_IMPORTED_MODULE_6__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/abgeschlosseneTasks",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_AbgeschlosseneTasksPage__WEBPACK_IMPORTED_MODULE_7__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_AbgeschlosseneTasksPage__WEBPACK_IMPORTED_MODULE_7__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/offeneTasks",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_OffeneTasksPage__WEBPACK_IMPORTED_MODULE_8__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_OffeneTasksPage__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/accountVerwalten",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_AccountVerwaltenPage__WEBPACK_IMPORTED_MODULE_9__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_AccountVerwaltenPage__WEBPACK_IMPORTED_MODULE_9__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/raumbuchungen",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_RaumbuchungenPage__WEBPACK_IMPORTED_MODULE_10__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_RaumbuchungenPage__WEBPACK_IMPORTED_MODULE_10__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/info",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_InfoPage__WEBPACK_IMPORTED_MODULE_19__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_InfoPage__WEBPACK_IMPORTED_MODULE_19__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/project",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_ProjectPage__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_ProjectPage__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/project/admin",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_Project_AdminPage__WEBPACK_IMPORTED_MODULE_11__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_Project_AdminPage__WEBPACK_IMPORTED_MODULE_11__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/project/ankuendigungen",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_Project_AnkuendigungPage__WEBPACK_IMPORTED_MODULE_12__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_Project_AnkuendigungPage__WEBPACK_IMPORTED_MODULE_12__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/project/deadline",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_Project_DeadlinePage__WEBPACK_IMPORTED_MODULE_13__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_Project_DeadlinePage__WEBPACK_IMPORTED_MODULE_13__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/project/uebersicht",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_Project_OverviewPage__WEBPACK_IMPORTED_MODULE_14__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_Project_OverviewPage__WEBPACK_IMPORTED_MODULE_14__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/project/rooms",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_Project_RoomsPage__WEBPACK_IMPORTED_MODULE_15__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_Project_RoomsPage__WEBPACK_IMPORTED_MODULE_15__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
             path: "/project/tags",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_pages_Project_TagsPage__WEBPACK_IMPORTED_MODULE_16__["default"], {})
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_Project_TagsPage__WEBPACK_IMPORTED_MODULE_16__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.Route, {
+            path: "/project/info",
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(_pages_ProjectInfoPage__WEBPACK_IMPORTED_MODULE_20__["default"], {})
           })]
         })
       })
@@ -2691,8 +2696,8 @@ function ReactApp() {
   });
 }
 var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementById('root'));
-root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_22__.BrowserRouter, {
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(ReactApp, {})
+root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_23__.BrowserRouter, {
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_21__.jsx)(ReactApp, {})
 }));
 
 /***/ }),
@@ -3149,7 +3154,6 @@ var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlo
 
       if (project) {
         projectCtx.select(project.id, project.title, project.creator_user_id);
-        alert("project set with id " + projectCtx.project_id + " data: " + project);
         navigate('/project');
       } else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");
     });
@@ -4424,43 +4428,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
-var ProjectMaximumViewOffeneTasks = function ProjectMaximumViewOffeneTasks(_ref) {
-  var title = _ref.title,
-      description = _ref.description,
-      deadline = _ref.deadline;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+
+var ProjectMaximumViewOffeneTasks = function ProjectMaximumViewOffeneTasks(props) {
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+  var closeTask = function closeTask() {
+    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    axios.put(url, {
+      status_id: 4
+    }, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + userCtx.user_token
+      }
+    }).then(function (res) {
+      if (res.status == 201) alert("Task erfolgreich abgeschlossen");
+    })["catch"](function (error) {
+      return console.log("error: ", error);
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "ml-8 w-1/2 py-5",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
         className: "font-bold",
-        children: title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        children: description
+        children: props.title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: props.description
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "flex justify-center w-1/2 p-3 pt-8",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "w-1/2 h-1/2 px-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
           className: "font-bold",
           children: "Deadline"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          children: deadline
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+          children: props.deadline
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "flex w-1/2 p-3 items-end",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        className: "flex justify-between items-end",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-          className: "bg-red w-28 h-6 rounded-xl mr-5 text-white hover:font-bold drop-shadow-lg",
-          children: "L\xF6schen"
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "flex justify-end items-end",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: closeTask,
+          className: "bg-red w-40 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg",
+          children: "Task Abbrechen"
         })
       })
     })]
@@ -4580,6 +4602,7 @@ var ProjectMinimumViewOffeneTasks = function ProjectMinimumViewOffeneTasks(props
         }), "            "]
       })]
     }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ProjectMaximumViewOffeneTasks__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      id: props.id,
       description: props.description,
       title: props.fullTitle,
       deadline: props.deadline
@@ -4847,7 +4870,7 @@ function DashboardProjects(props) {
       filteredProjects = _useState12[0],
       setFilteredProjects = _useState12[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  var getData = function getData() {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/projects";
     axios__WEBPACK_IMPORTED_MODULE_6___default().get(url, {
@@ -4862,6 +4885,10 @@ function DashboardProjects(props) {
       setIsLoaded(true);
       setError(error);
     });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getData();
   }, []);
 
   var sortElements = function sortElements(event, rotate) {
@@ -5024,7 +5051,8 @@ function DashboardProjects(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_popup_NewProjectPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         trigger: popupTrigger,
         onClick: changePopupTriggerValue,
-        token: props.token
+        token: props.token,
+        getData: getData
       })]
     });
   }
@@ -5242,11 +5270,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function NewProjectPopup(_ref) {
-  var trigger = _ref.trigger,
-      onClick = _ref.onClick,
-      token = _ref.token;
-
+function NewProjectPopup(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       description = _useState2[0],
@@ -5287,18 +5311,20 @@ function NewProjectPopup(_ref) {
     axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, projectData, {
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
       if (res.status === 201) {
         alert("Projekt wurder erfolgreich erstellt!");
+        props.onClick();
+        props.getData();
       } else {
         alert("Es ist etwas schief gelaufen");
       }
     });
   };
 
-  return trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+  return props.trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
     className: "w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
@@ -5333,7 +5359,7 @@ function NewProjectPopup(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "flex items-center justify-between",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-            onClick: onClick,
+            onClick: props.onClick,
             className: "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
             children: "Abbruch"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
@@ -5914,7 +5940,8 @@ function DashboardRaumbuchungen(props) {
             opening_time: booking.room.opening_time.substring(0, 5),
             closing_time: booking.room.closing_time.substring(0, 5),
             address_info: booking.room.address_info,
-            project: booking.room.project_id
+            project: booking.room.project_id,
+            getData: getBookings
           }, index);
         }) : loadedBookings.map(function (booking, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ProjectMinimumViewRaumbuchungen__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -5931,7 +5958,8 @@ function DashboardRaumbuchungen(props) {
             opening_time: booking.room.opening_time.substring(0, 5),
             closing_time: booking.room.closing_time.substring(0, 5),
             address_info: booking.room.address_info,
-            project: booking.room.project_id
+            project: booking.room.project_id,
+            getData: getBookings
           }, index);
         })
       })]
@@ -6170,8 +6198,8 @@ var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(p
       closing_time: props.closing_time,
       address_info: props.address_info,
       id: props.id,
-      token: props.token,
-      onClick: props.onClick
+      token: userCtx.user_token,
+      onClick: props.getData
     }) : null]
   });
 };
@@ -8960,9 +8988,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8979,7 +9009,31 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 var RoomsMaxView = function RoomsMaxView(props) {
+  var handleSubmit = function handleSubmit(event) {
+    console.log("should room id: ", props.room.id);
+    console.log("should token: ", props.token);
+    var url = "http://127.0.0.1:8000/api/room/" + props.room.id;
+    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (res) {
+      console.log(res);
+
+      if (res.status == 200) {
+        alert("Erfolgreich gelöscht");
+        props.getData();
+      }
+
+      if (res.status == 401) alert("Keine Berechtigung");
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  };
+
   var city = props.room.address_info;
   var building = city.substring(0, city.indexOf(','));
 
@@ -8991,69 +9045,70 @@ var RoomsMaxView = function RoomsMaxView(props) {
 
   city = city.replace(building + ',', '');
   building = building.substring(0, building.length - helper.length);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "flex bg-white rounded-xl -mt-5 shadow-bottom",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "w-1/4 ml-5 mt-5 pb-5",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "font-bold",
         children: "Beschreibung:"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
         className: "mt-5",
         children: props.room.description
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "w-1/4 mt-5 pb-5 ml-4 flex flex-col justify-between ",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "font-bold",
           children: "Ausstattung:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: props.room.equipment_info
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "font-bold",
           children: "\xD6ffnungszeiten:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
           children: [props.room.opened_on_weekends === "0" ? "Mo-Fr " : "Mo-So", ": ", props.room.opening_time, " - ", props.room.closing_time, " Uhr"]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "w-1/4 mt-5 pb-5",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "font-bold",
         children: "Zu finden:"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "Stadt: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: city
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "PLZ: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: plz
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "Adresse: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: building
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: "Raum: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: props.room.room_number
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "w-1/4 flex flex-col justify-end pb-5 items-end",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
         className: "bg-red h-8 w-28 rounded-xl text-white mr-12 hover:font-bold",
+        onClick: handleSubmit,
         children: "L\xF6schen"
       })
     })]
@@ -9107,6 +9162,8 @@ var RoomsMinView = function RoomsMinView(props) {
       setPopupTriggerBooking = _useState2[1];
 
   var changePopupTrigger = function changePopupTrigger() {
+    props.getRoomName(props.room.title);
+    props.getRoomID(props.room.id);
     props.changePopupTriggerValueBooking(!popupTriggerBooking);
   };
 
@@ -9154,7 +9211,9 @@ var RoomsMinView = function RoomsMinView(props) {
         })
       })]
     }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RoomsMaxView__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      room: props.room
+      room: props.room,
+      token: props.token,
+      getData: props.getData
     }) : null]
   });
 };
@@ -9238,6 +9297,7 @@ var dashboardRooms = function dashboardRooms(props) {
 
   var changePopupTriggerValueBooking = function changePopupTriggerValueBooking() {
     setPopupTriggerBooking(!popupTriggerBooking);
+    if (popupTriggerBooking) getData(); //true bs async
   };
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
@@ -9265,7 +9325,17 @@ var dashboardRooms = function dashboardRooms(props) {
       filteredRooms = _useState14[0],
       setFilteredRooms = _useState14[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState16 = _slicedToArray(_useState15, 2),
+      roomName = _useState16[0],
+      setRoomName = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState18 = _slicedToArray(_useState17, 2),
+      roomID = _useState18[0],
+      setRoomID = _useState18[1];
+
+  var getData = function getData() {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/rooms";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
@@ -9276,10 +9346,15 @@ var dashboardRooms = function dashboardRooms(props) {
     }).then(function (response) {
       setIsLoaded(true);
       setRooms(response.data["rooms"]);
+      console.log(response.data["rooms"]);
     })["catch"](function (response) {
       setIsLoaded(true);
       setError(true);
     });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getData();
   }, []);
 
   var sortElements = function sortElements(event, rotate) {
@@ -9357,6 +9432,14 @@ var dashboardRooms = function dashboardRooms(props) {
     setFilteredRooms(filteredRoomsBuffer);
   };
 
+  var getRoomName = function getRoomName(data) {
+    setRoomName(data);
+  };
+
+  var getRoomID = function getRoomID(data) {
+    setRoomID(data);
+  };
+
   if (error) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       className: "m-auto text-red font-bold",
@@ -9400,13 +9483,23 @@ var dashboardRooms = function dashboardRooms(props) {
         className: "h-full w-full",
         children: filtered ? filteredRooms.map(function (room, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            id: room.id,
             changePopupTriggerValueBooking: changePopupTriggerValueBooking,
-            room: room
+            room: room,
+            token: props.token,
+            getRoomName: getRoomName,
+            getRoomID: getRoomID,
+            getData: getData
           }, index);
         }) : loadedRooms.map(function (room, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_RoomsMinView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            id: room.id,
             changePopupTriggerValueBooking: changePopupTriggerValueBooking,
-            room: room
+            room: room,
+            token: props.token,
+            getRoomID: getRoomID,
+            getRoomName: getRoomName,
+            getData: getData
           }, index);
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
@@ -9422,7 +9515,9 @@ var dashboardRooms = function dashboardRooms(props) {
         token: props.token,
         trigger: popupTriggerBooking,
         onClick: changePopupTriggerValueBooking,
-        user_id: user.user_id
+        user_id: user.user_id,
+        roomName: roomName,
+        roomID: roomID
       })]
     });
   }
@@ -9558,7 +9653,6 @@ function NewRoomPopup(props) {
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
-    console.log("projectID: ", project.project_id);
     var room = {
       title: name,
       capacity: size,
@@ -9580,6 +9674,7 @@ function NewRoomPopup(props) {
     }).then(function (res) {
       if (res.status === 201) {
         alert("Raum wurder erfolgreich erstellt!");
+        props.onClick();
       } else {
         alert("Es ist etwas schief gelaufen");
       }
@@ -9741,35 +9836,25 @@ function RoomBookingPopup(props) {
       date = _useState2[0],
       setDate = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("08:00:00"),
       _useState4 = _slicedToArray(_useState3, 2),
-      room = _useState4[0],
-      setRoom = _useState4[1];
+      from = _useState4[0],
+      setFrom = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("08:00:00"),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("09:00:00"),
       _useState6 = _slicedToArray(_useState5, 2),
-      from = _useState6[0],
-      setFrom = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("09:00:00"),
-      _useState8 = _slicedToArray(_useState7, 2),
-      to = _useState8[0],
-      setTo = _useState8[1];
-
-  var getRoom = function getRoom(data) {
-    setRoom(data);
-  };
+      to = _useState6[0],
+      setTo = _useState6[1];
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var booking = {
-      room_id: 1,
+      room_id: props.roomID,
       user_id: props.user_id,
       reservation_date: date,
       start_time: from + ":00",
       end_time: to + ":00"
     };
-    console.log(booking);
     var url = "http://127.0.0.1:8000/api/bookings";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, booking, {
       headers: {
@@ -9777,8 +9862,12 @@ function RoomBookingPopup(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      console.log(res);
-      console.log(res.data);
+      console.log("res-booking: ", res);
+
+      if (res.status == 201) {
+        props.onClick();
+        alert("Buchung erfolgreich erstellt");
+      }
     });
   };
 
@@ -9797,14 +9886,16 @@ function RoomBookingPopup(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "flex justify-center items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "w-1/2 px-4",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "mb-4",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_forms_DropDownSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                  title: "Raum auswählen",
-                  onChange: getRoom,
-                  options: ["muss", "noch", "dynamisch", "geladen", "werden"]
-                })
+              className: "w-1/2 px-4 ",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "mb-4 flex justify-center items-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                  className: "mr-4 p-2",
+                  children: "Raum: "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                  className: " p-2",
+                  children: props.roomName
+                })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "mb-4 flex justify-center items-center",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
@@ -10734,15 +10825,29 @@ __webpack_require__.r(__webpack_exports__);
 function TaskMaximumView(props) {
   var closeTask = function closeTask() {
     var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
+      status_id: 4
+    }, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (res) {
+      if (res.status == 201) alert("Task erfolgreich abgebrochen");
+    })["catch"](function (error) {
+      return console.log("error: ", error);
+    });
+  };
+
+  var deleteTask = function deleteTask() {
+    var url = "http://127.0.0.1:8000/api/task/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      console.log("res-close-delete: ", res);
       if (res.status == 201) alert("Task erfolgreich gelöscht");
-      props.onClick(); //rerender parent-component if possible 
     })["catch"](function (error) {
       return console.log("error: ", error);
     });
@@ -10811,11 +10916,14 @@ function TaskMaximumView(props) {
         })]
       }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "mr-12  mb-4 mt-auto",
-        children: props.status.id !== 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        children: props.status.id == 2 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg",
           onClick: closeTask,
           children: "Task abbrechen"
-        }) : null
+        }) : //props.status.id == 4 ? 
+        //    <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={deleteTask}>komplett löschen</button>
+        //    :
+        null
       })]
     })]
   });
@@ -10900,19 +11008,21 @@ function TaskMinimumView(props) {
     }
   };
 
-  var openAgain = function openAgain() {//    const url = "http://127.0.0.1:8000/api/task/"+props.id+"/complete";
-    //    axios.put(url,{
-    //        headers: {
-    //            'Accept': 'application/json',
-    //            'Authorization': 'Bearer ' + props.token
-    //        }
-    //    })
-    //    .then(res => {
-    //        console.log("res-close-task: ", res)
-    //        if(res.status == 201) alert("Task erfolgreich abgeschlossen")
-    //        props.onClick() //rerender parent-component
-    //    })
-    //    .catch(error => console.log("error: ", error))  
+  var openAgain = function openAgain() {
+    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().put(url, {
+      status_id: 2
+    }, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (res) {
+      if (res.status == 201) alert("Task erfolgreich abgeschlossen");
+      props.onClick(); //rerender parent-component
+    })["catch"](function (error) {
+      return console.log("error: ", error);
+    });
   };
 
   var rotateArrow = function rotateArrow() {
@@ -10951,7 +11061,18 @@ function TaskMinimumView(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
             onClick: openAgain,
-            children: "Abgeschlossen"
+            children: "Wieder Aufnehmen"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
+            alt: "maxView",
+            className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+            onClick: rotateArrow
+          })]
+        }) : props.status.id == 2 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            className: "bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
+            onClick: setPopupTrigger,
+            children: "Abschlie\xDFen"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
             src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
             alt: "maxView",
@@ -10960,9 +11081,9 @@ function TaskMinimumView(props) {
           })]
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-            className: "bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
-            onClick: setPopupTrigger,
-            children: "Abschlie\xDFen"
+            className: "bg-orange-400 w-40 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
+            onClick: openAgain,
+            children: "Wieder Aufnehmen"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
             src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
             alt: "maxView",
@@ -11648,6 +11769,7 @@ var Sidebar = function Sidebar(props) {
       selected: props.page
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_SidebarButtonElement__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        url: "info",
         img: _images_icons_info_jpg__WEBPACK_IMPORTED_MODULE_6__["default"],
         desc: "Info",
         selected: "false"
@@ -12253,6 +12375,52 @@ function OffeneTasksPage() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OffeneTasksPage);
+
+/***/ }),
+
+/***/ "./resources/js/pages/ProjectInfoPage.js":
+/*!***********************************************!*\
+  !*** ./resources/js/pages/ProjectInfoPage.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/projectDashboard/sidebar/Sidebar */ "./resources/js/components/projectDashboard/sidebar/Sidebar.js");
+/* harmony import */ var _components_dashboard_dashboardInfo_DashboardInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/dashboardInfo/DashboardInfo */ "./resources/js/components/dashboard/dashboardInfo/DashboardInfo.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+function InfoPage() {
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  return userCtx.user_id == null || userCtx.user_id == undefined ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Navigate, {
+    replace: true,
+    to: "/Login"
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "flex w-screen",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      username: userCtx.user_name
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_dashboard_dashboardInfo_DashboardInfo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      userID: userCtx.user_id,
+      token: userCtx.user_token
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InfoPage);
 
 /***/ }),
 

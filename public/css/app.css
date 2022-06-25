@@ -764,11 +764,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-36{
   width: 9rem;
 }
-.w-4\/5{
-  width: 80%;
-}
 .w-40{
   width: 10rem;
+}
+.w-4\/5{
+  width: 80%;
 }
 .w-0{
   width: 0px;
@@ -999,6 +999,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-cyan-400{
   --tw-bg-opacity: 1;
   background-color: rgb(34 211 238 / var(--tw-bg-opacity));
+}
+.bg-orange-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
 }
 .bg-gray-400\/\[\.7\]{
   background-color: rgb(156 163 175 / .7);

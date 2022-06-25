@@ -1,6 +1,29 @@
+import axios from 'axios'
 import React, {useState} from 'react'
 
 const RoomsMaxView = (props) => {
+
+    const handleSubmit = (event) => {
+        console.log("should room id: ", props.room.id)
+        console.log("should token: ", props.token)
+        const url = "http://127.0.0.1:8000/api/room/"+props.room.id
+
+        axios.delete(url, {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + props.token
+            }
+          })
+          .then(res => {
+            console.log(res)
+            if(res.status == 200) {
+                alert("Erfolgreich gelöscht")
+                props.getData()
+            }
+            if(res.status == 401) alert("Keine Berechtigung")
+          })
+          .catch(error => console.log(error))
+    }
 
     let city = props.room.address_info;
     let building = city.substring(0,city.indexOf(','));
@@ -51,7 +74,7 @@ const RoomsMaxView = (props) => {
         </div>
 
         <div className="w-1/4 flex flex-col justify-end pb-5 items-end">
-            <button className="bg-red h-8 w-28 rounded-xl text-white mr-12 hover:font-bold">Löschen</button>
+            <button className="bg-red h-8 w-28 rounded-xl text-white mr-12 hover:font-bold" onClick={handleSubmit}>Löschen</button>
         </div>        
     </div>
   )

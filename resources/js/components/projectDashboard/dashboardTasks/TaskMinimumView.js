@@ -24,20 +24,21 @@ function TaskMinimumView (props) {
         }
     }
 
+
     const openAgain = () => {
-    //    const url = "http://127.0.0.1:8000/api/task/"+props.id+"/complete";
-    //    axios.put(url,{
-    //        headers: {
-    //            'Accept': 'application/json',
-    //            'Authorization': 'Bearer ' + props.token
-    //        }
-    //    })
-    //    .then(res => {
-    //        console.log("res-close-task: ", res)
-    //        if(res.status == 201) alert("Task erfolgreich abgeschlossen")
-    //        props.onClick() //rerender parent-component
-    //    })
-    //    .catch(error => console.log("error: ", error))  
+        const url = "http://127.0.0.1:8000/api/task/"+props.id;
+        axios.put(url,{status_id: 2},
+            {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + props.token
+            }
+        })
+        .then(res => {
+            if(res.status == 201) alert("Task erfolgreich abgeschlossen")
+            props.onClick() //rerender parent-component
+        })
+        .catch(error => console.log("error: ", error))  
     }
     const rotateArrow = () => {rotate ? setRotate(false) : setRotate(true)}
 
@@ -62,14 +63,20 @@ function TaskMinimumView (props) {
             {
                 props.status.id == 1 ? 
                     <>
-                    <button className="bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Abgeschlossen</button>
+                    <button className="bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Wieder Aufnehmen</button>
                     <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
                     </>
                     :
-                    <>
-                    <button className="bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={setPopupTrigger}>Abschließen</button>
-                    <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
-                    </>
+                    props.status.id == 2 ?
+                        <>
+                        <button className="bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={setPopupTrigger}>Abschließen</button>
+                        <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
+                        </>
+                        :
+                        <>
+                        <button className="bg-orange-400 w-40 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Wieder Aufnehmen</button>
+                        <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
+                        </>
             }
             </div>
         </div>

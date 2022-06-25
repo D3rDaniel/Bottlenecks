@@ -3,20 +3,34 @@ import axios from 'axios';
 
 function TaskMaximumView(props){
 
-    const closeTask = () =>{
+    const closeTask = () => {
         const url = "http://127.0.0.1:8000/api/task/"+props.id;
-        axios.delete(url,{
+        axios.put(url,{status_id: 4},
+            {
             headers: {
                 'Accept': 'application/json',
                 'Authorization': 'Bearer ' + props.token
             }
         })
         .then(res => {
-            console.log("res-close-delete: ", res)
-            if(res.status == 201) alert("Task erfolgreich gelöscht")
-            props.onClick() //rerender parent-component if possible 
+            if(res.status == 201) alert("Task erfolgreich abgebrochen")
         })
-        .catch(error => console.log("error: ", error))    
+        .catch(error => console.log("error: ", error))  
+    }
+
+    const deleteTask = () => {
+        const url = "http://127.0.0.1:8000/api/task/"+props.id;
+        axios.delete(url,
+            {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + props.token
+            }
+        })
+        .then(res => {
+            if(res.status == 201) alert("Task erfolgreich gelöscht")
+        })
+        .catch(error => console.log("error: ", error))  
     }
 
   return (
@@ -56,7 +70,13 @@ function TaskMaximumView(props){
                 <div>{props.comment}</div>
             </div> : null}
             <div className="mr-12  mb-4 mt-auto">
-                {props.status.id !== 1? <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={closeTask}>Task abbrechen</button> : null }
+                {props.status.id == 2 ? 
+                    <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={closeTask}>Task abbrechen</button> 
+                    :
+                    //props.status.id == 4 ? 
+                    //    <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={deleteTask}>komplett löschen</button>
+                    //    :
+                        null}
             </div>
         </div>
     </div>

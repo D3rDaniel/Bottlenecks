@@ -21,6 +21,7 @@ const dashboardRooms = (props) => {
   }
   const changePopupTriggerValueBooking = () => {
     setPopupTriggerBooking(!popupTriggerBooking);
+    if(popupTriggerBooking) getData() //true bs async
   }
 
     const [error, setError] = useState(null);
@@ -28,9 +29,10 @@ const dashboardRooms = (props) => {
     const [loadedRooms, setRooms] = useState([]);
     const [filtered, setFiltered] = useState(false);
     const [filteredRooms, setFilteredRooms] = useState([]);
+    const [roomName, setRoomName] = useState()
+    const [roomID, setRoomID] = useState()
 
-
-    useEffect(() => {
+    const getData = () =>{
       setIsLoaded(false);
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
   
@@ -41,10 +43,15 @@ const dashboardRooms = (props) => {
         }
       })
         .then(function(response) {setIsLoaded(true);
-          setRooms(response.data["rooms"]);  
+          setRooms(response.data["rooms"]); 
+          console.log(response.data["rooms"]) 
           }).catch(function(response){
               setIsLoaded(true)
               setError(true)})
+    }
+
+    useEffect(() => {
+      getData()
     },[] );
 
     const sortElements = (event, rotate) => {
@@ -94,6 +101,13 @@ const dashboardRooms = (props) => {
       setFilteredRooms(filteredRoomsBuffer)
     }
 
+    const getRoomName = (data) => {
+      setRoomName(data)
+    }
+    const getRoomID = (data) => {
+      setRoomID(data)
+    }
+
       if (error) {
           return <div className="m-auto text-red font-bold">Es ist ein Fehler aufgetreten!</div> 
       }else if(!isLoaded){
@@ -123,9 +137,14 @@ const dashboardRooms = (props) => {
               filteredRooms.map((room, index) => {
                 return (
                     <MinView
+                        id={room.id}
                         changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
+                        token={props.token}
+                        getRoomName={getRoomName}
+                        getRoomID={getRoomID}
+                        getData={getData}
                     ></MinView>
                 )
             })
@@ -134,9 +153,14 @@ const dashboardRooms = (props) => {
               loadedRooms.map((room, index) => {
                 return (
                     <MinView
+                        id={room.id}
                         changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
+                        token={props.token}
+                        getRoomID={getRoomID}
+                        getRoomName={getRoomName}
+                        getData={getData}
                     ></MinView>
                 )
             })
@@ -147,7 +171,7 @@ const dashboardRooms = (props) => {
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
         <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
-        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} />
+        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} roomName={roomName} roomID={roomID}/>
     </div>
   )}
 }
