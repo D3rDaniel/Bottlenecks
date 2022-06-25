@@ -21,10 +21,10 @@ const MemberInputField = (props) => {
                 'Accept': 'application/json',
                 'Authorization' : 'Bearer ' + props.token
             }
-        }).then(function() {
+        }).then(function(response) {
             props.getData()
         }).catch(function(error){
-            console.log(error.response.data);
+            console.log(error);
             alert("Bitte nur gütlige Nutzernamen eingeben!");
         });
     }

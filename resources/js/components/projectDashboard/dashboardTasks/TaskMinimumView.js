@@ -61,8 +61,8 @@ function TaskMinimumView (props) {
 
             <div  className="flex">
             {   
-                props.deadlineView === false ?
-                props.status.id == 1 ? 
+                //props.deadlineView === false ?
+                    props.status.id == 1 ? 
                     <>
                     <button className="bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Wieder Aufnehmen</button>
                     <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
@@ -78,7 +78,7 @@ function TaskMinimumView (props) {
                         <button className="bg-orange-400 w-40 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Wieder Aufnehmen</button>
                         <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
                         </>
-                : null    
+                //: null    
         }
             </div>
         </div>

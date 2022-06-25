@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import SearchIcon from '../../../../../images/icons/search.jpg'
 
 const SearchField = (props) => {

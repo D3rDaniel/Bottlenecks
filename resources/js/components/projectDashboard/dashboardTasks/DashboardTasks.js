@@ -23,6 +23,7 @@ function DashboardTasks(props) {
 
   const getTasks = () =>{
     setIsLoaded(false);
+    console.log("project-id-from_dashTasks: ", props.projectID)
     const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
 
     axios.get(url, {
@@ -81,6 +82,7 @@ function DashboardTasks(props) {
         }
         break;
       default:
+        return;
     }
     setTasks(orderedTasks)
   }
@@ -177,13 +179,9 @@ function DashboardTasks(props) {
           </div>
 
           <div className="w-full flex justify-end">
-            {/*<div className="bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold">
-                <img src={Plus} alt="plus" className="h-6 w-6 mx-2"></img>
-                <button className="text-white rounded-xl">Task erstellen</button>           
-            </div> */}
             <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        <NewTaskPopup token={props.token} trigger={popupTrigger} onClick={changePopupTriggerValue}/>
+        <NewTaskPopup token={props.token} trigger={popupTrigger} onClick={changePopupTriggerValue} user_id={props.userID} project_id={props.projectID}/>
       </div>
     )}
 }

@@ -41,7 +41,7 @@ const MemberMaxView = (props) => {
               'Authorization': 'Bearer ' + props.token
             }
         }).then(function() {
-            alert("Mitglied wurde entfernt");
+            props.getData()
         }).catch(function(error){
             console.log(error.response.data);
         });

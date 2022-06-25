@@ -1,8 +1,5 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
-import TextArea from '../../../forms/TextArea';
-import DropDownSelect from '../../../forms/DropDownSelect'
-
 
 
 function RoomBookingPopup(props) {
@@ -11,6 +8,7 @@ function RoomBookingPopup(props) {
     const [date, setDate] = useState();
     const [from, setFrom] = useState("08:00:00");
     const [to, setTo] = useState("09:00:00");
+    const [bookings, setBookings] = useState([])
 
 
     const handleSubmit = (event) => {
@@ -36,7 +34,7 @@ function RoomBookingPopup(props) {
                 alert("Buchung erfolgreich erstellt")
             }
         })
-        
+        .catch(error => alert("Bitte überprüfe Eingaben auf Richtigkeit"))
     }
     
 
@@ -70,7 +68,23 @@ function RoomBookingPopup(props) {
                                 </div>
                             </div>
                             <div className="w-1/2 px-4">
-                                <TextArea  placeholder="Liste von Buchungen, welche noch dynamisch geladen werden müssen..."></TextArea>
+                                <div className="p-3 flex justify-center">
+                                        {
+                                            props.bookings ? 
+                                            props.bookings.map((booking, index) =>{
+                                                return (
+                                                    <>
+                                                        <div className="p-2">Start: {booking.start_time}</div>
+                                                        <div className="p-2">Ende: {booking.end_time}</div>
+                                                    </>
+                                                    
+                                                )
+                                            })
+                                            : 
+                                            ""
+                                            
+                                        }
+                                </div>
                             </div>
                         </div>
                     

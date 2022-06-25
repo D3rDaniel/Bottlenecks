@@ -35,10 +35,12 @@ function NewTaskPopup(props) {
     
 
     useEffect(() => {
-        
+        tagKeyValues = {}; memberKeyValues = {}; prioKeyValues = {}
+        console.log("preloaded_members: ", allMember)
         const urlTags = "http://127.0.0.1:8000/api/project/"+project.project_id+"/tags";
         const urlPriorities = "http://127.0.0.1:8000/api/priorities/all"
         const urlWorker = "http://127.0.0.1:8000/api/project/"+project.project_id+"/members"
+        console.log("project-id: ", project.project_id)
         //get tags
         axios.get(urlTags,{
             headers: {
@@ -73,6 +75,7 @@ function NewTaskPopup(props) {
               }
         })
         .then((res) => {
+            console.log("members in project",project.project_id,": ", res.data.members)
             res.data.members.map(member => {
                 memberKeyValues[member.id] = member.username
             })
@@ -104,7 +107,7 @@ function NewTaskPopup(props) {
        })
         .then(res => {
             if(res.status === 201){
-                alert("Task wurder erfolgreich erstellt!");
+                props.onClick()
             }else{
                 alert("Es ist etwas schief gelaufen");
             }
@@ -112,13 +115,13 @@ function NewTaskPopup(props) {
         })
         .catch(error => console.log(error))
 
-        props.onClick()
+        
         
     }
     
 
   return ( props.trigger) ? (
-    <div className="w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ">
+    <div className="w-screen h-full rounded-lg bg-gray-400/[.7] fixed ">
         <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
             
             <div className="w-full">

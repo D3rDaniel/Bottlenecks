@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import Arrow from '../../../../images/icons/arrow-black.png'
 import MaxView from './RoomsMaxView'
@@ -7,11 +7,31 @@ import BookingButton from './BookingButton'
 const RoomsMinView = (props) => {
 
     const [popupTriggerBooking, setPopupTriggerBooking] = useState(false)
+    const [roomBookings, setRoomBookings] = useState([])
     const changePopupTrigger = () => {
         props.getRoomName(props.room.title)
         props.getRoomID(props.room.id)
         props.changePopupTriggerValueBooking(!popupTriggerBooking)
     }
+    const getBookings = () =>{
+        console.log("room-id: ", props.room.id)
+        const urlBookings = "http://127.0.0.1:8000/api/room/"+props.room.id+"/bookings"; 
+
+        axios.get(urlBookings, {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + props.token
+            }
+          })
+            .then(function(response) {
+                console.log("all bookingss: ", response) 
+                setRoomBookings(response); 
+              }).catch(function(response){
+                  console.log("error: ", response)})
+    }
+    useEffect(() =>{
+        getBookings()
+    },[])
 
     const [rotate, setRotate] = useState(0);
 

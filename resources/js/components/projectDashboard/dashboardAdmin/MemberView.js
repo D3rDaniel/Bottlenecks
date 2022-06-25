@@ -20,6 +20,7 @@ const MemberView = (props) => {
         }
       })
         .then(function(response) {setIsLoaded(true);
+          console.log("res-members: ", response)
           setMembers(response.data.members);  
           },(error) =>{
             setIsLoaded(true);
@@ -47,7 +48,7 @@ const MemberView = (props) => {
                      Es sind noch keine Mitgllieder vorhanden!
                 </div>
             </div>
-            <InputField token={props.token} projectID={props.projectID}/>
+            <InputField token={props.token} projectID={props.projectID} getData={getData}/>
             </div>)
     }else {  
       return (
@@ -57,7 +58,7 @@ const MemberView = (props) => {
                 <div className="h-full w-full">
                     {loadedMembers.map((member, index) => {
                         return (
-                            <MemberMinView token={props.token} member={member} key={index}/>
+                            <MemberMinView token={props.token} member={member} key={index} getData={getData}/>
                         )
                     })}  
                 </div>

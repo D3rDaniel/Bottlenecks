@@ -9,10 +9,12 @@ import NewRoomPopup from './popup/NewRoomPopup'
 import Loading from '../../../../images/icons/loading-spinner.png'
 import RoomBookingPopup from './popup/RoomBookingPopup'
 import UserContext from '../../../store/user-context'
+import ProjectContext from '../../../store/project-context'
 
 const dashboardRooms = (props) => {
 
   const user = useContext(UserContext)
+  const project = useContext(ProjectContext)
 
   const [popupTrigger, setPopupTrigger] = useState(false)
   const [popupTriggerBooking, setPopupTriggerBooking] = useState(false)
@@ -31,6 +33,7 @@ const dashboardRooms = (props) => {
     const [filteredRooms, setFilteredRooms] = useState([]);
     const [roomName, setRoomName] = useState()
     const [roomID, setRoomID] = useState()
+    const [roomBookings, setRoomBookings] = useState([])
 
     const getData = () =>{
       setIsLoaded(false);
@@ -51,7 +54,7 @@ const dashboardRooms = (props) => {
 
     useEffect(() => {
       getData()
-    },[] );
+    },[project] );
 
     const sortElements = (event, rotate) => {
       const IDTriggeredSortElement = event.target.id
@@ -104,6 +107,10 @@ const dashboardRooms = (props) => {
     const getRoomID = (data) => {
       setRoomID(data)
     }
+    const getRoomBookings = (data) => {
+      console.log("bookings_data: ", data)
+      setRoomBookings(data)
+    }
 
       if (error) {
           return <div className="m-auto text-red font-bold">Es ist ein Fehler aufgetreten!</div> 
@@ -119,7 +126,7 @@ const dashboardRooms = (props) => {
             <h2>Keine Räume gefunden</h2>
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
           </div>
-          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID}/>
+          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID} getData={getData}/>
         </>
         )
     }else {
@@ -142,6 +149,7 @@ const dashboardRooms = (props) => {
                         getRoomName={getRoomName}
                         getRoomID={getRoomID}
                         getData={getData}
+                        getRoomBookings={getRoomBookings}
                     ></MinView>
                 )
             })
@@ -158,6 +166,7 @@ const dashboardRooms = (props) => {
                         getRoomID={getRoomID}
                         getRoomName={getRoomName}
                         getData={getData}
+                        getRoomBookings={getRoomBookings}
                     ></MinView>
                 )
             })
@@ -168,7 +177,7 @@ const dashboardRooms = (props) => {
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
         <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
-        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} roomName={roomName} roomID={roomID}/>
+        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} roomName={roomName} roomID={roomID} bookings={roomBookings}/>
     </div>
   )}
 }
