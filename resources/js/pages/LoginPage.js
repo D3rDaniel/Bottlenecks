@@ -71,7 +71,7 @@ function LoginPage() {
                     <InputField id="email" placeholder="Email" onChange={setEmail}></InputField>
                 </div>
                 <div className="mb-6">
-                    <InputField id="password" placeholder="Passwort" onChange={setPassword}></InputField>
+                    <InputField id="password" placeholder="Passwort" onChange={setPassword} type="password"></InputField>
                 </div>
                 <div className="flex items-center justify-between">
                     <Link to="/Register" className='text-blue underline'>Du hast noch keinen Account?</Link>

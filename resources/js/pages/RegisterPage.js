@@ -36,7 +36,7 @@ function RegisterPage() {
             axios.post(baseURL+'register', registrionData).then(function(response){
                 if(response.status === 201){
                     alert("Sie haben sich erfolgreich registiert!");
-                    handleLogin();
+                    navigate('/login');
                 }else alert("Fehler bei der Registrierung");
             })
         }
@@ -51,7 +51,7 @@ function RegisterPage() {
         axios.post(baseURL+'login', loginData).then(function(response){
             if(response.data.success == true) {
                 userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.bearer_token);
-                navigate('/');
+                navigate('/login');
             }
             else alert("Anmeldung fehlgeschlagen!");
         })
@@ -81,10 +81,10 @@ function RegisterPage() {
                     <InputField id="username" placeholder="Nutzername" onChange={setUserName}></InputField>
                 </div>
                 <div className="mb-2">
-                    <InputField id="password" placeholder="Passwort" onChange={setPassword}></InputField>
+                    <InputField id="password" placeholder="Passwort" onChange={setPassword} type="password"></InputField>
                 </div>
                 <div className="mb-6">
-                    <InputField id="pwd_confirm" placeholder="Passwort bestätigen" onChange={setPwdConfirm}></InputField>
+                    <InputField id="pwd_confirm" placeholder="Passwort bestätigen" onChange={setPwdConfirm} type="password"></InputField>
                 </div>
                 <div className="flex items-center justify-between">
                     <Link to="/Login" className='text-blue underline'>Du bist bereits registriert?</Link>

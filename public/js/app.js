@@ -6686,7 +6686,7 @@ function InputField(props) {
       className: "bg-gray-50 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
       onChange: handleChange,
       id: props.id,
-      type: "text",
+      type: props.type === "password" ? "password" : "text",
       placeholder: props.placeholder
     })
   });
@@ -11925,6 +11925,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -11934,14 +11935,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SignOutButton = function SignOutButton(props) {
+  console.log(props.token);
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+
   var logout = function logout() {
     var url = "http://127.0.0.1:8000/api/logout";
-    axios__WEBPACK_IMPORTED_MODULE_1___default().post(url, {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post(url, "-", {
       headers: {
+        'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
-    }).then(function (res) {
-      console.log(res);
+    }).then(function () {
+      navigate('/login');
+    })["catch"](function (response) {
+      console.log(response);
     });
   };
 
@@ -12309,7 +12316,8 @@ function LoginPage() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
           id: "password",
           placeholder: "Passwort",
-          onChange: setPassword
+          onChange: setPassword,
+          type: "password"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex items-center justify-between",
@@ -12919,7 +12927,7 @@ function RegisterPage() {
       axios__WEBPACK_IMPORTED_MODULE_3___default().post(baseURL + 'register', registrionData).then(function (response) {
         if (response.status === 201) {
           alert("Sie haben sich erfolgreich registiert!");
-          handleLogin();
+          navigate('/login');
         } else alert("Fehler bei der Registrierung");
       });
     }
@@ -12933,7 +12941,7 @@ function RegisterPage() {
     axios__WEBPACK_IMPORTED_MODULE_3___default().post(baseURL + 'login', loginData).then(function (response) {
       if (response.data.success == true) {
         userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.bearer_token);
-        navigate('/');
+        navigate('/login');
       } else alert("Anmeldung fehlgeschlagen!");
     });
   };
@@ -12988,14 +12996,16 @@ function RegisterPage() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
           id: "password",
           placeholder: "Passwort",
-          onChange: setPassword
+          onChange: setPassword,
+          type: "password"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "mb-6",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
           id: "pwd_confirm",
           placeholder: "Passwort best\xE4tigen",
-          onChange: setPwdConfirm
+          onChange: setPwdConfirm,
+          type: "password"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex items-center justify-between",
