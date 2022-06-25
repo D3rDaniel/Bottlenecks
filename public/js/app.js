@@ -8657,11 +8657,6 @@ var absoluteView = function absoluteView(props) {
         className: "font-bold",
         children: props.tasks.failed_tasks
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      children: ["Pausiert: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-        className: "font-bold",
-        children: props.tasks.paused_tasks
-      })]
     })]
   });
 };
@@ -8710,33 +8705,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var project_overview = [{
-  title: "Projekt 1",
-  description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-  due_date: "2022-06-10",
-  completed_tasks: 0,
-  failed_tasks: 1,
-  paused_tasks: 2,
-  in_progress_tasks: 2,
-  progress_percentage: 34,
-  members: [{
-    username: "Jogy",
-    pivot: {
-      can_create_tasks: "0",
-      can_assign_tasks: "0",
-      can_edit_tasks: "0",
-      can_create_tags: "0"
-    }
-  }, {
-    username: "Freddy",
-    pivot: {
-      can_create_tasks: "1",
-      can_assign_tasks: "1",
-      can_edit_tasks: "1",
-      can_create_tags: "1"
-    }
-  }]
-}];
 
 var dashboardOverView = function dashboardOverView(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
