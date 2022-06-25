@@ -17,8 +17,9 @@ class RoomPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user, int $project_id): Response|bool
+    public function viewAny(User $user,  Room $room): Response|bool
     {
+        $project_id = $room->project_id;
         return ($user->isMemberOfProject($project_id) || $user->isOwnerOfProject($project_id));
     }
 
