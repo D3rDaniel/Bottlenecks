@@ -22,7 +22,7 @@ const MemberInputField = (props) => {
                 'Authorization' : 'Bearer ' + props.token
             }
         }).then(function() {
-            alert("Mitglied hinzugefügt");
+            props.getData()
         }).catch(function(error){
             console.log(error.response.data);
             alert("Bitte nur gütlige Nutzernamen eingeben!");

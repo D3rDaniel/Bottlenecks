@@ -61,9 +61,23 @@ function DashboardTasks(props) {
         break;
       case "1":
         if(rotate){
-          orderedTasks = [...loadedTasks].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.status.title > b.status.title) ? 1: ((b.status.title > a.status.title) ? -1 : 0))
         }else{
-          orderedTasks = [...loadedTasks].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? -1: ((b.creator_user_id > a.creator_user_id) ? 1 : 0))
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.status.title > b.status.title) ? -1: ((b.status.title > a.status.title) ? 1 : 0))
+        }
+        break;
+      case "2":
+        if(rotate){
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.priority.title > b.priority.title) ? 1: ((b.priority.title > a.priority.title) ? -1 : 0))
+        }else{
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.priority.title > b.priority.title) ? -1: ((b.priority.title > a.priority.title) ? 1 : 0))
+        }
+        break;
+      case "3":
+        if(rotate){
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.due_date > b.due_date) ? 1: ((b.due_date > a.due_date) ? -1 : 0))
+        }else{
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.due_date > b.due_date) ? -1: ((b.due_date > a.due_date) ? 1 : 0))
         }
         break;
       default:
@@ -74,7 +88,13 @@ function DashboardTasks(props) {
   const filterElements = (inputValue, filtered) => {
     setFiltered(filtered)
     let filteredTasksBuffer
-    filteredTasksBuffer = [...loadedTasks].filter((task) => task.title.toLowerCase().includes(inputValue))
+    console.log("loadedTasks: ", loadedTasks)
+    filteredTasksBuffer = [...loadedTasks].filter((task) => {
+      console.log("tasks: ", task)
+      task.title.toLowerCase().includes(inputValue)
+      console.log("filtered true? ", task.title.toLowerCase().includes(inputValue))
+    })
+    console.log("filteredTaskBuffer: ", filteredTasksBuffer)
     setFilteredTasks(filteredTasksBuffer)
   }
 
@@ -116,7 +136,7 @@ function DashboardTasks(props) {
                   fullTitle = {task.title}
                   description = {task.description}
                   comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                  status = {task.status !== null? task.status.id : "kein status"}
+                  status = {task.status !== null? task.status : "kein status"}
                   prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "nicht abgeschlossen" : task.completed_date)}
                   date = {task.due_date}

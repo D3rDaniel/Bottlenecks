@@ -17,9 +17,7 @@ const dashboardTags = (props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedTags, setTags] = useState([]);
 
-
-
-    useEffect(() => {
+    const getData = () => {
       setIsLoaded(false);
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tags";
   
@@ -34,6 +32,10 @@ const dashboardTags = (props) => {
           },(error) =>{
             setIsLoaded(true);
             setError(error);})
+    }
+
+    useEffect(() => {
+      getData()
     }, []);
 
       if (error) {
@@ -49,7 +51,7 @@ const dashboardTags = (props) => {
         return (
             <div className="m-auto w-1/2">
                 <div className="text-red font-bold text-center mb-5">Keine Tags gefunden</div>
-                <Input projectID = {props.projectID} token={props.token}/>
+                <Input projectID = {props.projectID} token={props.token} getData={getData}/>
             </div>
         )
     }else {
@@ -72,7 +74,7 @@ const dashboardTags = (props) => {
                     })}
                 </div>  
             </div>
-            <Input projectID = {props.projectID} token={props.token}/>
+            <Input projectID = {props.projectID} token={props.token} getData={getData}/>
         </div>
     </div>
   )}

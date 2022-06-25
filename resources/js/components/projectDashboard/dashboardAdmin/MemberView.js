@@ -9,7 +9,7 @@ const MemberView = (props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedMembers, setMembers] = useState([]);
 
-    useEffect(() => {
+    const getData = () => {
       setIsLoaded(false);
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/members";
   
@@ -24,6 +24,9 @@ const MemberView = (props) => {
           },(error) =>{
             setIsLoaded(true);
             setError(error);})
+    }
+    useEffect(() => {
+      getData()
     }, []);
         
       if (error) {
@@ -47,7 +50,7 @@ const MemberView = (props) => {
             <InputField token={props.token} projectID={props.projectID}/>
             </div>)
     }else {  
-    return (
+      return (
         <div className="bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between overflow-auto">
             <div>
                 <div className="font-bold mt-2 ml-1">Mitglieder</div>
@@ -59,8 +62,9 @@ const MemberView = (props) => {
                     })}  
                 </div>
             </div>
-            <InputField token={props.token} projectID={props.projectID}/>
-        </div>)
+            <InputField token={props.token} projectID={props.projectID} getData={getData} />
+        </div>
+      )
     }
 }
 
