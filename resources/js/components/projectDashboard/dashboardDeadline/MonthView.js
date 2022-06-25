@@ -14,13 +14,7 @@ const MonthView = (props) => {
         let month_difference = parseInt(task_month)-(currentDate.getMonth()+1);
         let year_difference = parseInt(task_year)-currentDate.getFullYear();
 
-        //console.log("task day: " + task_day + ", current day: " + currentDate.getDate() + ", difference: " + day_difference)
-        //console.log("task month: " + task_month + ", current month: " + currentDate.getMonth() + ", difference: " + month_difference)
-        //console.log("task year: " + task_year + ", current year: " + currentDate.getFullYear() + ", difference: " + year_difference)
-
         let total_difference = day_difference + (month_difference*31) + (year_difference*12*31)
-
-        //console.log(total_difference);
 
         if(total_difference >= 8 && total_difference < 32) return true;
         else return false;
@@ -44,6 +38,7 @@ const MonthView = (props) => {
                 creator = {task.creator.username}
                 assignee = {task.assignee}
                 tag = {task.tag == null ? "keine Tag" : task.tag.title}
+                deadlineView = {true}
                 key={index}>
             </MinView>
             ) : (null))

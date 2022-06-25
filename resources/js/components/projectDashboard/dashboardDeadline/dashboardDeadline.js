@@ -6,34 +6,9 @@ import Searchbar from '../dashboardTasks/searchbar/SearchBar'
 import WeekView from './WeekView'
 import MonthView from './MonthView'
 
-const checkWorkingTasks = () => {
-    let workingTasks = [];
-
-    for(let i = 0; i < loadedTasks.length; i++){
-        if(loadedTasks[i].status.id !== 1){
-            workingTasks.push(loadedTasks[i]);
-        }
-    };
-    setTasksInWorking(workingTasks);
-}
-
-const tasks = [
-    {title: "Task1", status: "abgeschlossen", prio: "Hoch", completedDate: "06.05.2022" , date: "2022-05-09"},
-    {title: "Task2", status: "in Bearbeitung", prio: "Mittel", completedDate: "-" , date: "2022-05-09"},
-    {title: "Task3", status: "in Bearbeitung", prio: "Mittel", completedDate: "-" , date: "2022-05-31"},
-    {title: "Task4", status: "abgeschlossen", prio: "Gering", completedDate: "20.05.2022", date: "2022-05-09"},
-    {title: "Task5", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-05"},
-    {title: "Task6", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-06"},
-    {title: "Task7", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-07"},
-    {title: "Task8", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-08"},
-    {title: "Task9", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-07-07"},
-    {title: "Task10", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-07-09"},
-    {title: "Task11", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-07-09"}
-  ]
-
 const dashboardDeadline = (props) => {
 
-    const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadedTasks, setTasks] = useState([]);
 

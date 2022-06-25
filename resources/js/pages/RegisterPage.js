@@ -1,13 +1,11 @@
-import {React, useState, useContext } from 'react'
+import {React, useState } from 'react'
 import InputField from '../components/forms/InputField'
 import Logo from '../../images/logo.jpg'
 import {Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import UserContext from '../store/user-context';
 
 function RegisterPage() {
 
-    const userCtx = useContext(UserContext);
     const navigate = useNavigate();
     const baseURL = "http://127.0.0.1:8000/api/"
 
@@ -40,22 +38,6 @@ function RegisterPage() {
                 }else alert("Fehler bei der Registrierung");
             })
         }
-    }
-
-    const handleLogin = () => {
-        const loginData = {
-            "email" : email,
-            "password" : password
-        }
-    
-        axios.post(baseURL+'login', loginData).then(function(response){
-            if(response.data.success == true) {
-                userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.bearer_token);
-                navigate('/login');
-            }
-            else alert("Anmeldung fehlgeschlagen!");
-        })
-
     }
 
   return (
