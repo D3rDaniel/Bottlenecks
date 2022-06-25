@@ -68,22 +68,33 @@ function RoomBookingPopup(props) {
                                 </div>
                             </div>
                             <div className="w-1/2 px-4">
-                                <div className="p-3 flex justify-center">
+                                <div className="p-3">
+                                
+                                    <div className="px-2 text-lg"></div>
+                                    <div className="flex justify-center">
+                                        <div className="items-center align-center text-center p-1">Datum</div>
+                                        <div className="items-center align-center text-center p-1">Von</div>
+                                        <div className="items-center align-center text-center p-1">Bis</div>
+                                    </div>
+                                    <div className="flex justify-center">
                                         {
-                                            props.bookings ? 
-                                            props.bookings.map((booking, index) =>{
-                                                return (
-                                                    <>
-                                                        <div className="p-2">Start: {booking.start_time}</div>
-                                                        <div className="p-2">Ende: {booking.end_time}</div>
-                                                    </>
-                                                    
-                                                )
-                                            })
-                                            : 
-                                            ""
-                                            
-                                        }
+                                            //konnte noch nicht getestet werden, da project/roomid/room-api internal server error aufweist
+                                                props.bookings ? 
+                                                props.bookings.map((booking, index) =>{
+                                                    return (
+                                                        <>
+                                                            <div className="items-center align-center text-center p-1">{booking.date}</div>
+                                                            <div className="items-center align-center text-center p-1">{booking.start_time}</div>
+                                                            <div className="items-center align-center text-center p-1">{booking.end_time}</div>
+                                                        </>
+                                                        
+                                                    )
+                                                })
+                                                : 
+                                                ""
+                                                
+                                            }
+                                    </div>
                                 </div>
                             </div>
                         </div>

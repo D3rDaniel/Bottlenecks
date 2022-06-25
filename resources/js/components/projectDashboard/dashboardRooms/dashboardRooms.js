@@ -47,7 +47,8 @@ const dashboardRooms = (props) => {
       })
         .then(function(response) {setIsLoaded(true);
           setRooms(response.data["rooms"]); 
-          }).catch(function(response){
+          }).catch(function(error){
+              console.log("error of getrooms: ", error)
               setIsLoaded(true)
               setError(true)})
     }

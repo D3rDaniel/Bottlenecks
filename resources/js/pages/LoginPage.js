@@ -14,6 +14,7 @@ function LoginPage() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState(false)
 
     function checkInput(){
         let emailIsValid = String(email)
@@ -44,7 +45,20 @@ function LoginPage() {
                     navigate('/');
                 }
                 else alert("Anmeldung fehlgeschlagen!");
-            }).catch(function (error) {if (error.response) alert("Anmeldung fehlgeschlagen, es wurde kein Nutzer mit dieser E-Mail gefunden")})
+            }).catch(function (error) {
+                if (error.response) {
+                    console.log(error.response)
+                    if(error.response.status == 401){
+                        setError(true)
+                        alert("Anmeldung fehlgeschlagen, falsches Password.")
+                    } 
+                    if(error.response.status == 422) {
+                        setError(true)
+                        alert("Anmeldung fehlgeschlagen, kein Benutzer mit dieser Email gefunden.")
+                    }
+                }
+                
+            })
         }
         else alert("Eingabe ist ungültig!");
     }
@@ -60,7 +74,7 @@ function LoginPage() {
                     <InputField id="email" placeholder="Email" onChange={setEmail}></InputField>
                 </div>
                 <div className="mb-6">
-                    <InputField id="password" placeholder="Passwort" onChange={setPassword} type="password"></InputField>
+                    <InputField error={error} id="password" placeholder="Passwort" onChange={setPassword} type="password"></InputField>
                 </div>
                 <div className="flex items-center justify-between">
                     <Link to="/Register" className='text-blue underline'>Du hast noch keinen Account?</Link>
