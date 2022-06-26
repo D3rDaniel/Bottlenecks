@@ -35,22 +35,25 @@ class BookingController extends Controller
         if($room->opened_on_weekends==0&&$date->isWeekend()){
             return response()->json(['success'=>false,'message' => 'This room is not open at the weekend'], 422);
         }
-
         //check if the timeslot is available
-        $timeslot = CarbonPeriod::create($data['start_time'], $data['end_time']); //timeslot of new booking
+        $timeslothours = CarbonPeriod::create($data['start_time'], $data['end_time']); //timeslot of new booking
         //get the opening hours of the room
         $room = Room::find($data['room_id']);
         $room_opening_hours = CarbonPeriod::create($room->opening_time, $room->closing_time);
         //check if the timeslot of the booking is within the timeslot of the opening_hours
-        if (!$timeslot->overlaps($room_opening_hours)) {
+        if (!$timeslothours->overlaps($room_opening_hours)) {
             return response()->json(['success'=>false,'message' => 'The timeslot of the booking is not within the time range of the opening hours'], 422);
         }
-
+        $starttimeslot = $data['reservation_date'].$data['start_time'];
+        $endtimeslot = $data['reservation_date'].$data['end_time'];
+        $timeslot = CarbonPeriod::create($starttimeslot,$endtimeslot);
         //Check if the timeslot is available
         $bookings = Booking::where('room_id', $data['room_id'])->get();
         if(!$bookings->isEmpty()){
             foreach($bookings as $booking){
-                $booking_timeslot = CarbonPeriod::create($booking->start_time, $booking->end_time);
+                $bookingstarttimeslot = $booking->reservation_date.$booking->start_time;
+                $bookingendtimeslot = $booking->reservation_date.$booking->end_time;
+                $booking_timeslot = CarbonPeriod::create($bookingstarttimeslot,$bookingendtimeslot);
                 if($timeslot->overlaps($booking_timeslot)){
                     return response()->json(['success'=>false,'message' => 'This timeslot is not available'], 422);
                 }

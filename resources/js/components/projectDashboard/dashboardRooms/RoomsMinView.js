@@ -13,10 +13,9 @@ const RoomsMinView = (props) => {
         props.getRoomID(props.room.id)
         props.changePopupTriggerValueBooking(!popupTriggerBooking)
         //laden der Buchungen pro Raum und Rückgabewert wird an Parent dashboardRooms übergeben, damit an PopuP RoomBooking übergebn werden kann
-        props.getRoomBookings(getBookings())
+        props.getRoomBookings(roomBookings)
     }
     const getBookings = () =>{
-        console.log("room-id: ", props.room.id)
         const urlBookings = "http://127.0.0.1:8000/api/room/"+props.room.id+"/bookings"; 
 
         axios.get(urlBookings, {
@@ -26,8 +25,7 @@ const RoomsMinView = (props) => {
             }
           })
             .then(function(response) {
-                console.log("all bookingss: ", response) 
-                setRoomBookings(response); 
+                setRoomBookings(response.data.bookings); 
               }).catch(function(response){
                   console.log("error: ", response)})
     }
