@@ -7,7 +7,9 @@ const MemberMaxView = (props) => {
     const [createTasks , setCreateTasks] = useState(props.member.pivot.can_create_tasks);
     const [editTasks , setEditTasks] = useState(props.member.pivot.can_edit_tasks);
     const [createTags , setCreateTags] = useState(props.member.pivot.can_create_tags);
- 
+    
+    const reRender =  () => {props.onClick();}
+
     const handleCheckbox = (value, right) =>{
         value.target.checked === true ? value = 1 : value = 0;
         
@@ -30,7 +32,6 @@ const MemberMaxView = (props) => {
               'Accept': 'application/json',
               'Authorization': 'Bearer ' + props.token
             }
-        }).then(function(response){
         }).catch(function(error){console.log(error);})
     }
 
@@ -41,7 +42,7 @@ const MemberMaxView = (props) => {
               'Authorization': 'Bearer ' + props.token
             }
         }).then(function() {
-            props.getData()
+            props.onClick();
         }).catch(function(error){
             console.log(error.response.data);
         });
@@ -65,8 +66,9 @@ const MemberMaxView = (props) => {
                     <label htmlFor="create Tag" className="ml-2">Tag erstellen</label>  
                 </div>    
             </div>
-            <div className="flex justify-end h-8 mt-5" onClick={deleteMember}>
-                <button className="text-white  mx-2 w-1/3 bg-red border border-black rounded-md">entfernen</button>
+            <div className="flex justify-between h-8 mt-5">
+                <button className="text-white mx-2 w-1/3 bg-blue border border-black rounded-md" onClick={reRender}>sichern</button>
+                <button className="text-white mx-2 w-1/3 bg-red border border-black rounded-md" onClick={deleteMember}>entfernen</button>
             </div> 
         </div>
     </div>

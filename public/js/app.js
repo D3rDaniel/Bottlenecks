@@ -7097,9 +7097,9 @@ var MemberInputField = function MemberInputField(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (response) {
-      props.getData();
+      props.onClick();
     })["catch"](function (error) {
-      console.log(error);
+      console.log(error.response.data);
       alert("Bitte nur gütlige Nutzernamen eingeben!");
     });
   };
@@ -7179,6 +7179,10 @@ var MemberMaxView = function MemberMaxView(props) {
       createTags = _useState6[0],
       setCreateTags = _useState6[1];
 
+  var reRender = function reRender() {
+    props.onClick();
+  };
+
   var handleCheckbox = function handleCheckbox(value, right) {
     value.target.checked === true ? value = 1 : value = 0;
     var changeData = {};
@@ -7211,7 +7215,7 @@ var MemberMaxView = function MemberMaxView(props) {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
-    }).then(function (response) {})["catch"](function (error) {
+    })["catch"](function (error) {
       console.log(error);
     });
   };
@@ -7223,7 +7227,7 @@ var MemberMaxView = function MemberMaxView(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function () {
-      props.getData();
+      props.onClick();
     })["catch"](function (error) {
       console.log(error.response.data);
     });
@@ -7280,13 +7284,17 @@ var MemberMaxView = function MemberMaxView(props) {
             children: "Tag erstellen"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "flex justify-end h-8 mt-5",
-        onClick: deleteMember,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-          className: "text-white  mx-2 w-1/3 bg-red border border-black rounded-md",
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "flex justify-between h-8 mt-5",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          className: "text-white mx-2 w-1/3 bg-blue border border-black rounded-md",
+          onClick: reRender,
+          children: "sichern"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          className: "text-white mx-2 w-1/3 bg-red border border-black rounded-md",
+          onClick: deleteMember,
           children: "entfernen"
-        })
+        })]
       })]
     })]
   });
@@ -7358,7 +7366,7 @@ var MemberMinView = function MemberMinView(props) {
     }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_MemberMaxView__WEBPACK_IMPORTED_MODULE_2__["default"], {
       member: props.member,
       token: props.token,
-      getData: props.getData
+      onClick: props.onClick
     }) : null]
   });
 };
@@ -7422,7 +7430,16 @@ var MemberView = function MemberView(props) {
       loadedMembers = _useState6[0],
       setMembers = _useState6[1];
 
-  var getData = function getData() {
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      reRenderMembers = _useState8[0],
+      setReRenderMembers = _useState8[1];
+
+  var reRender = function reRender() {
+    reRenderMembers ? setReRenderMembers(false) : setReRenderMembers(true);
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/members";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
@@ -7432,17 +7449,12 @@ var MemberView = function MemberView(props) {
       }
     }).then(function (response) {
       setIsLoaded(true);
-      console.log("res-members: ", response);
       setMembers(response.data.members);
     }, function (error) {
       setIsLoaded(true);
       setError(error);
     });
-  };
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getData();
-  }, []);
+  }, [reRenderMembers]);
 
   if (error) {
     errormessage = error.message;
@@ -7493,14 +7505,14 @@ var MemberView = function MemberView(props) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_MemberMinView__WEBPACK_IMPORTED_MODULE_1__["default"], {
               token: props.token,
               member: member,
-              getData: getData
+              onClick: reRender
             }, index);
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_MemberInputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
         token: props.token,
         projectID: props.projectID,
-        getData: getData
+        onClick: reRender
       })]
     });
   }
