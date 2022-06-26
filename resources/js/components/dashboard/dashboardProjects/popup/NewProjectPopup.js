@@ -39,6 +39,7 @@ function NewProjectPopup(props) {
                 alert("Projekt wurder erfolgreich erstellt!");
                 props.onClick()
                 props.getData()
+                props.refresh()
             }else{
                 alert("Es ist etwas schief gelaufen");
             }

@@ -4840,36 +4840,42 @@ function DashboardProjects(props) {
       popupTrigger = _useState2[0],
       setPopupTrigger = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      refresh = _useState4[0],
+      setRefresh = _useState4[1];
+
   var changePopupTriggerValue = function changePopupTriggerValue() {
     setPopupTrigger(!popupTrigger);
   };
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      error = _useState4[0],
-      setError = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      isLoaded = _useState6[0],
-      setIsLoaded = _useState6[1];
+      error = _useState6[0],
+      setError = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      loadedProjects = _useState8[0],
-      setProjects = _useState8[1];
+      isLoaded = _useState8[0],
+      setIsLoaded = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      filtered = _useState10[0],
-      setFiltered = _useState10[1];
+      loadedProjects = _useState10[0],
+      setProjects = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      filteredProjects = _useState12[0],
-      setFilteredProjects = _useState12[1];
+      filtered = _useState12[0],
+      setFiltered = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      filteredProjects = _useState14[0],
+      setFilteredProjects = _useState14[1];
 
   var getData = function getData() {
+    setRefresh(false);
     setIsLoaded(false);
     var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/projects";
     axios__WEBPACK_IMPORTED_MODULE_6___default().get(url, {
@@ -4888,7 +4894,7 @@ function DashboardProjects(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getData();
-  }, []);
+  }, [refresh]);
 
   var sortElements = function sortElements(event, rotate) {
     var IDTriggeredSortElement = event.target.id;
@@ -5049,6 +5055,9 @@ function DashboardProjects(props) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_popup_NewProjectPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         trigger: popupTrigger,
+        refresh: function refresh() {
+          setRefresh(true);
+        },
         onClick: changePopupTriggerValue,
         token: props.token,
         getData: getData
@@ -5317,6 +5326,7 @@ function NewProjectPopup(props) {
         alert("Projekt wurder erfolgreich erstellt!");
         props.onClick();
         props.getData();
+        props.refresh();
       } else {
         alert("Es ist etwas schief gelaufen");
       }
@@ -7488,8 +7498,7 @@ var MemberView = function MemberView(props) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_MemberInputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
         token: props.token,
-        projectID: props.projectID,
-        getData: getData
+        projectID: props.projectID
       })]
     });
   } else {
@@ -11348,7 +11357,9 @@ function NewTaskPopup(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      res.data.members.map(function (member) {
+      var members = res.data.members;
+      members.push(res.data.project_creator);
+      members.map(function (member) {
         memberKeyValues[member.id] = member.username;
       });
       setAllMember(Object.values(memberKeyValues));
