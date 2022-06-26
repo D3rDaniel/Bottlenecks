@@ -20,6 +20,7 @@ function RoomBookingPopup(props) {
             start_time: from+":00",
             end_time:to+":00"
         }
+        console.log("übergabe booking- date: ", booking)
        const url = "http://127.0.0.1:8000/api/bookings"; 
        axios.post(url, booking, {
         headers:{
@@ -32,6 +33,9 @@ function RoomBookingPopup(props) {
             if(res.status == 201){
                 props.onClick()
                 alert("Buchung erfolgreich erstellt")
+            }
+            else{
+                alert("Buchung konnte nicht erstellt werden, bitte gleiche die Termine ab. Doppelbuchungen sind nicht möglich")
             }
         })
         .catch(error => alert("Bitte überprüfe Eingaben auf Richtigkeit"))
@@ -68,25 +72,25 @@ function RoomBookingPopup(props) {
                                 </div>
                             </div>
                             <div className="w-1/2 px-4">
-                                <div className="p-3">
+                                <div className="p-3 border-2 rounded-xl">
                                 
-                                    <div className="px-2 text-lg"></div>
-                                    <div className="flex justify-center">
+                                    <div className="px-2 text-lg">Vorhandene Buchungen</div>
+                                    <div className="flex justify-between p-1">
                                         <div className="items-center align-center text-center p-1">Datum</div>
                                         <div className="items-center align-center text-center p-1">Von</div>
                                         <div className="items-center align-center text-center p-1">Bis</div>
                                     </div>
-                                    <div className="flex justify-center">
+                                    <div className="p-1">
                                         {
                                             //konnte noch nicht getestet werden, da project/roomid/room-api internal server error aufweist
                                                 props.bookings ? 
                                                 props.bookings.map((booking, index) =>{
                                                     return (
-                                                        <>
-                                                            <div className="items-center align-center text-center p-1">{booking.date}</div>
-                                                            <div className="items-center align-center text-center p-1">{booking.start_time}</div>
-                                                            <div className="items-center align-center text-center p-1">{booking.end_time}</div>
-                                                        </>
+                                                        <div key={index} className="flex justify-between">
+                                                            <div  className="items-center align-center text-center p-1">{booking.reservation_date.substring(0,10)}</div>
+                                                            <div  className="items-center align-center text-center p-1">{booking.start_time}</div>
+                                                            <div  className="items-center align-center text-center p-1">{booking.end_time}</div>
+                                                        </div>
                                                         
                                                     )
                                                 })

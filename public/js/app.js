@@ -9124,11 +9124,12 @@ var RoomsMinView = function RoomsMinView(props) {
   var changePopupTrigger = function changePopupTrigger() {
     props.getRoomName(props.room.title);
     props.getRoomID(props.room.id);
-    props.changePopupTriggerValueBooking(!popupTriggerBooking);
+    props.changePopupTriggerValueBooking(!popupTriggerBooking); //laden der Buchungen pro Raum und Rückgabewert wird an Parent dashboardRooms übergeben, damit an PopuP RoomBooking übergebn werden kann
+
+    props.getRoomBookings(roomBookings);
   };
 
   var getBookings = function getBookings() {
-    console.log("room-id: ", props.room.id);
     var urlBookings = "http://127.0.0.1:8000/api/room/" + props.room.id + "/bookings";
     axios.get(urlBookings, {
       headers: {
@@ -9136,8 +9137,7 @@ var RoomsMinView = function RoomsMinView(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (response) {
-      console.log("all bookingss: ", response);
-      setRoomBookings(response);
+      setRoomBookings(response.data.bookings);
     })["catch"](function (response) {
       console.log("error: ", response);
     });
@@ -9821,7 +9821,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function RoomBookingPopup(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
       _useState2 = _slicedToArray(_useState, 2),
@@ -9852,6 +9851,7 @@ function RoomBookingPopup(props) {
       start_time: from + ":00",
       end_time: to + ":00"
     };
+    console.log("übergabe booking- date: ", booking);
     var url = "http://127.0.0.1:8000/api/bookings";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, booking, {
       headers: {
@@ -9864,6 +9864,8 @@ function RoomBookingPopup(props) {
       if (res.status == 201) {
         props.onClick();
         alert("Buchung erfolgreich erstellt");
+      } else {
+        alert("Buchung konnte nicht erstellt werden, bitte gleiche die Termine ab. Doppelbuchungen sind nicht möglich");
       }
     })["catch"](function (error) {
       return alert("Bitte überprüfe Eingaben auf Richtigkeit");
@@ -9937,11 +9939,12 @@ function RoomBookingPopup(props) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
               className: "w-1/2 px-4",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                className: "p-3",
+                className: "p-3 border-2 rounded-xl",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "px-2 text-lg"
+                  className: "px-2 text-lg",
+                  children: "Vorhandene Buchungen"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  className: "flex justify-center",
+                  className: "flex justify-between p-1",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                     className: "items-center align-center text-center p-1",
                     children: "Datum"
@@ -9953,13 +9956,14 @@ function RoomBookingPopup(props) {
                     children: "Bis"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "flex justify-center",
+                  className: "p-1",
                   children: //konnte noch nicht getestet werden, da project/roomid/room-api internal server error aufweist
                   props.bookings ? props.bookings.map(function (booking, index) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                      className: "flex justify-between",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                         className: "items-center align-center text-center p-1",
-                        children: booking.date
+                        children: booking.reservation_date.substring(0, 10)
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                         className: "items-center align-center text-center p-1",
                         children: booking.start_time
@@ -9967,7 +9971,7 @@ function RoomBookingPopup(props) {
                         className: "items-center align-center text-center p-1",
                         children: booking.end_time
                       })]
-                    });
+                    }, index);
                   }) : ""
                 })]
               })
