@@ -73,7 +73,9 @@ function NewTaskPopup(props) {
               }
         })
         .then((res) => {
-            res.data.members.map(member => {
+            let members = res.data.members
+            members.push(res.data.project_creator)
+            members.map(member => {
                 memberKeyValues[member.id] = member.username
             })
             setAllMember(Object.values(memberKeyValues))

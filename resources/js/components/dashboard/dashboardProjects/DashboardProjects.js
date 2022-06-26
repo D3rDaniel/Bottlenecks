@@ -14,6 +14,7 @@ const projects = [
 
 function DashboardProjects (props) {
   const [popupTrigger, setPopupTrigger] = useState(false)
+  const [refresh,setRefresh] = useState(false)
 
   const changePopupTriggerValue = () => {setPopupTrigger(!popupTrigger);}
 
@@ -24,6 +25,7 @@ function DashboardProjects (props) {
   const [filteredProjects, setFilteredProjects] = useState([]);
 
   const getData = () =>{
+    setRefresh(false)
     setIsLoaded(false);
     const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/projects";
 
@@ -42,7 +44,7 @@ function DashboardProjects (props) {
 
     useEffect(() => {
         getData()
-      }, []);
+      }, [refresh]);
       
       
       const sortElements = (event, rotate) => {
@@ -167,7 +169,7 @@ function DashboardProjects (props) {
           <div className="flex justify-end">
             <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
           </div>
-          <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token} getData={getData}/>
+          <NewProjectPopup trigger={popupTrigger} refresh={function(){setRefresh(true)}} onClick={changePopupTriggerValue} token={props.token} getData={getData}/>
         </div>
       )
     }

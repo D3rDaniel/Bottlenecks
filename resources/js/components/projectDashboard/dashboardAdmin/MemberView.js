@@ -47,7 +47,7 @@ const MemberView = (props) => {
                      Es sind noch keine Mitgllieder vorhanden!
                 </div>
             </div>
-            <InputField token={props.token} projectID={props.projectID} getData={getData}/>
+            <InputField token={props.token} projectID={props.projectID}/>
             </div>)
     }else {  
       return (
