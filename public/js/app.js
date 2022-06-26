@@ -9124,7 +9124,9 @@ var RoomsMinView = function RoomsMinView(props) {
   var changePopupTrigger = function changePopupTrigger() {
     props.getRoomName(props.room.title);
     props.getRoomID(props.room.id);
-    props.changePopupTriggerValueBooking(!popupTriggerBooking);
+    props.changePopupTriggerValueBooking(!popupTriggerBooking); //laden der Buchungen pro Raum und Rückgabewert wird an Parent dashboardRooms übergeben, damit an PopuP RoomBooking übergebn werden kann
+
+    props.getRoomBookings(getBookings());
   };
 
   var getBookings = function getBookings() {
@@ -9864,6 +9866,8 @@ function RoomBookingPopup(props) {
       if (res.status == 201) {
         props.onClick();
         alert("Buchung erfolgreich erstellt");
+      } else {
+        alert("Buchung konnte nicht erstellt werden, bitte gleiche die Termine ab. Doppelbuchungen sind nicht möglich");
       }
     })["catch"](function (error) {
       return alert("Bitte überprüfe Eingaben auf Richtigkeit");

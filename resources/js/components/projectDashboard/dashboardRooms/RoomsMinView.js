@@ -12,6 +12,8 @@ const RoomsMinView = (props) => {
         props.getRoomName(props.room.title)
         props.getRoomID(props.room.id)
         props.changePopupTriggerValueBooking(!popupTriggerBooking)
+        //laden der Buchungen pro Raum und Rückgabewert wird an Parent dashboardRooms übergeben, damit an PopuP RoomBooking übergebn werden kann
+        props.getRoomBookings(getBookings())
     }
     const getBookings = () =>{
         console.log("room-id: ", props.room.id)

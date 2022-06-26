@@ -33,6 +33,9 @@ function RoomBookingPopup(props) {
                 props.onClick()
                 alert("Buchung erfolgreich erstellt")
             }
+            else{
+                alert("Buchung konnte nicht erstellt werden, bitte gleiche die Termine ab. Doppelbuchungen sind nicht möglich")
+            }
         })
         .catch(error => alert("Bitte überprüfe Eingaben auf Richtigkeit"))
     }
