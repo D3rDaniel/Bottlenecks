@@ -55,7 +55,8 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
 
 //User
     Route::apiResource('user', \App\Http\Controllers\API\UserController::class);
-    Route::put('/user/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
+    Route::put('/user', [\App\Http\Controllers\API\UserController::class, 'update']);
+    Route::delete('/user', [\App\Http\Controllers\API\UserController::class, 'destroy']);
     Route::get('/user/tasks/{slug}',[\App\Http\Controllers\API\TaskUserController::class,'getTasks']);
 
 //Room
