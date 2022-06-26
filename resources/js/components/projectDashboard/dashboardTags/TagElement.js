@@ -13,7 +13,7 @@ const TagElement = (props) => {
       }
      })
     .then(function(response) {
-       alert("Tag wurde erfolgreich entfernt");
+       props.refresh();
     }).catch(function(response){
         console.log(response);
     })

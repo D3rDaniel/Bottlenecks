@@ -34,8 +34,10 @@ const dashboardRooms = (props) => {
     const [roomName, setRoomName] = useState()
     const [roomID, setRoomID] = useState()
     const [roomBookings, setRoomBookings] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
     const getData = () =>{
+      setRefresh(false)
       setIsLoaded(false);
       const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
   
@@ -55,7 +57,7 @@ const dashboardRooms = (props) => {
 
     useEffect(() => {
       getData()
-    },[project] );
+    },[project, refresh] );
 
     const sortElements = (event, rotate) => {
       const IDTriggeredSortElement = event.target.id
@@ -177,7 +179,7 @@ const dashboardRooms = (props) => {
         <div className="w-full flex justify-end">
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
+        <NewRoomPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} />
         <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} roomName={roomName} roomID={roomID} bookings={roomBookings}/>
     </div>
   )}

@@ -22,7 +22,7 @@ const TagInputField = (props) => {
       }
      })
     .then(function(response) {
-        props.getData()
+      props.refresh();
     }).catch(function(response){
       alert("Etwas ist schief gelaufen, versuche es erneut")
     })

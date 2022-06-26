@@ -37,6 +37,7 @@ function TaskMinimumView (props) {
         .then(res => {
             if(res.status == 201) alert("Task erfolgreich abgeschlossen")
             props.onClick() //rerender parent-component
+            props.refresh();
         })
         .catch(error => console.log("error: ", error))  
     }
@@ -59,30 +60,29 @@ function TaskMinimumView (props) {
 
             <label className="w-1/5">{props.date}</label>
 
-            <div  className="flex">
+            <div  className="flex ml-auto">
             {   
-               // props.deadlineView === false ?
-                    props.status.id == 1 ? 
+                props.view == "TaskView" ?
+                    (props.status.id == 1 ? 
                     <>
-                    <button className="bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Wieder Aufnehmen</button>
-                    <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
+                    <button className="bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Rückgängig</button>
                     </>
                     :
                     props.status.id == 2 ?
                         <>
                         <button className="bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={setPopupTrigger}>Abschließen</button>
-                        <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
                         </>
                         :
                         <>
-                        <button className="bg-orange-400 w-40 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Wieder Aufnehmen</button>
-                        <img src={Arrow} alt="maxView" className={`h-7 w-7 mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
-                        </>
-               // : null    
+                        <button className="bg-orange-400 w-40 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Rückgängig</button>
+                        </>)
+                    : null    
         }
+                <img src={Arrow} alt="maxView" className={`h-7 w-7 ml-auto mr-3 mt-1 hover:cursor-pointer ${rotate ? "rotate-180" : "rotate-0"}`} onClick={rotateArrow}></img> 
+
             </div>
         </div>
-        {rotate ? <TaskMaximumView title={props.fullTitle} description={props.description} comment={props.comment} assignee={props.assignee} creator={props.creator} updated_at={props.updated_at} tag={props.tag} status={props.status} token={props.token} id={props.id} onClick={props.onClick}></TaskMaximumView> : null}
+        {rotate ? <TaskMaximumView view={props.view} refresh={props.refresh} title={props.fullTitle} description={props.description} comment={props.comment} assignee={props.assignee} creator={props.creator} updated_at={props.updated_at} tag={props.tag} status={props.status} token={props.token} id={props.id} onClick={props.onClick}></TaskMaximumView> : null}
     </div>
     
   )

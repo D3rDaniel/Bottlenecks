@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import MinView from '../dashboardTasks/TaskMinimumView'
 
@@ -21,10 +21,6 @@ const WeekView = (props) => {
         else return false;
     }
 
-    useEffect( () => {
-        currentDate.setDate(currentDate.getDate()+7)
-    }, [])
-
   return (
     <div className="w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl z-0">
         <div className="mt-2 ml-5 font-bold">Endet in einer Woche:</div>
@@ -44,7 +40,9 @@ const WeekView = (props) => {
                 assignee = {task.assignee.username}
                 tag = {task.tag == null ? "keine Tag" : task.tag.title}
                 deadlineView = {true}
-                key={index}>
+                key={index}
+                view="DeadlineView"
+                >
             </MinView>
             ) : (null))
         })}

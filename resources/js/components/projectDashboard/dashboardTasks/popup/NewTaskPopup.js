@@ -107,6 +107,7 @@ function NewTaskPopup(props) {
         .then(res => {
             if(res.status === 201){
                 props.onClick()
+                props.refresh()
             }else{
                 alert("Es ist etwas schief gelaufen");
             }

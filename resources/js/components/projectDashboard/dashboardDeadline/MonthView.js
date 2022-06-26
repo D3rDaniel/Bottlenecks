@@ -1,4 +1,4 @@
-import React , {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import MinView from '../dashboardTasks/TaskMinimumView'
 
@@ -14,7 +14,9 @@ const MonthView = (props) => {
         let month_difference = parseInt(task_month)-(currentDate.getMonth()+1);
         let year_difference = parseInt(task_year)-currentDate.getFullYear();
 
+        if(year_difference < -1 || year_difference > 1) return false
         let total_difference = day_difference + (month_difference*31) + (year_difference*12*31)
+        console.log(total_difference);
 
         if(total_difference >= 8 && total_difference < 32) return true;
         else return false;
@@ -39,7 +41,9 @@ const MonthView = (props) => {
                 assignee = {task.assignee}
                 tag = {task.tag == null ? "keine Tag" : task.tag.title}
                 deadlineView = {true}
-                key={index}>
+                key={index}
+                view="DeadlineView"
+                >
             </MinView>
             ) : (null))
         })}

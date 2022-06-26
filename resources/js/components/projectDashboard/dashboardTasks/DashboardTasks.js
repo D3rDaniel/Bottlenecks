@@ -18,7 +18,6 @@ function DashboardTasks(props) {
   const [popupTrigger, setPopupTrigger] = useState(false)
   const changePopupTriggerValue = () => {
     setPopupTrigger(!popupTrigger);
-    getTasks();
   }
 
   const getTasks = () =>{
@@ -44,10 +43,11 @@ function DashboardTasks(props) {
   const [loadedTasks, setTasks] = useState([]);
   const [filtered, setFiltered] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [refresh,setRefresh] = useState(false)
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [refresh]);
 
   const sortElements = (event, rotate) => {
     const IDTriggeredSortElement = event.target.id
@@ -131,7 +131,7 @@ function DashboardTasks(props) {
                   title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
                   fullTitle = {task.title}
                   description = {task.description}
-                  comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
+                  comment = {(task.completion_comment === null ? "-ohne Kommentar-" : task.completion_comment)}
                   status = {task.status !== null? task.status : "kein status"}
                   prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "nicht abgeschlossen" : task.completed_date)}
@@ -139,9 +139,11 @@ function DashboardTasks(props) {
                   updated_at = {task.updated_at.substring(0,10)}
                   creator = {task.creator.username}
                   assignee = {task.assignee}
-                  tag = {task.tag === null ? "kein Tag" : task.tag.title}
+                  tag = {task.tag === null ? "-kein Tag-" : task.tag.title}
                   key={index}
-                  token={props.token}>
+                  token={props.token}
+                  refresh={function(){setRefresh(true)}}
+                  >
                 </TaskMinimumView>
               )
             })
@@ -164,7 +166,10 @@ function DashboardTasks(props) {
                   assignee = {task.assignee}
                   tag = {task.tag === null ? "keine Tag" : task.tag.title}
                   key={index}
-                  token={props.token}>
+                  token={props.token}
+                  refresh={function(){setRefresh(true)}}
+                  view="TaskView"
+                  >
                 </TaskMinimumView>
               )
             })
@@ -175,7 +180,7 @@ function DashboardTasks(props) {
           <div className="w-full flex justify-end">
             <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        <NewTaskPopup token={props.token} trigger={popupTrigger} onClick={changePopupTriggerValue} user_id={props.userID} project_id={props.projectID}/>
+        <NewTaskPopup refresh={function(){setRefresh(true)}} token={props.token} trigger={popupTrigger} onClick={changePopupTriggerValue} user_id={props.userID} project_id={props.projectID}/>
       </div>
     )}
 }
