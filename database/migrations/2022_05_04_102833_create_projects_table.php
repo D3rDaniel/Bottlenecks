@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('description',3000);
 
             $table->unsignedBigInteger('creator_user_id');
-            $table->foreign('creator_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('creator_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->date('due_date');
             $table->date('completion_date')->nullable();
