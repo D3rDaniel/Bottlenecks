@@ -40,9 +40,12 @@ class ProjectUserController extends Controller
         }
         $members = $project->members()->get();
 
+        $creator = $project->creator()->get()->first();
+
         $res = [
             'success'=>true,
             'project_id'=>$project->id,
+            'project_creator'=>$creator,
             'members'=>$members
         ];
 
