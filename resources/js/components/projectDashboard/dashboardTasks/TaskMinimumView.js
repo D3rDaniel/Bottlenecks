@@ -35,8 +35,7 @@ function TaskMinimumView (props) {
             }
         })
         .then(res => {
-            if(res.status == 201) alert("Task erfolgreich abgeschlossen")
-            props.onClick() //rerender parent-component
+            console.log(props.refresh)
             props.refresh();
         })
         .catch(error => console.log("error: ", error))  
@@ -50,7 +49,7 @@ function TaskMinimumView (props) {
 
   return (
     <div className="my-5 ml-8 mr-8">
-        <CompletionPopup id={props.id} deadline={props.date} trigger={popupTrigger} close={function(){setPopupTrigger(false)}}/>
+        <CompletionPopup id={props.id} deadline={props.date} refresh={props.refresh} trigger={popupTrigger} close={function(){setPopupTrigger(false)}}/>
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
             <label className="ml-12 w-1/5">{props.title}</label>
 
@@ -74,7 +73,7 @@ function TaskMinimumView (props) {
                         </>
                         :
                         <>
-                        <button className="bg-orange-400 w-40 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Rückgängig</button>
+                        <button className="bg-orange-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg" onClick={openAgain}>Rückgängig</button>
                         </>)
                     : null    
         }

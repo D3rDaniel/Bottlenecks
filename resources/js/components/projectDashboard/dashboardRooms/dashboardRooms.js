@@ -23,7 +23,6 @@ const dashboardRooms = (props) => {
   }
   const changePopupTriggerValueBooking = () => {
     setPopupTriggerBooking(!popupTriggerBooking);
-    if(popupTriggerBooking) getData() //true bs async
   }
 
     const [error, setError] = useState(null);
@@ -129,7 +128,7 @@ const dashboardRooms = (props) => {
             <h2>Keine Räume gefunden</h2>
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
           </div>
-          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID} getData={getData}/>
+          <NewRoomPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID} getData={getData}/>
         </>
         )
     }else {

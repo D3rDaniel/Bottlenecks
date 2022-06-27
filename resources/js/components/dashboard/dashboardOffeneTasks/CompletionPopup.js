@@ -25,7 +25,7 @@ const CompletionPopup = (props) => {
               'Authorization': 'Bearer ' + userCtx.user_token
             }})
         .then(function(response) {
-          if(response.data.success == true) {alert("Task wurde erfolgreich abgeschlossen!");}
+          if(response.data.success == true) props.refresh();
           else {alert("Es ist ein Fehler aufgetreten!");}
           props.close();
         })

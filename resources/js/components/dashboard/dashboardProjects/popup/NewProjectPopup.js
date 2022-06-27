@@ -38,7 +38,6 @@ function NewProjectPopup(props) {
             if(res.status === 201){
                 alert("Projekt wurder erfolgreich erstellt!");
                 props.onClick()
-                props.getData()
                 props.refresh()
             }else{
                 alert("Es ist etwas schief gelaufen");

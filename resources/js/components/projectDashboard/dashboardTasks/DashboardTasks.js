@@ -21,6 +21,7 @@ function DashboardTasks(props) {
   }
 
   const getTasks = () =>{
+    setRefresh(false)
     setIsLoaded(false);
     console.log("project-id-from_dashTasks: ", props.projectID)
     const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
@@ -111,7 +112,7 @@ function DashboardTasks(props) {
                  <h2>Keine Tasks gefunden</h2>
                  <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
               </div>
-              <NewTaskPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token} user_id={props.userID} project_id={props.projectID}/>
+              <NewTaskPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token} user_id={props.userID} project_id={props.projectID}/>
         </>
         )
   }else {

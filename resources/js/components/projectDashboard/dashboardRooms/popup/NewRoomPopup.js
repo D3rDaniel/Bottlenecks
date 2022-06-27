@@ -62,11 +62,12 @@ function NewRoomPopup(props) {
         })
         .then(res => {
             if(res.status === 201){
-                alert("Raum wurder erfolgreich erstellt!");
                 props.onClick();
                 props.refresh();
             }else{
                 alert("Es ist etwas schief gelaufen");
+                props.onClick();
+                props.refresh();
             }
             
         })

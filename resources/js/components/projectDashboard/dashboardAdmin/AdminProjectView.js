@@ -1,5 +1,6 @@
-import React , {useState} from 'react'
+import React , {useState, useContext} from 'react'
 import axios from 'axios'
+import ProjectContext from '../../../store/project-context'
 
 import Pencil from '../../../../images/icons/stift.png'
 import Kreuz from '../../../../images/icons/kreuz.png'
@@ -7,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 const AdminProjectView = (props) => {
     const navigate = useNavigate();
+    const projectCtx = useContext(ProjectContext);
 
     const [editButton , setEditButton] = useState(false);
     const [newDueDate , setNewDueDate] = useState(props.project.due_date);
@@ -31,6 +33,8 @@ const AdminProjectView = (props) => {
                 'Authorization' : 'Bearer ' + props.token
             }
         }).then(function(response) {
+            projectCtx.project_title = newTitle;
+            props.setRefresh();
             alert("Projektdaten erfolgreich geändert");
         }).catch(function(error){
             console.log(error.response.data);
