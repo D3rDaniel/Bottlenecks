@@ -21,7 +21,7 @@ const dashboardTags = (props) => {
     const getData = () => {
       setRefresh(false)
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tags";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/tags";
   
       axios.get(url, {
         headers: {

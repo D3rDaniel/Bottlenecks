@@ -6,7 +6,7 @@ const MemberInputField = (props) => {
 
 
     const addMember = () =>{
-        const url= "http://127.0.0.1:8000/api/project/add-new-user"
+        const url= "http://sl-vinf-bordbame.hof-university.de:80/api/project/add-new-user"
 
         const memberData = {
             username : member,

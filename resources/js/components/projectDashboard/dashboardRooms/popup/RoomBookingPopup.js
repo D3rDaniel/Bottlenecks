@@ -21,7 +21,7 @@ function RoomBookingPopup(props) {
             end_time:to+":00"
         }
         console.log("übergabe booking- date: ", booking)
-       const url = "http://127.0.0.1:8000/api/bookings"; 
+       const url = "http://sl-vinf-bordbame.hof-university.de:80/api/bookings"; 
        axios.post(url, booking, {
         headers:{
         'Accept': 'application/json',

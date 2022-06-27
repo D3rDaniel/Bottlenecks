@@ -2845,7 +2845,7 @@ function DashboardAbgeschlosseneTasks(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/tasks/completed";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/tasks/completed";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -3143,7 +3143,7 @@ var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlo
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
 
   var handleOpenProject = function handleOpenProject(id) {
-    var url = "http://127.0.0.1:8000/api/project/" + id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + id;
     axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -3395,7 +3395,7 @@ function DashboardAccountVerwalten(props) {
       setEmail = _useState6[1];
 
   var changeInputs = function changeInputs() {
-    var url = "http://127.0.0.1:8000/api/user/" + props.user.user_id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + props.user.user_id;
     var userData = {};
     email === props.user.user_email ? userData = {
       "first_name": firstName,
@@ -3703,7 +3703,7 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/announcements";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + props.userID + "/announcements";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -4074,7 +4074,7 @@ var CompletionPopup = function CompletionPopup(props) {
   };
 
   var handleCompletion = function handleCompletion() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id + "/complete";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id + "/complete";
     var comment = value ? value : "-ohne Kommentar-";
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
       completion_comment: comment
@@ -4331,7 +4331,7 @@ function DashboardOffeneTasks(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/tasks/in-progress";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/tasks/in-progress";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -4436,7 +4436,7 @@ var ProjectMaximumViewOffeneTasks = function ProjectMaximumViewOffeneTasks(props
   var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
   var closeTask = function closeTask() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios.put(url, {
       status_id: 4
     }, {
@@ -4876,7 +4876,7 @@ function DashboardProjects(props) {
     setError(null);
     setRefresh(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/projects";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + props.userID + "/projects";
     axios__WEBPACK_IMPORTED_MODULE_6___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -5317,7 +5317,7 @@ function NewProjectPopup(props) {
       description: description,
       due_date: year + "-" + month + "-" + day
     };
-    var url = "http://127.0.0.1:8000/api/project/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/";
     axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, projectData, {
       headers: {
         'Accept': 'application/json',
@@ -5780,7 +5780,7 @@ function DashboardRaumbuchungen(props) {
 
   var getBookings = function getBookings() {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + user.user_id + "/bookings";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + user.user_id + "/bookings";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -6001,7 +6001,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ProjectMaximumViewRaumbuchungen(props) {
   var deleteBooking = function deleteBooking() {
-    var url = "http://127.0.0.1:8000/api/bookings/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/bookings/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -6137,7 +6137,7 @@ var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(p
   };
 
   var handleOpenProject = function handleOpenProject(id) {
-    var url = "http://127.0.0.1:8000/api/project/" + id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + id;
     axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -6561,7 +6561,7 @@ var SignOutButton = function SignOutButton(props) {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var logout = function logout() {
-    var url = "http://127.0.0.1:8000/api/logout";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/logout";
     axios__WEBPACK_IMPORTED_MODULE_1___default().post(url, "-", {
       headers: {
         'Accept': 'application/json',
@@ -6810,7 +6810,7 @@ var AdminAnkuendigungView = function AdminAnkuendigungView(props) {
       setMessage = _useState4[1];
 
   var handleAnnouncement = function handleAnnouncement() {
-    var url = "http://127.0.0.1:8000/api/announcements";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/announcements";
     var announcment = {
       subject: subject,
       message: message,
@@ -6946,7 +6946,7 @@ var AdminProjectView = function AdminProjectView(props) {
 
   var handleNewData = function handleNewData() {
     changeView();
-    var url = "http://127.0.0.1:8000/api/project/" + props.project.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.project.id;
     var projectData = {
       title: newTitle,
       description: newDescription,
@@ -6967,7 +6967,7 @@ var AdminProjectView = function AdminProjectView(props) {
   };
 
   var deleteProject = function deleteProject() {
-    var url = "http://127.0.0.1:8000/api/project/" + props.project.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.project.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -7104,7 +7104,7 @@ var MemberInputField = function MemberInputField(props) {
       setMember = _useState2[1];
 
   var addMember = function addMember() {
-    var url = "http://127.0.0.1:8000/api/project/add-new-user";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/add-new-user";
     var memberData = {
       username: member,
       project_id: props.projectID,
@@ -7186,7 +7186,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var MemberMaxView = function MemberMaxView(props) {
-  var url = "http://127.0.0.1:8000/api/project-member/" + props.member.pivot.id;
+  var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project-member/" + props.member.pivot.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tasks),
       _useState2 = _slicedToArray(_useState, 2),
@@ -7467,7 +7467,7 @@ var MemberView = function MemberView(props) {
     setError(null);
     setReRenderMembers(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/members";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/members";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -7630,7 +7630,7 @@ var dashboardAdmin = function dashboardAdmin(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setError(null);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID;
     axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -7895,7 +7895,7 @@ var dashboardAnkuendigung = function dashboardAnkuendigung(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/announcements";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/announcements";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -8472,7 +8472,7 @@ var dashboardDeadline = function dashboardDeadline(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/tasks";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/tasks";
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -8848,7 +8848,7 @@ var dashboardOverView = function dashboardOverView(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/overview";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/overview";
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -9012,7 +9012,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var RoomsMaxView = function RoomsMaxView(props) {
   var handleSubmit = function handleSubmit(event) {
-    var url = "http://127.0.0.1:8000/api/room/" + props.room.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/room/" + props.room.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -9171,7 +9171,7 @@ var RoomsMinView = function RoomsMinView(props) {
   };
 
   var getBookings = function getBookings() {
-    var urlBookings = "http://127.0.0.1:8000/api/room/" + props.room.id + "/bookings";
+    var urlBookings = "http://sl-vinf-bordbame.hof-university.de:80/api/room/" + props.room.id + "/bookings";
     axios.get(urlBookings, {
       headers: {
         'Accept': 'application/json',
@@ -9371,7 +9371,7 @@ var dashboardRooms = function dashboardRooms(props) {
   var getData = function getData() {
     setRefresh(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/rooms";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/rooms";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -9712,7 +9712,7 @@ function NewRoomPopup(props) {
       equipment_info: equipment,
       project_id: project.project_id
     };
-    var url = "http://127.0.0.1:8000/api/room/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/room/";
     axios__WEBPACK_IMPORTED_MODULE_5___default().post(url, room, {
       headers: {
         'Accept': 'application/json',
@@ -9902,7 +9902,7 @@ function RoomBookingPopup(props) {
       end_time: to + ":00"
     };
     console.log("übergabe booking- date: ", booking);
-    var url = "http://127.0.0.1:8000/api/bookings";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/bookings";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, booking, {
       headers: {
         'Accept': 'application/json',
@@ -10314,7 +10314,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var TagElement = function TagElement(props) {
   var removeTag = function removeTag() {
-    var url = "http://127.0.0.1:8000/api/tag/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/tag/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -10386,7 +10386,7 @@ var TagInputField = function TagInputField(props) {
       setTag = _useState2[1];
 
   var addTagToProject = function addTagToProject() {
-    var url = "http://127.0.0.1:8000/api/tag";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/tag";
     var data = {
       "project_id": props.projectID,
       "title": tag
@@ -10501,7 +10501,7 @@ var dashboardTags = function dashboardTags(props) {
   var getData = function getData() {
     setRefresh(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/tags";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/tags";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -10713,7 +10713,7 @@ function DashboardTasks(props) {
     setRefresh(false);
     setIsLoaded(false);
     console.log("project-id-from_dashTasks: ", props.projectID);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/tasks";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/tasks";
     axios__WEBPACK_IMPORTED_MODULE_6___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -10972,7 +10972,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function TaskMaximumView(props) {
   var closeTask = function closeTask() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
       status_id: 4
     }, {
@@ -10989,7 +10989,7 @@ function TaskMaximumView(props) {
   };
 
   var deleteTask = function deleteTask() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -11161,7 +11161,7 @@ function TaskMinimumView(props) {
   };
 
   var openAgain = function openAgain() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default().put(url, {
       status_id: 2
     }, {
@@ -11378,9 +11378,9 @@ function NewTaskPopup(props) {
     tagKeyValues = {};
     memberKeyValues = {};
     prioKeyValues = {};
-    var urlTags = "http://127.0.0.1:8000/api/project/" + project.project_id + "/tags";
-    var urlPriorities = "http://127.0.0.1:8000/api/priorities/all";
-    var urlWorker = "http://127.0.0.1:8000/api/project/" + project.project_id + "/members"; //get tags
+    var urlTags = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + project.project_id + "/tags";
+    var urlPriorities = "http://sl-vinf-bordbame.hof-university.de:80/api/priorities/all";
+    var urlWorker = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + project.project_id + "/members"; //get tags
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(urlTags, {
       headers: {
@@ -11440,7 +11440,7 @@ function NewTaskPopup(props) {
       description: description,
       status_id: 2
     };
-    var url = "http://127.0.0.1:8000/api/task/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, task, {
       headers: {
         'Accept': 'application/json',
@@ -12065,7 +12065,7 @@ var SignOutButton = function SignOutButton(props) {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var logout = function logout() {
-    var url = "http://127.0.0.1:8000/api/logout";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/logout";
     axios__WEBPACK_IMPORTED_MODULE_1___default().post(url, "-", {
       headers: {
         'Accept': 'application/json',
@@ -12399,7 +12399,7 @@ function LoginPage() {
         "email": email,
         "password": password
       };
-      var url = "http://127.0.0.1:8000/api/login";
+      var url = "http://sl-vinf-bordbame.hof-university.de:80/api/login";
       axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, loginData).then(function (response) {
         if (response.data.success == true) {
           userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.username.first_name, response.data.username.last_name, response.data.bearer_token);
@@ -13033,7 +13033,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function RegisterPage() {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
-  var baseURL = "http://127.0.0.1:8000/api/";
+  var baseURL = "http://sl-vinf-bordbame.hof-university.de:80/api/";
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),

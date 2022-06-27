@@ -36,9 +36,9 @@ function NewTaskPopup(props) {
 
     useEffect(() => {
         tagKeyValues = {}; memberKeyValues = {}; prioKeyValues = {}
-        const urlTags = "http://127.0.0.1:8000/api/project/"+project.project_id+"/tags";
-        const urlPriorities = "http://127.0.0.1:8000/api/priorities/all"
-        const urlWorker = "http://127.0.0.1:8000/api/project/"+project.project_id+"/members"
+        const urlTags = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+project.project_id+"/tags";
+        const urlPriorities = "http://sl-vinf-bordbame.hof-university.de:80/api/priorities/all"
+        const urlWorker = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+project.project_id+"/members"
         //get tags
         axios.get(urlTags,{
             headers: {
@@ -97,7 +97,7 @@ function NewTaskPopup(props) {
             description: description,
             status_id: 2
         }
-       const url = "http://127.0.0.1:8000/api/task/"
+       const url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/"
        axios.post(url, task , {
         headers: {
             'Accept': 'application/json',

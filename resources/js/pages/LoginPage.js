@@ -38,7 +38,7 @@ function LoginPage() {
                 "password" : password
             }
 
-            const url = "http://127.0.0.1:8000/api/login";
+            const url = "http://sl-vinf-bordbame.hof-university.de:80/api/login";
             axios.post(url, loginData).then(function(response){
                 if(response.data.success == true) {
                     userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.username.first_name, response.data.username.last_name, response.data.bearer_token);

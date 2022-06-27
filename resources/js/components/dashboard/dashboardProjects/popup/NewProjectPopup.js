@@ -26,7 +26,7 @@ function NewProjectPopup(props) {
             due_date: year + "-" + month + "-" + day
         }
 
-       const url = "http://127.0.0.1:8000/api/project/"
+       const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"
 
        axios.post(url, projectData , {
         headers: {

@@ -2,7 +2,7 @@ import React, {useState , useEffect} from 'react'
 import axios from 'axios'
 
 const MemberMaxView = (props) => {
-    const url = "http://127.0.0.1:8000/api/project-member/"+props.member.pivot.id;
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project-member/"+props.member.pivot.id;
 
     const [createTasks , setCreateTasks] = useState(props.member.pivot.can_create_tasks);
     const [editTasks , setEditTasks] = useState(props.member.pivot.can_edit_tasks);

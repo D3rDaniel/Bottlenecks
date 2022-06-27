@@ -16,7 +16,7 @@ const MemberView = (props) => {
       setError(null);
       setReRenderMembers(false);
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/members";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/members";
   
       axios.get(url, {
         headers: {

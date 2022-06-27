@@ -26,7 +26,7 @@ function TaskMinimumView (props) {
 
 
     const openAgain = () => {
-        const url = "http://127.0.0.1:8000/api/task/"+props.id;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/"+props.id;
         axios.put(url,{status_id: 2},
             {
             headers: {

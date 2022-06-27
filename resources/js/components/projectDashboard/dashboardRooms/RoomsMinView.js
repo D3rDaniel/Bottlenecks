@@ -16,7 +16,7 @@ const RoomsMinView = (props) => {
         props.getRoomBookings(roomBookings)
     }
     const getBookings = () =>{
-        const urlBookings = "http://127.0.0.1:8000/api/room/"+props.room.id+"/bookings"; 
+        const urlBookings = "http://sl-vinf-bordbame.hof-university.de:80/api/room/"+props.room.id+"/bookings"; 
 
         axios.get(urlBookings, {
             headers: {

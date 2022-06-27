@@ -22,7 +22,7 @@ const dashboardAdmin = (props) => {
     useEffect(() => {
       setError(null);
         setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/project/"+props.projectID;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID;
         axios.get(url, {
           headers: {
             'Accept': 'application/json',

@@ -28,7 +28,7 @@ function DashboardProjects (props) {
     setError(null);
     setRefresh(false)
     setIsLoaded(false);
-    const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/projects";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/"+props.userID+"/projects";
 
     axios.get(url, {
       headers: {

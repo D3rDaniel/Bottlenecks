@@ -16,7 +16,7 @@ const ProjectMinimumViewAbgeschlosseneTasks = (props) => {
     const navigate = useNavigate();
 
     const handleOpenProject = (id) => {
-        const url = "http://127.0.0.1:8000/api/project/"+id;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+id;
 
         axios.get(url, {
             headers: {

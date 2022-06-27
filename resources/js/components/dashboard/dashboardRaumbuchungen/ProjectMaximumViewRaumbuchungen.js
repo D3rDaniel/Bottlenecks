@@ -4,7 +4,7 @@ import React from 'react'
 function ProjectMaximumViewRaumbuchungen (props) {
 
   const deleteBooking = () => {
-    const url = "http://127.0.0.1:8000/api/bookings/"+props.id;
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/bookings/"+props.id;
     axios.delete(url, {
       headers: {
         'Accept': 'application/json',

@@ -24,7 +24,7 @@ function DashboardTasks(props) {
     setRefresh(false)
     setIsLoaded(false);
     console.log("project-id-from_dashTasks: ", props.projectID)
-    const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/tasks";
 
     axios.get(url, {
       headers: {

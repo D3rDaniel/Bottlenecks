@@ -14,7 +14,7 @@ const dashboardOverView = (props) => {
   
     useEffect(() => {
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/overview";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/overview";
   
       axios.get(url, {
         headers: {

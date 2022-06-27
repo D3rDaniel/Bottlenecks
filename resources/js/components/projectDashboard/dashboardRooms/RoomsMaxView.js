@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 const RoomsMaxView = (props) => {
 
     const handleSubmit = (event) => {
-        const url = "http://127.0.0.1:8000/api/room/"+props.room.id
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/room/"+props.room.id
 
         axios.delete(url, {
             headers: {

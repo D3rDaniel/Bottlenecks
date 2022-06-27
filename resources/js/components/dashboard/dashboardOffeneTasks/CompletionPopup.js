@@ -13,7 +13,7 @@ const CompletionPopup = (props) => {
     }
 
     const handleCompletion = () => {
-        const url = "http://127.0.0.1:8000/api/task/"+props.id+"/complete";
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/"+props.id+"/complete";
 
         let comment = value ? value : "-ohne Kommentar-";
 

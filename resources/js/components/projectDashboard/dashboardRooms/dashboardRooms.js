@@ -38,7 +38,7 @@ const dashboardRooms = (props) => {
     const getData = () =>{
       setRefresh(false)
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/rooms";
   
       axios.get(url, {
         headers: {
