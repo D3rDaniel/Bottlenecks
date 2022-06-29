@@ -4750,7 +4750,7 @@ function CreateProjectButton(_ref) {
   var onClick = _ref.onClick,
       popupTrigger = _ref.popupTrigger;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
       className: "mt-1 mr-2"
@@ -5317,20 +5317,24 @@ function NewProjectPopup(props) {
       description: description,
       due_date: year + "-" + month + "-" + day
     };
-    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project";
     axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, projectData, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      if (res.status === 201) {
+      console.log(res);
+
+      if (res.status < 400) {
         alert("Projekt wurder erfolgreich erstellt!");
         props.onClick();
         props.refresh();
       } else {
-        alert("Es ist etwas schief gelaufen");
+        alert("Es ist ein Fehler aufgetreten!");
       }
+    })["catch"](function (error) {
+      console.log(error);
     });
   };
 
@@ -6575,7 +6579,7 @@ var SignOutButton = function SignOutButton(props) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-    className: "bg-red text-white w-36 h-8 m-2 mt-7 \r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
+    className: "bg-red text-white w-36 h-8 m-2 mt-7  hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
     onClick: logout,
     children: "Abmelden"
   });
@@ -6633,7 +6637,7 @@ function DropDownSelect(props) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "mb-3 xl:w-96",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
-        className: "form-select\r block\r w-full\r px-3\r py-1.5\r text-base\r font-normal\r text-gray-700\r bg-white bg-clip-padding bg-no-repeat\r border border-solid border-gray-300\r rounded\r transition\r ease-in-out\r m-0\r focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+        className: "form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
         value: selects,
         onChange: handleChange,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
@@ -8931,7 +8935,7 @@ __webpack_require__.r(__webpack_exports__);
 function BookingButton(_ref) {
   var onClick = _ref.onClick;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-2 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-2 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: "Buchen"
   });
@@ -8965,7 +8969,7 @@ function CreateRoomButton(_ref) {
   var onClick = _ref.onClick,
       popupTrigger = _ref.popupTrigger;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
       className: "mt-1 mr-2"
@@ -9712,7 +9716,7 @@ function NewRoomPopup(props) {
       equipment_info: equipment,
       project_id: project.project_id
     };
-    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/room/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/room";
     axios__WEBPACK_IMPORTED_MODULE_5___default().post(url, room, {
       headers: {
         'Accept': 'application/json',
@@ -10615,7 +10619,7 @@ function CreateTaskButton(_ref) {
   var onClick = _ref.onClick,
       popupTrigger = _ref.popupTrigger;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
       className: "mt-1 mr-2"
@@ -12079,7 +12083,7 @@ var SignOutButton = function SignOutButton(props) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-    className: "bg-red text-white w-36 h-8 m-2 mt-7 \r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
+    className: "bg-red text-white w-36 h-8 m-2 mt-7  hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
     onClick: logout,
     children: "Abmelden"
   });

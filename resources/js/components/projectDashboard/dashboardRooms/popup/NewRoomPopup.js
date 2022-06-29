@@ -53,7 +53,7 @@ function NewRoomPopup(props) {
             project_id: project.project_id
         }
 
-       const url = "http://sl-vinf-bordbame.hof-university.de:80/api/room/"; 
+       const url = "http://sl-vinf-bordbame.hof-university.de:80/api/room"; 
         axios.post(url, room, {
         headers: {
             'Accept': 'application/json',
