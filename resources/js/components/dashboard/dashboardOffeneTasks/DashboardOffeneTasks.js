@@ -71,14 +71,13 @@ function DashboardOffeneTasks(props) {
             }
             break;
           default:
-            console.log("default- shit")
         }
         setTasks(orderedTasks)
   }
 
     useEffect(() => {
         setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/user/tasks/in-progress";
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/tasks/in-progress";
 
         axios.get(url, {
           headers: {
@@ -121,10 +120,11 @@ function DashboardOffeneTasks(props) {
                 fullTitle = {task.title}
                 project={(task.project.title.length > 30) ? task.project.title.substring(0,27)+'...' : task.project.title}
                 deadline={task.due_date}
-                tag={task.tag.title}
+                tag={task.tag ? task.tag.title : "kein Tag"}
                 room={task.room == null ? "kein Raum angegeben" : task.room}
-                priority={task.priority.title}
+                priority={task.priority ? task.priority.title : "keine Priorität"}
                 description={task.description}
+                id={task.id}
                 key={index}
                 >
               </ProjectMinimumViewOffeneTasks>
@@ -140,10 +140,11 @@ function DashboardOffeneTasks(props) {
                 fullTitle = {task.title}
                 project={(task.project.title.length > 30) ? task.project.title.substring(0,27)+'...' : task.project.title}
                 deadline={task.due_date}
-                tag={task.tag.title}
+                tag={task.tag ? task.tag.title : "kein Tag"}
                 room={task.room == null ? "kein Raum angegeben" : task.room}
-                priority={task.priority.title}
+                priority={task.priority ? task.priority.title : "keine Priorität"}
                 description={task.description}
+                id={task.id}
                 key={index}
                 >
               </ProjectMinimumViewOffeneTasks>

@@ -8,20 +8,27 @@ const elements = [
     {label: "Deadline", selected: false}
   ];
 
-const SortList = () => {
-  return (
-    <div className="flex w-full ml-20">
-        {elements.map((element, index) => {
-            return (
-                <Sortelement
-                    label={element.label}
-                    selected={element.selected}
-                    key={index}>
-                </Sortelement>
-        )
-        })}
-    </div>
-  )
-}
+  const SortList = (props) => {
 
-export default SortList
+    const sortElements = (event, rotate) => {
+      props.sortElements(event, rotate);
+    }
+  
+    return (
+      <div className="flex w-full ml-20">
+          {elements.map((element, index) => {
+              return (
+                  <Sortelement
+                      id={index}
+                      label={element.label}
+                      selected={element.selected}
+                      key={index}
+                      sortElements={sortElements}>
+                  </Sortelement>
+          )
+          })}
+      </div>
+    )
+  }
+  
+  export default SortList

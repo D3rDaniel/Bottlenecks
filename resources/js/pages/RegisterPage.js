@@ -1,15 +1,13 @@
-import {React, useState, useContext } from 'react'
+import {React, useState } from 'react'
 import InputField from '../components/forms/InputField'
 import Logo from '../../images/logo.jpg'
 import {Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import UserContext from '../store/user-context';
 
 function RegisterPage() {
 
-    const userCtx = useContext(UserContext);
     const navigate = useNavigate();
-    const baseURL = "http://127.0.0.1:8000/api/"
+    const baseURL = "http://sl-vinf-bordbame.hof-university.de:80/api/"
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -36,26 +34,10 @@ function RegisterPage() {
             axios.post(baseURL+'register', registrionData).then(function(response){
                 if(response.status === 201){
                     alert("Sie haben sich erfolgreich registiert!");
-                    handleLogin();
+                    navigate('/login');
                 }else alert("Fehler bei der Registrierung");
             })
         }
-    }
-
-    const handleLogin = () => {
-        const loginData = {
-            "email" : email,
-            "password" : password
-        }
-    
-        axios.post(baseURL+'login', loginData).then(function(response){
-            if(response.data.success == true) {
-                userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.bearer_token);
-                navigate('/');
-            }
-            else alert("Anmeldung fehlgeschlagen!");
-        })
-
     }
 
   return (
@@ -81,10 +63,10 @@ function RegisterPage() {
                     <InputField id="username" placeholder="Nutzername" onChange={setUserName}></InputField>
                 </div>
                 <div className="mb-2">
-                    <InputField id="password" placeholder="Passwort" onChange={setPassword}></InputField>
+                    <InputField id="password" placeholder="Passwort" onChange={setPassword} type="password"></InputField>
                 </div>
                 <div className="mb-6">
-                    <InputField id="pwd_confirm" placeholder="Passwort bestätigen" onChange={setPwdConfirm}></InputField>
+                    <InputField id="pwd_confirm" placeholder="Passwort bestätigen" onChange={setPwdConfirm} type="password"></InputField>
                 </div>
                 <div className="flex items-center justify-between">
                     <Link to="/Login" className='text-blue underline'>Du bist bereits registriert?</Link>

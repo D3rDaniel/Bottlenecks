@@ -3,12 +3,22 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const SignOutButton = (props) => {
+  const navigate = useNavigate();
   
   const logout = () => {
-    const url = "http://127.0.0.1:8000/api/logout";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/logout";
 
-    axios.post(url, {headers: {'Authorization': 'Bearer ' + props.token}})
-      .then(function(res) {console.log(res)});
+    axios.post(url, "-",  {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + props.token
+        }
+      })
+      .then(function() {
+        navigate('/login');
+      }).catch(function(response){
+        console.log(response);
+      });
   }
 
   return (

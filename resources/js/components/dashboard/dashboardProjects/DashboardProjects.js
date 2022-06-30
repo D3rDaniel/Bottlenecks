@@ -14,6 +14,7 @@ const projects = [
 
 function DashboardProjects (props) {
   const [popupTrigger, setPopupTrigger] = useState(false)
+  const [refresh,setRefresh] = useState(false)
 
   const changePopupTriggerValue = () => {setPopupTrigger(!popupTrigger);}
 
@@ -23,22 +24,28 @@ function DashboardProjects (props) {
   const [filtered, setFiltered] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState([]);
 
-    useEffect(() => {
-        setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/projects";
+  const getData = () =>{
+    setError(null);
+    setRefresh(false)
+    setIsLoaded(false);
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/"+props.userID+"/projects";
 
-        axios.get(url, {
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + props.token
-          }
-        })
-          .then(function(response) {setIsLoaded(true);
-            setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
-            },(error) =>{
-              setIsLoaded(true);
-              setError(error);})
-      }, []);
+    axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + props.token
+      }
+    })
+      .then(function(response) {setIsLoaded(true);
+        setProjects(response.data["projects_created"].concat(response.data["project-member_of"]));  
+        },(error) =>{
+          setIsLoaded(true);
+          setError(error);})
+  }
+
+    useEffect(() => {
+        getData()
+      }, [refresh]);
       
       
       const sortElements = (event, rotate) => {
@@ -81,7 +88,7 @@ function DashboardProjects (props) {
             }
             break;
           default:
-            console.log("default- shit")
+            return;
         }
         setProjects(orderedProjects)
       }
@@ -106,7 +113,7 @@ function DashboardProjects (props) {
             <div className="flex justify-end">
               <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
             </div> : ""}
-            <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token}/>
+            <NewProjectPopup trigger={popupTrigger} refresh={function(){setRefresh(true)}} onClick={changePopupTriggerValue} token={props.token} getData={getData}/>
         </div>)
     }else if(!isLoaded){
       return (
@@ -129,7 +136,7 @@ function DashboardProjects (props) {
                   title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
                   fullTitle = {project.title}
                   id = {project.id}
-                  creator={project.creator_user_id}
+                  creator={project.creator ? project.creator.username : props.username}
                   progress={project.progress_percentage}
                   startDate={project.created_at.substring(0,10)}
                   date={project.due_date}
@@ -146,7 +153,7 @@ function DashboardProjects (props) {
                   title={(project.title.length > 30) ? project.title.substring(0,27)+'...' : project.title}
                   fullTitle = {project.title}
                   id = {project.id}
-                  creator={project.creator_user_id}
+                  creator={project.creator ? project.creator.username : props.username}
                   progress={project.progress_percentage}
                   startDate={project.created_at.substring(0,10)}
                   date={project.due_date}
@@ -163,7 +170,7 @@ function DashboardProjects (props) {
           <div className="flex justify-end">
             <CreateProjectButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
           </div>
-          <NewProjectPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token}/>
+          <NewProjectPopup trigger={popupTrigger} refresh={function(){setRefresh(true)}} onClick={changePopupTriggerValue} token={props.token} getData={getData}/>
         </div>
       )
     }

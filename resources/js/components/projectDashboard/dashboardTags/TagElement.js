@@ -4,9 +4,8 @@ import axios from 'axios'
 const TagElement = (props) => {
 
   const removeTag = () =>{
-    const url = "http://127.0.0.1:8000/api/tag/"+props.id;
-    console.log(props.token);
-    
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/tag/"+props.id;
+
     axios.delete(url,{
       headers: {
           'Accept': 'application/json',
@@ -14,7 +13,7 @@ const TagElement = (props) => {
       }
      })
     .then(function(response) {
-        console.log(response);
+       props.refresh();
     }).catch(function(response){
         console.log(response);
     })

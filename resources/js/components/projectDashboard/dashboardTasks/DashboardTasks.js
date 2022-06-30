@@ -20,15 +20,11 @@ function DashboardTasks(props) {
     setPopupTrigger(!popupTrigger);
   }
 
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [loadedTasks, setTasks] = useState([]);
-  const [filtered, setFiltered] = useState(false);
-  const [filteredTasks, setFilteredTasks] = useState([]);
-
-  useEffect(() => {
+  const getTasks = () =>{
+    setRefresh(false)
     setIsLoaded(false);
-    const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
+    console.log("project-id-from_dashTasks: ", props.projectID)
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/tasks";
 
     axios.get(url, {
       headers: {
@@ -41,7 +37,18 @@ function DashboardTasks(props) {
         },(error) =>{
           setIsLoaded(true);
           setError(error);})
-  }, []);
+  }
+
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedTasks, setTasks] = useState([]);
+  const [filtered, setFiltered] = useState(false);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [refresh,setRefresh] = useState(false)
+
+  useEffect(() => {
+    getTasks();
+  }, [refresh]);
 
   const sortElements = (event, rotate) => {
     const IDTriggeredSortElement = event.target.id
@@ -56,12 +63,27 @@ function DashboardTasks(props) {
         break;
       case "1":
         if(rotate){
-          orderedTasks = [...loadedTasks].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? 1: ((b.creator_user_id > a.creator_user_id) ? -1 : 0))
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.status.title > b.status.title) ? 1: ((b.status.title > a.status.title) ? -1 : 0))
         }else{
-          orderedTasks = [...loadedTasks].sort((a,b) => (a.creator_user_id > b.creator_user_id) ? -1: ((b.creator_user_id > a.creator_user_id) ? 1 : 0))
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.status.title > b.status.title) ? -1: ((b.status.title > a.status.title) ? 1 : 0))
+        }
+        break;
+      case "2":
+        if(rotate){
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.priority.title > b.priority.title) ? 1: ((b.priority.title > a.priority.title) ? -1 : 0))
+        }else{
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.priority.title > b.priority.title) ? -1: ((b.priority.title > a.priority.title) ? 1 : 0))
+        }
+        break;
+      case "3":
+        if(rotate){
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.due_date > b.due_date) ? 1: ((b.due_date > a.due_date) ? -1 : 0))
+        }else{
+          orderedTasks = [...loadedTasks].sort((a,b) => (a.due_date > b.due_date) ? -1: ((b.due_date > a.due_date) ? 1 : 0))
         }
         break;
       default:
+        return;
     }
     setTasks(orderedTasks)
   }
@@ -70,8 +92,9 @@ function DashboardTasks(props) {
     setFiltered(filtered)
     let filteredTasksBuffer
     filteredTasksBuffer = [...loadedTasks].filter((task) => task.title.toLowerCase().includes(inputValue))
-    setFilteredRooms(filteredTasksBuffer)
+    setFilteredTasks(filteredTasksBuffer)
   }
+
       
     if (error) {
       errormessage = error.message;
@@ -89,7 +112,7 @@ function DashboardTasks(props) {
                  <h2>Keine Tasks gefunden</h2>
                  <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue}/>
               </div>
-              <NewTaskPopup trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token} user_id={props.userID} project_id={props.projectID}/>
+              <NewTaskPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} token={props.token} user_id={props.userID} project_id={props.projectID}/>
         </>
         )
   }else {
@@ -102,21 +125,26 @@ function DashboardTasks(props) {
             {
               filtered?
               filteredTasks.map((task, index) => {
+                
               return (
                 <TaskMinimumView
+                  id={task.id}
                   title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
                   fullTitle = {task.title}
                   description = {task.description}
-                  comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                  status = {task.status !== null? task.status.title : "kein status"}
+                  comment = {(task.completion_comment === null ? "-ohne Kommentar-" : task.completion_comment)}
+                  status = {task.status !== null? task.status : "kein status"}
                   prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "nicht abgeschlossen" : task.completed_date)}
                   date = {task.due_date}
                   updated_at = {task.updated_at.substring(0,10)}
                   creator = {task.creator.username}
                   assignee = {task.assignee}
-                  tag = {task.tag === null ? "kein Tag" : task.tag.title}
-                  key={index}>
+                  tag = {task.tag === null ? "-kein Tag-" : task.tag.title}
+                  key={index}
+                  token={props.token}
+                  refresh={function(){setRefresh(true)}}
+                  >
                 </TaskMinimumView>
               )
             })
@@ -125,11 +153,12 @@ function DashboardTasks(props) {
               loadedTasks.map((task, index) => {
               return (
                 <TaskMinimumView
+                  id={task.id}
                   title={(task.title.length > 27) ? task.title.substring(0,24)+'...' : task.title}
                   fullTitle = {task.title}
                   description = {task.description}
-                  comment = {(task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment)}
-                  status = {task.status !== null? task.status.title : "kein status"}
+                  comment = {(task.completion_comment === null ? "-ohne Kommentar-" : task.completion_comment)}
+                  status = {task.status !== null? task.status : "kein status"}
                   prio = {task.priority !== null ? task.priority.title : "keine Priorität"}
                   completedDate = {(task.completed_date === null ? "not completed" : task.completed_date)}
                   date = {task.due_date}
@@ -137,7 +166,11 @@ function DashboardTasks(props) {
                   creator = {task.creator.username}
                   assignee = {task.assignee}
                   tag = {task.tag === null ? "keine Tag" : task.tag.title}
-                  key={index}>
+                  key={index}
+                  token={props.token}
+                  refresh={function(){setRefresh(true)}}
+                  view="TaskView"
+                  >
                 </TaskMinimumView>
               )
             })
@@ -146,13 +179,9 @@ function DashboardTasks(props) {
           </div>
 
           <div className="w-full flex justify-end">
-            {/*<div className="bg-blue rounded-xl h-10 w-44 flex items-center mr-10 mb-3 hover:cursor-pointer hover:font-bold">
-                <img src={Plus} alt="plus" className="h-6 w-6 mx-2"></img>
-                <button className="text-white rounded-xl">Task erstellen</button>           
-            </div> */}
             <CreateTaskButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        <NewTaskPopup token={props.token} trigger={popupTrigger} onClick={changePopupTriggerValue}/>
+        <NewTaskPopup refresh={function(){setRefresh(true)}} token={props.token} trigger={popupTrigger} onClick={changePopupTriggerValue} user_id={props.userID} project_id={props.projectID}/>
       </div>
     )}
 }

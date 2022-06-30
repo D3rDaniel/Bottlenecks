@@ -16,20 +16,27 @@ function DashboardRaumbuchungen(props) {
   const [filtered, setFiltered] = useState(false)
   const [filteredBookings, setFilteredBookings] = useState([])
 
-  useEffect(() => {
+  
+
+  const getBookings = () =>{
     setIsLoaded(false);
-    const url = "http://127.0.0.1:8000/api/user/"+user.user_id+"/bookings";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/"+user.user_id+"/bookings";
     axios.get(url, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
     })
-      .then(function(response) {setIsLoaded(true);
+      .then(function(response) {
+        setIsLoaded(true);
         setBookings(response.data.bookings);  
         }).catch(function(response){
             setIsLoaded(true)
             setError(true)})
+  }
+
+  useEffect(() => {
+    getBookings()
   },[] );
 
 
@@ -80,7 +87,6 @@ function DashboardRaumbuchungen(props) {
         }
         break;
       default:
-        console.log("default- shit")
         return;
     }
     setBookings(orderedBookings)
@@ -135,7 +141,9 @@ function DashboardRaumbuchungen(props) {
                 opening_time={booking.room.opening_time.substring(0,5)}
                 closing_time={booking.room.closing_time.substring(0,5)}
                 address_info={booking.room.address_info}
-                key={index} >
+                project={booking.room.project_id}
+                key={index} 
+                getData={getBookings}>
                 </ProjectMinimumViewRaumbuchungen>
               )
             })
@@ -158,7 +166,9 @@ function DashboardRaumbuchungen(props) {
                 opening_time={booking.room.opening_time.substring(0,5)}
                 closing_time={booking.room.closing_time.substring(0,5)}
                 address_info={booking.room.address_info}
-                key={index} >
+                project={booking.room.project_id}
+                key={index} 
+                getData={getBookings}>
                 </ProjectMinimumViewRaumbuchungen>
               )
             })

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios';
 
 import Megaphone from '../../../../images/icons/megaphone.png'
 
@@ -7,7 +8,7 @@ const AdminAnkuendigungView = (props) => {
     const [message , setMessage] = useState("");
 
     const handleAnnouncement = () => {
-        const url = "http://127.0.0.1:8000/api/announcements";
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/announcements";
 
         const announcment = {
             subject : subject,

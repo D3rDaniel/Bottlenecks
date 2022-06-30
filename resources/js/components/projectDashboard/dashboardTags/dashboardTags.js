@@ -16,12 +16,12 @@ const dashboardTags = (props) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedTags, setTags] = useState([]);
+    const [refresh, setRefresh] = useState(false)
 
-
-
-    useEffect(() => {
+    const getData = () => {
+      setRefresh(false)
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tags";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/tags";
   
       axios.get(url, {
         headers: {
@@ -34,7 +34,11 @@ const dashboardTags = (props) => {
           },(error) =>{
             setIsLoaded(true);
             setError(error);})
-    }, []);
+    }
+
+    useEffect(() => {
+      getData()
+    }, [refresh]);
 
       if (error) {
         errormessage = error.message;
@@ -49,7 +53,7 @@ const dashboardTags = (props) => {
         return (
             <div className="m-auto w-1/2">
                 <div className="text-red font-bold text-center mb-5">Keine Tags gefunden</div>
-                <Input projectID = {props.projectID} token={props.token}/>
+                <Input refresh={function(){setRefresh(true)}} projectID = {props.projectID} token={props.token}/>
             </div>
         )
     }else {
@@ -66,13 +70,15 @@ const dashboardTags = (props) => {
                                 name={tag.title}
                                 id={tag.id}
                                 token={props.token}
-                                key={index}>
+                                key={index}
+                                refresh={function(){setRefresh(true)}}
+                                >
                             </TagElement>
                         )
                     })}
                 </div>  
             </div>
-            <Input projectID = {props.projectID} token={props.token}/>
+            <Input projectID = {props.projectID} token={props.token} refresh={function(){setRefresh(true)}}/>
         </div>
     </div>
   )}

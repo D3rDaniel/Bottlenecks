@@ -6,7 +6,6 @@ const PieView = (props) => {
     let completed = props.tasks.completed_tasks;
     let progress = props.tasks["in-progress_tasks"];
     let failed = props.tasks.failed_tasks;
-    let paused = props.tasks.paused_tasks;
 
   return (
     <div className="h-5/6 w-1/2 mt-8">
@@ -21,7 +20,6 @@ const PieView = (props) => {
                 {title: 'Abgeschlossen' , value: completed , color: '#42A8FD'},
                 {title: 'in Bearbeitung' , value: progress , color: '#FFBB29'},
                 {title: 'Abgebrochen' , value: failed , color: '#FF3838'},
-                {title: 'Pausiert' , value: paused , color: '#ADADAD'}
             ]}
         />
     </div>

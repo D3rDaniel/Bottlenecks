@@ -7,27 +7,23 @@ import TextArea from '../../../forms/TextArea';
 import ProjectContext from '../../../../store/project-context';
 
 let tagKeyValues = {}
-let roomKeyValues = {}
 let memberKeyValues = {}
 let prioKeyValues =  {}
 
 function NewTaskPopup(props) {
 
     const [member, setMember] = useState();
-    const [room, setRoom] = useState();
     const [priority, setPriority] = useState();
     const [tag, setTag] = useState();
     const [title, setTitle] = useState();
     const [deadline, setDeadline] = useState();
     const [description, setDescription] = useState();
     const [allTags, setAllTags] = useState([""])
-    const [allRooms, setAllRooms] = useState([""])
     const [allPriorities, setAllPriorities] = useState([""])
     const [allMember, setAllMember] = useState([""])
 
     
     
-    const getRoom = (data) => { setRoom(getKeyByValue(roomKeyValues, data));}
     const getMember = (data) => {setMember(getKeyByValue(memberKeyValues, data));}
     const getPriority = (data) => {setPriority(getKeyByValue(prioKeyValues, data));}
     const getTag = (data) => {setTag(getKeyByValue(tagKeyValues, data));}
@@ -39,11 +35,10 @@ function NewTaskPopup(props) {
     
 
     useEffect(() => {
-        
-        const urlTags = "http://127.0.0.1:8000/api/project/"+project.project_id+"/tags";
-        const urlRooms = "http://127.0.0.1:8000/api/project/"+project.project_id+"/rooms";
-        const urlPriorities = "http://127.0.0.1:8000/api/priorities/all"
-        const urlWorker = "http://127.0.0.1:8000/api/project/"+project.project_id+"/members"
+        tagKeyValues = {}; memberKeyValues = {}; prioKeyValues = {}
+        const urlTags = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+project.project_id+"/tags";
+        const urlPriorities = "http://sl-vinf-bordbame.hof-university.de:80/api/priorities/all"
+        const urlWorker = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+project.project_id+"/members"
         //get tags
         axios.get(urlTags,{
             headers: {
@@ -56,19 +51,6 @@ function NewTaskPopup(props) {
                 tagKeyValues[tag.id] = tag.title
             })
             setAllTags(Object.values(tagKeyValues))
-        })
-        //get rooms
-        axios.get(urlRooms,{
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + props.token
-              }
-        })
-        .then((res) => {
-            res.data.rooms.map(room =>{
-                roomKeyValues[room.id] = room.title
-            })
-            setAllRooms(Object.values(roomKeyValues))
         })
         //get prios
         axios.get(urlPriorities,{
@@ -91,12 +73,14 @@ function NewTaskPopup(props) {
               }
         })
         .then((res) => {
-            res.data.members.map(member => {
+            let members = res.data.members
+            members.push(res.data.project_creator)
+            members.map(member => {
                 memberKeyValues[member.id] = member.username
             })
             setAllMember(Object.values(memberKeyValues))
         })
-    },[])
+    },[project])
 
     function getKeyByValue(object, value) { return Object.keys(object).find(key => object[key] === value)}
 
@@ -108,14 +92,12 @@ function NewTaskPopup(props) {
             due_date: deadline.getFullYear()+"-"+((deadline.getMonth()+1) < 10 ? "0"+(deadline.getMonth()+1) : (deadline.getMonth()+1))+"-"+(deadline.getDate() < 10 ? "0"+ deadline.getDate() : deadline.getDate()),
             due_time: "00:00",
             assignee_user_id: member,
-            room_id: room,
             priority_id: priority,
             tag_id: tag,
             description: description,
             status_id: 2
         }
-       console.log(task)
-       const url = "http://127.0.0.1:8000/api/task/"
+       const url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/"
        axios.post(url, task , {
         headers: {
             'Accept': 'application/json',
@@ -124,19 +106,22 @@ function NewTaskPopup(props) {
        })
         .then(res => {
             if(res.status === 201){
-                alert("Task wurder erfolgreich erstellt!");
+                props.onClick()
+                props.refresh()
             }else{
                 alert("Es ist etwas schief gelaufen");
             }
             
         })
         .catch(error => console.log(error))
+
+        
         
     }
     
 
   return ( props.trigger) ? (
-    <div className="w-screen h-screen rounded-lg bg-gray-400/[.7] fixed ">
+    <div className="w-screen h-full rounded-lg bg-gray-400/[.7] fixed ">
         <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
             
             <div className="w-full">
@@ -157,9 +142,6 @@ function NewTaskPopup(props) {
                             </div>
                         </div>
                         <div className="w-1/2 h-full p-6">
-                            <div className="mb-4">
-                                <DropDownSelect title={"Raum auswählen"} onChange={getRoom} options={allRooms}/>
-                            </div>
                             <div className="mb-6">
                                 <DropDownSelect title={"Tag auswählen"} onChange={getTag} options={allTags}/>
                             </div>

@@ -6,40 +6,17 @@ import Searchbar from '../dashboardTasks/searchbar/SearchBar'
 import WeekView from './WeekView'
 import MonthView from './MonthView'
 
-const checkWorkingTasks = () => {
-    let workingTasks = [];
-
-    for(let i = 0; i < loadedTasks.length; i++){
-        if(loadedTasks[i].status.id !== 1){
-            workingTasks.push(loadedTasks[i]);
-        }
-    };
-    setTasksInWorking(workingTasks);
-}
-
-const tasks = [
-    {title: "Task1", status: "abgeschlossen", prio: "Hoch", completedDate: "06.05.2022" , date: "2022-05-09"},
-    {title: "Task2", status: "in Bearbeitung", prio: "Mittel", completedDate: "-" , date: "2022-05-09"},
-    {title: "Task3", status: "in Bearbeitung", prio: "Mittel", completedDate: "-" , date: "2022-05-31"},
-    {title: "Task4", status: "abgeschlossen", prio: "Gering", completedDate: "20.05.2022", date: "2022-05-09"},
-    {title: "Task5", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-05"},
-    {title: "Task6", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-06"},
-    {title: "Task7", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-07"},
-    {title: "Task8", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-06-08"},
-    {title: "Task9", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-07-07"},
-    {title: "Task10", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-07-09"},
-    {title: "Task11", status: "in Bearbeitung", prio: "Gering", completedDate: "-", date: "2022-07-09"}
-  ]
-
 const dashboardDeadline = (props) => {
 
-    const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadedTasks, setTasks] = useState([]);
+  const [filtered, setFiltered] = useState(false)
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
     setIsLoaded(false);
-    const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/tasks";
 
     axios.get(url, {
       headers: {
@@ -52,9 +29,9 @@ const dashboardDeadline = (props) => {
 
             let filteredTasks = []
             for(let i = 0; i < response.data["tasks"].length; i++){
-                if(response.data["tasks"][i].completed_date == null) filteredTasks.push(response.data["tasks"][i]);
+                if(response.data["tasks"][i].status ? response.data["tasks"][i].status.id == 2 : false) filteredTasks.push(response.data["tasks"][i]);
             }
-
+            console.log("deadline filtered Tasks: ", filteredTasks)
             setTasks(filteredTasks)
 
           },(error) =>{
@@ -63,6 +40,50 @@ const dashboardDeadline = (props) => {
           }
         )
     }, []);
+
+    const filterElements = (inputValue, filtered) => {
+      setFiltered(filtered)
+      let filteredTasksBuffer
+      filteredTasksBuffer = [...loadedTasks].filter((task) => task.title.toLowerCase().includes(inputValue))
+      setFilteredTasks(filteredTasksBuffer)
+    }
+    const sortElements = (event, rotate) => {
+      const IDTriggeredSortElement = event.target.id
+      let orderedTasks;
+      switch(IDTriggeredSortElement){
+        case "0":
+          if(rotate){
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.title > b.title) ? 1: ((b.title > a.title) ? -1 : 0))
+          }else{
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.title > b.title) ? -1: ((b.title > a.title) ? 1 : 0))
+          }
+          break;
+        case "1":
+          if(rotate){
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.status.title > b.status.title) ? 1: ((b.status.title > a.status.title) ? -1 : 0))
+          }else{
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.status.title > b.status.title) ? -1: ((b.status.title > a.status.title) ? 1 : 0))
+          }
+          break;
+        case "2":
+          if(rotate){
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.priority.title > b.priority.title) ? 1: ((b.priority.title > a.priority.title) ? -1 : 0))
+          }else{
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.priority.title > b.priority.title) ? -1: ((b.priority.title > a.priority.title) ? 1 : 0))
+          }
+          break;
+        case "3":
+          if(rotate){
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.due_date > b.due_date) ? 1: ((b.due_date > a.due_date) ? -1 : 0))
+          }else{
+            orderedTasks = [...loadedTasks].sort((a,b) => (a.due_date > b.due_date) ? -1: ((b.due_date > a.due_date) ? 1 : 0))
+          }
+          break;
+        default:
+          return;
+      }
+      setTasks(orderedTasks)
+    }
       
     if (error) {
       errormessage = error.message;
@@ -80,10 +101,28 @@ const dashboardDeadline = (props) => {
     
   return (
     <div className="flex flex-col w-full mx-2 my-2">
-        <Searchbar />
+        <Searchbar filterElements={filterElements} sortElements={sortElements} />
         <div className="h-full w-full flex flex-col gap-10 mt-10">
-            <WeekView tasks={loadedTasks}/>
-            <MonthView tasks={loadedTasks}/>   
+        {
+        filtered?
+        <>
+          <WeekView tasks={loadedTasks}/>
+          <MonthView tasks={loadedTasks}/>  
+        </>
+          :
+          <>
+          <WeekView tasks={filteredTasks}/>
+          <MonthView tasks={filteredTasks}/>  
+          </>
+          
+        }
+        {
+          /*
+          <WeekView tasks={loadedTasks}/>
+          <MonthView tasks={loadedTasks}/>  
+          */
+        }
+          
         </div>        
     </div>
   )}

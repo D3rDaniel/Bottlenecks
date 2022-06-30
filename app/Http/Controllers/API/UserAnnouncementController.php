@@ -22,7 +22,7 @@ class UserAnnouncementController extends Controller
         if (!$user) {
             return response()->json(['success'=>false,'message' => 'User not found'], 404);
         }
-        $announcements = Announcement::where('user_id',$user->id)->get();
+        $announcements = Announcement::where('user_id',$user->id)->with('project')->get();
         $res = [
             'success'=>true,
             'user_id'=> $user->id,

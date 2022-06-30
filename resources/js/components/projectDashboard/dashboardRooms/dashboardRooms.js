@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 
 import Searchbar from './searchbar/SearchBar'
@@ -8,37 +8,13 @@ import CreateRoomButton from './CreateRoomButton'
 import NewRoomPopup from './popup/NewRoomPopup'
 import Loading from '../../../../images/icons/loading-spinner.png'
 import RoomBookingPopup from './popup/RoomBookingPopup'
-
-const rooms = [
-    {title : "Dösraum" , 
-    room_number : "100" , 
-    created_at : "11.05.2022" ,
-    capacity : "20" , 
-    equipment_info : "Bett" , 
-    time : {opening_time : "12:00" , closing_time : "13:00" , openend_on_weekends : "0"} , 
-    address_info : {city : "Hof" , plz : "95028" , address : "Hofstr. 1" , appartment : "B"} ,
-    description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"} ,
-
-    {title : "Actionraum" , 
-    room_number : "223" , 
-    created_at : "11.05.2022" ,
-    capacity : "42" , 
-    equipment_info : "Stühle" , 
-    time : {opening_time : "12:00" , closing_time : "13:00" , openend_on_weekends : "1"} , 
-    address_info : {city : "Naila" , plz : "12345" , address : "Hofstr. 1" , appartment : "A"} ,
-    description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"} ,
-
-    {title : "T-Raum" , 
-    room_number : "666" , 
-    created_at : "11.05.2022" ,
-    capacity : "235" , 
-    equipment_info : "Tafel" , 
-    time : {opening_time : "12:00" , closing_time : "13:00" , openend_on_weekends : "0"} , 
-    address_info : {city : "Bayreuth" , plz : "11111" , address : "Baystr. 1" , appartment : "C"} ,
-    description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"}
-]
+import UserContext from '../../../store/user-context'
+import ProjectContext from '../../../store/project-context'
 
 const dashboardRooms = (props) => {
+
+  const user = useContext(UserContext)
+  const project = useContext(ProjectContext)
 
   const [popupTrigger, setPopupTrigger] = useState(false)
   const [popupTriggerBooking, setPopupTriggerBooking] = useState(false)
@@ -54,11 +30,15 @@ const dashboardRooms = (props) => {
     const [loadedRooms, setRooms] = useState([]);
     const [filtered, setFiltered] = useState(false);
     const [filteredRooms, setFilteredRooms] = useState([]);
+    const [roomName, setRoomName] = useState()
+    const [roomID, setRoomID] = useState()
+    const [roomBookings, setRoomBookings] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
-
-    useEffect(() => {
+    const getData = () =>{
+      setRefresh(false)
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/rooms";
   
       axios.get(url, {
         headers: {
@@ -67,15 +47,19 @@ const dashboardRooms = (props) => {
         }
       })
         .then(function(response) {setIsLoaded(true);
-          setRooms(response.data["rooms"]);  
-          }).catch(function(response){
+          setRooms(response.data["rooms"]); 
+          }).catch(function(error){
+              console.log("error of getrooms: ", error)
               setIsLoaded(true)
               setError(true)})
-    },[] );
+    }
+
+    useEffect(() => {
+      getData()
+    },[project, refresh] );
 
     const sortElements = (event, rotate) => {
       const IDTriggeredSortElement = event.target.id
-      console.log(loadedRooms)
       let orderedRooms;
       switch(IDTriggeredSortElement){
         case "0":
@@ -107,7 +91,6 @@ const dashboardRooms = (props) => {
           }
           break;
         default:
-          console.log("default- shit")
           return;
       }
       setRooms(orderedRooms)
@@ -118,6 +101,17 @@ const dashboardRooms = (props) => {
       let filteredRoomsBuffer
       filteredRoomsBuffer = [...loadedRooms].filter((room) => room.title.toLowerCase().includes(inputValue))
       setFilteredRooms(filteredRoomsBuffer)
+    }
+
+    const getRoomName = (data) => {
+      setRoomName(data)
+    }
+    const getRoomID = (data) => {
+      setRoomID(data)
+    }
+    const getRoomBookings = (data) => {
+      console.log("bookings_data: ", data)
+      setRoomBookings(data)
     }
 
       if (error) {
@@ -134,7 +128,7 @@ const dashboardRooms = (props) => {
             <h2>Keine Räume gefunden</h2>
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
           </div>
-          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID}/>
+          <NewRoomPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID} getData={getData}/>
         </>
         )
     }else {
@@ -149,9 +143,15 @@ const dashboardRooms = (props) => {
               filteredRooms.map((room, index) => {
                 return (
                     <MinView
+                        id={room.id}
                         changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
+                        token={props.token}
+                        getRoomName={getRoomName}
+                        getRoomID={getRoomID}
+                        getData={getData}
+                        getRoomBookings={getRoomBookings}
                     ></MinView>
                 )
             })
@@ -160,9 +160,15 @@ const dashboardRooms = (props) => {
               loadedRooms.map((room, index) => {
                 return (
                     <MinView
+                        id={room.id}
                         changePopupTriggerValueBooking={changePopupTriggerValueBooking} 
                         room = {room}
                         key = {index}
+                        token={props.token}
+                        getRoomID={getRoomID}
+                        getRoomName={getRoomName}
+                        getData={getData}
+                        getRoomBookings={getRoomBookings}
                     ></MinView>
                 )
             })
@@ -172,8 +178,8 @@ const dashboardRooms = (props) => {
         <div className="w-full flex justify-end">
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
-        <RoomBookingPopup trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} />
+        <NewRoomPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} />
+        <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} roomName={roomName} roomID={roomID} bookings={roomBookings}/>
     </div>
   )}
 }

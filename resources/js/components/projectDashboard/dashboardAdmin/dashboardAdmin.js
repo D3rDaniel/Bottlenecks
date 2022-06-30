@@ -20,8 +20,9 @@ const dashboardAdmin = (props) => {
     const [project, setProject] = useState([]);
 
     useEffect(() => {
+      setError(null);
         setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/project/"+props.projectID;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID;
         axios.get(url, {
           headers: {
             'Accept': 'application/json',
@@ -49,7 +50,7 @@ const dashboardAdmin = (props) => {
         return (
             <div className="h-screen w-screen flex justify-center items-center ml-10 mr-5">
                 <div className="flex flex-col justify-center h-full w-full mr-5 gap-10">
-                    <ProjectView project = {project} token={props.token}/>
+                    <ProjectView setRefresh={props.setRefresh} project = {project} token={props.token}/>
                     <AnkuendigungView projectID = {props.projectID} userID = {props.userID} token={props.token}/>
                 </div>
                 

@@ -4,8 +4,10 @@ import TaskMaximumView from './ProjectMaximumView'
 import { Link, useNavigate } from 'react-router-dom'
 import Progressbar from '../../../progressBar'
 import ProjectContext from '../../../store/project-context'
+import axios from 'axios'
 
 const ProjectMinimumView = (props) => {
+
 
     const projectCtx = useContext(ProjectContext);
     const navigate = useNavigate();
@@ -15,6 +17,7 @@ const ProjectMinimumView = (props) => {
         navigate("/project")
     }
 
+    const [creatorUser, setCreatorUser] = useState();
     const [progressCompleted, setProgressCompleted] = useState("w-0%")
     const [rotate, setRotate] = useState(0);
 
@@ -31,15 +34,6 @@ const ProjectMinimumView = (props) => {
         }
     }
 
-    //TestMethode 
-    const test = () => {
-        console.log(rotate);
-    }
-
-    useEffect(() => {
-        fillProgressBar();
-    });
-
   return (
     <div className="my-5 ml-1">
         <div className={`flex h-14 bg-white ${rotate ? null : "drop-shadow-md"} rounded-xl items-center`} >
@@ -48,11 +42,6 @@ const ProjectMinimumView = (props) => {
             <label className="w-1/5 ml-3">{props.creator}</label>
 
             <div className="w-1/5 mr-5">
-                {/* <div className="bg-gray-300 rounded-full h-4 text-xs w-5/6 text-center">
-                    <div className={`${progressCompleted} bg-green-400 rounded-full`}>
-                        {props.progress}%
-                    </div>
-                </div> */}
                 <Progressbar progressPercentage = {props.progress} />
             </div>
             

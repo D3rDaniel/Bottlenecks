@@ -26,8 +26,10 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'email' => 'string|email|unique:users',
-            'password' => '',
-            'last_name' => 'string|max:20',
+            'password' => 'string|min:8|confirmed',
+            'last_name' => 'string|max:30',
+            'first_name' => 'string|max:30',
+            'username' => 'string|max:20|unique:users',
         ];
     }
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator): array

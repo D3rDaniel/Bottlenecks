@@ -43,10 +43,11 @@ class TaskController extends Controller
         //get assigned user
         $assignee = User::find($data['assignee_user_id']);
 
-        //check if assignee is a project-member
-        if (!$assignee->isMemberOfProject($data['project_id'])) {
-            return response()->json(['success'=>false,'message' => 'Assignee is not a member of the project.'], 400);
+        //check if assignee is a project-member or the project owner
+        if (!$assignee->isMemberOfProject($data['project_id']) && !$assignee->isOwnerOfProject($data['project_id'])) {
+                return response()->json(['success'=>false,'message' => 'Assignee is not a member of the project.'], 400);
         }
+
 
         //authorize
         $this->authorize('create', [Task::class,$data['project_id']]);

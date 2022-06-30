@@ -8,10 +8,15 @@ const MemberView = (props) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadedMembers, setMembers] = useState([]);
+    const [reRenderMembers, setReRenderMembers] = useState(false);
+
+    const reRender = () => {setReRenderMembers(true)}
 
     useEffect(() => {
+      setError(null);
+      setReRenderMembers(false);
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/members";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/members";
   
       axios.get(url, {
         headers: {
@@ -24,7 +29,7 @@ const MemberView = (props) => {
           },(error) =>{
             setIsLoaded(true);
             setError(error);})
-    }, []);
+    }, [reRenderMembers]);
         
       if (error) {
         errormessage = error.message;
@@ -44,23 +49,24 @@ const MemberView = (props) => {
                      Es sind noch keine Mitgllieder vorhanden!
                 </div>
             </div>
-            <InputField token={props.token} projectID={props.projectID}/>
+            <InputField token={props.token} projectID={props.projectID} onClick={reRender} />
             </div>)
     }else {  
-    return (
-        <div className="bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between">
+      return (
+        <div className="bg-white rounded-xl w-1/3 h-3/4 drop-shadow-xl flex flex-col justify-between overflow-auto">
             <div>
                 <div className="font-bold mt-2 ml-1">Mitglieder</div>
                 <div className="h-full w-full">
                     {loadedMembers.map((member, index) => {
                         return (
-                            <MemberMinView token={props.token} member={member} key={index}/>
+                            <MemberMinView token={props.token} member={member} key={index} onClick={reRender}/>
                         )
                     })}  
                 </div>
             </div>
-            <InputField token={props.token} projectID={props.projectID}/>
-        </div>)
+            <InputField token={props.token} projectID={props.projectID} onClick={reRender} />
+        </div>
+      )
     }
 }
 

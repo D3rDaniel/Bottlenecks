@@ -19,7 +19,7 @@ const DashboardAnkündigungen = (props) => {
 
     useEffect(() => {
         setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/user/"+props.userID+"/announcements"
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/"+props.userID+"/announcements"
 
         axios.get(url, {
           headers: {
@@ -28,7 +28,7 @@ const DashboardAnkündigungen = (props) => {
           }
         })
           .then(function(response) {setIsLoaded(true);
-            setAnnouncements(response.data["announcements"]);  
+            setAnnouncements(response.data["announcements"]);
             },(error) =>{
               setIsLoaded(true);
               setError(error);})
@@ -75,7 +75,6 @@ const DashboardAnkündigungen = (props) => {
                 }
                 break;
               default:
-                console.log("default- shit")
             }
             setAnnouncements(orderedAnnouncements)
       }
@@ -105,7 +104,7 @@ const DashboardAnkündigungen = (props) => {
             filteredAnnouncements.map((announcement, index) => {
             return (
               <AnnouncementMinimumView
-                project={announcement.project_id}
+                project={announcement.project.title}
                 created_at={announcement.created_at.substring(0, 10)}
                 updated_at={announcement.updated_at.substring(0, 10)}
                 title={announcement.subject}
@@ -120,7 +119,7 @@ const DashboardAnkündigungen = (props) => {
             loadedAnnouncements.map((announcement, index) => {
             return (
               <AnnouncementMinimumView
-                project={announcement.project_id}
+                project={announcement.project.title}
                 created_at={announcement.created_at.substring(0, 10)}
                 updated_at={announcement.updated_at.substring(0, 10)}
                 title={announcement.subject}

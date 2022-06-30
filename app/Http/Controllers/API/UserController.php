@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Mockery\Exception;
 
 class UserController extends Controller
@@ -16,9 +18,9 @@ class UserController extends Controller
     /**
      * Display all verified Users
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $users = User::where('email_verified_at', '!=', NULL)->get();
 
@@ -32,10 +34,10 @@ class UserController extends Controller
     /**
      * Store a newly created user
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param StoreUserRequest $request
+     * @return JsonResponse
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): JsonResponse
     {
         $data = $request->validated();
 
@@ -52,12 +54,12 @@ class UserController extends Controller
     }
 
     /**
-     * Display a user by his id
+     * Display a user by id.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\JsonResponse
+     * @param $id
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $data = User::find($id);
 
@@ -69,28 +71,41 @@ class UserController extends Controller
     }
 
     /**
-     * Update User
+     * Update user data.
      *
-
+     * @param UpdateUserRequest $request
+     * @return JsonResponse
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request): JsonResponse
     {
-        $data = $request->safe()->only(
-            [
-                'email',
-                'password',
-                'first_name',
-                'last_name',
-            ]
-        );
-
+        //get the id of the current user
+        $id = auth()->user()->id;
         try {
             $user = User::findOrFail($id);
 
+            $data = $request->safe()->only(
+                [
+                    'email',
+                    'password',
+                    'first_name',
+                    'last_name',
+                    'username',
+                ]
+            );
+
+            $pwd_changed = false;
+            if(isset($data['password'])){
+                $user->password =  $fields['password'] = Hash::make($data['password']);
+                $user->save();
+                $pwd_changed = true;
+            }
+
             $user->update($data);
+
             $res = [
                 'success' => true,
-                'user' => $user,
+                'password_changed' => $pwd_changed,
+                'user' => $user
             ];
             return response()->json($res, 200);
         } catch (\Exception $e) {
@@ -105,11 +120,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(): JsonResponse
     {
+        $id = auth()->user()->id;
+
         $user = User::find($id);
         if(empty($user)){
             return response()->json(['deleted'=>false,'message'=>'User not found'],404);

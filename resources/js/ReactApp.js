@@ -18,6 +18,8 @@ import Project_RoomsPage from './pages/Project_RoomsPage';
 import Project_TagsPage from './pages/Project_TagsPage';
 import { UserContextProvider } from './store/user-context';
 import {ProjectContextProvider} from './store/project-context';
+import InfoPage from './pages/InfoPage';
+import ProjectInfoPage from './pages/ProjectInfoPage'
 
 export default function ReactApp() {
 
@@ -35,6 +37,7 @@ export default function ReactApp() {
                     <Route path='/offeneTasks' element={<OffeneTasksPage/>}/>
                     <Route path='/accountVerwalten' element={<AccountVerwaltenPage/>}/>
                     <Route path='/raumbuchungen' element={<RaumbuchungenPage/>}/>
+                    <Route path='/info' element={<InfoPage/>}/>
                     <Route path='/project' element={<ProjectPage/>}/>
                     <Route path='/project/admin' element={<Project_AdminPage/>}/>
                     <Route path='/project/ankuendigungen' element={<Project_AnkuendiungPage/>}/>
@@ -42,6 +45,7 @@ export default function ReactApp() {
                     <Route path='/project/uebersicht' element={<Project_UebersichtPage/>}/>
                     <Route path='/project/rooms' element={<Project_RoomsPage/>}/>
                     <Route path='/project/tags' element={<Project_TagsPage/>}/>
+                    <Route path='/project/info' element={<ProjectInfoPage/>}/>
                 </Routes>
                 </ProjectContextProvider>
             </UserContextProvider>

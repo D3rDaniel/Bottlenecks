@@ -55,7 +55,8 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
 
 //User
     Route::apiResource('user', \App\Http\Controllers\API\UserController::class);
-    Route::put('/user/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
+    Route::put('/user', [\App\Http\Controllers\API\UserController::class, 'update']);
+    Route::delete('/user', [\App\Http\Controllers\API\UserController::class, 'destroy']);
     Route::get('/user/tasks/{slug}',[\App\Http\Controllers\API\TaskUserController::class,'getTasks']);
 
 //Room
@@ -71,9 +72,6 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
 //Announcements
     Route::post('/announcements', [\App\Http\Controllers\API\AnnouncementController::class, 'store']);
     Route::delete('/announcements/{id}', [\App\Http\Controllers\API\AnnouncementController::class, 'destroy']);
-    //Route::apiResource('/announcements',\App\Http\Controllers\API\AnnouncementController::class);
-    Route::get('/announcements/user',[\App\Http\Controllers\API\AnnouncementUserController::class,'show']);
-    //Route::get('/project/{project_id}/user/{user_id}/announcements', [\App\Http\Controllers\API\ProjectUserAnnouncementController::class, 'show']);
     Route::get('/user/{user_id}/announcements', [\App\Http\Controllers\API\UserAnnouncementController::class,'show']);
     Route::get('/project/{project_id}/announcements', [\App\Http\Controllers\API\ProjectAnnouncementController::class, 'show']);
 }) ;

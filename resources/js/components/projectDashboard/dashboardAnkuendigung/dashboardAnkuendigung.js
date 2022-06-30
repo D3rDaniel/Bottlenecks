@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from 'react'
+import axios from 'axios'
 
 import Searchbar from './searchbar/SearchBar'
 import MinView from './AnkuendigungMinimumView'
@@ -19,7 +20,7 @@ const dashboardAnkuendigung = (props) => {
 
     useEffect(() => {
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/announcements";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/announcements";
   
       axios.get(url, {
         headers: {
@@ -53,7 +54,6 @@ const dashboardAnkuendigung = (props) => {
           }
           break;
         default:
-          console.log("default- shit")
       }
       setAnnouncements(orderedAnnouncements)
     }

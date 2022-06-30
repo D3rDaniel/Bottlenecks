@@ -15,7 +15,6 @@ const SearchBar = (props) => {
     <div className="bg-blue rounded-xl h-20">
       <div className="flex">
         <SearchField filterElements={filterElements} />
-        <CheckboxList />
       </div>
       
       <div className="flex">

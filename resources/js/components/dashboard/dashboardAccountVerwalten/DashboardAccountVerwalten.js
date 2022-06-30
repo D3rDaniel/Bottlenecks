@@ -8,7 +8,7 @@ function DashboardAccountVerwalten(props) {
     const [email, setEmail] = useState(props.user.user_email);
 
     const changeInputs = () => {
-        const url = "http://127.0.0.1:8000/api/user/"+props.user.user_id;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/"+props.user.user_id;
 
         let userData = {};
 

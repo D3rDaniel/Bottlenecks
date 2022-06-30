@@ -14,6 +14,7 @@ function LoginPage() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState(false)
 
     function checkInput(){
         let emailIsValid = String(email)
@@ -26,18 +27,8 @@ function LoginPage() {
 
         if(emailIsValid && passwordIsValid) return true
         else {
-            return false
+            return true
         }
-    }
-
-    function handleLoginDummy(){
-        userCtx.login(2, "Johann_Esmatus", "dummy@email.com", "DummyT0k3n")
-        console.log(userCtx.user_id);
-        console.log(userCtx.user_name);
-        console.log(userCtx.user_email);
-        console.log(userCtx.user_token);
-
-        navigate('/');
     }
 
     function handleLogin(){
@@ -47,15 +38,27 @@ function LoginPage() {
                 "password" : password
             }
 
-            const url = "http://127.0.0.1:8000/api/login";
+            const url = "http://sl-vinf-bordbame.hof-university.de:80/api/login";
             axios.post(url, loginData).then(function(response){
                 if(response.data.success == true) {
                     userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.username.first_name, response.data.username.last_name, response.data.bearer_token);
-                    alert("Erfolgreich angemeldet!");
                     navigate('/');
                 }
                 else alert("Anmeldung fehlgeschlagen!");
-            }).catch(function (error) {if (error.response) alert("Anmeldung fehlgeschlagen, es wurde kein Nutzer mit dieser E-Mail gefunden")})
+            }).catch(function (error) {
+                if (error.response) {
+                    console.log(error.response)
+                    if(error.response.status == 401){
+                        setError(true)
+                        alert("Anmeldung fehlgeschlagen, falsches Password.")
+                    } 
+                    if(error.response.status == 422) {
+                        setError(true)
+                        alert("Anmeldung fehlgeschlagen, kein Benutzer mit dieser Email gefunden.")
+                    }
+                }
+                
+            })
         }
         else alert("Eingabe ist ungültig!");
     }
@@ -71,7 +74,7 @@ function LoginPage() {
                     <InputField id="email" placeholder="Email" onChange={setEmail}></InputField>
                 </div>
                 <div className="mb-6">
-                    <InputField id="password" placeholder="Passwort" onChange={setPassword}></InputField>
+                    <InputField error={error} id="password" placeholder="Passwort" onChange={setPassword} type="password"></InputField>
                 </div>
                 <div className="flex items-center justify-between">
                     <Link to="/Register" className='text-blue underline'>Du hast noch keinen Account?</Link>

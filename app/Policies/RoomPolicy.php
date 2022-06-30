@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Project;
 use App\Models\Room;
 use App\Models\User;
 use http\Client\Response;
@@ -17,7 +18,7 @@ class RoomPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user, int $project_id): Response|bool
+    public function viewAny(User $user,  $project_id): Response|bool
     {
         return ($user->isMemberOfProject($project_id) || $user->isOwnerOfProject($project_id));
     }
