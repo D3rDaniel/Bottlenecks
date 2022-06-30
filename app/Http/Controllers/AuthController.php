@@ -2,45 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    /**
+     * Register a new user.
+     *
+     * @param RegisterRequest $request
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request): JsonResponse
+    {
 
-        $fields = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'username' => 'required|string|unique:users',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|confirmed'
-        ]);
+        $fields = $request->validated();
 
         $fields['password'] = Hash::make($fields['password']);
 
-        $user = User::create(
-            $fields
-        );
+        $user = User::create($fields);
 
         $response=[
             'success'=>true,
             'user' => $user,
         ];
 
-        return response($response,201);
+        return response()->json($response, 201);
 
     }
 
-    public function logout(Request $request){
+    /**
+     * Logout a user.
+     * Deletes all API tokens of the user.
+     *
+     * @param Request $request
+     * @return JsonResponse success: true -> user logged out
+     */
+    public function logout(Request $request): JsonResponse
+    {
         //revoke all tokens
         auth()->user()->tokens()->delete();
 
-        return ['message' => 'Successfully logged out'];
+        return response()->json([
+            'success'=>true,
+        ], 200);
     }
 
-    public function login(Request $request){
+    /**
+     * Login a user.
+     *
+     * @param Request $request
+     * @return JsonResponse logged in user
+     */
+    public function login(Request $request): JsonResponse
+    {
         $credentials = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required'
@@ -49,20 +67,15 @@ class AuthController extends Controller
         $user = User::where('email',$credentials['email'])->first();
 
         if(!$user){
-            return response(['message' => 'No user found'],404);
+            return response()->json(['message' => 'User not found.'],404);
         }
 
         //Check users password
         if(!$user || !Hash::check($credentials['password'],$user->password)){
-            return response(['message' => 'Invalid credentials'],401);
+            return response()->json(['message' => 'Invalid credentials.'],401);
         }
 
-        //if(!auth()->attempt($credentials)){
-        //   return response(['message' => 'Invalid credentials'],401);
-        //}
-
         $token = $user->createToken('token')->plainTextToken;
-
 
         $response=[
             'success' => true,
