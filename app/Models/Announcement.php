@@ -11,11 +11,21 @@ class Announcement extends Model
 
     protected $guarded = ['id','created_at', 'updated_at'];
 
+    /**
+     * The user that created the announcement.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * The project the announcement belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function project()
     {
         return $this->belongsTo(Project::class);

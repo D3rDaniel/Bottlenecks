@@ -28,51 +28,110 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
+    /**
+     * The projects that where created by the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function createdProjects(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Project::class,'creator_user_id');
     }
 
+    /**
+     * The tasks that where created by the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function createdTasks(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Task::class,'creator_user_id');
     }
 
+    /**
+     * The tasks that where assigned to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function tasksAssigned(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Task::class,'assignee_user_id');
     }
 
+    /**
+     * The projects where the user is a member.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function projectsWhereMember(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Project::class,'project_users')
             ->withPivot(['can_edit_tasks','can_create_tasks','can_create_tags'])->as('user_project_rights');
     }
 
+    /**
+     * All bookings of the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function bookings(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Booking::class);
     }
 
+    /**
+     * All announcements the user created.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function announcements(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Announcement::class);
     }
 
+    /**
+     * Checks if the user is owner of the project with
+     * the specified id.
+     *
+     * @param $project_id
+     * @return bool
+     */
     public function isOwnerOfProject($project_id): bool
     {
         return $this->createdProjects()->where('id',$project_id)->exists();
     }
 
+    /**
+     * Checks if the user is a member of the project with
+     * the specified id.
+     *
+     * @param $project_id
+     * @return bool
+     */
     public function isMemberOfProject($project_id): bool
     {
         return $this->projectsWhereMember()->where('project_id',$project_id)->exists();
     }
 
+    /**
+     * Checks if the user is allowed to create tasks in the project with
+     * the specified id.
+     *
+     * @param $project_id
+     * @return bool
+     */
     public function canCreateTasks($project_id): bool
     {
         return $this->projectsWhereMember()->where('project_id',$project_id)->where('can_create_tasks','1')->exists();
     }
+
+    /**
+     * Checks if the user is allowed to create announcements in the project with
+     * the specified id.
+     *
+     * @param $project_id
+     * @return bool
+     */
     public function canCreateAnnouncements($project_id): bool
     {
         return $this->projectsWhereMember()->where('project_id',$project_id)->where('can_create_announcements','1')->exists();

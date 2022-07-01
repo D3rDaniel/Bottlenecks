@@ -19,7 +19,7 @@ class Priority extends Model
 
 
     /**
-     * All Priorities that have this Priority.
+     * All tasks that have this Priority.
      *
      * @return HasMany
      */

@@ -17,7 +17,7 @@ class Status extends Model
     ];
 
     /**
-     * Get the tasks for the status.
+     * Get the tasks of this status.
      *
      * @return HasMany
      */
