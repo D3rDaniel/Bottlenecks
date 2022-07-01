@@ -50,7 +50,6 @@ class ProjectController extends Controller
     {
         $project = Project::with('creator')->find($id);
 
-        //TODO: Antwort zentral anpassen
         if($project){
             try {
                 $this->authorize('view', [$project]);
@@ -77,20 +76,19 @@ class ProjectController extends Controller
     /**
      * Update title, description and due_date of the project(id) in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param UpdateProjectRequest $request
+     * @param int $id
      * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function update(UpdateProjectRequest $request, $id)
+    public function update(UpdateProjectRequest $request, $id): JsonResponse
     {
 
         $project = Project::find($id);
         $data = $request->safe()->only(['title','description','due_date']);
 
-        $this->authorize('update',[$project]);
-
         if($project){
-
+            $this->authorize('update',[$project]);
             $project->update($data);
 
             $res = ['success'=>true,'project'=>$project];
@@ -105,10 +103,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified project from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
 
         $project = Project::find($id);
@@ -128,10 +127,11 @@ class ProjectController extends Controller
      * Set the projects completion date
      * to current date
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function completeProject($id)
+    public function completeProject($id): JsonResponse
     {
         $project = Project::find($id);
 
@@ -154,7 +154,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function getTags($id)
+    public function getTags($id): JsonResponse
     {
         $project = Project::find($id);
 

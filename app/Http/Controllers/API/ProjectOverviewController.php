@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 
 class ProjectOverviewController extends Controller
 {
     /**
      * Return an overview of the projects stats.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param int $id
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
 
         try {
