@@ -2,7 +2,7 @@ import React, {useState , useEffect} from 'react'
 import axios from 'axios'
 
 const MemberMaxView = (props) => {
-    const url = "http://127.0.0.1:8000/api/project-member/"+props.member.pivot.id;
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project-member/"+props.member.pivot.id;
 
     const [createTasks , setCreateTasks] = useState(props.member.pivot.can_create_tasks);
     const [editTasks , setEditTasks] = useState(props.member.pivot.can_edit_tasks);
@@ -67,7 +67,7 @@ const MemberMaxView = (props) => {
                 </div>    
             </div>
             <div className="flex justify-between h-8 mt-5">
-                <button className="text-white mx-2 w-1/3 bg-blue border border-black rounded-md" onClick={reRender}>sichern</button>
+                <button className="text-white mx-2 w-1/3 bg-blue border border-black rounded-md" onClick={props.onClick}>sichern</button>
                 <button className="text-white mx-2 w-1/3 bg-red border border-black rounded-md" onClick={deleteMember}>entfernen</button>
             </div> 
         </div>

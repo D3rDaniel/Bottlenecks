@@ -16,7 +16,7 @@ const dashboardDeadline = (props) => {
 
   useEffect(() => {
     setIsLoaded(false);
-    const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/tasks";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/tasks";
 
     axios.get(url, {
       headers: {
@@ -29,7 +29,7 @@ const dashboardDeadline = (props) => {
 
             let filteredTasks = []
             for(let i = 0; i < response.data["tasks"].length; i++){
-                if(response.data["tasks"][i].completed_date == null) filteredTasks.push(response.data["tasks"][i]);
+                if(response.data["tasks"][i].status ? response.data["tasks"][i].status.id == 2 : false) filteredTasks.push(response.data["tasks"][i]);
             }
             console.log("deadline filtered Tasks: ", filteredTasks)
             setTasks(filteredTasks)

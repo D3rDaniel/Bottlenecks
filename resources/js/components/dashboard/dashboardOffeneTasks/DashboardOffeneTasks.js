@@ -77,7 +77,7 @@ function DashboardOffeneTasks(props) {
 
     useEffect(() => {
         setIsLoaded(false);
-        const url = "http://127.0.0.1:8000/api/user/tasks/in-progress";
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/tasks/in-progress";
 
         axios.get(url, {
           headers: {

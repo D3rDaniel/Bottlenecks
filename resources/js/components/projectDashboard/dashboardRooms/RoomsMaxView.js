@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 const RoomsMaxView = (props) => {
 
     const handleSubmit = (event) => {
-        const url = "http://127.0.0.1:8000/api/room/"+props.room.id
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/room/"+props.room.id
 
         axios.delete(url, {
             headers: {
@@ -51,15 +51,15 @@ const RoomsMaxView = (props) => {
         <div className="w-1/4 mt-5 pb-5">
             <div className="font-bold">Zu finden:</div>
             <div>
-               <label>Stadt: </label>
+               <label>Adresse: </label>
                 <label>{city}</label> 
             </div>
             <div>
-               <label>PLZ: </label>
+               <label>Stadt: </label>
                 <label>{plz}</label> 
             </div>
             <div>
-               <label>Adresse: </label>
+               <label>PLZ: </label>
                 <label>{building}</label> 
             </div>
             <div>

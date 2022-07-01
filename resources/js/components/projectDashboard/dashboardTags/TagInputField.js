@@ -8,7 +8,7 @@ const TagInputField = (props) => {
   const [tag, setTag] = useState("");
 
   const addTagToProject = () => {
-    const url = "http://127.0.0.1:8000/api/tag";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/tag";
 
     const data = {
       "project_id" : props.projectID,
@@ -22,7 +22,7 @@ const TagInputField = (props) => {
       }
      })
     .then(function(response) {
-        props.getData()
+      props.refresh();
     }).catch(function(response){
       alert("Etwas ist schief gelaufen, versuche es erneut")
     })

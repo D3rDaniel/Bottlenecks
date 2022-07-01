@@ -24,7 +24,7 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
     }
 
     const handleOpenProject = (id) => {
-        const url = "http://127.0.0.1:8000/api/project/"+id;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+id;
 
         axios.get(url, {
             headers: {
@@ -35,8 +35,7 @@ const ProjectMinimumViewRaumbuchungen = (props) => {
             .then(function(response) {
                 let project = response.data["project"]
               if(project){
-                projectCtx.select(project.id, project.title, project.creator_user_id);
-                alert("project set with id " + projectCtx.project_id + " data: " + project)
+                projectCtx.select(project.id, project.title, project.creator.username);
                 navigate('/project/rooms');
             }
             else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");

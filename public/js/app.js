@@ -2845,7 +2845,7 @@ function DashboardAbgeschlosseneTasks(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/tasks/completed";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/tasks/completed";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -3143,7 +3143,7 @@ var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlo
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
 
   var handleOpenProject = function handleOpenProject(id) {
-    var url = "http://127.0.0.1:8000/api/project/" + id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + id;
     axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -3153,7 +3153,7 @@ var ProjectMinimumViewAbgeschlosseneTasks = function ProjectMinimumViewAbgeschlo
       var project = response.data["project"];
 
       if (project) {
-        projectCtx.select(project.id, project.title, project.creator_user_id);
+        projectCtx.select(project.id, project.title, project.creator.username);
         navigate('/project');
       } else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");
     });
@@ -3395,7 +3395,7 @@ function DashboardAccountVerwalten(props) {
       setEmail = _useState6[1];
 
   var changeInputs = function changeInputs() {
-    var url = "http://127.0.0.1:8000/api/user/" + props.user.user_id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + props.user.user_id;
     var userData = {};
     email === props.user.user_email ? userData = {
       "first_name": firstName,
@@ -3703,7 +3703,7 @@ var DashboardAnkündigungen = function DashboardAnkündigungen(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/announcements";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + props.userID + "/announcements";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -4074,21 +4074,19 @@ var CompletionPopup = function CompletionPopup(props) {
   };
 
   var handleCompletion = function handleCompletion() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id + "/complete";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id + "/complete";
+    var comment = value ? value : "-ohne Kommentar-";
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
-      completion_comment: value
+      completion_comment: comment
     }, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + userCtx.user_token
       }
     }).then(function (response) {
-      if (response.data.success == true) {
-        alert("Task wurde erfolgreich abgeschlossen!");
-      } else {
+      if (response.data.success == true) props.refresh();else {
         alert("Es ist ein Fehler aufgetreten!");
       }
-
       props.close();
     });
   };
@@ -4333,7 +4331,7 @@ function DashboardOffeneTasks(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/tasks/in-progress";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/tasks/in-progress";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -4438,7 +4436,7 @@ var ProjectMaximumViewOffeneTasks = function ProjectMaximumViewOffeneTasks(props
   var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
   var closeTask = function closeTask() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios.put(url, {
       status_id: 4
     }, {
@@ -4752,7 +4750,7 @@ function CreateProjectButton(_ref) {
   var onClick = _ref.onClick,
       popupTrigger = _ref.popupTrigger;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
       className: "mt-1 mr-2"
@@ -4875,9 +4873,10 @@ function DashboardProjects(props) {
       setFilteredProjects = _useState14[1];
 
   var getData = function getData() {
+    setError(null);
     setRefresh(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + props.userID + "/projects";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + props.userID + "/projects";
     axios__WEBPACK_IMPORTED_MODULE_6___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -4999,6 +4998,9 @@ function DashboardProjects(props) {
         })
       }) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_popup_NewProjectPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         trigger: popupTrigger,
+        refresh: function refresh() {
+          setRefresh(true);
+        },
         onClick: changePopupTriggerValue,
         token: props.token,
         getData: getData
@@ -5315,21 +5317,24 @@ function NewProjectPopup(props) {
       description: description,
       due_date: year + "-" + month + "-" + day
     };
-    var url = "http://127.0.0.1:8000/api/project/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project";
     axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, projectData, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      if (res.status === 201) {
+      console.log(res);
+
+      if (res.status < 400) {
         alert("Projekt wurder erfolgreich erstellt!");
         props.onClick();
-        props.getData();
         props.refresh();
       } else {
-        alert("Es ist etwas schief gelaufen");
+        alert("Es ist ein Fehler aufgetreten!");
       }
+    })["catch"](function (error) {
+      console.log(error);
     });
   };
 
@@ -5779,7 +5784,7 @@ function DashboardRaumbuchungen(props) {
 
   var getBookings = function getBookings() {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/user/" + user.user_id + "/bookings";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/" + user.user_id + "/bookings";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -6000,7 +6005,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ProjectMaximumViewRaumbuchungen(props) {
   var deleteBooking = function deleteBooking() {
-    var url = "http://127.0.0.1:8000/api/bookings/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/bookings/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -6136,7 +6141,7 @@ var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(p
   };
 
   var handleOpenProject = function handleOpenProject(id) {
-    var url = "http://127.0.0.1:8000/api/project/" + id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + id;
     axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -6146,8 +6151,7 @@ var ProjectMinimumViewRaumbuchungen = function ProjectMinimumViewRaumbuchungen(p
       var project = response.data["project"];
 
       if (project) {
-        projectCtx.select(project.id, project.title, project.creator_user_id);
-        alert("project set with id " + projectCtx.project_id + " data: " + project);
+        projectCtx.select(project.id, project.title, project.creator.username);
         navigate('/project/rooms');
       } else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");
     });
@@ -6343,8 +6347,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SignOutButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignOutButton */ "./resources/js/components/dashboard/sidebar/SignOutButton.js");
 /* harmony import */ var _images_logo_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../images/logo.jpg */ "./resources/images/logo.jpg");
 /* harmony import */ var _images_icons_info_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../images/icons/info.jpg */ "./resources/images/icons/info.jpg");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../store/user-context */ "./resources/js/store/user-context.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -6356,37 +6362,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Sidebar = function Sidebar(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+  var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_6__["default"]);
+  var name = userCtx.user_name;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    name = userCtx.user_name;
+  }, [userCtx]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     className: "flex flex-col min-w-max w-80 justify-between mt-2",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "rounded-xl bg-white",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
         to: "/",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
           src: _images_logo_jpg__WEBPACK_IMPORTED_MODULE_4__["default"],
           alt: "logo",
           className: "h-16 w-16 mr-2 pl-2 float-left hover:cursor-pointer"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
         className: "font-bold text-xl mt-1",
         children: "Dashboard"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
-        children: ["von ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h2", {
+        children: ["von ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
           className: "text-darkorange",
-          children: props.username
+          children: name
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "mt-16",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SidebarButtonList__WEBPACK_IMPORTED_MODULE_1__["default"], {})
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_SidebarButtonList__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SidebarButtonElement__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_SidebarButtonElement__WEBPACK_IMPORTED_MODULE_2__["default"], {
         img: _images_icons_info_jpg__WEBPACK_IMPORTED_MODULE_5__["default"],
         desc: "Info",
         selected: "false",
         url: "info"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SignOutButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_SignOutButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
         token: props.token
       })]
     })]
@@ -6554,7 +6565,7 @@ var SignOutButton = function SignOutButton(props) {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var logout = function logout() {
-    var url = "http://127.0.0.1:8000/api/logout";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/logout";
     axios__WEBPACK_IMPORTED_MODULE_1___default().post(url, "-", {
       headers: {
         'Accept': 'application/json',
@@ -6568,7 +6579,7 @@ var SignOutButton = function SignOutButton(props) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-    className: "bg-red text-white w-36 h-8 m-2 mt-7 \r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
+    className: "bg-red text-white w-36 h-8 m-2 mt-7  hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
     onClick: logout,
     children: "Abmelden"
   });
@@ -6626,7 +6637,7 @@ function DropDownSelect(props) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "mb-3 xl:w-96",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
-        className: "form-select\r block\r w-full\r px-3\r py-1.5\r text-base\r font-normal\r text-gray-700\r bg-white bg-clip-padding bg-no-repeat\r border border-solid border-gray-300\r rounded\r transition\r ease-in-out\r m-0\r focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+        className: "form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
         value: selects,
         onChange: handleChange,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
@@ -6803,7 +6814,7 @@ var AdminAnkuendigungView = function AdminAnkuendigungView(props) {
       setMessage = _useState4[1];
 
   var handleAnnouncement = function handleAnnouncement() {
-    var url = "http://127.0.0.1:8000/api/announcements";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/announcements";
     var announcment = {
       subject: subject,
       message: message,
@@ -6883,10 +6894,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _images_icons_stift_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../images/icons/stift.png */ "./resources/images/icons/stift.png");
-/* harmony import */ var _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../images/icons/kreuz.png */ "./resources/images/icons/kreuz.png");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _store_project_context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store/project-context */ "./resources/js/store/project-context.js");
+/* harmony import */ var _images_icons_stift_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../images/icons/stift.png */ "./resources/images/icons/stift.png");
+/* harmony import */ var _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../images/icons/kreuz.png */ "./resources/images/icons/kreuz.png");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6907,8 +6919,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var AdminProjectView = function AdminProjectView(props) {
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
+  var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -6936,7 +6950,7 @@ var AdminProjectView = function AdminProjectView(props) {
 
   var handleNewData = function handleNewData() {
     changeView();
-    var url = "http://127.0.0.1:8000/api/project/" + props.project.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.project.id;
     var projectData = {
       title: newTitle,
       description: newDescription,
@@ -6948,6 +6962,8 @@ var AdminProjectView = function AdminProjectView(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (response) {
+      projectCtx.project_title = newTitle;
+      props.setRefresh();
       alert("Projektdaten erfolgreich geändert");
     })["catch"](function (error) {
       console.log(error.response.data);
@@ -6955,7 +6971,7 @@ var AdminProjectView = function AdminProjectView(props) {
   };
 
   var deleteProject = function deleteProject() {
-    var url = "http://127.0.0.1:8000/api/project/" + props.project.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.project.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -6969,19 +6985,19 @@ var AdminProjectView = function AdminProjectView(props) {
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "bg-white rounded-xl w-full h-1/3 drop-shadow-xl",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "flex flex-col h-5/6",
-      children: editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      children: editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
           type: "text",
           placeholder: newTitle,
           onChange: function onChange(e) {
             setNewTitle(e.target.value);
           },
           className: "font-bold ml-4 mt-2 outline-none w-11/12 p-1 rounded-md drop-shadow-md bg-gray-200 placeholder-gray-600"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("textarea", {
           type: "text",
           rows: "4",
           placeholder: newDescription,
@@ -6990,54 +7006,54 @@ var AdminProjectView = function AdminProjectView(props) {
           },
           className: "ml-4 mt-4 outline-none w-11/12 mr-5 rounded-md drop-shadow-md bg-gray-200 placeholder-gray-600"
         })]
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "font-bold ml-4 mt-2",
           children: newTitle
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "ml-4 mt-4",
           children: newDescription
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "flex justify-between items-center h-1/6",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "font-bold ml-4 mr-2",
           children: "Fertigstellung bis:"
-        }), editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+        }), editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
           type: "date",
           onChange: function onChange(e) {
             setNewDueDate(e.target.value);
           }
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           children: newDueDate
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "flex",
-        children: [editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        children: [editButton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
           className: "bg-lightorange rounded-xl h-8 w-48 text-white hover:font-bold  mb-2 mr-2",
           onClick: handleNewData,
           children: "Speichern"
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "flex justify-center bg-lightorange rounded-xl h-8 w-36 mb-2 mr-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-            src: _images_icons_stift_png__WEBPACK_IMPORTED_MODULE_2__["default"],
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            src: _images_icons_stift_png__WEBPACK_IMPORTED_MODULE_3__["default"],
             alt: "stift",
             className: "h-5 w-5 mt-1 mr-3"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "text-white hover:font-bold",
             onClick: changeView,
             children: "Bearbeiten"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "flex justify-center bg-red rounded-xl h-8 w-44 mb-2 mr-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-            src: _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_3__["default"],
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            src: _images_icons_kreuz_png__WEBPACK_IMPORTED_MODULE_4__["default"],
             alt: "Kreuz",
             className: "h-5 w-5 mt-1.5 mr-3"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "text-white hover:font-bold",
             onClick: deleteProject,
             children: "Projekt l\xF6schen"
@@ -7092,7 +7108,7 @@ var MemberInputField = function MemberInputField(props) {
       setMember = _useState2[1];
 
   var addMember = function addMember() {
-    var url = "http://127.0.0.1:8000/api/project/add-new-user";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/add-new-user";
     var memberData = {
       username: member,
       project_id: props.projectID,
@@ -7109,8 +7125,7 @@ var MemberInputField = function MemberInputField(props) {
     }).then(function (response) {
       props.onClick();
     })["catch"](function (error) {
-      console.log(error.response.data);
-      alert("Bitte nur gütlige Nutzernamen eingeben!");
+      props.onClick();
     });
   };
 
@@ -7122,12 +7137,15 @@ var MemberInputField = function MemberInputField(props) {
       onChange: function onChange(e) {
         setMember(e.target.value);
       },
-      className: "bg-gray-200 placeholder-gray-600 w-full rounded-md pl-3 h-8 outline-none"
+      className: "bg-gray-200 text-sm placeholder-gray-600 w-full rounded-md pl-3 h-8 outline-none"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "bg-blue rounded-r-md w-40 flex items-center justify-center hover:cursor-pointer",
+      onClick: function onClick() {
+        addMember();
+        props.onClick();
+      },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
         className: "text-white hover:font-bold min-w-max text-sm",
-        onClick: addMember,
         children: "hinzuf\xFCgen"
       })
     })]
@@ -7172,7 +7190,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var MemberMaxView = function MemberMaxView(props) {
-  var url = "http://127.0.0.1:8000/api/project-member/" + props.member.pivot.id;
+  var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project-member/" + props.member.pivot.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.member.pivot.can_create_tasks),
       _useState2 = _slicedToArray(_useState, 2),
@@ -7298,7 +7316,7 @@ var MemberMaxView = function MemberMaxView(props) {
         className: "flex justify-between h-8 mt-5",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "text-white mx-2 w-1/3 bg-blue border border-black rounded-md",
-          onClick: reRender,
+          onClick: props.onClick,
           children: "sichern"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "text-white mx-2 w-1/3 bg-red border border-black rounded-md",
@@ -7446,12 +7464,14 @@ var MemberView = function MemberView(props) {
       setReRenderMembers = _useState8[1];
 
   var reRender = function reRender() {
-    reRenderMembers ? setReRenderMembers(false) : setReRenderMembers(true);
+    setReRenderMembers(true);
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setError(null);
+    setReRenderMembers(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/members";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/members";
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -7498,7 +7518,8 @@ var MemberView = function MemberView(props) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_MemberInputField__WEBPACK_IMPORTED_MODULE_2__["default"], {
         token: props.token,
-        projectID: props.projectID
+        projectID: props.projectID,
+        onClick: reRender
       })]
     });
   } else {
@@ -7611,8 +7632,9 @@ var dashboardAdmin = function dashboardAdmin(props) {
       setProject = _useState6[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setError(null);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID;
     axios__WEBPACK_IMPORTED_MODULE_5___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -7652,6 +7674,7 @@ var dashboardAdmin = function dashboardAdmin(props) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "flex flex-col justify-center h-full w-full mr-5 gap-10",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AdminProjectView__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          setRefresh: props.setRefresh,
           project: project,
           token: props.token
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AdminAnkuendigungView__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -7876,7 +7899,7 @@ var dashboardAnkuendigung = function dashboardAnkuendigung(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/announcements";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/announcements";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -8260,7 +8283,9 @@ var MonthView = function MonthView(props) {
     var day_difference = parseInt(task_day) - currentDate.getDate();
     var month_difference = parseInt(task_month) - (currentDate.getMonth() + 1);
     var year_difference = parseInt(task_year) - currentDate.getFullYear();
+    if (year_difference < -1 || year_difference > 1) return false;
     var total_difference = day_difference + month_difference * 31 + year_difference * 12 * 31;
+    console.log(total_difference);
     if (total_difference >= 8 && total_difference < 32) return true;else return false;
   };
 
@@ -8283,7 +8308,8 @@ var MonthView = function MonthView(props) {
         creator: task.creator.username,
         assignee: task.assignee,
         tag: task.tag == null ? "keine Tag" : task.tag.title,
-        deadlineView: true
+        deadlineView: true,
+        view: "DeadlineView"
       }, index) : null;
     })]
   });
@@ -8342,9 +8368,6 @@ var WeekView = function WeekView(props) {
     if (total_difference >= 0 && total_difference < 8) return true;else return false;
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    currentDate.setDate(currentDate.getDate() + 7);
-  }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "w-full h-1/3 bg-gray-400 rounded-xl overflow-auto drop-shadow-xl z-0",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -8364,7 +8387,8 @@ var WeekView = function WeekView(props) {
         creator: task.creator.username,
         assignee: task.assignee.username,
         tag: task.tag == null ? "keine Tag" : task.tag.title,
-        deadlineView: true
+        deadlineView: true,
+        view: "DeadlineView"
       }, index) : null;
     })]
   });
@@ -8452,7 +8476,7 @@ var dashboardDeadline = function dashboardDeadline(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/tasks";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/tasks";
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -8463,7 +8487,7 @@ var dashboardDeadline = function dashboardDeadline(props) {
       var filteredTasks = [];
 
       for (var i = 0; i < response.data["tasks"].length; i++) {
-        if (response.data["tasks"][i].completed_date == null) filteredTasks.push(response.data["tasks"][i]);
+        if (response.data["tasks"][i].status ? response.data["tasks"][i].status.id == 2 : false) filteredTasks.push(response.data["tasks"][i]);
       }
 
       console.log("deadline filtered Tasks: ", filteredTasks);
@@ -8828,7 +8852,7 @@ var dashboardOverView = function dashboardOverView(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/overview";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/overview";
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -8911,7 +8935,7 @@ __webpack_require__.r(__webpack_exports__);
 function BookingButton(_ref) {
   var onClick = _ref.onClick;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-2 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-2 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: "Buchen"
   });
@@ -8945,7 +8969,7 @@ function CreateRoomButton(_ref) {
   var onClick = _ref.onClick,
       popupTrigger = _ref.popupTrigger;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
       className: "mt-1 mr-2"
@@ -8992,7 +9016,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var RoomsMaxView = function RoomsMaxView(props) {
   var handleSubmit = function handleSubmit(event) {
-    var url = "http://127.0.0.1:8000/api/room/" + props.room.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/room/" + props.room.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
@@ -9057,19 +9081,19 @@ var RoomsMaxView = function RoomsMaxView(props) {
         children: "Zu finden:"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-          children: "Stadt: "
+          children: "Adresse: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: city
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-          children: "PLZ: "
+          children: "Stadt: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: plz
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-          children: "Adresse: "
+          children: "PLZ: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           children: building
         })]
@@ -9151,7 +9175,7 @@ var RoomsMinView = function RoomsMinView(props) {
   };
 
   var getBookings = function getBookings() {
-    var urlBookings = "http://127.0.0.1:8000/api/room/" + props.room.id + "/bookings";
+    var urlBookings = "http://sl-vinf-bordbame.hof-university.de:80/api/room/" + props.room.id + "/bookings";
     axios.get(urlBookings, {
       headers: {
         'Accept': 'application/json',
@@ -9301,7 +9325,6 @@ var dashboardRooms = function dashboardRooms(props) {
 
   var changePopupTriggerValueBooking = function changePopupTriggerValueBooking() {
     setPopupTriggerBooking(!popupTriggerBooking);
-    if (popupTriggerBooking) getData(); //true bs async
   };
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
@@ -9344,9 +9367,15 @@ var dashboardRooms = function dashboardRooms(props) {
       roomBookings = _useState20[0],
       setRoomBookings = _useState20[1];
 
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      refresh = _useState22[0],
+      setRefresh = _useState22[1];
+
   var getData = function getData() {
+    setRefresh(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/rooms";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/rooms";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -9364,7 +9393,7 @@ var dashboardRooms = function dashboardRooms(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getData();
-  }, [project]);
+  }, [project, refresh]);
 
   var sortElements = function sortElements(event, rotate) {
     var IDTriggeredSortElement = event.target.id;
@@ -9480,6 +9509,9 @@ var dashboardRooms = function dashboardRooms(props) {
           onClick: changePopupTriggerValue
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_popup_NewRoomPopup__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        refresh: function refresh() {
+          setRefresh(true);
+        },
         trigger: popupTrigger,
         onClick: changePopupTriggerValue,
         project_id: props.projectID,
@@ -9524,6 +9556,9 @@ var dashboardRooms = function dashboardRooms(props) {
           onClick: changePopupTriggerValue
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_popup_NewRoomPopup__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        refresh: function refresh() {
+          setRefresh(true);
+        },
         trigger: popupTrigger,
         onClick: changePopupTriggerValue
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_popup_RoomBookingPopup__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -9681,7 +9716,7 @@ function NewRoomPopup(props) {
       equipment_info: equipment,
       project_id: project.project_id
     };
-    var url = "http://127.0.0.1:8000/api/room/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/room";
     axios__WEBPACK_IMPORTED_MODULE_5___default().post(url, room, {
       headers: {
         'Accept': 'application/json',
@@ -9689,10 +9724,12 @@ function NewRoomPopup(props) {
       }
     }).then(function (res) {
       if (res.status === 201) {
-        alert("Raum wurder erfolgreich erstellt!");
         props.onClick();
+        props.refresh();
       } else {
         alert("Es ist etwas schief gelaufen");
+        props.onClick();
+        props.refresh();
       }
     })["catch"](function (error) {
       alert("Bitte überprüfe deine Eingaben auf Richtigkeit. ");
@@ -9700,107 +9737,103 @@ function NewRoomPopup(props) {
   };
 
   return props.trigger ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-    className: "w-screen h-full rounded-lg bg-gray-400/[.7] fixed ",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "w-full",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
-          className: "bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20",
-          onSubmit: handleSubmit,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-            className: "items-center mb-6 text-5xl font-body",
-            children: "Raum erstellen"
+    className: "fixed top-0 right-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "relative bg-white shadow-md rounded-lg p-5 flex flex-col m-auto w-1/2",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+        className: "text-center text-xl font-bold mb-3",
+        children: "Raum erstellen"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "flex flex-row pb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "flex flex-col w-3/5 pr-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "h-1/6 justify-center items-center",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              onChange: getName,
+              placeholder: "Name..."
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "h-1/6 justify-center items-center",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              onChange: getSize,
+              placeholder: "Gr\xF6\xDFe..."
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "h-1/6 justify-center items-center",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              onChange: getNumber,
+              placeholder: "Nummer..."
+            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "w-full h-full p-6",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "flex justify-between p-4 mb-4",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                  onChange: getName,
-                  placeholder: "Name..."
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "px-1",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                  onChange: getSize,
-                  placeholder: "Gr\xF6\xDFe..."
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "px-1",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                  onChange: getNumber,
-                  placeholder: "Nummer..."
-                })
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "flex justify-center items-center p-4 mb-4",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                className: "p-2 mr-4",
-                children: "\xD6ffent um:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                type: "time",
-                onChange: function onChange(e) {
-                  setOpen_at(e.target.value + ":00");
-                }
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                className: "p-2 mr-4",
-                children: "Schlie\xDFt um:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                type: "time",
-                onChange: function onChange(e) {
-                  setClose_at(e.target.value + ":00");
-                }
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "flex justify-center items-center  p-4 mb-4",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                className: "mr-6",
-                id: "weekend_checkbox",
-                name: "weekend_checkbox",
-                type: "checkbox",
-                onChange: getOpen_at_weekend
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                htmlFor: "weekend_checkbox",
-                children: "Offen am Wochenende"
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "p-4 mb-4",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                onChange: getAddress,
-                placeholder: "Adresse..."
-              })
+            className: "flex flex-row h-1/6 items-center justify-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+              className: "my-auto mr-1 font-bold",
+              children: "\xD6ffnet um:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+              type: "time",
+              onChange: function onChange(e) {
+                setOpen_at(e.target.value + ":00");
+              }
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "flex justify-between p-6",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "w-1/2 h-full p-6",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-                onChange: getDescription,
-                placeholder: "Beschreibung..."
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "w-1/2 h-full p-6",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-                onChange: getEquipment,
-                placeholder: "Ausstattung..."
-              })
+            className: "flex flex-row h-1/6 items-center justify-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+              className: "font-bold my-auto mr-1",
+              children: "Schlie\xDFt um:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+              type: "time",
+              onChange: function onChange(e) {
+                setClose_at(e.target.value + ":00");
+              }
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "flex items-center justify-between",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-              onClick: props.onClick,
-              className: "bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
-              type: "button",
-              children: "Abbruch"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-              className: "bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline",
-              type: "submit",
-              children: "Erstellen"
+            className: "flex flex-row h-1/6 items-center justify-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+              className: "mr-2 my-auto",
+              htmlFor: "weekend_checkbox",
+              children: "Offen am Wochenende"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+              id: "weekend_checkbox",
+              name: "weekend_checkbox",
+              type: "checkbox",
+              onChange: getOpen_at_weekend
             })]
           })]
-        })
-      })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "flex flex-col w-2/5 pl-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "pb-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              onChange: getDescription,
+              placeholder: "Beschreibung..."
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "pt-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_TextArea__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              onChange: getEquipment,
+              placeholder: "Ausstattung..."
+            })
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "flex flex-row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "w-2/3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_forms_InputField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            onChange: getAddress,
+            placeholder: "Adresse..."
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+          className: "bg-red rounded-xl p-1 text-white ml-auto",
+          onClick: props.onClick,
+          children: "Abbrechen"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+          className: "bg-blue rounded-xl p-1 text-white mx-2",
+          onClick: handleSubmit,
+          children: "Erstellen"
+        })]
+      })]
     })
   }) : "";
 }
@@ -9873,7 +9906,7 @@ function RoomBookingPopup(props) {
       end_time: to + ":00"
     };
     console.log("übergabe booking- date: ", booking);
-    var url = "http://127.0.0.1:8000/api/bookings";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/bookings";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, booking, {
       headers: {
         'Accept': 'application/json',
@@ -10285,14 +10318,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var TagElement = function TagElement(props) {
   var removeTag = function removeTag() {
-    var url = "http://127.0.0.1:8000/api/tag/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/tag/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (response) {
-      alert("Tag wurde erfolgreich entfernt");
+      props.refresh();
     })["catch"](function (response) {
       console.log(response);
     });
@@ -10357,7 +10390,7 @@ var TagInputField = function TagInputField(props) {
       setTag = _useState2[1];
 
   var addTagToProject = function addTagToProject() {
-    var url = "http://127.0.0.1:8000/api/tag";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/tag";
     var data = {
       "project_id": props.projectID,
       "title": tag
@@ -10368,7 +10401,7 @@ var TagInputField = function TagInputField(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (response) {
-      props.getData();
+      props.refresh();
     })["catch"](function (response) {
       alert("Etwas ist schief gelaufen, versuche es erneut");
     });
@@ -10464,9 +10497,15 @@ var dashboardTags = function dashboardTags(props) {
       loadedTags = _useState6[0],
       setTags = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      refresh = _useState8[0],
+      setRefresh = _useState8[1];
+
   var getData = function getData() {
+    setRefresh(false);
     setIsLoaded(false);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/tags";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/tags";
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -10483,7 +10522,7 @@ var dashboardTags = function dashboardTags(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getData();
-  }, []);
+  }, [refresh]);
 
   if (error) {
     errormessage = error.message;
@@ -10511,9 +10550,11 @@ var dashboardTags = function dashboardTags(props) {
         className: "text-red font-bold text-center mb-5",
         children: "Keine Tags gefunden"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TagInputField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        refresh: function refresh() {
+          setRefresh(true);
+        },
         projectID: props.projectID,
-        token: props.token,
-        getData: getData
+        token: props.token
       })]
     });
   } else {
@@ -10531,14 +10572,19 @@ var dashboardTags = function dashboardTags(props) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TagElement__WEBPACK_IMPORTED_MODULE_2__["default"], {
                 name: tag.title,
                 id: tag.id,
-                token: props.token
+                token: props.token,
+                refresh: function refresh() {
+                  setRefresh(true);
+                }
               }, index);
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TagInputField__WEBPACK_IMPORTED_MODULE_3__["default"], {
           projectID: props.projectID,
           token: props.token,
-          getData: getData
+          refresh: function refresh() {
+            setRefresh(true);
+          }
         })]
       })
     });
@@ -10573,7 +10619,7 @@ function CreateTaskButton(_ref) {
   var onClick = _ref.onClick,
       popupTrigger = _ref.popupTrigger;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center\r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
+    className: "bg-blue text-white w-40 h-8 m-2 mt-7 pt-0.5 px-2 flex align-center justify-center hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer ",
     onClick: onClick,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_bs__WEBPACK_IMPORTED_MODULE_2__.BsFillPlusCircleFill, {
       className: "mt-1 mr-2"
@@ -10665,13 +10711,13 @@ function DashboardTasks(props) {
 
   var changePopupTriggerValue = function changePopupTriggerValue() {
     setPopupTrigger(!popupTrigger);
-    getTasks();
   };
 
   var getTasks = function getTasks() {
+    setRefresh(false);
     setIsLoaded(false);
     console.log("project-id-from_dashTasks: ", props.projectID);
-    var url = "http://127.0.0.1:8000/api/project/" + props.projectID + "/tasks";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + props.projectID + "/tasks";
     axios__WEBPACK_IMPORTED_MODULE_6___default().get(url, {
       headers: {
         'Accept': 'application/json',
@@ -10711,9 +10757,14 @@ function DashboardTasks(props) {
       filteredTasks = _useState12[0],
       setFilteredTasks = _useState12[1];
 
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      refresh = _useState14[0],
+      setRefresh = _useState14[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getTasks();
-  }, []);
+  }, [refresh]);
 
   var sortElements = function sortElements(event, rotate) {
     var IDTriggeredSortElement = event.target.id;
@@ -10818,6 +10869,9 @@ function DashboardTasks(props) {
           onClick: changePopupTriggerValue
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_popup_NewTaskPopup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        refresh: function refresh() {
+          setRefresh(true);
+        },
         trigger: popupTrigger,
         onClick: changePopupTriggerValue,
         token: props.token,
@@ -10839,7 +10893,7 @@ function DashboardTasks(props) {
             title: task.title.length > 27 ? task.title.substring(0, 24) + '...' : task.title,
             fullTitle: task.title,
             description: task.description,
-            comment: task.completion_comment === null ? "noch nicht abgeschlossen" : task.completion_comment,
+            comment: task.completion_comment === null ? "-ohne Kommentar-" : task.completion_comment,
             status: task.status !== null ? task.status : "kein status",
             prio: task.priority !== null ? task.priority.title : "keine Priorität",
             completedDate: task.completed_date === null ? "nicht abgeschlossen" : task.completed_date,
@@ -10847,8 +10901,11 @@ function DashboardTasks(props) {
             updated_at: task.updated_at.substring(0, 10),
             creator: task.creator.username,
             assignee: task.assignee,
-            tag: task.tag === null ? "kein Tag" : task.tag.title,
-            token: props.token
+            tag: task.tag === null ? "-kein Tag-" : task.tag.title,
+            token: props.token,
+            refresh: function refresh() {
+              setRefresh(true);
+            }
           }, index);
         }) : loadedTasks.map(function (task, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_TaskMinimumView__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -10865,7 +10922,11 @@ function DashboardTasks(props) {
             creator: task.creator.username,
             assignee: task.assignee,
             tag: task.tag === null ? "keine Tag" : task.tag.title,
-            token: props.token
+            token: props.token,
+            refresh: function refresh() {
+              setRefresh(true);
+            },
+            view: "TaskView"
           }, index);
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -10875,6 +10936,9 @@ function DashboardTasks(props) {
           onClick: changePopupTriggerValue
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_popup_NewTaskPopup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        refresh: function refresh() {
+          setRefresh(true);
+        },
         token: props.token,
         trigger: popupTrigger,
         onClick: changePopupTriggerValue,
@@ -10912,7 +10976,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function TaskMaximumView(props) {
   var closeTask = function closeTask() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(url, {
       status_id: 4
     }, {
@@ -10922,20 +10986,24 @@ function TaskMaximumView(props) {
       }
     }).then(function (res) {
       if (res.status == 201) alert("Task erfolgreich abgebrochen");
+      props.refresh();
     })["catch"](function (error) {
       return console.log("error: ", error);
     });
   };
 
   var deleteTask = function deleteTask() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](url, {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      if (res.status == 201) alert("Task erfolgreich gelöscht");
+      if (res.status == 201) {
+        alert("Task erfolgreich gelöscht");
+        props.refresh();
+      }
     })["catch"](function (error) {
       return console.log("error: ", error);
     });
@@ -11004,11 +11072,11 @@ function TaskMaximumView(props) {
         })]
       }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "mr-12  mb-4 mt-auto",
-        children: props.status.id == 2 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        children: props.status.id == 2 ? props.view == "TaskView" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg",
           onClick: closeTask,
           children: "Task abbrechen"
-        }) : //props.status.id == 4 ? 
+        }) : null : //props.status.id == 4 ? 
         //    <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={deleteTask}>komplett löschen</button>
         //    :
         null
@@ -11097,7 +11165,7 @@ function TaskMinimumView(props) {
   };
 
   var openAgain = function openAgain() {
-    var url = "http://127.0.0.1:8000/api/task/" + props.id;
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/" + props.id;
     axios__WEBPACK_IMPORTED_MODULE_0___default().put(url, {
       status_id: 2
     }, {
@@ -11106,8 +11174,8 @@ function TaskMinimumView(props) {
         'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
-      if (res.status == 201) alert("Task erfolgreich abgeschlossen");
-      props.onClick(); //rerender parent-component
+      console.log(props.refresh);
+      props.refresh();
     })["catch"](function (error) {
       return console.log("error: ", error);
     });
@@ -11125,6 +11193,7 @@ function TaskMinimumView(props) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_dashboard_dashboardOffeneTasks_CompletionPopup__WEBPACK_IMPORTED_MODULE_4__["default"], {
       id: props.id,
       deadline: props.date,
+      refresh: props.refresh,
       trigger: popupTrigger,
       close: function close() {
         setPopupTrigger(false);
@@ -11143,46 +11212,36 @@ function TaskMinimumView(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
         className: "w-1/5",
         children: props.date
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "flex",
-        children: // props.deadlineView === false ?
-        props.status.id == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "flex ml-auto",
+        children: [props.view == "TaskView" ? props.status.id == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "bg-cyan-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
             onClick: openAgain,
-            children: "Wieder Aufnehmen"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-            src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
-            alt: "maxView",
-            className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
-            onClick: rotateArrow
-          })]
-        }) : props.status.id == 2 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            children: "R\xFCckg\xE4ngig"
+          })
+        }) : props.status.id == 2 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "bg-blue w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
             onClick: setPopupTrigger,
             children: "Abschlie\xDFen"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-            src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
-            alt: "maxView",
-            className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
-            onClick: rotateArrow
-          })]
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-            className: "bg-orange-400 w-40 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
+          })
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            className: "bg-orange-400 w-32 h-6 rounded-xl mr-4 text-white hover:font-bold drop-shadow-lg",
             onClick: openAgain,
-            children: "Wieder Aufnehmen"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-            src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
-            alt: "maxView",
-            className: "h-7 w-7 mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
-            onClick: rotateArrow
-          })]
-        }) // : null    
-
+            children: "R\xFCckg\xE4ngig"
+          })
+        }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+          src: _images_icons_arrow_black_png__WEBPACK_IMPORTED_MODULE_2__["default"],
+          alt: "maxView",
+          className: "h-7 w-7 ml-auto mr-3 mt-1 hover:cursor-pointer ".concat(rotate ? "rotate-180" : "rotate-0"),
+          onClick: rotateArrow
+        })]
       })]
     }), rotate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TaskMaximumView__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      view: props.view,
+      refresh: props.refresh,
       title: props.fullTitle,
       description: props.description,
       comment: props.comment,
@@ -11323,9 +11382,9 @@ function NewTaskPopup(props) {
     tagKeyValues = {};
     memberKeyValues = {};
     prioKeyValues = {};
-    var urlTags = "http://127.0.0.1:8000/api/project/" + project.project_id + "/tags";
-    var urlPriorities = "http://127.0.0.1:8000/api/priorities/all";
-    var urlWorker = "http://127.0.0.1:8000/api/project/" + project.project_id + "/members"; //get tags
+    var urlTags = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + project.project_id + "/tags";
+    var urlPriorities = "http://sl-vinf-bordbame.hof-university.de:80/api/priorities/all";
+    var urlWorker = "http://sl-vinf-bordbame.hof-university.de:80/api/project/" + project.project_id + "/members"; //get tags
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(urlTags, {
       headers: {
@@ -11385,7 +11444,7 @@ function NewTaskPopup(props) {
       description: description,
       status_id: 2
     };
-    var url = "http://127.0.0.1:8000/api/task/";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/";
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, task, {
       headers: {
         'Accept': 'application/json',
@@ -11394,6 +11453,7 @@ function NewTaskPopup(props) {
     }).then(function (res) {
       if (res.status === 201) {
         props.onClick();
+        props.refresh();
       } else {
         alert("Es ist etwas schief gelaufen");
       }
@@ -11807,6 +11867,11 @@ __webpack_require__.r(__webpack_exports__);
 var Sidebar = function Sidebar(props) {
   var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_7__["default"]);
   var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_8__["default"]);
+  var projectTitle = projectCtx.project_title;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    projectTitle = projectCtx.project_title;
+    props.refresh ? props.setRefresh() : {};
+  }, [props.refresh ? props.refresh : {}]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     className: "flex flex-col min-w-max w-72 justify-between mt-1",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
@@ -11826,7 +11891,7 @@ var Sidebar = function Sidebar(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h2", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
             className: "text-darkorange",
-            children: projectCtx.project_title.length > 20 ? projectCtx.project_title.toString().substring(0, 19) + "..." : projectCtx.project_title
+            children: projectTitle.length > 20 ? projectTitle.toString().substring(0, 19) + "..." : projectTitle
           })
         })]
       }), userCtx.user_name === projectCtx.project_admin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_AdminButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -12004,7 +12069,7 @@ var SignOutButton = function SignOutButton(props) {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var logout = function logout() {
-    var url = "http://127.0.0.1:8000/api/logout";
+    var url = "http://sl-vinf-bordbame.hof-university.de:80/api/logout";
     axios__WEBPACK_IMPORTED_MODULE_1___default().post(url, "-", {
       headers: {
         'Accept': 'application/json',
@@ -12018,7 +12083,7 @@ var SignOutButton = function SignOutButton(props) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-    className: "bg-red text-white w-36 h-8 m-2 mt-7 \r hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
+    className: "bg-red text-white w-36 h-8 m-2 mt-7  hover:border-2 rounded-xl border-black hover:font-bold hover:cursor-pointer` ",
     onClick: logout,
     children: "Abmelden"
   });
@@ -12338,7 +12403,7 @@ function LoginPage() {
         "email": email,
         "password": password
       };
-      var url = "http://127.0.0.1:8000/api/login";
+      var url = "http://sl-vinf-bordbame.hof-university.de:80/api/login";
       axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, loginData).then(function (response) {
         if (response.data.success == true) {
           userCtx.login(response.data.username.id, response.data.username.username, response.data.username.email, response.data.username.first_name, response.data.username.last_name, response.data.bearer_token);
@@ -12577,6 +12642,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_user_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/user-context */ "./resources/js/store/user-context.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -12587,6 +12664,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Project_AdminPage = function Project_AdminPage() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      refresh = _useState2[0],
+      _setRefresh = _useState2[1];
+
   var projectCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_project_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
   var userCtx = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_store_user_context__WEBPACK_IMPORTED_MODULE_4__["default"]);
   return userCtx.user_id == null || userCtx.user_id == undefined || projectCtx.project_id == null || projectCtx.project_id == undefined ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Navigate, {
@@ -12595,9 +12677,16 @@ var Project_AdminPage = function Project_AdminPage() {
   }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "flex w-screen",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_projectDashboard_sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      refresh: refresh,
+      setRefresh: function setRefresh() {
+        _setRefresh(false);
+      },
       page: "admin",
       token: userCtx.user_token
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_projectDashboard_dashboardAdmin_dashboardAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      setRefresh: function setRefresh() {
+        _setRefresh(true);
+      },
       token: userCtx.user_token,
       userID: userCtx.user_id,
       projectID: projectCtx.project_id
@@ -12948,7 +13037,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function RegisterPage() {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
-  var baseURL = "http://127.0.0.1:8000/api/";
+  var baseURL = "http://sl-vinf-bordbame.hof-university.de:80/api/";
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),

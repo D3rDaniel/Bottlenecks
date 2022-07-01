@@ -13,17 +13,19 @@ const CompletionPopup = (props) => {
     }
 
     const handleCompletion = () => {
-        const url = "http://127.0.0.1:8000/api/task/"+props.id+"/complete";
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/"+props.id+"/complete";
+
+        let comment = value ? value : "-ohne Kommentar-";
 
         axios.put(
             url, 
-            {completion_comment: value},
+            {completion_comment: comment},
             {headers: {
               'Accept': 'application/json',
               'Authorization': 'Bearer ' + userCtx.user_token
             }})
         .then(function(response) {
-          if(response.data.success == true) {alert("Task wurde erfolgreich abgeschlossen!");}
+          if(response.data.success == true) props.refresh();
           else {alert("Es ist ein Fehler aufgetreten!");}
           props.close();
         })

@@ -10,11 +10,13 @@ const MemberView = (props) => {
     const [loadedMembers, setMembers] = useState([]);
     const [reRenderMembers, setReRenderMembers] = useState(false);
 
-    const reRender = () => {reRenderMembers ? setReRenderMembers(false) : setReRenderMembers(true)}
+    const reRender = () => {setReRenderMembers(true)}
 
     useEffect(() => {
+      setError(null);
+      setReRenderMembers(false);
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/members";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/members";
   
       axios.get(url, {
         headers: {
@@ -47,7 +49,7 @@ const MemberView = (props) => {
                      Es sind noch keine Mitgllieder vorhanden!
                 </div>
             </div>
-            <InputField token={props.token} projectID={props.projectID}/>
+            <InputField token={props.token} projectID={props.projectID} onClick={reRender} />
             </div>)
     }else {  
       return (

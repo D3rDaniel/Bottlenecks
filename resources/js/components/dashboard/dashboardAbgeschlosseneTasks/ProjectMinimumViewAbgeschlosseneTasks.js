@@ -16,7 +16,7 @@ const ProjectMinimumViewAbgeschlosseneTasks = (props) => {
     const navigate = useNavigate();
 
     const handleOpenProject = (id) => {
-        const url = "http://127.0.0.1:8000/api/project/"+id;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+id;
 
         axios.get(url, {
             headers: {
@@ -27,7 +27,7 @@ const ProjectMinimumViewAbgeschlosseneTasks = (props) => {
             .then(function(response) {
                 let project = response.data["project"]
               if(project){
-                projectCtx.select(project.id, project.title, project.creator_user_id);
+                projectCtx.select(project.id, project.title, project.creator.username);
                 navigate('/project');
             }
             else alert("Es ist ein Fehler beim Öffnen des dazugehörigem Projektes aufgetreten");

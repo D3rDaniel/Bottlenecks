@@ -7,7 +7,7 @@ import axios from 'axios'
 function RegisterPage() {
 
     const navigate = useNavigate();
-    const baseURL = "http://127.0.0.1:8000/api/"
+    const baseURL = "http://sl-vinf-bordbame.hof-university.de:80/api/"
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")

@@ -53,7 +53,7 @@ function NewRoomPopup(props) {
             project_id: project.project_id
         }
 
-       const url = "http://127.0.0.1:8000/api/room/"; 
+       const url = "http://sl-vinf-bordbame.hof-university.de:80/api/room"; 
         axios.post(url, room, {
         headers: {
             'Accept': 'application/json',
@@ -62,10 +62,12 @@ function NewRoomPopup(props) {
         })
         .then(res => {
             if(res.status === 201){
-                alert("Raum wurder erfolgreich erstellt!");
-                props.onClick()
+                props.onClick();
+                props.refresh();
             }else{
                 alert("Es ist etwas schief gelaufen");
+                props.onClick();
+                props.refresh();
             }
             
         })
@@ -73,57 +75,38 @@ function NewRoomPopup(props) {
             alert("Bitte überprüfe deine Eingaben auf Richtigkeit. ")
         })
     }
-    
-    
 
   return ( props.trigger) ? (
-    <div className="w-screen h-full rounded-lg bg-gray-400/[.7] fixed ">
-        <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
-            
-            <div className="w-full">
-                <form className="bg-white shadow-md rounded-lg w-full px-10 pt-12 pb-14 mb-4 mx-20" onSubmit={handleSubmit}>
-                <h3 className="items-center mb-6 text-5xl font-body">Raum erstellen</h3>
-
-                        <div className="w-full h-full p-6">
-                            <div className="flex justify-between p-4 mb-4">
-                                <div><InputField  onChange={getName} placeholder="Name..."></InputField></div>
-                                <div className="px-1"><InputField  onChange={getSize} placeholder="Größe..."></InputField></div>
-                                <div className="px-1"><InputField  onChange={getNumber} placeholder="Nummer..."></InputField></div>
-                            </div>
-                            <div className="flex justify-center items-center p-4 mb-4">
-                               {/* <div className="pr-3"><InputField  onChange={getOpen_at} placeholder="Öffnet um..."></InputField></div>
-                                <div className="pl-3"><InputField  onChange={getClose_at} placeholder="Schließt um..."></InputField></div> */ }
-                                <label className='p-2 mr-4'>Öffent um:</label>
-                                <input type="time" onChange={e => {setOpen_at(e.target.value+":00")}}></input>
-                                <label className='p-2 mr-4'>Schließt um:</label>
-                                <input type="time" onChange={e => {setClose_at(e.target.value+":00")}}></input>
-                            </div>
-                            <div className="flex justify-center items-center  p-4 mb-4">
-                                <input className="mr-6" id="weekend_checkbox" name="weekend_checkbox" type="checkbox" onChange={getOpen_at_weekend}/>
-                                <label  htmlFor='weekend_checkbox'>Offen am Wochenende</label>
-                            </div>
-                            <div className="p-4 mb-4">
-                                <InputField  onChange={getAddress} placeholder="Adresse..."></InputField>
-                            </div>
-                        </div>
-                        <div className="flex justify-between p-6">
-                            <div className="w-1/2 h-full p-6">
-                                <TextArea onChange={getDescription} placeholder="Beschreibung..."></TextArea>
-                            </div>
-                            <div className="w-1/2 h-full p-6">
-                                <TextArea onChange={getEquipment} placeholder="Ausstattung..."></TextArea>
-                            </div>
-                        </div>
-                    
-                    <div className="flex items-center justify-between">
-                        <button onClick={props.onClick} className="bg-red hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="button">
-                        Abbruch
-                        </button>
-                        <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="submit">
-                        Erstellen
-                        </button>
+    <div className="fixed top-0 right-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10">
+        <div className="relative bg-white shadow-md rounded-lg p-5 flex flex-col m-auto w-1/2">
+            <h3 className="text-center text-xl font-bold mb-3">Raum erstellen</h3>
+            <div className='flex flex-row pb-4'>
+                <div className='flex flex-col w-3/5 pr-2'>
+                    <div className='h-1/6 justify-center items-center'><InputField  onChange={getName} placeholder="Name..."></InputField></div>
+                    <div className='h-1/6 justify-center items-center'><InputField  onChange={getSize} placeholder="Größe..."></InputField></div>
+                    <div className='h-1/6 justify-center items-center'><InputField  onChange={getNumber} placeholder="Nummer..."></InputField></div>
+                    <div className='flex flex-row h-1/6 items-center justify-center'>
+                        <label className='my-auto mr-1 font-bold'>Öffnet um:</label>
+                        <input type="time" onChange={e => {setOpen_at(e.target.value+":00")}}></input>
                     </div>
-                </form>
+                    <div className='flex flex-row h-1/6 items-center justify-center'>
+                        <label className='font-bold my-auto mr-1'>Schließt um:</label>
+                        <input type="time" onChange={e => {setClose_at(e.target.value+":00")}}></input>
+                    </div>
+                    <div className='flex flex-row h-1/6 items-center justify-center'>
+                        <label className="mr-2 my-auto" htmlFor='weekend_checkbox'>Offen am Wochenende</label>
+                        <input id="weekend_checkbox" name="weekend_checkbox" type="checkbox" onChange={getOpen_at_weekend}/>
+                    </div>
+                </div>
+                <div className='flex flex-col w-2/5 pl-4'>
+                    <div className='pb-2'><TextArea onChange={getDescription} placeholder="Beschreibung..."></TextArea></div>
+                    <div className='pt-2'><TextArea onChange={getEquipment} placeholder="Ausstattung..."></TextArea></div>
+                </div>
+            </div>
+            <div className='flex flex-row'>
+                <div className='w-2/3'><InputField  onChange={getAddress} placeholder="Adresse..."/></div>
+                <button className='bg-red rounded-xl p-1 text-white ml-auto' onClick={props.onClick}>Abbrechen</button>
+                <button className='bg-blue rounded-xl p-1 text-white mx-2' onClick={handleSubmit}>Erstellen</button>
             </div>
         </div>
     </div>

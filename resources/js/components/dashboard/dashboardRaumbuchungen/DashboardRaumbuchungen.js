@@ -20,7 +20,7 @@ function DashboardRaumbuchungen(props) {
 
   const getBookings = () =>{
     setIsLoaded(false);
-    const url = "http://127.0.0.1:8000/api/user/"+user.user_id+"/bookings";
+    const url = "http://sl-vinf-bordbame.hof-university.de:80/api/user/"+user.user_id+"/bookings";
     axios.get(url, {
       headers: {
         'Accept': 'application/json',

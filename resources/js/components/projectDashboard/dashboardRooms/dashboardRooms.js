@@ -23,7 +23,6 @@ const dashboardRooms = (props) => {
   }
   const changePopupTriggerValueBooking = () => {
     setPopupTriggerBooking(!popupTriggerBooking);
-    if(popupTriggerBooking) getData() //true bs async
   }
 
     const [error, setError] = useState(null);
@@ -34,10 +33,12 @@ const dashboardRooms = (props) => {
     const [roomName, setRoomName] = useState()
     const [roomID, setRoomID] = useState()
     const [roomBookings, setRoomBookings] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
     const getData = () =>{
+      setRefresh(false)
       setIsLoaded(false);
-      const url = "http://127.0.0.1:8000/api/project/"+props.projectID+"/rooms";
+      const url = "http://sl-vinf-bordbame.hof-university.de:80/api/project/"+props.projectID+"/rooms";
   
       axios.get(url, {
         headers: {
@@ -55,7 +56,7 @@ const dashboardRooms = (props) => {
 
     useEffect(() => {
       getData()
-    },[project] );
+    },[project, refresh] );
 
     const sortElements = (event, rotate) => {
       const IDTriggeredSortElement = event.target.id
@@ -127,7 +128,7 @@ const dashboardRooms = (props) => {
             <h2>Keine Räume gefunden</h2>
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
           </div>
-          <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID} getData={getData}/>
+          <NewRoomPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} project_id={props.projectID} getData={getData}/>
         </>
         )
     }else {
@@ -177,7 +178,7 @@ const dashboardRooms = (props) => {
         <div className="w-full flex justify-end">
             <CreateRoomButton popupTrigger={popupTrigger} onClick={changePopupTriggerValue} />  
         </div>
-        <NewRoomPopup trigger={popupTrigger} onClick={changePopupTriggerValue} />
+        <NewRoomPopup refresh={function(){setRefresh(true)}} trigger={popupTrigger} onClick={changePopupTriggerValue} />
         <RoomBookingPopup token={props.token} trigger={popupTriggerBooking} onClick={changePopupTriggerValueBooking} user_id={user.user_id} roomName={roomName} roomID={roomID} bookings={roomBookings}/>
     </div>
   )}

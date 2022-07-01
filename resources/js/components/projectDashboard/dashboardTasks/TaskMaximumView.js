@@ -4,7 +4,7 @@ import axios from 'axios';
 function TaskMaximumView(props){
 
     const closeTask = () => {
-        const url = "http://127.0.0.1:8000/api/task/"+props.id;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/"+props.id;
         axios.put(url,{status_id: 4},
             {
             headers: {
@@ -14,12 +14,13 @@ function TaskMaximumView(props){
         })
         .then(res => {
             if(res.status == 201) alert("Task erfolgreich abgebrochen")
+            props.refresh();
         })
         .catch(error => console.log("error: ", error))  
     }
 
     const deleteTask = () => {
-        const url = "http://127.0.0.1:8000/api/task/"+props.id;
+        const url = "http://sl-vinf-bordbame.hof-university.de:80/api/task/"+props.id;
         axios.delete(url,
             {
             headers: {
@@ -28,7 +29,10 @@ function TaskMaximumView(props){
             }
         })
         .then(res => {
-            if(res.status == 201) alert("Task erfolgreich gelöscht")
+            if(res.status == 201) {
+                alert("Task erfolgreich gelöscht");
+                props.refresh();
+            }
         })
         .catch(error => console.log("error: ", error))  
     }
@@ -71,12 +75,12 @@ function TaskMaximumView(props){
             </div> : null}
             <div className="mr-12  mb-4 mt-auto">
                 {props.status.id == 2 ? 
-                    <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={closeTask}>Task abbrechen</button> 
+                    (props.view == "TaskView" ? <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={closeTask}>Task abbrechen</button>: null) 
                     :
                     //props.status.id == 4 ? 
                     //    <button className="bg-red w-36 h-6 rounded-xl text-white hover:font-bold drop-shadow-lg" onClick={deleteTask}>komplett löschen</button>
                     //    :
-                        null}
+                    null}
             </div>
         </div>
     </div>
