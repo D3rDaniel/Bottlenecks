@@ -8,6 +8,7 @@ use App\Http\Controllers\API\ProjectUserController;
 use App\Http\Controllers\API\TaskController;
 use App\Http\Controllers\API\UserProjectController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\API\ProjectTagController;
 use Illuminate\Support\Facades\Route;
 //Public routes
 Route::post('/register',[AuthController::class,'register']);
@@ -42,7 +43,7 @@ Route::get('/priorities/all',[\App\Http\Controllers\API\PriorityController::clas
     Route::delete('/project/{id}', [ProjectController::class, 'destroy']);
     Route::put('/project/{id}', [ProjectController::class, 'update']);
     Route::put('/project/{id}/complete', [ProjectController::class, 'completeProject']);
-    Route::get('/project/{id}/tags',[ProjectController::class,'getTags']);
+    Route::get('/project/{id}/tags',[ProjectTagController::class,'getTags']);
 
 //Project Overview
     Route::get('project/{id}/overview',[ProjectOverviewController::class,'show']);
