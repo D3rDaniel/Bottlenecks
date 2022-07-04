@@ -11,7 +11,7 @@ Sebastian Bär<br>
 Hochschule Hof<br>
 Praktikum SWE<br>
 <hr>
-Der Code unserer Studienarbeit ist unter "Code_der_Studienarbeit" zu finden, dieser läuft so auf dem virtuellen Server der Hochschule<br>
+Der Code unserer Studienarbeit ist unter "Code_der_Studienarbeit" als ZIP-Datei zu finden oder im Master-Branch des Git-Repositories, dieser läuft so auf dem virtuellen Server der Hochschule<br>
 Unter "Dokumentation" findet man alle Dokumente, die während der Projektarbeit entstanden sind. Im Unterordner "eigene_Dokumentationen" finden Sie die persönlichen Dokumentationen der einzelnen Gruppenmitglieder<br>
 
 Verbindung zur virtuellen Maschine ist in der dafür vorgesehenen Datei beschrieben
